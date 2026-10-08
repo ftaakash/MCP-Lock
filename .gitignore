@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.ruff_cache/
+# upstream code checked out for read-only analysis
+third_party/
+# bulky caches (tarballs, API responses); summaries + provenance JSON are committed
+results/**/cache/
+results/**/tarballs/
+paper/*.aux
+paper/*.log
+paper/*.out
+paper/*.bbl
+paper/*.blg
