@@ -238,5 +238,43 @@ def run(pilot: Path, per_eco: int = 20) -> Path:
     return out
 
 
+def summarize(pilot: Path) -> dict:
+    """Extractor accuracy against tools/list ground truth (plan §6)."""
+    from census.stats import wilson
+
+    rows = [json.loads(x) for x in open(pilot / "validation.jsonl", encoding="utf-8")]
+    ok = [r for r in rows if r.get("stage_b_ok")]
+    out: dict = {"attempted": len(rows), "stage_a_failed": sum(not r["stage_a_ok"] for r in rows),
+                 "stage_b_failed": sum(r["stage_a_ok"] and not r.get("stage_b_ok") for r in rows),
+                 "validated": len(ok)}
+    for eco in ("all", "npm", "pypi"):
+        sub = [r for r in ok if eco == "all" or r["ecosystem"] == eco]
+        if not sub:
+            continue
+        c = [r["compare"] for r in sub]
+        both, ns, nd = (sum(x[k] for x in c) for k in ("n_both", "n_static", "n_dynamic"))
+        dyn_pos = [x for x in c if x["n_dynamic"] > 0]
+        detected = sum(1 for x in dyn_pos if x["n_static"] > 0)
+        eq = sum(x["name_set_equal"] for x in c)
+        desc = [x["desc_exact_match"] for x in c if x["desc_exact_match"] is not None]
+        out[eco] = {
+            "versions": len(sub),
+            "name_precision_micro": both / ns if ns else None,
+            "name_recall_micro": both / nd if nd else None,
+            "name_set_equal": [eq, len(sub), wilson(eq, len(sub))],
+            "g1_detection_when_server_has_tools": [detected, len(dyn_pos),
+                                                   wilson(detected, len(dyn_pos))],
+            "servers_with_zero_tools": sum(1 for x in c if x["n_dynamic"] == 0),
+            "description_exact_match_mean": sum(desc) / len(desc) if desc else None,
+        }
+    (pilot / "validation_summary.json").write_text(json.dumps(out, indent=2))
+    provenance.write(pilot / "validation_summary.json", inputs=[pilot / "validation.jsonl"])
+    print(json.dumps(out, indent=2))
+    return out
+
+
 if __name__ == "__main__":
-    run(Path(sys.argv[1]), int(sys.argv[2]) if len(sys.argv) > 2 else 20)
+    if sys.argv[1] == "summarize":
+        summarize(Path(sys.argv[2]))
+    else:
+        run(Path(sys.argv[1]), int(sys.argv[2]) if len(sys.argv) > 2 else 20)

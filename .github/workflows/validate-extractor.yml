@@ -1,0 +1,51 @@
+name: Validate static extractor
+
+# Plan §6: dynamic tools/list ground truth for the static tool-definition extractor.
+# Stage A installs with network on and install scripts disabled; stage B runs the server
+# in Docker with --network none, read-only, no capabilities, non-root, and never calls a tool.
+
+on:
+  workflow_dispatch:
+    inputs:
+      per_ecosystem:
+        description: "Validated versions per ecosystem"
+        default: "20"
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.lock
+
+      - name: Pull base images
+        run: |
+          docker pull node:22-slim
+          docker pull python:3.11-slim
+
+      - name: Run validation
+        run: python -m census.dynamic results/census/pilot ${{ inputs.per_ecosystem }}
+
+      - name: Summarize
+        run: python -m census.dynamic summarize results/census/pilot
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: extractor-validation
+          path: |
+            results/census/pilot/validation.jsonl
+            results/census/pilot/validation.jsonl.provenance.json
+            results/census/pilot/validation_summary.json
+            results/census/pilot/validation_summary.json.provenance.json
+          retention-days: 30
