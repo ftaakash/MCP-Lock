@@ -20,7 +20,7 @@ from census.tooldefs import dedupe, tools_hash
 SUSPICIOUS = re.compile(
     r"ignore (all |any )?(previous|prior) instructions|<important>|do not (tell|inform|mention)"
     r" (to )?the user|don't tell the user|without (telling|informing) the user|\.ssh/|id_rsa|"
-    r"\.aws/credentials|exfiltrat|send (it|them|the contents) to http|base64[- ]encode.*(key|token)"
+    r"\.aws/credentials|exfiltrat|send (it|them|the contents) to http|base64[- ]encode.{0,40}(key|token)"
     r"|<(system|instructions?)>|before using this tool,? (you must )?read",
     re.I)
 

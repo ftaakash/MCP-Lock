@@ -1,0 +1,21 @@
+{
+  "result": "results/census/pilot/versions.jsonl",
+  "result_sha256": "771ae88e477b04c81fa478e73b4fd4b81a7e7e80940f1e8e019543cbe83a5631",
+  "command": "python.exe C:\\Users\\Administrator\\Desktop\\Major Project\\mcp-lock\\census\\versions.py results/census/pilot/sample.jsonl",
+  "commit": "50cff337558893f5b6090a310938d8a018930437-dirty",
+  "timestamp_utc": "2026-10-08T17:51:48Z",
+  "python": "3.11.9",
+  "inputs": {
+    "results/census/pilot/sample.jsonl": "97a7c61023ae4262ddd47e3e57192c849eb61a64c313faf418b0370c89ecc533"
+  },
+  "params": {
+    "K": 10,
+    "window": [
+      "2026-07-10T00:00:00+00:00",
+      "2026-10-08T23:59:59+00:00"
+    ],
+    "window_cap": 40,
+    "versions_selected": 1887
+  },
+  "note": ""
+}
