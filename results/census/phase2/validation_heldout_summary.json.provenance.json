@@ -1,0 +1,14 @@
+{
+  "result": "results/census/phase2/validation_heldout_summary.json",
+  "result_sha256": "be08d658f3ceb49b0d9bf00f750464f622ba98530c94c1cdce20e859fc8e9463",
+  "command": "python /home/runner/work/MCP-Lock/MCP-Lock/census/dynamic.py summarize results/census/phase2 --prefix validation_heldout_",
+  "commit": "88dfdb94a5a5e41d1b0ebf550fcfc77b5f9ce8d1-dirty",
+  "timestamp_utc": "2026-10-08T20:58:49Z",
+  "python": "3.11.17",
+  "inputs": {
+    "results/census/phase2/validation_heldout_npm.jsonl": "18de331c6db88362996890864567ab99316ee542492f1f17571dc457a3cba5af",
+    "results/census/phase2/validation_heldout_pypi.jsonl": "43e311bea259cbfea87adae9b3d5f65712e7da85257c75f736f02bf879c3dbe2"
+  },
+  "params": {},
+  "note": ""
+}
