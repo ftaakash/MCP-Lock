@@ -21,9 +21,9 @@ USER_AGENT = "mcp-lock-research/0.0.1 (academic census; contact: github.com/ftaa
 # Minimum seconds between requests to one host.
 RATE = {
     "registry.npmjs.org": 0.2,
-    "api.npmjs.org": 0.5,
+    "api.npmjs.org": 0.3,
     "pypi.org": 0.2,
-    "pypistats.org": 1.1,
+    "pypistats.org": 0.6,
     "registry.modelcontextprotocol.io": 0.3,
     "api.github.com": 0.75,
     "raw.githubusercontent.com": 0.2,

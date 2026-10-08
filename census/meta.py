@@ -142,8 +142,10 @@ def _pypi_downloads(pkgs: list[str]) -> dict[str, int]:
 def downloads(elig_path: str) -> Path:
     rows = [json.loads(x) for x in open(elig_path, encoding="utf-8")]
     rows = [r for r in rows if r["eligible"]]
-    npm = _npm_downloads([r["package"] for r in rows if r["ecosystem"] == "npm"])
-    pypi = _pypi_downloads([r["package"] for r in rows if r["ecosystem"] == "pypi"])
+    with ThreadPoolExecutor(2) as ex:  # different hosts and rate limits: run side by side
+        f_npm = ex.submit(_npm_downloads, [r["package"] for r in rows if r["ecosystem"] == "npm"])
+        f_py = ex.submit(_pypi_downloads, [r["package"] for r in rows if r["ecosystem"] == "pypi"])
+        npm, pypi = f_npm.result(), f_py.result()
     for r in rows:
         r["downloads_last_month"] = (npm if r["ecosystem"] == "npm" else pypi).get(r["package"], 0)
     out = Path(elig_path).with_name(Path(elig_path).stem.replace("_eligibility", "")

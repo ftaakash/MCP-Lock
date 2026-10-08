@@ -1,0 +1,25 @@
+{
+  "result": "results/census/frame/frame_2026-10-08_eligibility.jsonl",
+  "result_sha256": "d7ec8561bf52cb51054d2d466868e1496e03957011c80d00b9628991546c5dfe",
+  "command": "python.exe C:\\Users\\Administrator\\Desktop\\Major Project\\mcp-lock\\census\\meta.py eligibility results/census/frame/frame_2026-10-08.jsonl",
+  "commit": "bf6acd421e38babc4dc203d4b7f9e83da566f0b9-dirty",
+  "timestamp_utc": "2026-10-08T15:31:59Z",
+  "python": "3.11.9",
+  "inputs": {
+    "results/census/frame/frame_2026-10-08.jsonl": "905cc9d79f56aecca50f5cec16df37b1d9eb7b58c9ac2e005fd34859444c8dcb"
+  },
+  "params": {
+    "counts": {
+      "npm:generic_runner": 9,
+      "npm:ok": 11201,
+      "npm:proxy": 6,
+      "npm:single_version": 1073,
+      "npm:unresolved": 1049,
+      "pypi:ok": 4071,
+      "pypi:proxy": 1,
+      "pypi:single_version": 470,
+      "pypi:unresolved": 187
+    }
+  },
+  "note": ""
+}
