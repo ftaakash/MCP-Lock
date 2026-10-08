@@ -127,3 +127,10 @@ def test_py_dict_literal_tools(tmp_path):
         ]
     ''')
     assert set(t) == {"browser_back"} and t["browser_back"].kind == "py_dict_literal"
+
+
+def test_fisher_matches_known_values():
+    from census.rq1 import fisher_two_sided
+    # Lady tasting tea: [[3, 1], [1, 3]] -> two-sided p = 0.4857
+    assert abs(fisher_two_sided(3, 1, 1, 3) - 0.4857142857) < 1e-6
+    assert fisher_two_sided(0, 10, 10, 0) < 1e-4
