@@ -11,7 +11,7 @@
 
 ## Open risks
 - Baseline code unavailable, so S1 must be reimplemented from the pseudocode; parity is "to spec", not "to code".
-  Aakash to email the corresponding author for the code and scenarios.
+  Email to the corresponding author sent 2026-10-08 (code, scenarios, P list, Table 8 scoring); awaiting reply.
 - Static extraction from bundled/minified npm `dist/` may push G1 toward the 60% kill line.
 
 ## Next gate
