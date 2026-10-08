@@ -1,0 +1,44 @@
+{
+  "result": "results/census/phase2/sample.jsonl",
+  "result_sha256": "bf22222164af2874079f6f452c79651c7a715ab6a379b317d72873d2e574e311",
+  "command": "python.exe C:\\Users\\Administrator\\Desktop\\Major Project\\mcp-lock\\census\\sample.py results/census/frame/frame_2026-10-08_eligible_downloads.jsonl 2000 results/census/phase2",
+  "commit": "1290d3cddb6cc47866dd9b71b1d136dd14b7de51-dirty",
+  "timestamp_utc": "2026-10-08T20:41:56Z",
+  "python": "3.11.9",
+  "inputs": {
+    "results/census/frame/frame_2026-10-08_eligible_downloads.jsonl": "6a0afa6f994f6ef7d52478aab0a201b26758c5bbaa08dad9bdd38af40861a107"
+  },
+  "params": {
+    "seed": 20261008,
+    "n": 2000,
+    "floor": 50,
+    "frame_sha256": "bbb61750c6685a3ec8d29840c5692f40089a651c4d0d2ab4e3323d4d8ce6ca50",
+    "strata_N_n": {
+      "npm:0": [
+        3734,
+        489
+      ],
+      "npm:1": [
+        3734,
+        489
+      ],
+      "npm:2": [
+        3733,
+        489
+      ],
+      "pypi:0": [
+        1357,
+        178
+      ],
+      "pypi:1": [
+        1357,
+        178
+      ],
+      "pypi:2": [
+        1357,
+        177
+      ]
+    }
+  },
+  "note": ""
+}

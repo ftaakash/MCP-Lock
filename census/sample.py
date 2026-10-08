@@ -5,7 +5,7 @@ the eligible frame with a floor of 50; within an ecosystem the three terciles ge
 Each stratum is permuted once with numpy default_rng(SEED); the first n_h are the sample and the
 remaining order is kept so the sample can be extended (n=400) without re-drawing.
 
-Usage: python -m census.sample <eligible_downloads.jsonl> [n]
+Usage: python -m census.sample <eligible_downloads.jsonl> [n] [out_dir]
 """
 
 from __future__ import annotations
@@ -54,7 +54,7 @@ def strata(rows: list[dict]) -> dict[tuple[str, int], list[dict]]:
     return out
 
 
-def draw(path: str, n: int = 200) -> Path:
+def draw(path: str, n: int = 200, out_dir: str = "results/census/pilot") -> Path:
     rows = [json.loads(x) for x in open(path, encoding="utf-8")]
     st = strata(rows)
     eco_counts = {e: sum(len(v) for (ee, _), v in st.items() if ee == e)
@@ -78,7 +78,7 @@ def draw(path: str, n: int = 200) -> Path:
             order.append(rec)
             if rank < n_h:
                 sample.append(rec)
-    out_dir = Path("results/census/pilot")
+    out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     frame_hash = hashlib.sha256("\n".join(sorted(json.dumps(r, sort_keys=True) for r in rows))
                                 .encode()).hexdigest()
@@ -99,4 +99,5 @@ def draw(path: str, n: int = 200) -> Path:
 
 
 if __name__ == "__main__":
-    draw(sys.argv[1], int(sys.argv[2]) if len(sys.argv) > 2 else 200)
+    draw(sys.argv[1], int(sys.argv[2]) if len(sys.argv) > 2 else 200,
+         sys.argv[3] if len(sys.argv) > 3 else "results/census/pilot")
