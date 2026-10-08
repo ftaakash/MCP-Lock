@@ -66,10 +66,25 @@ class TooLarge(Exception):
     pass
 
 
-def _download(url: str) -> bytes:
-    """Streaming download with a size cap and the shared per-host rate limit."""
+def _download(url: str, retries: int = 4) -> bytes:
+    """Streaming download with a size cap, retries, and the shared per-host rate limit."""
+    import time
     from urllib.parse import urlparse
-    http._wait(urlparse(url).netloc)
+
+    import requests
+    for attempt in range(retries):
+        try:
+            return _download_once(url, urlparse(url).netloc)
+        except (requests.RequestException, http.HttpError) as e:
+            transient = not isinstance(e, http.HttpError) or e.status in (429, 500, 502, 503, 504)
+            if not transient or attempt == retries - 1:
+                raise
+            time.sleep(5 * 2 ** attempt)
+    raise RuntimeError(url)
+
+
+def _download_once(url: str, host: str) -> bytes:
+    http._wait(host)
     with http._session.get(url, stream=True, timeout=(30, 120)) as r:
         if r.status_code != 200:
             raise http.HttpError(url, r.status_code)
