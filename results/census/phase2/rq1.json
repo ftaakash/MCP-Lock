@@ -1,0 +1,317 @@
+{
+  "kill_style": {
+    "n_packages": 2000,
+    "G1": {
+      "k": 9994,
+      "n": 12768,
+      "wilson": [
+        0.7827380952380952,
+        0.7755006501621261,
+        0.789805458849555
+      ],
+      "weighted": 0.7827346784781468,
+      "cluster_bootstrap": [
+        0.7629749673698386,
+        0.8023074771666563
+      ],
+      "packages_with_any_extractable_version": 1656,
+      "by_ecosystem": {
+        "npm": {
+          "k": 7028,
+          "n": 9241,
+          "wilson": [
+            0.7605237528406017,
+            0.7517154919943317,
+            0.7691155056433735
+          ]
+        },
+        "pypi": {
+          "k": 2966,
+          "n": 3527,
+          "wilson": [
+            0.840941309895095,
+            0.8285012513770847,
+            0.8526394987950495
+          ]
+        }
+      },
+      "decision": "PASS",
+      "decision_weighted_bootstrap": "PASS",
+      "status_counts": {
+        "ok": 12749,
+        "extract_error": 10,
+        "too_large": 9
+      }
+    },
+    "G2": {
+      "k": 731,
+      "n": 2000,
+      "wilson": [
+        0.3655,
+        0.3446711541986199,
+        0.386844531520037
+      ],
+      "weighted": 0.365413473254586,
+      "cluster_bootstrap": [
+        0.3459067938776424,
+        0.38491487570278665
+      ],
+      "decision": "PASS",
+      "secondary_among_with_window_release": {
+        "k": 731,
+        "n": 1239,
+        "wilson": [
+          0.5899919289749799,
+          0.5623685236731164,
+          0.6170590279404258
+        ]
+      },
+      "secondary_among_with_extractable_window_pair": {
+        "k": 731,
+        "n": 984,
+        "wilson": [
+          0.7428861788617886,
+          0.7146714170653782,
+          0.7692118981486303
+        ]
+      },
+      "by_ecosystem": {
+        "npm": {
+          "k": 537,
+          "n": 1467
+        },
+        "pypi": {
+          "k": 194,
+          "n": 533
+        }
+      }
+    },
+    "G2_sensitivity_no_prerelease": {
+      "k": 721,
+      "n": 2000,
+      "wilson": [
+        0.3605,
+        0.33974298711042866,
+        0.38179186908104085
+      ],
+      "weighted": 0.3604159137170571,
+      "cluster_bootstrap": [
+        0.3409178810173877,
+        0.3804040615273981
+      ],
+      "decision": "PASS",
+      "secondary_among_with_window_release": {
+        "k": 721,
+        "n": 1230,
+        "wilson": [
+          0.5861788617886179,
+          0.5584277801875995,
+          0.6133933225030409
+        ]
+      },
+      "secondary_among_with_extractable_window_pair": {
+        "k": 721,
+        "n": 972,
+        "wilson": [
+          0.7417695473251029,
+          0.7133415616480631,
+          0.7682940521615774
+        ]
+      },
+      "by_ecosystem": {
+        "npm": {
+          "k": 530,
+          "n": 1467
+        },
+        "pypi": {
+          "k": 191,
+          "n": 533
+        }
+      }
+    },
+    "G2_robust_names_or_descriptions_only": {
+      "k": 695,
+      "n": 2000,
+      "wilson": [
+        0.3475,
+        0.3269413555414848,
+        0.36864334387929726
+      ],
+      "weighted": 0.34741244612569944,
+      "cluster_bootstrap": [
+        0.32793315059850386,
+        0.36691264506944493
+      ],
+      "decision": "PASS",
+      "secondary_among_with_window_release": {
+        "k": 695,
+        "n": 1239,
+        "wilson": [
+          0.5609362389023406,
+          0.5331566739495118,
+          0.5883391121206444
+        ]
+      },
+      "secondary_among_with_extractable_window_pair": {
+        "k": 695,
+        "n": 984,
+        "wilson": [
+          0.7063008130081301,
+          0.6770851190949155,
+          0.7339120063797445
+        ]
+      },
+      "by_ecosystem": {
+        "npm": {
+          "k": 506,
+          "n": 1467
+        },
+        "pypi": {
+          "k": 189,
+          "n": 533
+        }
+      }
+    },
+    "G2_change_events": 2259,
+    "G2_event_kinds": {
+      "added": 987,
+      "removed": 132,
+      "description_changed": 1374,
+      "schema_changed": 1157
+    },
+    "G2_event_co_signals": {
+      "provenance_lost": 10,
+      "publisher_changed": 58,
+      "new_install_script": 2
+    },
+    "window_capped_packages": 39,
+    "packages_with_window_release": 1239,
+    "provenance_share_g1_versions": {
+      "npm": {
+        "k": 2402,
+        "n": 9241
+      },
+      "pypi": {
+        "k": 1499,
+        "n": 3527
+      }
+    }
+  },
+  "transitions_extractable": 6695,
+  "transitions_meta_joined": 6695,
+  "tool_change_per_transition": {
+    "k": 2259,
+    "n": 6695,
+    "wilson": [
+      0.33741598207617624,
+      0.326186091990417,
+      0.3488323401694549
+    ],
+    "weighted": 0.3374392743998306,
+    "cluster_bootstrap": [
+      0.3260916875690939,
+      0.3489381034810795
+    ]
+  },
+  "change_kinds": {
+    "added": 987,
+    "removed": 132,
+    "desc": 1374,
+    "schema": 1157
+  },
+  "co_signals": {
+    "provenance_lost": {
+      "table_changed_signal": [
+        [
+          10,
+          2249
+        ],
+        [
+          11,
+          4425
+        ]
+      ],
+      "rate_among_tool_changes": [
+        0.004426737494466578,
+        0.0024063121628999555,
+        0.008129759079633921
+      ],
+      "rate_among_no_change": [
+        0.0024797114517583407,
+        0.0013852230365528247,
+        0.00443513317669766
+      ],
+      "fisher_p": 0.24622005899841395
+    },
+    "publisher_changed": {
+      "table_changed_signal": [
+        [
+          58,
+          1599
+        ],
+        [
+          86,
+          2917
+        ]
+      ],
+      "rate_among_tool_changes": [
+        0.03500301750150875,
+        0.027174412023119647,
+        0.04498266123888176
+      ],
+      "rate_among_no_change": [
+        0.02863802863802864,
+        0.0232483979574305,
+        0.03523205777290271
+      ],
+      "fisher_p": 0.2502919094879448
+    },
+    "maintainers_changed": {
+      "table_changed_signal": [
+        [
+          5,
+          1652
+        ],
+        [
+          13,
+          2990
+        ]
+      ],
+      "rate_among_tool_changes": [
+        0.0030175015087507543,
+        0.0012895638829356938,
+        0.007044439791636874
+      ],
+      "rate_among_no_change": [
+        0.004329004329004329,
+        0.0025316863179725138,
+        0.0073928338901525165
+      ],
+      "fisher_p": 0.6248197422895277
+    },
+    "new_install_script": {
+      "table_changed_signal": [
+        [
+          2,
+          1655
+        ],
+        [
+          1,
+          3002
+        ]
+      ],
+      "rate_among_tool_changes": [
+        0.0012070006035003018,
+        0.0003310655290339236,
+        0.0043903115651181416
+      ],
+      "rate_among_no_change": [
+        0.000333000333000333,
+        5.8785154295929115e-05,
+        0.0018839374337400858
+      ],
+      "fisher_p": 0.28935091892261133
+    }
+  },
+  "tool_change_without_any_signal": 2192
+}

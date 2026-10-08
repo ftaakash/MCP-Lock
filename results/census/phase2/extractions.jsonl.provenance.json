@@ -1,0 +1,20 @@
+{
+  "result": "results/census/phase2/extractions.jsonl",
+  "result_sha256": "4de64b9c4fb593cb6e0ccd91f53c2a0fb78082ab7856cb473d52b4aa9b4afc93",
+  "command": "python.exe C:\\Users\\Administrator\\Desktop\\Major Project\\mcp-lock\\census\\run_extract.py results/census/phase2/versions.jsonl --stream",
+  "commit": "7362d8b0b0a0f75f813c4c0fd8e5b10ab631142f-dirty",
+  "timestamp_utc": "2026-10-08T23:45:56Z",
+  "python": "3.11.9",
+  "inputs": {
+    "results/census/phase2/versions.jsonl": "f4d1d7374e7ab914bf9f56a2d99022296e68973a7b38679d98b9f7c133094fce"
+  },
+  "params": {
+    "status_counts": {
+      "ok": 16085,
+      "extract_error": 10,
+      "too_large": 9
+    },
+    "suspicious_versions": 157
+  },
+  "note": ""
+}

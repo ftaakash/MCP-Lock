@@ -1,0 +1,21 @@
+{
+  "result": "results/census/phase2/versions.jsonl",
+  "result_sha256": "f4d1d7374e7ab914bf9f56a2d99022296e68973a7b38679d98b9f7c133094fce",
+  "command": "python.exe C:\\Users\\Administrator\\Desktop\\Major Project\\mcp-lock\\census\\versions.py results/census/phase2/sample.jsonl",
+  "commit": "ca9250c31ada69aa097dc76c54d91fb8d67acf33-dirty",
+  "timestamp_utc": "2026-10-08T21:47:30Z",
+  "python": "3.11.9",
+  "inputs": {
+    "results/census/phase2/sample.jsonl": "bf22222164af2874079f6f452c79651c7a715ab6a379b317d72873d2e574e311"
+  },
+  "params": {
+    "K": 10,
+    "window": [
+      "2026-07-10T00:00:00+00:00",
+      "2026-10-08T23:59:59+00:00"
+    ],
+    "window_cap": 40,
+    "versions_selected": 16104
+  },
+  "note": ""
+}
