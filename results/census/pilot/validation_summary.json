@@ -1,0 +1,202 @@
+{
+  "harness": "v2",
+  "attempted": 138,
+  "stage_a_failed": 4,
+  "stage_b_failed": 52,
+  "validated": 82,
+  "start_rate": [
+    0.5942028985507246,
+    0.5108007570480501,
+    0.6725024902265521
+  ],
+  "validated_needing_arg_fallback": 0,
+  "validated_without_dep_snapshot": 0,
+  "all": {
+    "attempted": 138,
+    "validated": 82,
+    "start_rate": [
+      0.5942028985507246,
+      0.5108007570480501,
+      0.6725024902265521
+    ],
+    "name_precision_micro": 0.9588638589618022,
+    "name_recall_micro": 0.689922480620155,
+    "name_precision_macro": 0.974771274250441,
+    "name_recall_macro": 0.8436963002759597,
+    "name_set_equal": [
+      61,
+      82,
+      [
+        0.7439024390243902,
+        0.6400110670496505,
+        0.8259642384673737
+      ]
+    ],
+    "g1_detection_when_server_has_tools": [
+      72,
+      81,
+      [
+        0.8888888888888888,
+        0.8021290531846268,
+        0.9404324359234946
+      ]
+    ],
+    "servers_with_zero_tools": 1,
+    "description_exact_match_mean": 0.9017044055546093,
+    "bias_static_extractable_started": [
+      72,
+      82,
+      [
+        0.8780487804878049,
+        0.7898702600481664,
+        0.9323914635032211
+      ]
+    ],
+    "bias_static_extractable_not_started": [
+      30,
+      56,
+      [
+        0.5357142857142857,
+        0.40704181935661177,
+        0.6598014708777623
+      ]
+    ],
+    "validated_by_tercile": {
+      "0": 21,
+      "1": 26,
+      "2": 35
+    },
+    "attempted_by_tercile": {
+      "0": 44,
+      "1": 44,
+      "2": 50
+    }
+  },
+  "npm": {
+    "attempted": 57,
+    "validated": 42,
+    "start_rate": [
+      0.7368421052631579,
+      0.6102342073651618,
+      0.8335421340202692
+    ],
+    "name_precision_micro": 0.9979550102249489,
+    "name_recall_micro": 0.9087523277467412,
+    "name_precision_macro": 0.9970760233918128,
+    "name_recall_macro": 0.8967452975022361,
+    "name_set_equal": [
+      34,
+      42,
+      [
+        0.8095238095238095,
+        0.6669922598996131,
+        0.9001799171835226
+      ]
+    ],
+    "g1_detection_when_server_has_tools": [
+      38,
+      41,
+      [
+        0.926829268292683,
+        0.8057255146228096,
+        0.9748021693660901
+      ]
+    ],
+    "servers_with_zero_tools": 1,
+    "description_exact_match_mean": 0.9053045292657481,
+    "bias_static_extractable_started": [
+      38,
+      42,
+      [
+        0.9047619047619048,
+        0.7793489419142897,
+        0.9623377511944261
+      ]
+    ],
+    "bias_static_extractable_not_started": [
+      5,
+      15,
+      [
+        0.3333333333333333,
+        0.1517632443971473,
+        0.5828645226148023
+      ]
+    ],
+    "validated_by_tercile": {
+      "0": 9,
+      "1": 14,
+      "2": 19
+    },
+    "attempted_by_tercile": {
+      "0": 17,
+      "1": 17,
+      "2": 23
+    }
+  },
+  "pypi": {
+    "attempted": 81,
+    "validated": 40,
+    "start_rate": [
+      0.49382716049382713,
+      0.38772115676987573,
+      0.6004921529268207
+    ],
+    "name_precision_micro": 0.9229323308270677,
+    "name_recall_micro": 0.5566893424036281,
+    "name_precision_macro": 0.94984243697479,
+    "name_recall_macro": 0.7893210781190264,
+    "name_set_equal": [
+      27,
+      40,
+      [
+        0.675,
+        0.5201774618987768,
+        0.799154977682173
+      ]
+    ],
+    "g1_detection_when_server_has_tools": [
+      34,
+      40,
+      [
+        0.85,
+        0.709276756335103,
+        0.9293881228267964
+      ]
+    ],
+    "servers_with_zero_tools": 0,
+    "description_exact_match_mean": 0.8976807378774541,
+    "bias_static_extractable_started": [
+      34,
+      40,
+      [
+        0.85,
+        0.709276756335103,
+        0.9293881228267964
+      ]
+    ],
+    "bias_static_extractable_not_started": [
+      25,
+      41,
+      [
+        0.6097560975609756,
+        0.45726856934123794,
+        0.7434385493987647
+      ]
+    ],
+    "validated_by_tercile": {
+      "0": 12,
+      "1": 12,
+      "2": 16
+    },
+    "attempted_by_tercile": {
+      "0": 27,
+      "1": 27,
+      "2": 27
+    }
+  },
+  "failure_reasons": {
+    "initialize timeout/exit": 51,
+    "tools/list failed": 1,
+    "stage_a": 4
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "result": "results/census/pilot/validation_pypi.jsonl",
+  "result_sha256": "e4e3332d27bfde2151e1c421fb45ced39330b2620d595b75a566bb699eedbbbb",
+  "command": "python /home/runner/work/MCP-Lock/MCP-Lock/census/dynamic.py run results/census/pilot --eco pypi --target 40 --max-attempts 160 --workers 3",
+  "commit": "bdbdf613b40b14b97a6611da1af0063ba48ec5ff-dirty",
+  "timestamp_utc": "2026-10-08T20:36:46Z",
+  "python": "3.11.17",
+  "inputs": {
+    "results/census/pilot/versions.jsonl": "771ae88e477b04c81fa478e73b4fd4b81a7e7e80940f1e8e019543cbe83a5631",
+    "results/census/pilot/extractions.jsonl": "fd3e9ce9abab8c1d526d63f8d57c7253d133ff90a7832960d5629ecbb811377c",
+    "results/census/pilot/stratum_order.jsonl": "e9fc22678b5ca7ea7725c07d84b60dd930aef1830e5db534470ed896846266fb"
+  },
+  "params": {
+    "harness": "v2",
+    "seed": 20261008,
+    "eco": "pypi",
+    "target": 40,
+    "max_attempts": 160,
+    "workers": 3,
+    "images": [
+      "node:22-slim",
+      "python:3.12-slim",
+      "python:3.13-slim",
+      "python:3.11-slim"
+    ],
+    "hardening": [
+      "--network",
+      "none",
+      "--read-only",
+      "--cap-drop",
+      "ALL",
+      "--security-opt",
+      "no-new-privileges",
+      "--user",
+      "65534:65534",
+      "--memory",
+      "1g",
+      "--pids-limit",
+      "256",
+      "--tmpfs",
+      "/tmp:rw,size=256m,mode=1777",
+      "-e",
+      "HOME=/tmp"
+    ],
+    "first_timeout_s": 60,
+    "retry_timeout_s": 25,
+    "arg_fallbacks": [
+      [
+        "--stdio"
+      ],
+      [
+        "stdio"
+      ],
+      [
+        "--transport",
+        "stdio"
+      ]
+    ]
+  },
+  "note": ""
+}
