@@ -1,4 +1,4 @@
-# Census pilot: sampling plan (PROPOSED, awaiting approval)
+# Census pilot: sampling plan (APPROVED by Aakash, 2026-10-08)
 
 Goal: decide the Phase 1 KILL test on 200 MCP packages.
 - **G1 extractability:** share of sampled versions whose tool definitions are statically extractable. KILL if < 60%.
@@ -18,7 +18,10 @@ Sources:
   10 requests/min, so queries are partitioned by `size:` ranges. Parse the `command`/`args` JSON;
   regex is a fallback only. Record how many configs mention each package (its config prevalence).
 
-Frame = F1 ∪ F2, de-duplicated by (ecosystem, normalized name). The frame snapshot is written to
+- **F3 (optional, pending licence check)**: unpinned-MCP findings in the Kapner et al. artifact
+  (github.com/Benkapner/harness-eval-experiments @ 217b8620e8a7).
+
+Frame = F1 ∪ F2 (∪ F3), de-duplicated by (ecosystem, normalized name). The frame snapshot is written to
 `results/census/frame_2026-10-XX.jsonl` with SHA-256 and provenance JSON **before** the sample is drawn.
 
 ## 2. Eligibility (applied to the frame; counts reported at each step)
