@@ -1,6 +1,6 @@
 # STATUS
 
-## Phase 1: census pilot (2026-10-08). KILL test: **PASS on both gates** (static; Docker validation pending)
+## Phase 1: census pilot (2026-10-08). KILL test: **PASS on both gates** (extractor validated in Docker, 2026-10-09)
 
 ### What ran
 | Step | Output | Numbers |
@@ -33,13 +33,25 @@ Secondary (Wilson 95%):
 - Unpinned share of F2 launch lines: npm 34,525/36,926 = 93.5%; PyPI 3,921/4,477 = 87.6% (descriptive; GitHub search is not a probability sample).
 
 ### Deviations from the approved plan (logged)
-1. **Docker `tools/list` validation of the extractor (plan §6) NOT run.** Docker Desktop cannot start
-   because the Windows *Virtual Machine Platform* feature is off (firmware VT-x is on). Harness is ready:
-   `python -m census.dynamic results/census/pilot`. Until it runs, G1 precision/recall is unmeasured; a
-   50-item manual audit stands in (`manual_audit.md`).
-   Update 2026-10-09: hypervisorlaunchtype now Auto and the hypervisor runs, but VirtualMachinePlatform stays
-   `EnablePending` after reboots; Windows servicing has had the enable pending since 2026-10-05 (CBS RebootPending set;
-   a component-store repair that day fixed 3,527 corrupt entries). Host servicing must be repaired before Docker can run.
+1. **Docker `tools/list` validation (plan §6) ran on a GitHub-hosted runner** (Actions run 37834955664,
+   workflow `.github/workflows/validate-extractor.yml`) because the local host's Virtual Machine Platform is stuck
+   `EnablePending`. Same two-stage design (install with scripts off; run with `--network none`, read-only, no caps,
+   non-root, no tool calls). 95 latest versions attempted in seeded random order; 31 started offline and answered
+   `tools/list` (20 npm, 11 PyPI; PyPI exhausted its 53 packages before reaching 20). Startup failures (56 initialize
+   timeouts, 7 install failures, 1 tools/list error) are mostly servers that need real credentials or arguments, so
+   the validated set leans toward servers that start without setup.
+
+   | | npm (n=20) | PyPI (n=11) | All (n=31) |
+   |---|---|---|---|
+   | Name precision (micro) | 99.7% | 91.1% | 96.6% |
+   | Name recall (micro) | 98.4% | 57.5% | 79.1% |
+   | Exact name-set match | 18/20 = 90.0% [69.9, 97.2] | 6/11 = 54.5% [28.0, 78.7] | 24/31 = 77.4% [60.2, 88.6] |
+   | Static finds ≥1 tool when the server has tools | 19/20 = 95.0% [76.4, 99.1] | 9/11 = 81.8% [52.3, 94.9] | 28/31 = 90.3% [75.1, 96.7] |
+   | Mean exact description match | 86.7% | 85.3% | 86.2% |
+
+   Reading: static extraction rarely invents tools; it under-counts on PyPI (dynamically or conditionally registered
+   tools). G1 and G2 are therefore conservative lower bounds. The 3 static misses (`dingdawg-marketing-agent@2.0.9`,
+   `llre@0.2.2`, `dydx-agent-gateway@0.3.2`) are recorded in `validation.jsonl`.
 2. Generic script runners (`tsx`, `ts-node`, `dotenv-cli`, …) excluded at eligibility (they launch local files,
    not packages); list fixed before sampling, 9 npm packages affected.
 3. Consecutive versions are ordered by version precedence (semver / PEP 440), not publish time, so backport
@@ -54,7 +66,7 @@ Secondary (Wilson 95%):
 - Bagmar & Saraf code still unavailable (email sent 2026-10-08, awaiting reply).
 
 ## Next gate
-- Run Docker validation once Virtual Machine Platform is enabled; update G1 with precision/recall.
+- Improve PyPI extraction recall (dynamic/conditional registration) before the full census.
 - Phase 2: full census (RQ1 publishable alone) + MCP-Lock spec (`lockfile/mcp-lock.schema.json` draft exists).
 
 ## Phase 0: setup (2026-10-08), done

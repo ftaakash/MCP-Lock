@@ -40,7 +40,7 @@ and tests the gate against an attacker who knows its checks (RQ3).
 | Phase | Scope | Status |
 |---|---|---|
 | 0 | Repo, baseline analysis, sampling plan | ✅ done |
-| 1 | Census pilot (200 packages) + kill test | ✅ **PASS** · extractor validation running in CI |
+| 1 | Census pilot (200 packages) + kill test | ✅ **PASS** · extractor validated in Docker |
 | 2 | Full census + MCP-Lock spec | ⏳ next |
 | 3 | Gate (S1–S5) + baseline parity | ⏳ |
 | 4 | Pre-registered evaluation | ⏳ |
@@ -90,6 +90,22 @@ largely *independent* signal that name/source/provenance checks do not see.
 | New install script (npm) | 2 / 243 = 0.8% [0.2, 3.0] |
 | Provenance lost | 0 / 243 = 0.0% [0.0, 1.6] |
 
+### Extractor validation (Docker `tools/list`, `--network none`)
+
+Static extraction was checked against what 31 live servers actually return from `tools/list`
+(GitHub-hosted runner, [workflow](.github/workflows/validate-extractor.yml)).
+
+| | npm (n=20) | PyPI (n=11) | All (n=31) |
+|---|---|---|---|
+| Tool-name precision | 99.7% | 91.1% | **96.6%** |
+| Tool-name recall | 98.4% | 57.5% | **79.1%** |
+| Exact tool-name set | 18 / 20 | 6 / 11 | 24 / 31 = 77.4% [60.2, 88.6] |
+| Finds ≥ 1 tool when the server has tools | 19 / 20 | 9 / 11 | 28 / 31 = 90.3% [75.1, 96.7] |
+
+Static extraction almost never invents tools and is near-exact on npm; it under-counts on PyPI,
+so the G1 and G2 figures above are **conservative lower bounds**. Only 31 of 95 attempted servers
+start offline without real credentials, so the validated set leans toward simpler servers.
+
 ### Census funnel
 
 ```mermaid
@@ -122,8 +138,9 @@ flowchart LR
   `$opaque` and bundler-renamed identifiers are normalized, so rebuilds do not create fake diffs.
 - **Audit.** 25 random tool sets and 25 random change events reviewed by hand: 25/25 plausible,
   25/25 genuine edits ([`manual_audit.md`](results/census/pilot/manual_audit.md)).
-- **Validation.** Dynamic `tools/list` ground truth on 40 versions, run in Docker with
-  `--network none` on a GitHub-hosted runner ([workflow](.github/workflows/validate-extractor.yml)).
+- **Validation.** Dynamic `tools/list` ground truth: 95 versions attempted in seeded order, 31
+  validated, run in Docker with `--network none` on a GitHub-hosted runner
+  ([workflow](.github/workflows/validate-extractor.yml)).
 
 </details>
 
