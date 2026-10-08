@@ -37,6 +37,9 @@ Secondary (Wilson 95%):
    because the Windows *Virtual Machine Platform* feature is off (firmware VT-x is on). Harness is ready:
    `python -m census.dynamic results/census/pilot`. Until it runs, G1 precision/recall is unmeasured; a
    50-item manual audit stands in (`manual_audit.md`).
+   Update 2026-10-09: hypervisorlaunchtype now Auto and the hypervisor runs, but VirtualMachinePlatform stays
+   `EnablePending` after reboots; Windows servicing has had the enable pending since 2026-10-05 (CBS RebootPending set;
+   a component-store repair that day fixed 3,527 corrupt entries). Host servicing must be repaired before Docker can run.
 2. Generic script runners (`tsx`, `ts-node`, `dotenv-cli`, …) excluded at eligibility (they launch local files,
    not packages); list fixed before sampling, 9 npm packages affected.
 3. Consecutive versions are ordered by version precedence (semver / PEP 440), not publish time, so backport
