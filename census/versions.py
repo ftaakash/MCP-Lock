@@ -78,9 +78,11 @@ def npm_versions(pkg: str) -> list[dict]:
 
 def _pick_file(files: list[dict]) -> dict | None:
     live = [f for f in files if not f.get("yanked")]
+    # Static analysis needs source: pure wheel, then sdist, then platform wheels (which may
+    # hold only compiled code).
     for pred in (lambda f: f["filename"].endswith("-none-any.whl"),
-                 lambda f: f["packagetype"] == "bdist_wheel",
-                 lambda f: f["packagetype"] == "sdist"):
+                 lambda f: f["packagetype"] == "sdist",
+                 lambda f: f["packagetype"] == "bdist_wheel"):
         cands = sorted((f for f in live if pred(f)), key=lambda f: f["filename"])
         if cands:
             return cands[0]

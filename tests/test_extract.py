@@ -92,3 +92,38 @@ def test_diff_and_dedupe():
     from census.tooldefs import ToolDef
     tools, conflicts = dedupe([ToolDef("a", "1", None, "k"), ToolDef("a", "2", None, "k")])
     assert len(tools) == 1 and conflicts == 1
+
+
+def test_py_call_form_and_wrapper_decorators(tmp_path):
+    t = _py(tmp_path, '''
+        def _watch_tool(annotations):
+            def deco(fn):
+                return mcp.tool(fn, annotations=annotations)
+            return deco
+
+        @_watch_tool(RO)
+        async def watch_add(wallet: str) -> dict:
+            """Add a watch."""
+
+        def candles(market: str, limit: int = 100):
+            """Get candles."""
+
+        def setup():
+            mcp.tool(candles, annotations=RO)
+            mcp.tool(fn_param_not_a_function)
+    ''')
+    assert t["watch_add"].description == "Add a watch." and t["watch_add"].kind == "py_wrapper_decorator"
+    assert t["candles"].kind == "py_tool_call"
+    assert t["candles"].schema == [["market", "str", None], ["limit", "int", "100"]]
+    assert "_watch_tool" not in t and "deco" not in t
+
+
+def test_py_dict_literal_tools(tmp_path):
+    t = _py(tmp_path, '''
+        TOOLS = [
+            {"name": "browser_back", "description": "Go back.", "inputSchema": {"type": "object"}},
+            {"name": some_var, "inputSchema": {}},
+            {"name": "not_a_tool", "value": 1},
+        ]
+    ''')
+    assert set(t) == {"browser_back"} and t["browser_back"].kind == "py_dict_literal"

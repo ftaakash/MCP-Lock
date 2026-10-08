@@ -1,0 +1,130 @@
+{
+  "all": {
+    "old": {
+      "precision": 0.9588638589618022,
+      "recall": 0.689922480620155,
+      "exact_sets": 61,
+      "detected": 72,
+      "n": 82
+    },
+    "new": {
+      "precision": 0.9613445378151261,
+      "recall": 0.8062015503875969,
+      "exact_sets": 63,
+      "detected": 75,
+      "n": 82
+    }
+  },
+  "npm": {
+    "old": {
+      "precision": 0.9979550102249489,
+      "recall": 0.9087523277467412,
+      "exact_sets": 34,
+      "detected": 38,
+      "n": 42
+    },
+    "new": {
+      "precision": 0.9979550102249489,
+      "recall": 0.9087523277467412,
+      "exact_sets": 34,
+      "detected": 38,
+      "n": 42
+    }
+  },
+  "pypi": {
+    "old": {
+      "precision": 0.9229323308270677,
+      "recall": 0.5566893424036281,
+      "exact_sets": 27,
+      "detected": 34,
+      "n": 40
+    },
+    "new": {
+      "precision": 0.9358059914407989,
+      "recall": 0.7437641723356009,
+      "exact_sets": 29,
+      "detected": 37,
+      "n": 40
+    }
+  },
+  "regressions": [
+    "twzrd-agent-intel"
+  ],
+  "still_missing": [
+    [
+      "@helloaigent-dev/publisher",
+      5,
+      9
+    ],
+    [
+      "strava-mcp-unofficial",
+      22,
+      29
+    ],
+    [
+      "dingdawg-marketing-agent",
+      0,
+      5
+    ],
+    [
+      "@cyanheads/fema-mcp-server",
+      0,
+      8
+    ],
+    [
+      "block-genomics-mcp",
+      0,
+      21
+    ],
+    [
+      "@open-state/camping",
+      20,
+      21
+    ],
+    [
+      "honeycheck-mcp",
+      3,
+      6
+    ],
+    [
+      "recite-mcp",
+      53,
+      57
+    ],
+    [
+      "llre",
+      0,
+      24
+    ],
+    [
+      "dydx-agent-gateway",
+      15,
+      22
+    ],
+    [
+      "mcp-grafana",
+      0,
+      79
+    ],
+    [
+      "iaiops-energy",
+      9,
+      59
+    ],
+    [
+      "marketplaces-mcp-ru",
+      28,
+      30
+    ],
+    [
+      "mcp-virtual-computer",
+      12,
+      20
+    ],
+    [
+      "autots-mcp",
+      0,
+      28
+    ]
+  ]
+}

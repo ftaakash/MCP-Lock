@@ -1,0 +1,14 @@
+{
+  "result": "results/census/pilot/devset_scores.json",
+  "result_sha256": "a6d1ee8a6cf705cece76a39c0c8cea115451ea6f3b23c1a13399f994dd5a60bb",
+  "command": "python.exe C:\\Users\\Administrator\\Desktop\\Major Project\\mcp-lock\\census\\devset.py results/census/pilot",
+  "commit": "ed2cae3fc0a7a5d733a6e50608d90ca6878929ee-dirty",
+  "timestamp_utc": "2026-10-08T20:39:09Z",
+  "python": "3.11.9",
+  "inputs": {
+    "results/census/pilot/validation_npm.jsonl": "68a14da0064e8ea40c720f69778b02d83a4a70f35751b010641832fb60ac5441",
+    "results/census/pilot/validation_pypi.jsonl": "e4e3332d27bfde2151e1c421fb45ced39330b2620d595b75a566bb699eedbbbb"
+  },
+  "params": {},
+  "note": "development set; not a reported accuracy figure"
+}

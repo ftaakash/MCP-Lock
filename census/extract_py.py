@@ -20,6 +20,7 @@ class Index:
         self.consts: dict[str, list[ast.AST]] = {}
         self.classes: dict[str, list[ast.ClassDef]] = {}
         self.funcs: dict[str, list[ast.AST]] = {}
+        self.wrappers: set[str] = set()
 
     def add_module(self, tree: ast.Module) -> None:
         for node in tree.body:
@@ -180,11 +181,42 @@ def extract_module(tree: ast.Module, idx: Index, rel: str) -> list[ToolDef]:
                 schema = evaluate(_kw(node, "inputSchema") or _kw(node, "input_schema"), idx)
                 tools.append(ToolDef(name, desc if isinstance(desc, str) else None, schema,
                                      "py_Tool", rel))
-        # @x.tool / @x.tool(...) decorated functions (FastMCP style)
+        # {"name": "...", "description": "...", "inputSchema": {...}} dict literals (raw
+        # list_tools handlers); mirrors the JS object-literal rule
+        if isinstance(node, ast.Dict):
+            keys = {k.value: v for k, v in zip(node.keys, node.values, strict=True)
+                    if isinstance(k, ast.Constant) and isinstance(k.value, str)}
+            schema_key = "inputSchema" if "inputSchema" in keys else (
+                "input_schema" if "input_schema" in keys else None)
+            if "name" in keys and schema_key:
+                name = evaluate(keys["name"], idx)
+                if isinstance(name, str) and name != OPAQUE:
+                    desc = evaluate(keys.get("description"), idx)
+                    tools.append(ToolDef(name, desc if isinstance(desc, str) and desc != OPAQUE
+                                         else None, evaluate(keys[schema_key], idx),
+                                         "py_dict_literal", rel))
+        # x.tool(fn, name=..., description=...): call form of the FastMCP decorator
+        if (isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute)
+                and node.func.attr in DECORATOR_ATTRS and node.args
+                and isinstance(node.args[0], ast.Name) and len(idx.funcs.get(node.args[0].id, [])) == 1):
+            fdef = idx.funcs[node.args[0].id][0]
+            n = evaluate(_kw(node, "name"), idx)
+            d = evaluate(_kw(node, "description"), idx)
+            desc = d if isinstance(d, str) and d != OPAQUE else ast.get_docstring(fdef)
+            tools.append(ToolDef(n if isinstance(n, str) and n != OPAQUE else fdef.name,
+                                 inspect.cleandoc(desc) if desc else None,
+                                 signature_schema(fdef), "py_tool_call", rel))
+        # @x.tool / @x.tool(...) (FastMCP style) and @wrapper / @wrapper(...) where the wrapper
+        # function itself calls x.tool(...)
         if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
             for dec in node.decorator_list:
                 call = dec if isinstance(dec, ast.Call) else None
                 target = dec.func if call else dec
+                if isinstance(target, ast.Name) and target.id in idx.wrappers:
+                    doc = ast.get_docstring(node)
+                    tools.append(ToolDef(node.name, inspect.cleandoc(doc) if doc else None,
+                                         signature_schema(node), "py_wrapper_decorator", rel))
+                    continue
                 if not (isinstance(target, ast.Attribute) and target.attr in DECORATOR_ATTRS):
                     continue
                 name, desc = node.name, ast.get_docstring(node)
@@ -217,6 +249,16 @@ def extract_module(tree: ast.Module, idx: Index, rel: str) -> list[ToolDef]:
     return tools
 
 
+def _calls_tool(fn: ast.AST) -> bool:
+    """A module-level function that registers tools itself (a custom tool decorator)."""
+    if any(isinstance(d, ast.Attribute) and d.attr in DECORATOR_ATTRS
+           or isinstance(d, ast.Call) and isinstance(d.func, ast.Attribute)
+           and d.func.attr in DECORATOR_ATTRS for d in fn.decorator_list):
+        return False  # it is a tool, not a wrapper
+    return any(isinstance(n, ast.Call) and isinstance(n.func, ast.Attribute)
+               and n.func.attr in (*DECORATOR_ATTRS, "add_tool") for n in ast.walk(fn))
+
+
 def extract_dir(root: Path) -> tuple[list[ToolDef], dict]:
     trees, errors = [], 0
     for p in sorted(root.rglob("*.py")):
@@ -228,6 +270,7 @@ def extract_dir(root: Path) -> tuple[list[ToolDef], dict]:
     idx = Index()
     for _, t in trees:
         idx.add_module(t)
+    idx.wrappers = {name for name, defs in idx.funcs.items() if any(_calls_tool(d) for d in defs)}
     tools = []
     for rel, t in trees:
         try:
