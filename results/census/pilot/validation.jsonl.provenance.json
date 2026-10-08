@@ -1,0 +1,39 @@
+{
+  "result": "results/census/pilot/validation.jsonl",
+  "result_sha256": "66e83a543b3d1ac01a754f117d066b545253f416729dd5cfccd2f971c10440cf",
+  "command": "python /home/runner/work/MCP-Lock/MCP-Lock/census/dynamic.py results/census/pilot 20",
+  "commit": "5f6c2d506a33615756fc49f760187f5ae9960dcd-dirty",
+  "timestamp_utc": "2026-10-08T20:10:19Z",
+  "python": "3.11.17",
+  "inputs": {
+    "results/census/pilot/versions.jsonl": "771ae88e477b04c81fa478e73b4fd4b81a7e7e80940f1e8e019543cbe83a5631",
+    "results/census/pilot/extractions.jsonl": "fd3e9ce9abab8c1d526d63f8d57c7253d133ff90a7832960d5629ecbb811377c"
+  },
+  "params": {
+    "seed": 20261008,
+    "per_ecosystem": 20,
+    "images": [
+      "node:22-slim",
+      "python:3.11-slim"
+    ],
+    "hardening": [
+      "--network",
+      "none",
+      "--read-only",
+      "--cap-drop",
+      "ALL",
+      "--security-opt",
+      "no-new-privileges",
+      "--user",
+      "65534:65534",
+      "--memory",
+      "1g",
+      "--pids-limit",
+      "256",
+      "--tmpfs",
+      "/tmp:rw,size=64m"
+    ],
+    "timeout_s": 30
+  },
+  "note": ""
+}

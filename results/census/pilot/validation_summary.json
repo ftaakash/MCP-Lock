@@ -1,0 +1,81 @@
+{
+  "attempted": 95,
+  "stage_a_failed": 7,
+  "stage_b_failed": 57,
+  "validated": 31,
+  "all": {
+    "versions": 31,
+    "name_precision_micro": 0.9656565656565657,
+    "name_recall_micro": 0.7913907284768212,
+    "name_set_equal": [
+      24,
+      31,
+      [
+        0.7741935483870968,
+        0.6018758161665794,
+        0.886048644387375
+      ]
+    ],
+    "g1_detection_when_server_has_tools": [
+      28,
+      31,
+      [
+        0.9032258064516129,
+        0.7510006155660716,
+        0.9665353558368026
+      ]
+    ],
+    "servers_with_zero_tools": 0,
+    "description_exact_match_mean": 0.8623434285444914
+  },
+  "npm": {
+    "versions": 20,
+    "name_precision_micro": 0.9968253968253968,
+    "name_recall_micro": 0.9843260188087775,
+    "name_set_equal": [
+      18,
+      20,
+      [
+        0.9,
+        0.6989663547715128,
+        0.9721335187862319
+      ]
+    ],
+    "g1_detection_when_server_has_tools": [
+      19,
+      20,
+      [
+        0.95,
+        0.763868806553258,
+        0.9911185511992047
+      ]
+    ],
+    "servers_with_zero_tools": 0,
+    "description_exact_match_mean": 0.8668291542252761
+  },
+  "pypi": {
+    "versions": 11,
+    "name_precision_micro": 0.9111111111111111,
+    "name_recall_micro": 0.5754385964912281,
+    "name_set_equal": [
+      6,
+      11,
+      [
+        0.5454545454545454,
+        0.280091537409322,
+        0.7872872837754024
+      ]
+    ],
+    "g1_detection_when_server_has_tools": [
+      9,
+      11,
+      [
+        0.8181818181818182,
+        0.523019438039156,
+        0.9486323102539149
+      ]
+    ],
+    "servers_with_zero_tools": 0,
+    "description_exact_match_mean": 0.8528735632183908
+  }
+}

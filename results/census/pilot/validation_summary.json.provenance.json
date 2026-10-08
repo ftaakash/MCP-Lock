@@ -1,0 +1,13 @@
+{
+  "result": "results/census/pilot/validation_summary.json",
+  "result_sha256": "be15947c3bdebc2bcc0e0412fd40ad4ad650fc644e5221bd6bd42350507548a3",
+  "command": "python /home/runner/work/MCP-Lock/MCP-Lock/census/dynamic.py summarize results/census/pilot",
+  "commit": "5f6c2d506a33615756fc49f760187f5ae9960dcd-dirty",
+  "timestamp_utc": "2026-10-08T20:10:19Z",
+  "python": "3.11.17",
+  "inputs": {
+    "results/census/pilot/validation.jsonl": "66e83a543b3d1ac01a754f117d066b545253f416729dd5cfccd2f971c10440cf"
+  },
+  "params": {},
+  "note": ""
+}
