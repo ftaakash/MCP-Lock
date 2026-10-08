@@ -330,6 +330,22 @@ def candidates(pilot: Path, eco: str) -> list[dict]:
     return out
 
 
+def heldout_candidates(pilot: Path, sample_dir: Path, eco: str) -> list[dict]:
+    """Packages of the phase-2 sample never attempted in harness v1/v2 (the development set),
+    in an independently seeded order. Static results come from the frozen extractor."""
+    dev = set()
+    for name in ("validation_v1.jsonl", "validation_npm.jsonl", "validation_pypi.jsonl"):
+        f = pilot / name
+        if f.exists():
+            dev |= {(r["ecosystem"], r["package"]) for r in map(json.loads, open(f, encoding="utf-8"))}
+    pool = sorted((r for r in map(json.loads, open(sample_dir / "sample.jsonl", encoding="utf-8"))
+                   if r["ecosystem"] == eco and (eco, r["package"]) not in dev),
+                  key=lambda r: r["package"])
+    order = np.random.default_rng(SEED + 1).permutation(len(pool))
+    return [{"ecosystem": eco, "package": pool[i]["package"], "tercile": pool[i]["tercile"],
+             "source": "heldout", "version": None, "static": None} for i in order]
+
+
 def _prepare_reserve(c: dict) -> dict | None:
     """Fetch the latest version and run the static extractor (host side; no code execution)."""
     from census import versions as V
@@ -364,11 +380,11 @@ def _f1_index() -> dict:
 
 
 def attempt(c: dict, idx: int, f1: dict) -> dict:
-    if c["source"] == "reserve":
+    if c["source"] in ("reserve", "heldout"):
         c2 = _prepare_reserve(c)
         if c2 is None:
             return {"ecosystem": c["ecosystem"], "package": c["package"], "attempt": idx,
-                    "source": "reserve", "skipped": "metadata unavailable"}
+                    "source": c["source"], "skipped": "metadata unavailable"}
         c = c2
     eco, pkg, v = c["ecosystem"], c["package"], c["version"]
     reg = f1.get((eco, pkg), {})
@@ -411,8 +427,14 @@ def attempt(c: dict, idx: int, f1: dict) -> dict:
     return rec
 
 
-def run(pilot: Path, eco: str, target: int, max_attempts: int, workers: int) -> Path:
-    cands = candidates(pilot, eco)[:max_attempts]
+def run(pilot: Path, eco: str, target: int, max_attempts: int, workers: int,
+        pool_name: str = "dev", sample_dir: Path | None = None) -> Path:
+    if pool_name == "heldout":
+        cands = heldout_candidates(pilot, sample_dir, eco)[:max_attempts]
+        out_dir, prefix = sample_dir, "validation_heldout_"
+    else:
+        cands = candidates(pilot, eco)[:max_attempts]
+        out_dir, prefix = pilot, "validation_"
     f1 = _f1_index()
     results, validated, i = [], 0, 0
     with ThreadPoolExecutor(workers) as pool:
@@ -426,13 +448,14 @@ def run(pilot: Path, eco: str, target: int, max_attempts: int, workers: int) -> 
                       f"eq={rec.get('compare', {}).get('name_set_equal')} validated={validated}",
                       flush=True)
             i = batch[-1] + 1
-    out = pilot / f"validation_{eco}.jsonl"
+    out = out_dir / f"{prefix}{eco}.jsonl"
     with open(out, "w", encoding="utf-8") as f:
         for r in results:
             f.write(json.dumps(r, sort_keys=True) + "\n")
     provenance.write(out, inputs=[pilot / "versions.jsonl", pilot / "extractions.jsonl",
                                   pilot / "stratum_order.jsonl"],
-                     params={"harness": "v2", "seed": SEED, "eco": eco, "target": target,
+                     params={"harness": "v2", "pool": pool_name, "seed": SEED, "eco": eco,
+                             "target": target,
                              "max_attempts": max_attempts, "workers": workers,
                              "images": [NODE_IMG, *PY_IMGS.values()], "hardening": HARDEN,
                              "first_timeout_s": FIRST_TIMEOUT, "retry_timeout_s": RETRY_TIMEOUT,
@@ -441,14 +464,13 @@ def run(pilot: Path, eco: str, target: int, max_attempts: int, workers: int) -> 
 
 
 # ------------------------------------------------------------------ summary
-def summarize(pilot: Path) -> dict:
+def summarize(pilot: Path, prefix: str = "validation_") -> dict:
     """Extractor accuracy against tools/list ground truth, plus a selection-bias check."""
     from census.stats import wilson
 
+    files = [pilot / f"{prefix}{e}.jsonl" for e in ("npm", "pypi") if (pilot / f"{prefix}{e}.jsonl").exists()]
     rows = []
-    for p in sorted(pilot.glob("validation_*.jsonl")):
-        if p.name.startswith("validation_v1"):
-            continue
+    for p in files:
         rows += [json.loads(x) for x in open(p, encoding="utf-8")]
     rows = [r for r in rows if not r.get("skipped")]
     ok = [r for r in rows if r.get("stage_b_ok")]
@@ -501,10 +523,9 @@ def summarize(pilot: Path) -> dict:
         k = "stage_a" if not r["stage_a_ok"] else (r.get("stage_b_error") or "unknown")
         fails[k] = fails.get(k, 0) + 1
     out["failure_reasons"] = fails
-    dest = pilot / "validation_summary.json"
+    dest = pilot / f"{prefix}summary.json"
     dest.write_text(json.dumps(out, indent=2))
-    provenance.write(dest, inputs=sorted(p for p in pilot.glob("validation_*.jsonl")
-                                         if not p.name.startswith("validation_v1")))
+    provenance.write(dest, inputs=files)
     print(json.dumps(out, indent=2))
     return out
 
@@ -518,13 +539,16 @@ def main():
     r.add_argument("--target", type=int, default=40)
     r.add_argument("--max-attempts", type=int, default=160)
     r.add_argument("--workers", type=int, default=3)
+    r.add_argument("--pool", choices=["dev", "heldout"], default="dev")
+    r.add_argument("--sample-dir", type=Path, default=Path("results/census/phase2"))
     s = sub.add_parser("summarize")
     s.add_argument("pilot", type=Path)
+    s.add_argument("--prefix", default="validation_")
     a = ap.parse_args()
     if a.cmd == "run":
-        run(a.pilot, a.eco, a.target, a.max_attempts, a.workers)
+        run(a.pilot, a.eco, a.target, a.max_attempts, a.workers, a.pool, a.sample_dir)
     else:
-        summarize(a.pilot)
+        summarize(a.pilot, a.prefix)
 
 
 if __name__ == "__main__":

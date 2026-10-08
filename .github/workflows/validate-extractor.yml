@@ -16,6 +16,16 @@ on:
         description: "Maximum attempts per ecosystem"
         default: "160"
         required: true
+      pool:
+        description: "dev (pilot packages, harness development) or heldout (phase-2 sample, frozen extractor)"
+        default: "heldout"
+        required: true
+        type: choice
+        options: [dev, heldout]
+
+env:
+  OUT_DIR: ${{ inputs.pool == 'heldout' && 'results/census/phase2' || 'results/census/pilot' }}
+  PREFIX: ${{ inputs.pool == 'heldout' && 'validation_heldout_' || 'validation_' }}
 
 permissions:
   contents: read
@@ -48,13 +58,14 @@ jobs:
         run: >
           python -m census.dynamic run results/census/pilot --eco ${{ matrix.eco }}
           --target ${{ inputs.target }} --max-attempts ${{ inputs.max_attempts }} --workers 3
+          --pool ${{ inputs.pool }} --sample-dir results/census/phase2
 
       - uses: actions/upload-artifact@v4
         with:
           name: validation-${{ matrix.eco }}
           path: |
-            results/census/pilot/validation_${{ matrix.eco }}.jsonl
-            results/census/pilot/validation_${{ matrix.eco }}.jsonl.provenance.json
+            ${{ env.OUT_DIR }}/${{ env.PREFIX }}${{ matrix.eco }}.jsonl
+            ${{ env.OUT_DIR }}/${{ env.PREFIX }}${{ matrix.eco }}.jsonl.provenance.json
           retention-days: 30
 
   summarize:
@@ -74,17 +85,14 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           pattern: validation-*
-          path: results/census/pilot
+          path: ${{ env.OUT_DIR }}
           merge-multiple: true
 
       - name: Summarize
-        run: python -m census.dynamic summarize results/census/pilot
+        run: python -m census.dynamic summarize ${{ env.OUT_DIR }} --prefix ${{ env.PREFIX }}
 
       - uses: actions/upload-artifact@v4
         with:
-          name: extractor-validation-v2
-          path: |
-            results/census/pilot/validation_npm.jsonl*
-            results/census/pilot/validation_pypi.jsonl*
-            results/census/pilot/validation_summary.json*
+          name: extractor-validation-${{ inputs.pool }}
+          path: ${{ env.OUT_DIR }}/${{ env.PREFIX }}*
           retention-days: 30
