@@ -39,7 +39,7 @@ def run(phase2: Path) -> dict:
     res = {"kill_style": analyze(phase2)}  # G1 / G2 estimates on the 2,000 sample
     versions = [json.loads(x) for x in open(phase2 / "versions.jsonl", encoding="utf-8")]
     ex = {(r["ecosystem"], r["package"], r["version"]): r
-          for r in map(json.loads, open(phase2 / "extractions.jsonl", encoding="utf-8"))}
+          for r in map(json.loads, provenance.open_text(phase2 / "extractions.jsonl"))}
     meta = {}
     mpath = Path("results/census/metacensus/transitions.jsonl.gz")
     for line in gzip.open(mpath, "rt", encoding="utf-8"):

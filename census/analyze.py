@@ -33,7 +33,7 @@ def _fmt(p, lo, hi):
 def load(pilot: Path):
     versions = [json.loads(x) for x in open(pilot / "versions.jsonl", encoding="utf-8")]
     ex = {(r["ecosystem"], r["package"], r["version"]): r
-          for r in map(json.loads, open(pilot / "extractions.jsonl", encoding="utf-8"))}
+          for r in map(json.loads, provenance.open_text(pilot / "extractions.jsonl"))}
     return versions, ex
 
 

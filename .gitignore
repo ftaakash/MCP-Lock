@@ -13,3 +13,6 @@ paper/*.log
 paper/*.out
 paper/*.bbl
 paper/*.blg
+
+# large result files are committed gzipped (*.jsonl.gz)
+results/census/phase2/extractions.jsonl
