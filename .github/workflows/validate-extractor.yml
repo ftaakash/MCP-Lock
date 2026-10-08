@@ -1,15 +1,20 @@
 name: Validate static extractor
 
-# Plan §6: dynamic tools/list ground truth for the static tool-definition extractor.
-# Stage A installs with network on and install scripts disabled; stage B runs the server
-# in Docker with --network none, read-only, no capabilities, non-root, and never calls a tool.
+# Plan §6: dynamic tools/list ground truth for the static tool-definition extractor (harness v2).
+# Stage A installs with network on, install scripts disabled, dependencies as of release date;
+# stage B runs the server in Docker with --network none, read-only root, no capabilities,
+# non-root, and never calls a tool.
 
 on:
   workflow_dispatch:
     inputs:
-      per_ecosystem:
+      target:
         description: "Validated versions per ecosystem"
-        default: "20"
+        default: "40"
+        required: true
+      max_attempts:
+        description: "Maximum attempts per ecosystem"
+        default: "160"
         required: true
 
 permissions:
@@ -18,7 +23,11 @@ permissions:
 jobs:
   validate:
     runs-on: ubuntu-24.04
-    timeout-minutes: 150
+    timeout-minutes: 300
+    strategy:
+      fail-fast: false
+      matrix:
+        eco: [npm, pypi]
     steps:
       - uses: actions/checkout@v4
 
@@ -31,21 +40,51 @@ jobs:
 
       - name: Pull base images
         run: |
-          docker pull node:22-slim
-          docker pull python:3.11-slim
+          for img in node:22-slim python:3.11-slim python:3.12-slim python:3.13-slim; do
+            docker pull -q "$img"
+          done
 
-      - name: Run validation
-        run: python -m census.dynamic results/census/pilot ${{ inputs.per_ecosystem }}
+      - name: Run validation (${{ matrix.eco }})
+        run: >
+          python -m census.dynamic run results/census/pilot --eco ${{ matrix.eco }}
+          --target ${{ inputs.target }} --max-attempts ${{ inputs.max_attempts }} --workers 3
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: validation-${{ matrix.eco }}
+          path: |
+            results/census/pilot/validation_${{ matrix.eco }}.jsonl
+            results/census/pilot/validation_${{ matrix.eco }}.jsonl.provenance.json
+          retention-days: 30
+
+  summarize:
+    needs: validate
+    if: always()
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.lock
+
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: validation-*
+          path: results/census/pilot
+          merge-multiple: true
 
       - name: Summarize
         run: python -m census.dynamic summarize results/census/pilot
 
       - uses: actions/upload-artifact@v4
         with:
-          name: extractor-validation
+          name: extractor-validation-v2
           path: |
-            results/census/pilot/validation.jsonl
-            results/census/pilot/validation.jsonl.provenance.json
-            results/census/pilot/validation_summary.json
-            results/census/pilot/validation_summary.json.provenance.json
+            results/census/pilot/validation_npm.jsonl*
+            results/census/pilot/validation_pypi.jsonl*
+            results/census/pilot/validation_summary.json*
           retention-days: 30
