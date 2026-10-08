@@ -1,0 +1,15 @@
+{
+  "result": "results/census/frame/f1_registry.jsonl",
+  "result_sha256": "fb2ab6457f49482524b3e97d19499c8537d5f632f9f518998184bcae40bbaae1",
+  "command": "python.exe C:\\Users\\Administrator\\Desktop\\Major Project\\mcp-lock\\census\\frame.py f1",
+  "commit": "e4a794709f538ac4b4d4854f80b7a2648ca7c105-dirty",
+  "timestamp_utc": "2026-10-08T12:39:00Z",
+  "python": "3.11.9",
+  "inputs": {},
+  "params": {
+    "url": "https://registry.modelcontextprotocol.io/v0/servers",
+    "pages": 409,
+    "rows": 15217
+  },
+  "note": ""
+}

@@ -1,0 +1,150 @@
+"""Registry metadata for frame packages: eligibility (>= 2 versions) and popularity.
+
+Usage:
+    python -m census.meta eligibility <frame.jsonl>
+    python -m census.meta downloads <eligibility.jsonl>
+"""
+
+from __future__ import annotations
+
+import json
+import sys
+from concurrent.futures import ThreadPoolExecutor
+from pathlib import Path
+from urllib.parse import quote
+
+from census import http, provenance
+
+OUT = Path("results/census/frame")
+
+# Launchers / proxies that ship no tool definitions of their own (pre-specified, plan §2.3).
+PROXIES = {
+    ("npm", "mcp-remote"), ("npm", "@smithery/cli"), ("npm", "supergateway"),
+    ("npm", "@modelcontextprotocol/inspector"), ("npm", "mcp-proxy"),
+    ("npm", "@pulsemcp/mcp-remote"), ("npm", "@llmindset/mcp-remote"),
+    ("pypi", "mcp-proxy"), ("pypi", "mcp-remote"), ("npm", "@agentdeskai/browser-tools-server"),
+}
+
+
+def npm_url(pkg: str) -> str:
+    return "https://registry.npmjs.org/" + quote(pkg, safe="@")
+
+
+def pypi_url(pkg: str) -> str:
+    return f"https://pypi.org/pypi/{pkg}/json"
+
+
+def _npm_summary(pkg: str) -> dict:
+    try:
+        doc = http.get_json(npm_url(pkg) + "?abbreviated",
+                            headers={"Accept": "application/vnd.npm.install-v1+json"})
+    except http.HttpError as e:
+        return {"resolves": False, "http": e.status}
+    versions = doc.get("versions") or {}
+    latest = (doc.get("dist-tags") or {}).get("latest")
+    dep_latest = bool(latest and versions.get(latest, {}).get("deprecated"))
+    return {"resolves": bool(versions), "n_versions": len(versions), "latest": latest,
+            "latest_deprecated": dep_latest, "modified": doc.get("modified")}
+
+
+def _pypi_summary(pkg: str) -> dict:
+    try:
+        doc = http.get_json(pypi_url(pkg))
+    except http.HttpError as e:
+        return {"resolves": False, "http": e.status}
+    rel = doc.get("releases") or {}
+    live = [v for v, files in rel.items() if files and not all(f.get("yanked") for f in files)]
+    return {"resolves": bool(live), "n_versions": len(live),
+            "latest": (doc.get("info") or {}).get("version"), "latest_deprecated": False}
+
+
+def eligibility(frame_path: str) -> Path:
+    rows = [json.loads(x) for x in open(frame_path, encoding="utf-8")]
+    rows = [r for r in rows if r["in_frame"]]
+
+    def work(r):
+        fn = _npm_summary if r["ecosystem"] == "npm" else _pypi_summary
+        s = fn(r["package"])
+        proxy = (r["ecosystem"], r["package"]) in PROXIES
+        eligible = s.get("resolves", False) and s.get("n_versions", 0) >= 2 and not proxy
+        reason = ("proxy" if proxy else "unresolved" if not s.get("resolves")
+                  else "single_version" if s.get("n_versions", 0) < 2 else "ok")
+        return {**{k: r[k] for k in ("ecosystem", "package", "in_f1", "f2_files_unpinned",
+                                     "f2_repos")}, **s, "proxy": proxy,
+                "eligible": eligible, "reason": reason}
+
+    with ThreadPoolExecutor(8) as ex:
+        out_rows = list(ex.map(work, rows))
+    out = OUT / (Path(frame_path).stem + "_eligibility.jsonl")
+    with open(out, "w", encoding="utf-8") as f:
+        for r in out_rows:
+            f.write(json.dumps(r, sort_keys=True) + "\n")
+    from collections import Counter
+    c = Counter((r["ecosystem"], r["reason"]) for r in out_rows)
+    provenance.write(out, inputs=[Path(frame_path)], params={"counts": {f"{a}:{b}": n for (a, b), n
+                                                                      in sorted(c.items())}})
+    print("eligibility:", dict(sorted(c.items())), "->", out)
+    return out
+
+
+def _npm_downloads(pkgs: list[str]) -> dict[str, int]:
+    res: dict[str, int] = {}
+    unscoped = [p for p in pkgs if not p.startswith("@")]
+    scoped = [p for p in pkgs if p.startswith("@")]
+    for i in range(0, len(unscoped), 128):
+        chunk = unscoped[i:i + 128]
+        url = "https://api.npmjs.org/downloads/point/last-month/" + ",".join(chunk)
+        try:
+            data = http.get_json(url)
+        except http.HttpError:
+            data = {}
+        if len(chunk) == 1:
+            data = {chunk[0]: data}
+        for p in chunk:
+            v = data.get(p)
+            res[p] = (v or {}).get("downloads", 0) if isinstance(v, dict) else 0
+
+    def one(p):
+        try:
+            return p, http.get_json("https://api.npmjs.org/downloads/point/last-month/"
+                                    + quote(p, safe="@")).get("downloads", 0)
+        except http.HttpError:
+            return p, 0
+
+    with ThreadPoolExecutor(4) as ex:
+        res.update(dict(ex.map(one, scoped)))
+    return res
+
+
+def _pypi_downloads(pkgs: list[str]) -> dict[str, int]:
+    def one(p):
+        try:
+            d = http.get_json(f"https://pypistats.org/api/packages/{p}/recent")
+            return p, (d.get("data") or {}).get("last_month", 0)
+        except http.HttpError:
+            return p, 0
+
+    with ThreadPoolExecutor(2) as ex:
+        return dict(ex.map(one, pkgs))
+
+
+def downloads(elig_path: str) -> Path:
+    rows = [json.loads(x) for x in open(elig_path, encoding="utf-8")]
+    rows = [r for r in rows if r["eligible"]]
+    npm = _npm_downloads([r["package"] for r in rows if r["ecosystem"] == "npm"])
+    pypi = _pypi_downloads([r["package"] for r in rows if r["ecosystem"] == "pypi"])
+    for r in rows:
+        r["downloads_last_month"] = (npm if r["ecosystem"] == "npm" else pypi).get(r["package"], 0)
+    out = Path(elig_path).with_name(Path(elig_path).stem.replace("_eligibility", "")
+                                    + "_eligible_downloads.jsonl")
+    with open(out, "w", encoding="utf-8") as f:
+        for r in rows:
+            f.write(json.dumps(r, sort_keys=True) + "\n")
+    provenance.write(out, inputs=[Path(elig_path)],
+                     params={"sources": ["api.npmjs.org last-month", "pypistats.org recent"]})
+    print(f"downloads: {len(rows)} eligible packages -> {out}")
+    return out
+
+
+if __name__ == "__main__":
+    {"eligibility": eligibility, "downloads": downloads}[sys.argv[1]](sys.argv[2])
