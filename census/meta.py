@@ -24,6 +24,13 @@ PROXIES = {
     ("npm", "@pulsemcp/mcp-remote"), ("npm", "@llmindset/mcp-remote"),
     ("pypi", "mcp-proxy"), ("pypi", "mcp-remote"), ("npm", "@agentdeskai/browser-tools-server"),
 }
+# Generic script runners that only execute a local file (`npx tsx ./server.ts`); they are not
+# MCP servers. Fixed before sampling (2026-10-08) after inspecting the top F2-only launches.
+RUNNERS = {
+    ("npm", n) for n in ("tsx", "ts-node", "dotenv-cli", "cross-env", "env-cmd", "nodemon",
+                         "concurrently", "@dotenvx/dotenvx", "dotenv", "node", "deno", "vite-node",
+                         "esno", "esrun", "jiti", "bun", "npm", "pnpm", "yarn", "typescript")
+} | {("pypi", n) for n in ("python", "poetry", "hatch", "pdm", "uv", "pip", "pipx")}
 
 
 def npm_url(pkg: str) -> str:
@@ -65,9 +72,13 @@ def eligibility(frame_path: str) -> Path:
     def work(r):
         fn = _npm_summary if r["ecosystem"] == "npm" else _pypi_summary
         s = fn(r["package"])
-        proxy = (r["ecosystem"], r["package"]) in PROXIES
-        eligible = s.get("resolves", False) and s.get("n_versions", 0) >= 2 and not proxy
-        reason = ("proxy" if proxy else "unresolved" if not s.get("resolves")
+        key = (r["ecosystem"], r["package"])
+        proxy = key in PROXIES
+        runner = key in RUNNERS
+        eligible = (s.get("resolves", False) and s.get("n_versions", 0) >= 2 and not proxy
+                    and not runner)
+        reason = ("proxy" if proxy else "generic_runner" if runner
+                  else "unresolved" if not s.get("resolves")
                   else "single_version" if s.get("n_versions", 0) < 2 else "ok")
         return {**{k: r[k] for k in ("ecosystem", "package", "in_f1", "f2_files_unpinned",
                                      "f2_repos")}, **s, "proxy": proxy,

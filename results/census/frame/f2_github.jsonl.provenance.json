@@ -1,0 +1,25 @@
+{
+  "result": "results/census/frame/f2_github.jsonl",
+  "result_sha256": "3686773596baa7751e09ec7a63b7316d4a9d0022837b84c2b20b759645bfa4b3",
+  "command": "python.exe C:\\Users\\Administrator\\Desktop\\Major Project\\mcp-lock\\census\\frame.py f2",
+  "commit": "c32c8f952ba89213137d640f1ec70a6566a6ee52-dirty",
+  "timestamp_utc": "2026-10-08T15:18:11Z",
+  "python": "3.11.9",
+  "inputs": {},
+  "params": {
+    "queries": [
+      "filename:.mcp.json npx",
+      "filename:.mcp.json uvx",
+      "filename:claude_desktop_config.json npx",
+      "filename:claude_desktop_config.json uvx",
+      "filename:mcp.json path:.vscode npx",
+      "filename:mcp.json path:.vscode uvx",
+      "filename:mcp.json path:.cursor npx",
+      "filename:mcp.json path:.cursor uvx"
+    ],
+    "search_calls": 386,
+    "raw_fetches": 14192,
+    "files": 32346
+  },
+  "note": "GitHub code search results with text-match snippets; raw file fetched only when the snippet did not parse."
+}

@@ -1,0 +1,50 @@
+[
+  {
+    "query": "filename:.mcp.json npx",
+    "partitions": 33,
+    "reported_total": 19288,
+    "items_retrieved": 19297
+  },
+  {
+    "query": "filename:.mcp.json uvx",
+    "partitions": 12,
+    "reported_total": 4342,
+    "items_retrieved": 4499
+  },
+  {
+    "query": "filename:claude_desktop_config.json npx",
+    "partitions": 1,
+    "reported_total": 689,
+    "items_retrieved": 700
+  },
+  {
+    "query": "filename:claude_desktop_config.json uvx",
+    "partitions": 1,
+    "reported_total": 251,
+    "items_retrieved": 235
+  },
+  {
+    "query": "filename:mcp.json path:.vscode npx",
+    "partitions": 15,
+    "reported_total": 5711,
+    "items_retrieved": 5988
+  },
+  {
+    "query": "filename:mcp.json path:.vscode uvx",
+    "partitions": 3,
+    "reported_total": 1008,
+    "items_retrieved": 1008
+  },
+  {
+    "query": "filename:mcp.json path:.cursor npx",
+    "partitions": 9,
+    "reported_total": 3357,
+    "items_retrieved": 3547
+  },
+  {
+    "query": "filename:mcp.json path:.cursor uvx",
+    "partitions": 1,
+    "reported_total": 418,
+    "items_retrieved": 435
+  }
+]

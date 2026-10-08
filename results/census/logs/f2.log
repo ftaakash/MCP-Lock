@@ -1,0 +1,9 @@
+F2 'filename:.mcp.json npx': 33 partitions, 19297 items, 103 search calls so far
+F2 'filename:.mcp.json uvx': 12 partitions, 4499 items, 182 search calls so far
+F2 'filename:claude_desktop_config.json npx': 1 partitions, 700 items, 190 search calls so far
+F2 'filename:claude_desktop_config.json uvx': 1 partitions, 235 items, 194 search calls so far
+F2 'filename:mcp.json path:.vscode npx': 15 partitions, 5988 items, 293 search calls so far
+F2 'filename:mcp.json path:.vscode uvx': 3 partitions, 1008 items, 316 search calls so far
+F2 'filename:mcp.json path:.cursor npx': 9 partitions, 3547 items, 380 search calls so far
+F2 'filename:mcp.json path:.cursor uvx': 1 partitions, 435 items, 386 search calls so far
+F2: 32346 files, 14192 raw fetches -> results\census\frame\f2_github.jsonl

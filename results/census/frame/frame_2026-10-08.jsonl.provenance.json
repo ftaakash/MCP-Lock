@@ -1,0 +1,20 @@
+{
+  "result": "results/census/frame/frame_2026-10-08.jsonl",
+  "result_sha256": "905cc9d79f56aecca50f5cec16df37b1d9eb7b58c9ac2e005fd34859444c8dcb",
+  "command": "python.exe C:\\Users\\Administrator\\Desktop\\Major Project\\mcp-lock\\census\\frame.py build",
+  "commit": "c32c8f952ba89213137d640f1ec70a6566a6ee52-dirty",
+  "timestamp_utc": "2026-10-08T15:18:55Z",
+  "python": "3.11.9",
+  "inputs": {
+    "results/census/frame/f1_registry.jsonl": "fb2ab6457f49482524b3e97d19499c8537d5f632f9f518998184bcae40bbaae1",
+    "results/census/frame/f2_github.jsonl": "3686773596baa7751e09ec7a63b7316d4a9d0022837b84c2b20b759645bfa4b3"
+  },
+  "params": {
+    "in_frame_by_ecosystem": {
+      "npm": 13338,
+      "pypi": 4729
+    },
+    "total_rows": 18341
+  },
+  "note": ""
+}
