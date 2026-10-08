@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import json
 import sys
+import time
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from urllib.parse import quote
@@ -98,8 +99,31 @@ def eligibility(frame_path: str) -> Path:
     return out
 
 
-def _npm_downloads(pkgs: list[str]) -> dict[str, int]:
-    res: dict[str, int] = {}
+def _with_retries(fetch_one, pkgs: list[str], workers: int) -> dict[str, int | None]:
+    """fetch_one returns an int, or None on a transient failure; failures are retried
+    sequentially up to 3 more passes. A package that still fails stays None (never 0)."""
+    with ThreadPoolExecutor(workers) as ex:
+        res = dict(zip(pkgs, ex.map(fetch_one, pkgs), strict=True))
+    for attempt in range(3):
+        todo = [p for p, v in res.items() if v is None]
+        if not todo:
+            break
+        time.sleep(30 * (attempt + 1))
+        for p in todo:
+            res[p] = fetch_one(p)
+    return res
+
+
+def _npm_one(p: str) -> int | None:
+    try:
+        return http.get_json("https://api.npmjs.org/downloads/point/last-month/"
+                             + quote(p, safe="@")).get("downloads", 0)
+    except http.HttpError as e:
+        return 0 if e.status == 404 else None  # 404 = package has no download stats
+
+
+def _npm_downloads(pkgs: list[str]) -> dict[str, int | None]:
+    res: dict[str, int | None] = {}
     unscoped = [p for p in pkgs if not p.startswith("@")]
     scoped = [p for p in pkgs if p.startswith("@")]
     for i in range(0, len(unscoped), 128):
@@ -113,30 +137,24 @@ def _npm_downloads(pkgs: list[str]) -> dict[str, int]:
             data = {chunk[0]: data}
         for p in chunk:
             v = data.get(p)
-            res[p] = (v or {}).get("downloads", 0) if isinstance(v, dict) else 0
-
-    def one(p):
-        try:
-            return p, http.get_json("https://api.npmjs.org/downloads/point/last-month/"
-                                    + quote(p, safe="@")).get("downloads", 0)
-        except http.HttpError:
-            return p, 0
-
-    with ThreadPoolExecutor(4) as ex:
-        res.update(dict(ex.map(one, scoped)))
+            if isinstance(v, dict) and "downloads" in v:
+                res[p] = v["downloads"]
+            else:
+                scoped.append(p)  # missing from the bulk answer: ask individually
+    res.update(_with_retries(_npm_one, scoped, 4))
     return res
 
 
-def _pypi_downloads(pkgs: list[str]) -> dict[str, int]:
-    def one(p):
-        try:
-            d = http.get_json(f"https://pypistats.org/api/packages/{p}/recent")
-            return p, (d.get("data") or {}).get("last_month", 0)
-        except http.HttpError:
-            return p, 0
+def _pypi_one(p: str) -> int | None:
+    try:
+        d = http.get_json(f"https://pypistats.org/api/packages/{p}/recent")
+        return (d.get("data") or {}).get("last_month", 0)
+    except http.HttpError as e:
+        return 0 if e.status == 404 else None
 
-    with ThreadPoolExecutor(2) as ex:
-        return dict(ex.map(one, pkgs))
+
+def _pypi_downloads(pkgs: list[str]) -> dict[str, int | None]:
+    return _with_retries(_pypi_one, pkgs, 2)
 
 
 def downloads(elig_path: str) -> Path:
@@ -147,14 +165,17 @@ def downloads(elig_path: str) -> Path:
         f_py = ex.submit(_pypi_downloads, [r["package"] for r in rows if r["ecosystem"] == "pypi"])
         npm, pypi = f_npm.result(), f_py.result()
     for r in rows:
-        r["downloads_last_month"] = (npm if r["ecosystem"] == "npm" else pypi).get(r["package"], 0)
+        v = (npm if r["ecosystem"] == "npm" else pypi).get(r["package"])
+        r["downloads_failed"] = v is None
+        r["downloads_last_month"] = v or 0
     out = Path(elig_path).with_name(Path(elig_path).stem.replace("_eligibility", "")
                                     + "_eligible_downloads.jsonl")
     with open(out, "w", encoding="utf-8") as f:
         for r in rows:
             f.write(json.dumps(r, sort_keys=True) + "\n")
     provenance.write(out, inputs=[Path(elig_path)],
-                     params={"sources": ["api.npmjs.org last-month", "pypistats.org recent"]})
+                     params={"sources": ["api.npmjs.org last-month", "pypistats.org recent"],
+                             "failed_lookups": sum(r["downloads_failed"] for r in rows)})
     print(f"downloads: {len(rows)} eligible packages -> {out}")
     return out
 

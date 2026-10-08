@@ -1,0 +1,1 @@
+eligibility: {('npm', 'generic_runner'): 9, ('npm', 'ok'): 11201, ('npm', 'proxy'): 6, ('npm', 'single_version'): 1073, ('npm', 'unresolved'): 1049, ('pypi', 'ok'): 4071, ('pypi', 'proxy'): 1, ('pypi', 'single_version'): 470, ('pypi', 'unresolved'): 187} -> results\census\frame\frame_2026-10-08_eligibility.jsonl

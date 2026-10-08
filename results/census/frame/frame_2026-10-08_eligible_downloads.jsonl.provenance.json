@@ -1,0 +1,19 @@
+{
+  "result": "results/census/frame/frame_2026-10-08_eligible_downloads.jsonl",
+  "result_sha256": "6a0afa6f994f6ef7d52478aab0a201b26758c5bbaa08dad9bdd38af40861a107",
+  "command": "python.exe C:\\Users\\Administrator\\Desktop\\Major Project\\mcp-lock\\census\\meta.py downloads results/census/frame/frame_2026-10-08_eligibility.jsonl",
+  "commit": "e8f16e28b96719bd26c6eab8455d07bb98677651-dirty",
+  "timestamp_utc": "2026-10-08T17:47:10Z",
+  "python": "3.11.9",
+  "inputs": {
+    "results/census/frame/frame_2026-10-08_eligibility.jsonl": "d7ec8561bf52cb51054d2d466868e1496e03957011c80d00b9628991546c5dfe"
+  },
+  "params": {
+    "sources": [
+      "api.npmjs.org last-month",
+      "pypistats.org recent"
+    ],
+    "failed_lookups": 0
+  },
+  "note": ""
+}
