@@ -1,6 +1,6 @@
 """Fetch, verify, extract and statically analyse every selected version.
 
-Usage: python -m census.run_extract <versions.jsonl>
+Usage: python -m census.run_extract <versions.jsonl> [--stream]
 Writes extractions.jsonl (one row per version) and suspicious.jsonl (manual-review queue).
 """
 
@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import json
 import re
+import shutil
 import sys
 import traceback
 from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
@@ -74,18 +75,43 @@ def extract_one(args) -> dict:
                 "n_tools": 0}
 
 
-def run(versions_path: str) -> Path:
+def _purge(fetched: dict) -> None:
+    """Streaming mode: delete the archive and its extracted sources once analysed."""
+    if not fetched.get("ok"):
+        return
+    key = fetched["key"]
+    Path(fetched["path"]).unlink(missing_ok=True)
+    shutil.rmtree(tarballs.SRC / key.rsplit(".tgz", 1)[0], ignore_errors=True)
+
+
+def run(versions_path: str, stream: bool = False, chunk: int = 300) -> Path:
+    """Process versions in chunks (fetch with threads, extract with processes). Results are
+    appended as they finish, so an interrupted run resumes where it stopped."""
     rows = [json.loads(x) for x in open(versions_path, encoding="utf-8")]
     jobs = [(r["ecosystem"], r["package"], v) for r in rows for v in r["versions"]]
-    with ThreadPoolExecutor(6) as tex:
-        fetched = list(tex.map(fetch_one, jobs))
-    with ProcessPoolExecutor(6) as pex:
-        results = list(pex.map(extract_one, [(e, p, v["version"], f) for (e, p, v), f
-                                             in zip(jobs, fetched, strict=True)], chunksize=4))
     out = Path(versions_path).with_name("extractions.jsonl")
-    with open(out, "w", encoding="utf-8") as f:
-        for r in results:
-            f.write(json.dumps(r, sort_keys=True) + "\n")
+    done = set()
+    if stream and out.exists():
+        done = {(r["ecosystem"], r["package"], r["version"])
+                for r in map(json.loads, open(out, encoding="utf-8"))}
+    elif out.exists():
+        out.unlink()
+    todo = [j for j in jobs if (j[0], j[1], j[2]["version"]) not in done]
+    with ThreadPoolExecutor(6) as tex, ProcessPoolExecutor(6) as pex, \
+            open(out, "a", encoding="utf-8") as f:
+        for i in range(0, len(todo), chunk):
+            part = todo[i:i + chunk]
+            fetched = list(tex.map(fetch_one, part))
+            res = list(pex.map(extract_one, [(e, p, v["version"], fe) for (e, p, v), fe
+                                             in zip(part, fetched, strict=True)], chunksize=4))
+            for r in res:
+                f.write(json.dumps(r, sort_keys=True) + "\n")
+            f.flush()
+            if stream:
+                for fe in fetched:
+                    _purge(fe)
+            print(f"extract: {min(i + chunk, len(todo))}/{len(todo)} versions", flush=True)
+    results = [json.loads(x) for x in open(out, encoding="utf-8")]
     sus = [r for r in results if r.get("suspicious")]
     with open(out.with_name("suspicious.jsonl"), "w", encoding="utf-8") as f:
         for r in sus:
@@ -100,4 +126,4 @@ def run(versions_path: str) -> Path:
 
 
 if __name__ == "__main__":
-    run(sys.argv[1])
+    run(sys.argv[1], stream="--stream" in sys.argv)
