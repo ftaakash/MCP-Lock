@@ -1,0 +1,13 @@
+{
+  "result": "results/census/metacensus/packages.jsonl.gz",
+  "result_sha256": "1f2901a3ceb785b05a4d21badf63e0d93f5e8d00b00726575675e2949d86ec20",
+  "command": "python.exe C:\\Users\\Administrator\\Desktop\\Major Project\\mcp-lock\\census\\metacensus.py results/census/frame/frame_2026-10-08_eligible_downloads.jsonl",
+  "commit": "09eeee0a871d538e22644812a076b294a16ec51a-dirty",
+  "timestamp_utc": "2026-10-08T21:23:46Z",
+  "python": "3.11.9",
+  "inputs": {
+    "results/census/frame/frame_2026-10-08_eligible_downloads.jsonl": "6a0afa6f994f6ef7d52478aab0a201b26758c5bbaa08dad9bdd38af40861a107"
+  },
+  "params": {},
+  "note": ""
+}

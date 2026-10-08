@@ -1,0 +1,14 @@
+{
+  "result": "results/census/metacensus/summary.json",
+  "result_sha256": "b63967ea4844037a1e43a970c4aed313aeb8cc1b6d95602bae26fd491b11036f",
+  "command": "python.exe C:\\Users\\Administrator\\Desktop\\Major Project\\mcp-lock\\census\\metacensus.py summarize",
+  "commit": "09eeee0a871d538e22644812a076b294a16ec51a-dirty",
+  "timestamp_utc": "2026-10-08T21:24:09Z",
+  "python": "3.11.9",
+  "inputs": {
+    "results/census/metacensus/transitions.jsonl.gz": "956cf2e66e3db457cac40a0a9a8acbc3855ca08bc6b979da36337406dd3ada63",
+    "results/census/metacensus/packages.jsonl.gz": "1f2901a3ceb785b05a4d21badf63e0d93f5e8d00b00726575675e2949d86ec20"
+  },
+  "params": {},
+  "note": ""
+}
