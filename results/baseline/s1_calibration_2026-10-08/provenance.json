@@ -1,0 +1,7 @@
+{
+  "command": "py -3.11 -I eval/scoring/s1_popular_set_calibration.py top-pypi-packages.min.json",
+  "commit": "d0aa47d51416517c558872548210a4b8d09ad00a",
+  "timestamp_utc": "2026-10-08T11:54:40Z",
+  "input": {"url": "https://hugovk.github.io/top-pypi-packages/top-pypi-packages.min.json", "sha256": "55fee05ed02b628f05350a51780ec436efae39ea0810df5d5419e15b850c7041", "snapshot": "2026-10-01"},
+  "note": "Exploratory calibration of Bagmar & Saraf check 1 (name proximity) read literally from Appendix I. Not a parity result."
+}

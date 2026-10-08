@@ -1,0 +1,8 @@
+snapshot: 2026-10-01 12:40:51 n = 15000
+P=top-100   flagged   3/1000  e.g. [('httpx2', 'httpx'), ('httpcore2', 'httpcore'), ('cattrs', 'attrs')]
+P=top-250   flagged  17/1000  e.g. [('httpx', 'httpx2'), ('httpcore', 'httpcore2'), ('tomli', 'toml'), ('httpx2', 'httpx'), ('httpcore2', 'httpcore'), ('psycopg2-binary', 'psycopg-binary')]
+P=top-500   flagged  31/1000  e.g. [('httpx', 'httpx2'), ('httpcore', 'httpcore2'), ('tomli', 'toml'), ('oauthlib', 'authlib'), ('httpx2', 'httpx'), ('httpcore2', 'httpcore')]
+P=top-1000  flagged  52/1000  e.g. [('attrs', 'cattrs'), ('httpx', 'httpx2'), ('httpcore', 'httpcore2'), ('tomli', 'toml'), ('oauthlib', 'authlib'), ('httpx2', 'httpx')]
+P=top-2000  flagged  71/1000  e.g. [('boto3', 'boto'), ('pyyaml', 'pyaml'), ('six', 'svix'), ('attrs', 'cattrs'), ('httpx', 'httpx2'), ('httpcore', 'httpcore2')]
+P=top-5000  flagged 115/1000  e.g. [('boto3', 'boto'), ('pyyaml', 'pyaml'), ('six', 'svix'), ('pydantic', 'dydantic'), ('attrs', 'cattrs'), ('httpx', 'httpx2')]
+P=top-10000 flagged 171/1000  e.g. [('boto3', 'boto'), ('requests', 'grequests'), ('pyyaml', 'pyaml'), ('six', 'svix'), ('pydantic', 'dydantic'), ('click', 'crick')]
