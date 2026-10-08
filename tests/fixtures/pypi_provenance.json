@@ -1,0 +1,12 @@
+{
+ "attestation_bundles": [
+  {
+   "publisher": {
+    "environment": "release",
+    "kind": "GitHub",
+    "repository": "modelcontextprotocol/servers",
+    "workflow": "release.yml"
+   }
+  }
+ ]
+}

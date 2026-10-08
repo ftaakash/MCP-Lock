@@ -4,32 +4,80 @@
   "title": "MCP-Lock lockfile (DRAFT v0.1)",
   "description": "Pins every MCP server launched by an agent harness to an exact package version, archive digest, provenance identity and tool-definition hash.",
   "type": "object",
-  "required": ["lockfileVersion", "servers"],
+  "required": [
+    "lockfileVersion",
+    "servers"
+  ],
   "additionalProperties": false,
   "properties": {
-    "lockfileVersion": { "const": "0.1" },
-    "generated": { "type": "string", "format": "date-time" },
+    "lockfileVersion": {
+      "const": "0.1"
+    },
+    "generated": {
+      "type": "string",
+      "format": "date-time"
+    },
     "servers": {
       "type": "object",
       "description": "Keyed by the server id used in the harness config (e.g. the key under mcpServers).",
-      "additionalProperties": { "$ref": "#/$defs/server" }
+      "additionalProperties": {
+        "$ref": "#/$defs/server"
+      }
+    },
+    "skipped": {
+      "type": "object",
+      "description": "Config entries not locked (remote URL servers, non-runner launches), with the reason.",
+      "additionalProperties": {
+        "type": "string"
+      }
     }
   },
   "$defs": {
     "server": {
       "type": "object",
-      "required": ["ecosystem", "name", "version", "integrity", "tools"],
+      "required": [
+        "ecosystem",
+        "name",
+        "version",
+        "integrity",
+        "tools"
+      ],
       "additionalProperties": false,
       "properties": {
-        "ecosystem": { "enum": ["npm", "pypi"] },
-        "name": { "type": "string", "description": "Registry package name (npm name or PEP 503-normalized PyPI name)." },
-        "version": { "type": "string", "description": "Exact resolved version; never a range or dist-tag." },
+        "ecosystem": {
+          "enum": [
+            "npm",
+            "pypi"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Registry package name (npm name or PEP 503-normalized PyPI name)."
+        },
+        "version": {
+          "type": "string",
+          "description": "Exact resolved version; never a range or dist-tag."
+        },
         "launch": {
           "type": "object",
           "description": "The launch line as declared, for drift detection of the config itself.",
           "properties": {
-            "runner": { "enum": ["npx", "pnpm dlx", "bunx", "uvx", "uv tool run", "pipx run"] },
-            "args": { "type": "array", "items": { "type": "string" } }
+            "runner": {
+              "enum": [
+                "npx",
+                "pnpx",
+                "bunx",
+                "uvx",
+                "uv tool run",
+                "pipx run"
+              ]
+            },
+            "args": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
           }
         },
         "integrity": {
@@ -37,22 +85,69 @@
           "pattern": "^(sha512|sha256)-.+$",
           "description": "Archive digest: npm dist.integrity (sha512, SRI) or PyPI file sha256."
         },
-        "archive": { "type": "string", "description": "Archive filename (PyPI) or tarball URL (npm)." },
+        "archive": {
+          "type": "string",
+          "description": "Archive filename (PyPI) or tarball URL (npm)."
+        },
         "provenance": {
           "description": "Build identity from a verified attestation, or null if the version had none.",
           "oneOf": [
-            { "type": "null" },
+            {
+              "type": "null"
+            },
             {
               "type": "object",
-              "required": ["predicateType", "sourceRepository", "workflowPath", "builder"],
+              "required": [
+                "predicateType",
+                "sourceRepository",
+                "workflowPath",
+                "builder",
+                "digest"
+              ],
               "properties": {
-                "predicateType": { "type": "string" },
-                "sourceRepository": { "type": "string", "description": "e.g. https://github.com/owner/repo" },
-                "sourceRef": { "type": "string" },
-                "sourceCommit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
-                "workflowPath": { "type": "string", "description": "e.g. .github/workflows/release.yml" },
-                "builder": { "type": "string", "description": "Builder id, e.g. GitHub Actions hosted runner." },
-                "digest": { "type": "string", "description": "sha256 over the canonical provenance identity tuple." }
+                "predicateType": {
+                  "type": "string"
+                },
+                "sourceRepository": {
+                  "type": "string",
+                  "description": "e.g. https://github.com/owner/repo"
+                },
+                "sourceRef": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "sourceCommit": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "type": "string",
+                      "pattern": "^[0-9a-f]{40}$"
+                    }
+                  ]
+                },
+                "workflowPath": {
+                  "type": "string",
+                  "description": "e.g. .github/workflows/release.yml"
+                },
+                "builder": {
+                  "type": "string",
+                  "description": "Builder id, e.g. GitHub Actions hosted runner."
+                },
+                "digest": {
+                  "type": "string",
+                  "pattern": "^sha256:[0-9a-f]{64}$",
+                  "description": "sha256 over the continuity identity [sourceRepository, workflowPath, builder]."
+                },
+                "environment": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
               }
             }
           ]
@@ -61,22 +156,65 @@
           "type": "object",
           "description": "Registry account identity at lock time (S3 maintainer-change signal).",
           "properties": {
-            "publisher": { "type": ["string", "null"] },
-            "maintainers": { "type": "array", "items": { "type": "string" } }
+            "publisher": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "maintainers": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
           }
         },
         "installScripts": {
           "type": "array",
-          "items": { "enum": ["preinstall", "install", "postinstall", "prepare", "setup.py"] },
+          "items": {
+            "enum": [
+              "preinstall",
+              "install",
+              "postinstall",
+              "prepare",
+              "setup.py"
+            ]
+          },
           "description": "Install-time hooks present at lock time (S4 new-install-script signal)."
         },
         "tools": {
           "type": "object",
-          "required": ["hash", "method"],
+          "required": [
+            "hash",
+            "method"
+          ],
           "properties": {
-            "hash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$", "description": "sha256 over the sorted canonical (name, description, schema) list." },
-            "method": { "enum": ["static", "dynamic"], "description": "static = extracted from the archive; dynamic = tools/list in a network-less sandbox." },
-            "names": { "type": "array", "items": { "type": "string" } }
+            "hash": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "pattern": "^sha256:[0-9a-f]{64}$"
+                }
+              ],
+              "description": "sha256 over the sorted canonical (name, description, schema) list; null if no tool definitions could be extracted."
+            },
+            "method": {
+              "enum": [
+                "static",
+                "dynamic"
+              ],
+              "description": "static = extracted from the archive; dynamic = tools/list in a network-less sandbox."
+            },
+            "names": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
           }
         }
       }

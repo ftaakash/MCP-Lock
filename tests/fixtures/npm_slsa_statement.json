@@ -1,0 +1,50 @@
+{
+ "predicateType": "https://slsa.dev/provenance/v1",
+ "statement": {
+  "_type": "https://in-toto.io/Statement/v1",
+  "subject": [
+   {
+    "name": "pkg:npm/%40modelcontextprotocol/server-filesystem@2026.8.31",
+    "digest": {
+     "sha512": "90a685932021ea88a9bdcf7e1006c9e79d8969f9cc9ceab99f39b35a4a758c97418530001a9988a568a1506d7eadf36198414cf7c8146437421c20c3e2fe9aed"
+    }
+   }
+  ],
+  "predicateType": "https://slsa.dev/provenance/v1",
+  "predicate": {
+   "buildDefinition": {
+    "buildType": "https://slsa-framework.github.io/github-actions-buildtypes/workflow/v1",
+    "externalParameters": {
+     "workflow": {
+      "ref": "refs/heads/main",
+      "repository": "https://github.com/modelcontextprotocol/servers",
+      "path": ".github/workflows/release.yml"
+     }
+    },
+    "internalParameters": {
+     "github": {
+      "event_name": "workflow_dispatch",
+      "repository_id": "890668799",
+      "repository_owner_id": "182288589"
+     }
+    },
+    "resolvedDependencies": [
+     {
+      "uri": "git+https://github.com/modelcontextprotocol/servers@refs/heads/main",
+      "digest": {
+       "gitCommit": "579c3903f30044eb702a599a74b3ae77588e722e"
+      }
+     }
+    ]
+   },
+   "runDetails": {
+    "builder": {
+     "id": "https://github.com/actions/runner/github-hosted"
+    },
+    "metadata": {
+     "invocationId": "https://github.com/modelcontextprotocol/servers/actions/runs/33419591732/attempts/1"
+    }
+   }
+  }
+ }
+}
