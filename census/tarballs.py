@@ -59,12 +59,36 @@ def check_integrity(data: bytes, integrity: str | None = None, sha256: str | Non
     return "unverified"
 
 
+MAX_ARCHIVE = 150 * 1024 * 1024  # archives above this are recorded as too_large, not analysed
+
+
+class TooLarge(Exception):
+    pass
+
+
+def _download(url: str) -> bytes:
+    """Streaming download with a size cap and the shared per-host rate limit."""
+    from urllib.parse import urlparse
+    http._wait(urlparse(url).netloc)
+    with http._session.get(url, stream=True, timeout=(30, 120)) as r:
+        if r.status_code != 200:
+            raise http.HttpError(url, r.status_code)
+        if int(r.headers.get("Content-Length") or 0) > MAX_ARCHIVE:
+            raise TooLarge(url)
+        buf = bytearray()
+        for chunk in r.iter_content(1 << 20):
+            buf += chunk
+            if len(buf) > MAX_ARCHIVE:
+                raise TooLarge(url)
+        return bytes(buf)
+
+
 def fetch(url: str, key: str, **digests) -> tuple[Path, str]:
     dest = TARBALLS / key
     if dest.exists():
         data = dest.read_bytes()
     else:
-        data = http.get(url, binary=True, cache=False)
+        data = _download(url)
         dest.parent.mkdir(parents=True, exist_ok=True)
         dest.write_bytes(data)
     return dest, check_integrity(data, **digests)

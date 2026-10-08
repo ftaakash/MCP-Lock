@@ -74,6 +74,9 @@ class FileCtx:
                     self.decls.setdefault(_text(name), []).append(val)
 
 
+STEP_BUDGET = 500_000  # evaluation steps per tool candidate; guarantees termination on huge bundles
+
+
 class Resolver:
     def __init__(self, files: list[FileCtx]):
         self.files = files
@@ -81,8 +84,20 @@ class Resolver:
         for f in files:
             for k, v in f.decls.items():
                 self.global_decls.setdefault(k, []).extend(v)
+        self._lookup_cache: dict[tuple[str, str], Node | None] = {}
+        self.steps = 0
+        self.budget_hits = 0
+
+    def start_candidate(self) -> None:
+        self.steps = 0
 
     def lookup(self, name: str, ctx: FileCtx) -> Node | None:
+        key = (name, ctx.rel)
+        if key not in self._lookup_cache:
+            self._lookup_cache[key] = self._lookup(name, ctx)
+        return self._lookup_cache[key]
+
+    def _lookup(self, name: str, ctx: FileCtx) -> Node | None:
         local = ctx.decls.get(name)
         if local and len(local) == 1:
             return local[0]
@@ -99,6 +114,11 @@ class Resolver:
         if n is None:
             return None
         if depth > 12:
+            return OPAQUE
+        self.steps += 1
+        if self.steps > STEP_BUDGET:
+            if self.steps == STEP_BUDGET + 1:
+                self.budget_hits += 1
             return OPAQUE
         ev = lambda x: self.ev(x, ctx, depth + 1)  # noqa: E731
         t = n.type
@@ -240,12 +260,14 @@ def extract_files(root: Path, files: list[Path]) -> tuple[list[ToolDef], dict]:
     for ctx in ctxs:
         for n in _walk(ctx.root):
             if n.type == "call_expression":
+                r.start_candidate()
                 tools.extend(_from_call(r, n, ctx))
             elif n.type == "object":
+                r.start_candidate()
                 t = _from_object(r, n, ctx)
                 if t:
                     tools.append(t)
-    return tools, {"js_files": len(ctxs)}
+    return tools, {"js_files": len(ctxs), "budget_hits": r.budget_hits}
 
 
 def _str(v):

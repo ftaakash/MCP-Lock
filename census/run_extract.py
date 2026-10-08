@@ -45,6 +45,8 @@ def fetch_one(args) -> dict:
         return {"ok": True, "path": str(path), "key": key, "integrity": integ}
     except tarballs.IntegrityError as e:
         return {"ok": False, "status": "integrity_error", "error": str(e)}
+    except tarballs.TooLarge:
+        return {"ok": False, "status": "too_large", "error": f"> {tarballs.MAX_ARCHIVE} bytes"}
     except Exception as e:  # noqa: BLE001
         return {"ok": False, "status": "fetch_error", "error": repr(e)[:300]}
 
