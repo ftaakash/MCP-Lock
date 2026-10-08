@@ -26,7 +26,9 @@ K = 10
 WINDOW_START = datetime(2026, 7, 10, tzinfo=UTC)
 WINDOW_END = datetime(2026, 10, 8, 23, 59, 59, tzinfo=UTC)
 WINDOW_CAP = 40
-INSTALL_SCRIPTS = ("preinstall", "install", "postinstall", "prepare")
+# Lifecycle scripts npm runs when installing a registry tarball. `prepare` is NOT run for
+# registry installs (only git/local), so it is excluded. `gypfile: true` implies `node-gyp rebuild`.
+INSTALL_SCRIPTS = ("preinstall", "install", "postinstall")
 
 
 def _ts(s: str | None) -> datetime | None:
@@ -63,7 +65,9 @@ def npm_versions(pkg: str) -> list[dict]:
             "attestation_url": (dist.get("attestations") or {}).get("url"),
             "publisher": (meta.get("_npmUser") or {}).get("name"),
             "maintainers": sorted(m.get("name", "") for m in meta.get("maintainers") or []),
-            "install_scripts": {k: scripts[k] for k in INSTALL_SCRIPTS if k in scripts},
+            "install_scripts": {**{k: scripts[k] for k in INSTALL_SCRIPTS if k in scripts},
+                                **({"install": "node-gyp rebuild (gypfile)"}
+                                   if meta.get("gypfile") and "install" not in scripts else {})},
             "deprecated": bool(meta.get("deprecated")),
             "dependencies_on_mcp_sdk": (meta.get("dependencies") or {}).get(
                 "@modelcontextprotocol/sdk"),

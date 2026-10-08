@@ -179,7 +179,7 @@
   "G2_event_co_signals": {
     "provenance_lost": 0,
     "publisher_changed": 8,
-    "new_install_script": 2
+    "new_install_script": 1
   },
   "window_capped_packages": 10,
   "packages_with_window_release": 117,

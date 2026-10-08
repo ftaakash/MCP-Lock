@@ -1,9 +1,9 @@
 {
   "result": "results/census/pilot/kill_test.json",
-  "result_sha256": "1d0fcd376370ea452e4f0d1d92d565b1ecd0ef0dbb5252003701f2a8df653860",
+  "result_sha256": "e42b586c0bcfd0c6f11d4cc9120c1bd6ec92430bdf9785d7dc495ad47ed79ec6",
   "command": "python.exe C:\\Users\\Administrator\\Desktop\\Major Project\\mcp-lock\\census\\analyze.py results/census/pilot",
-  "commit": "50cff337558893f5b6090a310938d8a018930437-dirty",
-  "timestamp_utc": "2026-10-08T18:23:55Z",
+  "commit": "bdbdf613b40b14b97a6611da1af0063ba48ec5ff-dirty",
+  "timestamp_utc": "2026-10-08T20:33:15Z",
   "python": "3.11.9",
   "inputs": {
     "results/census/pilot/versions.jsonl": "771ae88e477b04c81fa478e73b4fd4b81a7e7e80940f1e8e019543cbe83a5631",

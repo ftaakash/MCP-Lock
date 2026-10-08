@@ -174,6 +174,11 @@ def analyze(pilot: Path) -> dict:
     return res
 
 
+def _install_set(v: dict) -> set:
+    # registry installs never run `prepare`; older version records may still list it
+    return set(v.get("install_scripts") or {}) - {"prepare"}
+
+
 def co_signals(eco: str, a: dict, b: dict) -> dict:
     if eco != "npm":
         pa = (a.get("provenance") or {}).get("pypi_provenance")
@@ -184,8 +189,7 @@ def co_signals(eco: str, a: dict, b: dict) -> dict:
         "provenance_lost": bool(a.get("has_attestation") and not b.get("has_attestation")),
         "publisher_changed": bool(a.get("publisher") and b.get("publisher")
                                   and a["publisher"] != b["publisher"]),
-        "new_install_script": bool(set(b.get("install_scripts") or {})
-                                   - set(a.get("install_scripts") or {})),
+        "new_install_script": bool(_install_set(b) - _install_set(a)),
     }
 
 
