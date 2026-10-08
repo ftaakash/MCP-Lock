@@ -1,0 +1,13 @@
+{
+  "result": "results/census/metacensus/publisher_breakdown.json",
+  "result_sha256": "3cbb473b23dbca5907af68cb401e4ce02ed2a160c7d4e56b68a5ed5666392868",
+  "command": "python.exe -",
+  "commit": "ca9250c31ada69aa097dc76c54d91fb8d67acf33-dirty",
+  "timestamp_utc": "2026-10-08T21:49:16Z",
+  "python": "3.11.9",
+  "inputs": {
+    "results/census/metacensus/transitions.jsonl.gz": "956cf2e66e3db457cac40a0a9a8acbc3855ca08bc6b979da36337406dd3ada63"
+  },
+  "params": {},
+  "note": ""
+}
