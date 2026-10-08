@@ -1,0 +1,11 @@
+{
+  "skill": "analyze-project",
+  "target": "Bagmar & Saraf 2026 pre-install hook (arXiv:2607.15143v1)",
+  "date": "2026-10-08",
+  "code_available": false,
+  "code_check": "gh api repos/cardwizard/Sentinel -> 404 Not Found",
+  "basis": "paper full text: Sec. 9.3, Sec. 10, Table 8, Appendix I",
+  "paper_fraction_read": 1.0,
+  "edits_to_upstream": "none",
+  "execution": "none"
+}
