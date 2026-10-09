@@ -1,0 +1,13 @@
+{
+  "result": "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/baseline/parity_2026-10-09/parity.json",
+  "result_sha256": "f89c27976b1969d7a5a5d031173b7014f186ccd9b6d65b79f3b0d94dfbfc080f",
+  "command": "python.exe eval/scoring/parity.py",
+  "commit": "5eeeec8755bff8e701a30d28649f539fa5d2b103-dirty",
+  "timestamp_utc": "2026-10-09T17:50:24Z",
+  "python": "3.11.9",
+  "inputs": {},
+  "params": {
+    "clock": "2026-10-09T00:00:00+00:00"
+  },
+  "note": "Scenarios reconstructed from arXiv:2607.15143; no package installed."
+}

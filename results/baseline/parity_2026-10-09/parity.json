@@ -1,0 +1,941 @@
+{
+  "clock": "2026-10-09T00:00:00+00:00",
+  "configs": {
+    "literal": {
+      "variant": "literal",
+      "p_size": "1000",
+      "exempt_popular": "0",
+      "url_match": "substring",
+      "read_manifests": "False",
+      "expand_make": "False",
+      "read_npmrc": "False",
+      "env_sources": "False",
+      "find_links": "False",
+      "nested_requirements": "False",
+      "name_check_requirement_files": "False",
+      "check_launches": "False",
+      "age_days": "30",
+      "now": "2026-10-09 00:00:00+00:00"
+    },
+    "charitable": {
+      "variant": "charitable",
+      "p_size": "5000",
+      "exempt_popular": "15000",
+      "url_match": "host",
+      "read_manifests": "True",
+      "expand_make": "True",
+      "read_npmrc": "True",
+      "env_sources": "True",
+      "find_links": "True",
+      "nested_requirements": "True",
+      "name_check_requirement_files": "True",
+      "check_launches": "True",
+      "age_days": "30",
+      "now": "2026-10-09 00:00:00+00:00"
+    }
+  },
+  "pypi/literal/command": {
+    "scenarios": {
+      "R1": {
+        "detected": true,
+        "checks": [
+          "absent",
+          "name_proximity"
+        ],
+        "reasons": [
+          "'tranformers' is confusable with popular package 'transformers'",
+          "'tranformers' does not exist on pypi"
+        ]
+      },
+      "R2": {
+        "detected": true,
+        "checks": [
+          "absent",
+          "name_proximity"
+        ],
+        "reasons": [
+          "'azurecore' is confusable with popular package 'azure-core'",
+          "'azurecore' does not exist on pypi"
+        ]
+      },
+      "R3": {
+        "detected": true,
+        "checks": [
+          "absent",
+          "name_proximity"
+        ],
+        "reasons": [
+          "'aiohtpt' is confusable with popular package 'aiohttp'",
+          "'aiohtpt' does not exist on pypi"
+        ]
+      },
+      "R4": {
+        "detected": true,
+        "checks": [
+          "name_proximity"
+        ],
+        "reasons": [
+          "'langchian' is confusable with popular package 'langchain'"
+        ]
+      },
+      "R5": {
+        "detected": true,
+        "checks": [
+          "untrusted_source"
+        ],
+        "reasons": [
+          "untrusted package source http://packages.internal/simple/"
+        ]
+      },
+      "R6a": {
+        "detected": true,
+        "checks": [
+          "untrusted_source"
+        ],
+        "reasons": [
+          "untrusted package source http://localhost:8503/simple/"
+        ]
+      },
+      "R6b": {
+        "detected": true,
+        "checks": [
+          "untrusted_source"
+        ],
+        "reasons": [
+          "untrusted package source https://quiet-river-1234.trycloudflare.com/simple/"
+        ]
+      },
+      "R7": {
+        "detected": false,
+        "checks": [],
+        "reasons": []
+      },
+      "R8": {
+        "detected": true,
+        "checks": [
+          "hidden_source"
+        ],
+        "reasons": [
+          "requirements.txt redirects the index to http://localhost:8503/simple/"
+        ]
+      },
+      "R9": {
+        "detected": true,
+        "checks": [
+          "vulnerable_pin"
+        ],
+        "reasons": [
+          "requests==2.30.0 has GHSA-9hjg-9r4m-mvj7; fixed in 2.32.4",
+          "requests==2.30.0 has GHSA-9wx4-h78v-vm56; fixed in 2.32.0",
+          "requests==2.30.0 has GHSA-gc5v-m9x4-r6x2; fixed in 2.33.0",
+          "requests==2.30.0 has GHSA-j8r2-6x86-q33q; fixed in 2.31.0"
+        ]
+      },
+      "R10": {
+        "detected": true,
+        "checks": [
+          "config_poisoning"
+        ],
+        "reasons": [
+          "PIP_CONFIG_FILE=./pip.conf repoints pip"
+        ]
+      },
+      "R11": {
+        "detected": true,
+        "checks": [
+          "absent",
+          "name_proximity"
+        ],
+        "reasons": [
+          "'requets' is confusable with popular package 'requests'",
+          "'requets' does not exist on pypi"
+        ]
+      }
+    },
+    "detected_core": 10,
+    "n_core": 11,
+    "matches_table8": true
+  },
+  "pypi/literal/agent": {
+    "scenarios": {
+      "R1": {
+        "detected": true,
+        "checks": [
+          "absent",
+          "name_proximity"
+        ],
+        "reasons": [
+          "'tranformers' is confusable with popular package 'transformers'",
+          "'tranformers' does not exist on pypi"
+        ]
+      },
+      "R2": {
+        "detected": true,
+        "checks": [
+          "absent",
+          "name_proximity"
+        ],
+        "reasons": [
+          "'azurecore' is confusable with popular package 'azure-core'",
+          "'azurecore' does not exist on pypi"
+        ]
+      },
+      "R3": {
+        "detected": false,
+        "checks": [],
+        "reasons": []
+      },
+      "R4": {
+        "detected": true,
+        "checks": [
+          "name_proximity"
+        ],
+        "reasons": [
+          "'langchian' is confusable with popular package 'langchain'"
+        ]
+      },
+      "R5": {
+        "detected": true,
+        "checks": [
+          "untrusted_source"
+        ],
+        "reasons": [
+          "untrusted package source http://packages.internal/simple/"
+        ]
+      },
+      "R6a": {
+        "detected": true,
+        "checks": [
+          "untrusted_source"
+        ],
+        "reasons": [
+          "untrusted package source http://localhost:8503/simple/"
+        ]
+      },
+      "R6b": {
+        "detected": true,
+        "checks": [
+          "untrusted_source"
+        ],
+        "reasons": [
+          "untrusted package source https://quiet-river-1234.trycloudflare.com/simple/"
+        ]
+      },
+      "R7": {
+        "detected": false,
+        "checks": [],
+        "reasons": []
+      },
+      "R8": {
+        "detected": true,
+        "checks": [
+          "hidden_source"
+        ],
+        "reasons": [
+          "requirements.txt redirects the index to http://localhost:8503/simple/"
+        ]
+      },
+      "R9": {
+        "detected": true,
+        "checks": [
+          "vulnerable_pin"
+        ],
+        "reasons": [
+          "requests==2.30.0 has GHSA-9hjg-9r4m-mvj7; fixed in 2.32.4",
+          "requests==2.30.0 has GHSA-9wx4-h78v-vm56; fixed in 2.32.0",
+          "requests==2.30.0 has GHSA-gc5v-m9x4-r6x2; fixed in 2.33.0",
+          "requests==2.30.0 has GHSA-j8r2-6x86-q33q; fixed in 2.31.0"
+        ]
+      },
+      "R10": {
+        "detected": false,
+        "checks": [],
+        "reasons": []
+      },
+      "R11": {
+        "detected": true,
+        "checks": [
+          "absent",
+          "name_proximity"
+        ],
+        "reasons": [
+          "'requets' is confusable with popular package 'requests'",
+          "'requets' does not exist on pypi"
+        ]
+      }
+    },
+    "detected_core": 8,
+    "n_core": 11,
+    "matches_table8": false
+  },
+  "pypi/charitable/command": {
+    "scenarios": {
+      "R1": {
+        "detected": true,
+        "checks": [
+          "absent",
+          "name_proximity"
+        ],
+        "reasons": [
+          "'tranformers' is confusable with popular package 'transformers'",
+          "'tranformers' does not exist on pypi"
+        ]
+      },
+      "R2": {
+        "detected": true,
+        "checks": [
+          "absent",
+          "name_proximity"
+        ],
+        "reasons": [
+          "'azurecore' is confusable with popular package 'azure-core'",
+          "'azurecore' does not exist on pypi"
+        ]
+      },
+      "R3": {
+        "detected": true,
+        "checks": [
+          "absent",
+          "name_proximity"
+        ],
+        "reasons": [
+          "'aiohtpt' is confusable with popular package 'aiohttp'",
+          "'aiohtpt' does not exist on pypi"
+        ]
+      },
+      "R4": {
+        "detected": true,
+        "checks": [
+          "name_proximity"
+        ],
+        "reasons": [
+          "'langchian' is confusable with popular package 'langchain'"
+        ]
+      },
+      "R5": {
+        "detected": true,
+        "checks": [
+          "untrusted_source"
+        ],
+        "reasons": [
+          "untrusted package source http://packages.internal/simple/"
+        ]
+      },
+      "R6a": {
+        "detected": true,
+        "checks": [
+          "untrusted_source"
+        ],
+        "reasons": [
+          "untrusted package source http://localhost:8503/simple/"
+        ]
+      },
+      "R6b": {
+        "detected": true,
+        "checks": [
+          "untrusted_source"
+        ],
+        "reasons": [
+          "untrusted package source https://quiet-river-1234.trycloudflare.com/simple/"
+        ]
+      },
+      "R7": {
+        "detected": false,
+        "checks": [],
+        "reasons": []
+      },
+      "R8": {
+        "detected": true,
+        "checks": [
+          "hidden_source"
+        ],
+        "reasons": [
+          "requirements.txt redirects the index to http://localhost:8503/simple/"
+        ]
+      },
+      "R9": {
+        "detected": true,
+        "checks": [
+          "vulnerable_pin"
+        ],
+        "reasons": [
+          "requests==2.30.0 has GHSA-9hjg-9r4m-mvj7; fixed in 2.32.4",
+          "requests==2.30.0 has GHSA-9wx4-h78v-vm56; fixed in 2.32.0",
+          "requests==2.30.0 has GHSA-gc5v-m9x4-r6x2; fixed in 2.33.0",
+          "requests==2.30.0 has GHSA-j8r2-6x86-q33q; fixed in 2.31.0"
+        ]
+      },
+      "R10": {
+        "detected": true,
+        "checks": [
+          "config_poisoning"
+        ],
+        "reasons": [
+          "PIP_CONFIG_FILE=./pip.conf repoints pip"
+        ]
+      },
+      "R11": {
+        "detected": true,
+        "checks": [
+          "absent",
+          "name_proximity"
+        ],
+        "reasons": [
+          "'requets' is confusable with popular package 'requests'",
+          "'requets' does not exist on pypi"
+        ]
+      }
+    },
+    "detected_core": 10,
+    "n_core": 11,
+    "matches_table8": true
+  },
+  "pypi/charitable/agent": {
+    "scenarios": {
+      "R1": {
+        "detected": true,
+        "checks": [
+          "absent",
+          "name_proximity"
+        ],
+        "reasons": [
+          "'tranformers' is confusable with popular package 'transformers'",
+          "'tranformers' does not exist on pypi"
+        ]
+      },
+      "R2": {
+        "detected": true,
+        "checks": [
+          "absent",
+          "name_proximity"
+        ],
+        "reasons": [
+          "'azurecore' is confusable with popular package 'azure-core'",
+          "'azurecore' does not exist on pypi"
+        ]
+      },
+      "R3": {
+        "detected": true,
+        "checks": [
+          "absent",
+          "name_proximity"
+        ],
+        "reasons": [
+          "'aiohtpt' is confusable with popular package 'aiohttp'",
+          "'aiohtpt' does not exist on pypi"
+        ]
+      },
+      "R4": {
+        "detected": true,
+        "checks": [
+          "name_proximity"
+        ],
+        "reasons": [
+          "'langchian' is confusable with popular package 'langchain'"
+        ]
+      },
+      "R5": {
+        "detected": true,
+        "checks": [
+          "untrusted_source"
+        ],
+        "reasons": [
+          "untrusted package source http://packages.internal/simple/"
+        ]
+      },
+      "R6a": {
+        "detected": true,
+        "checks": [
+          "untrusted_source"
+        ],
+        "reasons": [
+          "untrusted package source http://localhost:8503/simple/"
+        ]
+      },
+      "R6b": {
+        "detected": true,
+        "checks": [
+          "untrusted_source"
+        ],
+        "reasons": [
+          "untrusted package source https://quiet-river-1234.trycloudflare.com/simple/"
+        ]
+      },
+      "R7": {
+        "detected": false,
+        "checks": [],
+        "reasons": []
+      },
+      "R8": {
+        "detected": true,
+        "checks": [
+          "hidden_source"
+        ],
+        "reasons": [
+          "requirements.txt redirects the index to http://localhost:8503/simple/"
+        ]
+      },
+      "R9": {
+        "detected": true,
+        "checks": [
+          "vulnerable_pin"
+        ],
+        "reasons": [
+          "requests==2.30.0 has GHSA-9hjg-9r4m-mvj7; fixed in 2.32.4",
+          "requests==2.30.0 has GHSA-9wx4-h78v-vm56; fixed in 2.32.0",
+          "requests==2.30.0 has GHSA-gc5v-m9x4-r6x2; fixed in 2.33.0",
+          "requests==2.30.0 has GHSA-j8r2-6x86-q33q; fixed in 2.31.0"
+        ]
+      },
+      "R10": {
+        "detected": true,
+        "checks": [
+          "config_poisoning"
+        ],
+        "reasons": [
+          "PIP_CONFIG_FILE=./pip.conf repoints pip"
+        ]
+      },
+      "R11": {
+        "detected": true,
+        "checks": [
+          "absent",
+          "name_proximity"
+        ],
+        "reasons": [
+          "'requets' is confusable with popular package 'requests'",
+          "'requets' does not exist on pypi"
+        ]
+      }
+    },
+    "detected_core": 10,
+    "n_core": 11,
+    "matches_table8": true
+  },
+  "npm/literal/command": {
+    "scenarios": {
+      "R1": {
+        "detected": false,
+        "checks": [],
+        "reasons": []
+      },
+      "R2": {
+        "detected": true,
+        "checks": [
+          "absent",
+          "name_proximity"
+        ],
+        "reasons": [
+          "'datefns' is confusable with popular package 'date-fns'",
+          "'datefns' does not exist on npm"
+        ]
+      },
+      "R3": {
+        "detected": true,
+        "checks": [
+          "name_proximity"
+        ],
+        "reasons": [
+          "'exrpess' is confusable with popular package 'express'"
+        ]
+      },
+      "R4": {
+        "detected": true,
+        "checks": [
+          "name_proximity"
+        ],
+        "reasons": [
+          "'axois' is confusable with popular package 'axios'"
+        ]
+      },
+      "R5": {
+        "detected": true,
+        "checks": [
+          "untrusted_source"
+        ],
+        "reasons": [
+          "untrusted package source http://packages.internal/"
+        ]
+      },
+      "R6a": {
+        "detected": true,
+        "checks": [
+          "untrusted_source"
+        ],
+        "reasons": [
+          "untrusted package source http://localhost:4873/"
+        ]
+      },
+      "R6b": {
+        "detected": true,
+        "checks": [
+          "untrusted_source"
+        ],
+        "reasons": [
+          "untrusted package source https://quiet-river-1234.trycloudflare.com/"
+        ]
+      },
+      "R7": {
+        "detected": false,
+        "checks": [],
+        "reasons": []
+      },
+      "R8": {
+        "detected": false,
+        "checks": [],
+        "reasons": []
+      },
+      "R9": {
+        "detected": true,
+        "checks": [
+          "name_proximity",
+          "vulnerable_pin"
+        ],
+        "reasons": [
+          "express==4.16.0 has GHSA-qw6h-vgh9-j6wx; fixed in 4.20.0",
+          "express==4.16.0 has GHSA-rv95-896h-c2vc; fixed in 4.19.2",
+          "lodash==4.17.20 has GHSA-29mw-wpgm-hmr9; fixed in 4.17.21",
+          "lodash==4.17.20 has GHSA-35jh-r3h4-6jhm; fixed in 4.17.21"
+        ]
+      },
+      "R10": {
+        "detected": true,
+        "checks": [
+          "config_poisoning"
+        ],
+        "reasons": [
+          "NPM_CONFIG_USERCONFIG=./evil.npmrc repoints npm configuration"
+        ]
+      },
+      "R11": {
+        "detected": false,
+        "checks": [],
+        "reasons": []
+      }
+    },
+    "detected_core": 7,
+    "n_core": 11,
+    "matches_table8": false
+  },
+  "npm/literal/agent": {
+    "scenarios": {
+      "R1": {
+        "detected": false,
+        "checks": [],
+        "reasons": []
+      },
+      "R2": {
+        "detected": true,
+        "checks": [
+          "absent",
+          "name_proximity"
+        ],
+        "reasons": [
+          "'datefns' is confusable with popular package 'date-fns'",
+          "'datefns' does not exist on npm"
+        ]
+      },
+      "R3": {
+        "detected": false,
+        "checks": [],
+        "reasons": []
+      },
+      "R4": {
+        "detected": true,
+        "checks": [
+          "name_proximity"
+        ],
+        "reasons": [
+          "'axois' is confusable with popular package 'axios'"
+        ]
+      },
+      "R5": {
+        "detected": true,
+        "checks": [
+          "untrusted_source"
+        ],
+        "reasons": [
+          "untrusted package source http://packages.internal/"
+        ]
+      },
+      "R6a": {
+        "detected": true,
+        "checks": [
+          "untrusted_source"
+        ],
+        "reasons": [
+          "untrusted package source http://localhost:4873/"
+        ]
+      },
+      "R6b": {
+        "detected": true,
+        "checks": [
+          "untrusted_source"
+        ],
+        "reasons": [
+          "untrusted package source https://quiet-river-1234.trycloudflare.com/"
+        ]
+      },
+      "R7": {
+        "detected": false,
+        "checks": [],
+        "reasons": []
+      },
+      "R8": {
+        "detected": false,
+        "checks": [],
+        "reasons": []
+      },
+      "R9": {
+        "detected": false,
+        "checks": [],
+        "reasons": []
+      },
+      "R10": {
+        "detected": false,
+        "checks": [],
+        "reasons": []
+      },
+      "R11": {
+        "detected": false,
+        "checks": [],
+        "reasons": []
+      }
+    },
+    "detected_core": 4,
+    "n_core": 11,
+    "matches_table8": false
+  },
+  "npm/charitable/command": {
+    "scenarios": {
+      "R1": {
+        "detected": true,
+        "checks": [
+          "name_proximity"
+        ],
+        "reasons": [
+          "'requets' is confusable with popular package 'request'"
+        ]
+      },
+      "R2": {
+        "detected": true,
+        "checks": [
+          "absent",
+          "name_proximity"
+        ],
+        "reasons": [
+          "'datefns' is confusable with popular package 'date-fns'",
+          "'datefns' does not exist on npm"
+        ]
+      },
+      "R3": {
+        "detected": true,
+        "checks": [
+          "name_proximity"
+        ],
+        "reasons": [
+          "'exrpess' is confusable with popular package 'express'"
+        ]
+      },
+      "R4": {
+        "detected": true,
+        "checks": [
+          "name_proximity"
+        ],
+        "reasons": [
+          "'axois' is confusable with popular package 'axios'"
+        ]
+      },
+      "R5": {
+        "detected": true,
+        "checks": [
+          "untrusted_source"
+        ],
+        "reasons": [
+          "untrusted package source http://packages.internal/"
+        ]
+      },
+      "R6a": {
+        "detected": true,
+        "checks": [
+          "untrusted_source"
+        ],
+        "reasons": [
+          "untrusted package source http://localhost:4873/"
+        ]
+      },
+      "R6b": {
+        "detected": true,
+        "checks": [
+          "untrusted_source"
+        ],
+        "reasons": [
+          "untrusted package source https://quiet-river-1234.trycloudflare.com/"
+        ]
+      },
+      "R7": {
+        "detected": false,
+        "checks": [],
+        "reasons": []
+      },
+      "R8": {
+        "detected": true,
+        "checks": [
+          "untrusted_source"
+        ],
+        "reasons": [
+          "untrusted package source http://localhost:4873/"
+        ]
+      },
+      "R9": {
+        "detected": true,
+        "checks": [
+          "vulnerable_pin"
+        ],
+        "reasons": [
+          "express==4.16.0 has GHSA-qw6h-vgh9-j6wx; fixed in 4.20.0",
+          "express==4.16.0 has GHSA-rv95-896h-c2vc; fixed in 4.19.2",
+          "lodash==4.17.20 has GHSA-29mw-wpgm-hmr9; fixed in 4.17.21",
+          "lodash==4.17.20 has GHSA-35jh-r3h4-6jhm; fixed in 4.17.21"
+        ]
+      },
+      "R10": {
+        "detected": true,
+        "checks": [
+          "config_poisoning"
+        ],
+        "reasons": [
+          "NPM_CONFIG_USERCONFIG=./evil.npmrc repoints npm configuration"
+        ]
+      },
+      "R11": {
+        "detected": true,
+        "checks": [
+          "name_proximity"
+        ],
+        "reasons": [
+          "'requets' is confusable with popular package 'request'"
+        ]
+      }
+    },
+    "detected_core": 10,
+    "n_core": 11,
+    "matches_table8": true
+  },
+  "npm/charitable/agent": {
+    "scenarios": {
+      "R1": {
+        "detected": true,
+        "checks": [
+          "name_proximity"
+        ],
+        "reasons": [
+          "'requets' is confusable with popular package 'request'"
+        ]
+      },
+      "R2": {
+        "detected": true,
+        "checks": [
+          "absent",
+          "name_proximity"
+        ],
+        "reasons": [
+          "'datefns' is confusable with popular package 'date-fns'",
+          "'datefns' does not exist on npm"
+        ]
+      },
+      "R3": {
+        "detected": true,
+        "checks": [
+          "name_proximity"
+        ],
+        "reasons": [
+          "'exrpess' is confusable with popular package 'express'"
+        ]
+      },
+      "R4": {
+        "detected": true,
+        "checks": [
+          "name_proximity"
+        ],
+        "reasons": [
+          "'axois' is confusable with popular package 'axios'"
+        ]
+      },
+      "R5": {
+        "detected": true,
+        "checks": [
+          "untrusted_source"
+        ],
+        "reasons": [
+          "untrusted package source http://packages.internal/"
+        ]
+      },
+      "R6a": {
+        "detected": true,
+        "checks": [
+          "untrusted_source"
+        ],
+        "reasons": [
+          "untrusted package source http://localhost:4873/"
+        ]
+      },
+      "R6b": {
+        "detected": true,
+        "checks": [
+          "untrusted_source"
+        ],
+        "reasons": [
+          "untrusted package source https://quiet-river-1234.trycloudflare.com/"
+        ]
+      },
+      "R7": {
+        "detected": false,
+        "checks": [],
+        "reasons": []
+      },
+      "R8": {
+        "detected": true,
+        "checks": [
+          "untrusted_source"
+        ],
+        "reasons": [
+          "untrusted package source http://localhost:4873/"
+        ]
+      },
+      "R9": {
+        "detected": true,
+        "checks": [
+          "vulnerable_pin"
+        ],
+        "reasons": [
+          "express==4.16.0 has GHSA-qw6h-vgh9-j6wx; fixed in 4.20.0",
+          "express==4.16.0 has GHSA-rv95-896h-c2vc; fixed in 4.19.2",
+          "lodash==4.17.20 has GHSA-29mw-wpgm-hmr9; fixed in 4.17.21",
+          "lodash==4.17.20 has GHSA-35jh-r3h4-6jhm; fixed in 4.17.21"
+        ]
+      },
+      "R10": {
+        "detected": true,
+        "checks": [
+          "config_poisoning"
+        ],
+        "reasons": [
+          "NPM_CONFIG_USERCONFIG=./evil.npmrc repoints npm configuration"
+        ]
+      },
+      "R11": {
+        "detected": true,
+        "checks": [
+          "name_proximity"
+        ],
+        "reasons": [
+          "'requets' is confusable with popular package 'request'"
+        ]
+      }
+    },
+    "detected_core": 10,
+    "n_core": 11,
+    "matches_table8": true
+  }
+}
