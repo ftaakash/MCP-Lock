@@ -1,6 +1,60 @@
 # STATUS
 
-## Phase 2: full census + MCP-Lock spec (2026-10-09). **Complete: RQ1 results ready; awaiting go-ahead for Phase 3**
+## Phase 3: gate + baseline (2026-10-10). **Complete: gate built, S1 parity reproduced; awaiting go-ahead for Phase 4 (PREREG)**
+
+No reply from Bagmar & Saraf (email sent 2026-10-08), so S1 is reimplemented from Appendix I in two variants.
+Docker now works locally (Virtual Machine Platform enabled after the Windows repair).
+
+### Built
+| Component | Files | What it does |
+|---|---|---|
+| Command parser | `gate/command.py` | pip / `python -m pip` / `uv pip` / npm / pnpm / yarn / bun installs, `npx` / `uvx` launches, env prefixes, `export`, `make` |
+| S1 baseline | `gate/s1.py`, `gate/data/` | Appendix I's 7 checks for PyPI **and** npm; `literal` and `charitable` variants as recorded switches |
+| S2 to S5 | `gate/signals.py` | provenance continuity, publisher change (human → CI migration ignored), new install script, tool-definition drift with diff; integrity check on the same version |
+| Policy | `gate/core.py` | allow / warn / block with a one-line reason |
+| Claude Code hook | `gate/hook.py` | PreToolUse on `Bash` and on `Write` to MCP configs; block → deny, warn → ask; fails closed |
+| CLI | `gate/cli.py` (`mcplock`) | `mcplock check -- <cmd>`, `mcplock lock <config>`; installable (`pip install -e .`) |
+| Docs | `docs/GATE.md` | signals, variants, hook setup, limitations |
+
+End-to-end check against a real lock: older pinned filesystem server → `npx -y` resolves 2026.8.31 → **WARN S5 tool_drift**;
+unchanged `mcp-server-fetch` → ALLOW; unlocked server → WARN; untrusted index → BLOCK. The hook gives the same answers
+from real PreToolUse JSON.
+
+### S1 parity with Bagmar & Saraf Table 8 (`results/baseline/parity_2026-10-10/`)
+| S1 variant | PyPI, command form | PyPI, agent form | npm port, command form | npm port, agent form |
+|---|---|---|---|---|
+| literal | **10/11 (R7 missed) = Table 8** | 8/11 (misses R3, R10) | 7/11 | 4/11 |
+| charitable | 10/11 = Table 8 | 10/11 = Table 8 | 10/11 | 10/11 |
+
+The literal reading reproduces Table 8 exactly on explicit install lines. Its misses on `pip install -e .` and `make setup`
+indicate that the paper scored command lines, or that the real code does more than Appendix I.
+
+### S1 false positives on popular packages (`results/baseline/s1_fp_2026-10-10/`)
+| | top-1,000 PyPI | top-1,000 npm |
+|---|---|---|
+| literal (P = top-1,000) | 52 = 5.2% [4.0, 6.8] | 35 = 3.5% [2.5, 4.8] |
+| charitable | 0 = 0.0% [0.0, 0.38] | 0 = 0.0% [0.0, 0.38] |
+| paper | 5 = 0.5% | n/a |
+
+The paper's 5/1,000 is reproduced by the literal name rule only with P of about the top-100 to 150 (3 at 100, 8 at 150).
+The charitable variant is at least as good as the paper on false positives, so it is not a strawman.
+
+### Fixed during Phase 3
+- Parser bug: `npm install https-proxy-agent` was read as a URL install (name starts with "http"). Fixed with a regression
+  test; npm literal false positives were 33/1,000 before the fix and 35/1,000 after. The buggy run was discarded.
+- Registry lookups for the age check made cheap (PyPI JSON simple API; npm abbreviated document plus a downloads
+  probe), because full npm packuments of popular packages are tens of MB.
+
+### Open risks for Phase 4
+- S5 recall equals the extractor's held-out recall (78.0%), so runtime-generated tools escape it.
+- Build identity is recorded, not signature-verified (Sigstore verification not implemented).
+- Latency: a cold PyPI lookup for very large projects (boto3) takes about 14 s; Phase 4 must report latency per install.
+
+## Next gate
+Phase 4: write `PREREG.md` (corpora, metrics, statistics, kill rule) and **stop for Aakash to register it** before any
+evaluation run.
+
+## Phase 2: full census + MCP-Lock spec (2026-10-09). Complete
 
 Protocol fixed before collection: `docs/CENSUS_PLAN.md`. Scope chosen by Aakash: **hybrid**. A literal full census
 would need ~250 GB of archives against 115 GB free disk.
@@ -73,11 +127,6 @@ publisher checks (S1 to S4) cannot see tool drift; only S5 can.
 - Extraction: 10 extract errors and 9 archives over 150 MB are excluded (recorded with status in `extractions.jsonl.gz`).
 - Large result files are committed gzipped (`extractions.jsonl.gz`); analysis reads them transparently.
 - Kill-test pilot numbers (Phase 1) used extract-v1. Phase 2 supersedes them with extract-v2.1 on the n=2,000 superset.
-
-## Next gate
-Phase 3: gate S1 to S5 + baseline. First reproduce Bagmar & Saraf parity on their scenarios (literal and charitable S1)
-ported to npm. Design input from Phase 2: S3 should ignore human → CI migration and flag CI → human and human → human
-switches; S5 is the only signal that sees tool drift.
 
 ## Phase 1: census pilot (2026-10-08). KILL test: **PASS on both gates** (extractor validated in Docker, 2026-10-09)
 

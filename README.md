@@ -6,7 +6,7 @@
 
 *Pinning what an MCP server is, who built it, and what tools it advertises — before an agent runs it.*
 
-![Phase](https://img.shields.io/badge/phase-2%20census%20complete-2ea44f)
+![Phase](https://img.shields.io/badge/phase-3%20gate%20built-2ea44f)
 ![Kill test](https://img.shields.io/badge/kill%20test-PASS-2ea44f)
 ![Python](https://img.shields.io/badge/python-3.11-3776AB?logo=python&logoColor=white)
 ![Packages](https://img.shields.io/badge/frame-18%2C067%20MCP%20packages-blue)
@@ -42,8 +42,8 @@ and tests the gate against an attacker who knows its checks (RQ3).
 | 0 | Repo, baseline analysis, sampling plan | ✅ done |
 | 1 | Census pilot (200 packages) + kill test | ✅ **PASS** |
 | 2 | Census (15,272 packages metadata · 2,000 tool diffs) + MCP-Lock spec | ✅ done |
-| 3 | Gate (S1–S5) + baseline parity | ⏳ next |
-| 4 | Pre-registered evaluation | ⏳ |
+| 3 | Gate (S1–S5) + baseline parity | ✅ done |
+| 4 | Pre-registered evaluation | ⏳ next |
 | 5 | Adaptive attacker + paper | ⏳ |
 
 ---
@@ -183,15 +183,32 @@ flowchart LR
 
 ## 🧱 Baseline: Bagmar & Saraf (2026)
 
-The baseline is the pre-install hook from *"Setup Complete, Now You Are Compromised"*
-(arXiv:2607.15143): a Claude Code `PreToolUse` gate with seven checks on `pip install` /
-`uv pip install` (name distance, existence, age, source trust, hidden index, `PIP_CONFIG_FILE`,
-OSV). Its code is not public yet, so S1 is reimplemented from the paper in two variants —
-**literal** and **charitable** — and RQ2 is reported against the stronger one.
+The baseline is the pre-install hook from *"Setup Complete, Now You Are Compromised"* (arXiv:2607.15143),
+a Claude Code `PreToolUse` gate with seven checks on `pip install`. Its code is not public, so S1 is
+reimplemented from the paper in two variants and **ported to npm**
+([replication notes](docs/BASELINE_REPLICATION.md)):
 
-A calibration run shows why both are needed: read literally, the name check flags **52 / 1,000**
-top PyPI packages against a top-1,000 popular list, versus **5 / 1,000** reported in the paper
-([details](docs/BASELINE_REPLICATION.md)).
+| S1 variant | Paper scenarios (PyPI) | npm port | False positives, top-1,000 PyPI / npm |
+|---|---|---|---|
+| **literal** (Appendix I as written) | **10/11, R7 missed: reproduces Table 8** | 7/11 | 5.2% / 3.5% |
+| **charitable** (ambiguities resolved in its favour) | 10/11, also on agent-style commands (`pip install -e .`, `make setup`) | 10/11 | 0.0% / 0.0% |
+
+The paper reports 0.5% false positives; the literal name rule matches that only with a popular set of
+about the top 100 to 150 packages.
+
+## 🚦 The gate
+
+```bash
+mcplock lock .mcp.json -o mcp-lock.json                                    # pin every MCP server
+mcplock check -- npx -y @modelcontextprotocol/server-filesystem /tmp      # allow / warn / block
+```
+
+```text
+WARN: S5 tool_drift: @modelcontextprotocol/server-filesystem@2026.8.31 changes tool descriptions or input schemas (locked 2025.8.21)
+```
+
+It runs as a Claude Code `PreToolUse` hook on `Bash` and on writes to MCP config files; block → deny,
+warn → ask ([setup](docs/GATE.md)).
 
 ## 🔐 The lockfile
 
@@ -218,8 +235,8 @@ python -m lockfile.generate .mcp.json -o mcp-lock.json
 ```
 census/        RQ1 pipeline: frame, eligibility, sampling, versions, extraction, analysis
 lockfile/      MCP-Lock format (JSON schema)
-gate/          S1–S5 signals, Claude Code PreToolUse hook, `mcplock check` CLI   (Phase 3)
-eval/          attack corpora and scoring                                       (Phase 4)
+gate/          S1–S5 signals, policy, Claude Code PreToolUse hook, `mcplock` CLI
+eval/          Bagmar scenarios, parity and false-positive scoring; corpora   (Phase 4)
 paper/         IEEEtran manuscript                                              (Phase 5)
 results/
   census/      frame, pilot sample, extractions, kill test (+ provenance JSON per result)
