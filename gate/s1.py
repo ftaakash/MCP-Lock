@@ -24,7 +24,7 @@ from packaging.requirements import InvalidRequirement, Requirement
 from packaging.version import InvalidVersion, Version
 
 from census import http, launch
-from census.meta import npm_url, pypi_url
+from census.meta import npm_url
 from gate import command
 from gate.findings import Finding
 
@@ -124,26 +124,47 @@ def name_proximity(eco: str, name: str, cfg: S1Config) -> str | None:
 
 
 # ------------------------------------------------------------------ registry metadata
+def _npm_existed_before(name: str, cutoff: datetime) -> bool:
+    """True if the package had downloads in the 30 days before `cutoff` (so it existed then)."""
+    start = (cutoff - timedelta(days=30)).strftime("%Y-%m-%d")
+    end = cutoff.strftime("%Y-%m-%d")
+    try:
+        d = http.get_json(f"https://api.npmjs.org/downloads/point/{start}:{end}/"
+                          + name.replace("/", "%2F"))
+    except http.HttpError:
+        return False
+    return (d.get("downloads") or 0) > 0
+
+
 def registry_info(eco: str, name: str, now: datetime | None = None, age_days: int = 30) -> dict:
     """{'exists': bool, 'first_release': datetime|None}; lookup errors -> {'error': status}.
 
-    npm: the small abbreviated document answers existence; the full packument (creation time)
-    is fetched only when the package was modified within the age window, because popular
-    packuments can be tens of MB.
+    Kept cheap because it runs on every install: PyPI uses the JSON simple API (per-file upload
+    times). npm uses the abbreviated packument for existence; creation time is needed only when
+    the package changed inside the age window and had no downloads before it, and only then is the
+    (possibly tens of MB) full packument fetched. `first_release` is None when the package is
+    known to be older than the window.
     """
     try:
         if eco == "pypi":
-            doc = http.get_json(pypi_url(name))
-            times = [f["upload_time_iso_8601"] for files in (doc.get("releases") or {}).values()
-                     for f in files if f.get("upload_time_iso_8601")]
+            doc = http.get_json(f"https://pypi.org/simple/{launch.pep503(name)}/",
+                                headers={"Accept": "application/vnd.pypi.simple.v1+json"})
+            files = doc.get("files") or []
+            if not files:
+                return {"exists": False}
+            times = [f["upload-time"] for f in files if f.get("upload-time")]
         else:
             abbr = http.get_json(npm_url(name) + "?abbreviated",
                                  headers={"Accept": "application/vnd.npm.install-v1+json"})
+            if not abbr.get("versions"):
+                return {"exists": False}
             modified = abbr.get("modified")
             if now and modified:
                 age = now - datetime.fromisoformat(modified.replace("Z", "+00:00"))
                 if age > timedelta(days=age_days):
                     return {"exists": True, "first_release": None}  # cannot be newer than modified
+            if now and _npm_existed_before(name, now - timedelta(days=age_days)):
+                return {"exists": True, "first_release": None}
             doc = http.get_json(npm_url(name))
             created = (doc.get("time") or {}).get("created")
             times = [created] if created else []
