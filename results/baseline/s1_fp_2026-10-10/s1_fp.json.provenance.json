@@ -1,0 +1,14 @@
+{
+  "result": "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/baseline/s1_fp_2026-10-10/s1_fp.json",
+  "result_sha256": "ba48bd198e6871479fe53e5f93298c67ac28c1ac3902f5c20044e991c25c5d88",
+  "command": "python.exe eval/scoring/s1_false_positives.py",
+  "commit": "eb3c3ca67ddb0366fdc12c24fe1f1cea9fce6cd7-dirty",
+  "timestamp_utc": "2026-10-09T18:37:34Z",
+  "python": "3.11.9",
+  "inputs": {
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/gate/data/top_pypi.json": "6e14fb9f5949f86ca8ab5c487cf68911f4c9ea3a1bc9f76eb0cece890de3229c",
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/gate/data/top_npm.json": "24df107637180f8b1e2d7a4ee5e43fba3876227b8e8f2aa43a2812ce9ad6a4e3"
+  },
+  "params": {},
+  "note": ""
+}

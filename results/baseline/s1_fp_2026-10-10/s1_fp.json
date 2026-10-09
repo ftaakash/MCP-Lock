@@ -1,0 +1,152 @@
+{
+  "n": 1000,
+  "clock": "2026-10-09T00:00:00+00:00",
+  "pypi/literal": {
+    "flagged": 52,
+    "wilson": [
+      0.052,
+      0.03987303628377742,
+      0.06755573931927998
+    ],
+    "examples": {
+      "attrs": [
+        "'attrs' is confusable with popular package 'cattrs'"
+      ],
+      "httpx": [
+        "'httpx' is confusable with popular package 'httpx2'"
+      ],
+      "httpcore": [
+        "'httpcore' is confusable with popular package 'httpcore2'"
+      ],
+      "tomli": [
+        "'tomli' is confusable with popular package 'toml'"
+      ],
+      "oauthlib": [
+        "'oauthlib' is confusable with popular package 'authlib'"
+      ],
+      "httpx2": [
+        "'httpx2' is confusable with popular package 'httpx'"
+      ],
+      "httpcore2": [
+        "'httpcore2' is confusable with popular package 'httpcore'"
+      ],
+      "psycopg2-binary": [
+        "'psycopg2-binary' is confusable with popular package 'psycopg-binary'"
+      ],
+      "chardet": [
+        "'chardet' is confusable with popular package 'cchardet'"
+      ],
+      "h2": [
+        "'h2' is confusable with popular package 'h3'"
+      ],
+      "toml": [
+        "'toml' is confusable with popular package 'tomli'"
+      ],
+      "psycopg": [
+        "'psycopg' is confusable with popular package 'psycopg2'"
+      ],
+      "uritemplate": [
+        "'uritemplate' is confusable with popular package 'uri-template'"
+      ],
+      "uv": [
+        "'uv' is confusable with popular package 'av'"
+      ],
+      "psycopg-binary": [
+        "'psycopg-binary' is confusable with popular package 'psycopg2-binary'"
+      ]
+    }
+  },
+  "pypi/charitable": {
+    "flagged": 0,
+    "wilson": [
+      0.0,
+      2.168404344971009e-19,
+      0.0038267584855551234
+    ],
+    "examples": {}
+  },
+  "pypi/literal_name_check_by_P": {
+    "100": 3,
+    "150": 8,
+    "200": 10,
+    "250": 17,
+    "500": 31,
+    "1000": 52,
+    "2000": 71,
+    "5000": 115
+  },
+  "npm/literal": {
+    "flagged": 35,
+    "wilson": [
+      0.035,
+      0.02527226301711295,
+      0.04828662237445333
+    ],
+    "examples": {
+      "ms": [
+        "'ms' is confusable with popular package 'ws'"
+      ],
+      "safe-buffer": [
+        "'safe-buffer' is confusable with popular package 'safer-buffer'"
+      ],
+      "ws": [
+        "'ws' is confusable with popular package 'ms'"
+      ],
+      "https-proxy-agent": [
+        "'https-proxy-agent' is confusable with popular package 'http-proxy-agent'"
+      ],
+      "qs": [
+        "'qs' is confusable with popular package 'ms'"
+      ],
+      "object-assign": [
+        "'object-assign' is confusable with popular package 'object.assign'"
+      ],
+      "http-proxy-agent": [
+        "'http-proxy-agent' is confusable with popular package 'https-proxy-agent'"
+      ],
+      "safer-buffer": [
+        "'safer-buffer' is confusable with popular package 'safe-buffer'"
+      ],
+      "levn": [
+        "'levn' is confusable with popular package 'leven'"
+      ],
+      "get-proto": [
+        "'get-proto' is confusable with popular package 'set-proto'"
+      ],
+      "axios": [
+        "'axios' is confusable with popular package 'gaxios'"
+      ],
+      "word-wrap": [
+        "'word-wrap' is confusable with popular package 'wordwrap'"
+      ],
+      "asynckit": [
+        "'asynckit' is confusable with popular package 'synckit'"
+      ],
+      "object.assign": [
+        "'object.assign' is confusable with popular package 'object-assign'"
+      ],
+      "extend": [
+        "'extend' is confusable with popular package 'xtend'"
+      ]
+    }
+  },
+  "npm/charitable": {
+    "flagged": 0,
+    "wilson": [
+      0.0,
+      2.168404344971009e-19,
+      0.0038267584855551234
+    ],
+    "examples": {}
+  },
+  "npm/literal_name_check_by_P": {
+    "100": 7,
+    "150": 8,
+    "200": 12,
+    "250": 13,
+    "500": 17,
+    "1000": 35,
+    "2000": 49,
+    "5000": 78
+  }
+}
