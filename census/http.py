@@ -112,3 +112,41 @@ def get(url: str, *, headers: dict | None = None, binary: bool = False, retries:
 
 def get_json(url: str, **kw):
     return json.loads(get(url, **kw))
+
+
+def post_json(url: str, body: dict, cache: bool = True):
+    """POST a JSON body (e.g. OSV queries); cached by URL + canonical body."""
+    payload = json.dumps(body, sort_keys=True, separators=(",", ":"))
+    body_p, meta_p = _paths(url + "#" + payload)
+    if cache and meta_p.exists():
+        meta = json.loads(meta_p.read_text())
+        if meta["status"] >= 400:
+            raise HttpError(url, meta["status"])
+        return json.loads(body_p.read_bytes())
+    host = urlparse(url).netloc
+    delay = 2.0
+    for attempt in range(5):
+        _wait(host)
+        try:
+            r = _session.post(url, data=payload, headers={"Content-Type": "application/json"},
+                              timeout=60)
+        except requests.RequestException:
+            if attempt == 4:
+                raise
+            time.sleep(delay)
+            delay *= 2
+            continue
+        if r.status_code in (429, 500, 502, 503, 504):
+            time.sleep(delay)
+            delay *= 2
+            continue
+        break
+    if cache and (r.ok or r.status_code == 404):
+        body_p.parent.mkdir(parents=True, exist_ok=True)
+        body_p.write_bytes(r.content)
+        meta_p.write_text(json.dumps({"url": url, "body": payload, "status": r.status_code,
+                                      "fetched_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ",
+                                                                   time.gmtime())}))
+    if not r.ok:
+        raise HttpError(url, r.status_code)
+    return r.json()
