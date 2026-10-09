@@ -44,3 +44,19 @@ allowlist rule). Our snapshot is four months newer than theirs (June 2026), whic
 3. Report RQ2 against **both**. The headline uses the stronger baseline on each metric, so no reviewer can call it a strawman.
 4. Parity targets: Table 8 pattern (10/11, R7 missed) and 5/1,000 top-PyPI flags. Every mismatch is logged here.
 5. Send this file to the authors with the request for code. If they reply, swap S1 for their code and re-run.
+
+## Parity results (Phase 3, 2026-10-09)
+No reply from the authors, so S1 is implemented from Appendix I (`gate/s1.py`). The scenarios are reconstructed from the paper
+(`eval/scenarios/bagmar.py`) and scored with no package installed (`eval/scoring/parity.py`, results in `results/baseline/parity_2026-10-09/`).
+
+| S1 variant | PyPI, command form | PyPI, agent form | npm port, command form | npm port, agent form |
+|---|---|---|---|---|
+| literal | **10/11, misses R7 only = Table 8** | 8/11 (misses R3, R10) | 7/11 | 4/11 |
+| charitable | 10/11 = Table 8 | 10/11 = Table 8 | 10/11 | 10/11 |
+
+- **Table 8 is reproduced exactly** by the literal reading when the hook sees the explicit install line ("command form").
+- Given what an agent actually runs ("agent form": `pip install -e .`, `make setup`), the literal hook misses R3 and R10.
+  So the paper's Table 8 was most likely scored on command form, or the real code reads pyproject.toml / Makefiles beyond
+  Appendix I. This answers question 5 of the author email empirically. Phase 4 scores both forms.
+- npm port: the literal variant misses `requets` (`request` is outside the npm top-1,000 by downloads) and never reads
+  `.npmrc`, just as literal pip never reads `pip.conf`.
