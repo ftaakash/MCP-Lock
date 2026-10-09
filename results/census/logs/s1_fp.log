@@ -1,0 +1,6 @@
+pypi/literal: 52/1000 ['attrs', 'httpx', 'httpcore', 'tomli', 'oauthlib', 'httpx2', 'httpcore2', 'psycopg2-binary']
+pypi/charitable: 0/1000 []
+pypi literal name-check flags by P: {100: 3, 150: 8, 200: 10, 250: 17, 500: 31, 1000: 52, 2000: 71, 5000: 115}
+npm/literal: 33/1000 ['ms', 'safe-buffer', 'ws', 'qs', 'object-assign', 'safer-buffer', 'levn', 'get-proto']
+npm/charitable: 0/1000 []
+npm literal name-check flags by P: {100: 7, 150: 8, 200: 12, 250: 13, 500: 17, 1000: 35, 2000: 49, 5000: 78}

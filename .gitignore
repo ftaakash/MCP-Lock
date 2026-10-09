@@ -16,3 +16,6 @@ paper/*.blg
 
 # large result files are committed gzipped (*.jsonl.gz)
 results/census/phase2/extractions.jsonl
+
+# local editable install metadata
+*.egg-info/

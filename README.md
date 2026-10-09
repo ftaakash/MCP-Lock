@@ -43,7 +43,7 @@ and tests the gate against an attacker who knows its checks (RQ3).
 | 1 | Census pilot (200 packages) + kill test | ✅ **PASS** |
 | 2 | Census (15,272 packages metadata · 2,000 tool diffs) + MCP-Lock spec | ✅ done |
 | 3 | Gate (S1–S5) + baseline parity | ✅ done |
-| 4 | Pre-registered evaluation | ⏳ next |
+| 4 | Pre-registered evaluation ([PREREG.md](PREREG.md)) | 📝 plan written, awaiting registration |
 | 5 | Adaptive attacker + paper | ⏳ |
 
 ---

@@ -51,8 +51,8 @@ The charitable variant is at least as good as the paper on false positives, so i
 - Latency: a cold PyPI lookup for very large projects (boto3) takes about 14 s; Phase 4 must report latency per install.
 
 ## Next gate
-Phase 4: write `PREREG.md` (corpora, metrics, statistics, kill rule) and **stop for Aakash to register it** before any
-evaluation run.
+Phase 4: `PREREG.md` written (2026-10-10). **Waiting for Aakash** to settle its §9 decisions and register it on
+OSF/Zenodo. Then tag `prereg-v1` and build the corpora. No evaluation run until registration.
 
 ## Phase 2: full census + MCP-Lock spec (2026-10-09). Complete
 
