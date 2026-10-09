@@ -1,9 +1,14 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "mcplock"
 version = "0.0.1"
 description = "Provenance-aware pre-install verification for coding agents (MCP-Lock)"
 requires-python = ">=3.11,<3.12"
-dependencies = []
+dependencies = ["requests>=2.31", "numpy>=1.26", "packaging>=23", "tree-sitter>=0.23",
+                "tree-sitter-javascript>=0.23", "tree-sitter-typescript>=0.23"]
 
 [project.optional-dependencies]
 dev = ["pytest>=8", "ruff>=0.6"]
@@ -13,6 +18,10 @@ mcplock = "gate.cli:main"
 
 [tool.setuptools]
 packages = ["census", "lockfile", "gate"]
+
+[tool.setuptools.package-data]
+gate = ["data/*.json"]
+lockfile = ["*.json"]
 
 [tool.ruff]
 line-length = 110
