@@ -111,7 +111,7 @@ def _npm(args: list[str], env: dict, raw: str) -> Invocation:
                 inv.index_urls.append(val)
         elif a.startswith("-"):
             pass
-        elif a.startswith((".", "/", "file:", "git+", "http")):
+        elif a.startswith((".", "/", "file:", "git+", "http://", "https://", "git://")):
             inv.local_targets.append(a)
         else:
             inv.specs.append(a)

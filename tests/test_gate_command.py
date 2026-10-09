@@ -41,3 +41,9 @@ def test_launches():
 
 def test_non_install_commands_ignored():
     assert parse("ls -la && git status && pip list && npm run build") == []
+
+
+def test_npm_names_starting_with_http_are_packages():
+    (a,) = parse("npm install https-proxy-agent http-errors https://example.com/x.tgz")
+    assert a.specs == ["https-proxy-agent", "http-errors"]
+    assert a.local_targets == ["https://example.com/x.tgz"]
