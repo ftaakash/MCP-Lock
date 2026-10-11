@@ -20,7 +20,7 @@
 
 \title{MCP-Lock: Lockfiles and Pre-Launch Gating for Coding-Agent MCP Servers}
 
-\author{\IEEEauthorblockN{Aakash}
+\author{\IEEEauthorblockN{Aakash G S}
 \IEEEauthorblockA{Department of Computer Science and Engineering (Data Science)\\
 SRM Institute of Science and Technology\\
 gsaakash05@gmail.com}}
@@ -188,7 +188,7 @@ gate & server not locked / same version, different digest & warn / block \\
 % ------------------------------------------------------------------------------------------------
 \section{RQ2: Pre-Registered Evaluation}
 \label{sec:eval}
-\textbf{Design.} Hypotheses, corpora, scoring and a kill rule were registered on OSF before any scored run, with the
+\textbf{Design.} Hypotheses, corpora, scoring and a kill rule were registered on OSF~\cite{osf2026prereg} before any scored run, with the
 gate frozen at a tagged commit. \textbf{H1:} on real attacks, \G{} (S1--S5) detects more cases than \SC{}, the stronger
 reading of the baseline. \textbf{H2:} on benign upgrades, \G{}'s false-block rate differs from \SC{}'s. \textbf{Kill
 rule:} the method claim is withdrawn if S2--S5 add fewer than two detections while \G{}'s false-block rate is equal or
@@ -370,7 +370,7 @@ defence: attacks shipped through the legitimate release pipeline, and the review
 \section{Artifact Availability}
 \label{sec:artifact}
 Code, lockfile specification, replay bundles, results and logs:
-\url{https://github.com/ftaakash/MCP-Lock}. Pre-registration: \url{https://osf.io/2amj3}. Every number in this paper is
+\url{https://github.com/ftaakash/MCP-Lock}. Pre-registration: \url{https://osf.io/2amj3}, DOI 10.17605/OSF.IO/2AMJ3. Every number in this paper is
 generated from the result files by \code{paper/make\_numbers.py}.
 
 \bibliographystyle{IEEEtran}

@@ -69,7 +69,7 @@ compromised release pipeline (T3) is outside what any lock can see.
 
 ## Phase 4: pre-registered evaluation (2026-10-11). **Complete: kill rule NOT triggered**
 
-Registered: OSF https://osf.io/2amj3 (plan text `914d2b3`, gate code tag `prereg-v1`, unchanged; harness tag
+Registered: OSF https://osf.io/2amj3, DOI 10.17605/OSF.IO/2AMJ3 (checked against the repo: `docs/OSF_VERIFICATION.md`; plan text `914d2b3`, gate code tag `prereg-v1`, unchanged; harness tag
 `phase4-harness`). Deviations #1–#6: `docs/DEVIATIONS.md`. Replay rules: `docs/REPLAY.md`.
 Results: `results/candidate/phase4/phase4_results.{json,md}`; baseline-only summary `results/baseline/phase4/`.
 
