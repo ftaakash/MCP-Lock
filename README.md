@@ -46,7 +46,7 @@ and tests the gate against an attacker who knows its checks (RQ3).
 | 2 | Census (15,272 packages metadata · 2,000 tool diffs) + MCP-Lock spec | ✅ done |
 | 3 | Gate (S1–S5) + baseline parity | ✅ done |
 | 4 | Pre-registered evaluation ([PREREG.md](PREREG.md), [OSF](https://osf.io/2amj3)) | ✅ **not killed** (+99 detections) |
-| 5 | Adaptive attacker + paper | ⏳ |
+| 5 | Adaptive attacker + paper ([plan](docs/PHASE5_PLAN.md)) | 📝 plan for review |
 
 ---
 
