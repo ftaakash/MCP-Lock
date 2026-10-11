@@ -1,5 +1,66 @@
 # STATUS
 
+## Phase 5: adaptive attacker (RQ3) and hardening (2026-10-11). **Attack and defence done; paper not started**
+
+Plan: `docs/PHASE5_PLAN.md`. Everything here is **exploratory**: Phase 4 stays the confirmatory result, and with no
+hardening switch on, the gate is the frozen `prereg-v1` code. After the hardening edits, a re-replay of every Phase 4
+corpus on the default path is identical in every system, decision, reason and finding: B 8,180/8,180, R-M 568/568,
+R-S 50/50 (`eval/adaptive/recheck_frozen.py`, `results/census/logs/p5_hardening_recheck.log`).
+Results: `results/candidate/phase5/` (`evasion_matrix.{json,md}`, `exposure.json`, `hardening_cost.json`, `h1_cost.json`).
+
+### Evasion matrix (local Verdaccio, inert payloads; G = frozen gate, all signals)
+| Case | Tier | Attack | G | Signal | All hardening |
+|---|---|---|---|---|---|
+| E1 | T1 | new name, edit distance ≥ 2, older than 30 days | warn | unlocked | warn |
+| E2 | T2 | stolen token, lock without provenance, runtime payload | **allow** | — | block (H4) |
+| E3 | T2 | stolen token, lock with provenance | block | S2, S3 | block |
+| E4 | T3 | payload through the genuine release workflow | **allow** | — | **allow** |
+| E5 | T4 | poisoned description built at runtime | warn | S5 | block (H2) |
+| E6a / E6b | T4 | tools fetched from a URL; rug pull with / without a new version | **allow** | — | block (H2) |
+| E7 | T4 | poisoning in an input-schema field description | warn | S5 | block (H2) |
+| E8a / E8b | T4 | time bomb / tool registered from a base64 blob | warn / **allow** | S5 / — | block (H2) |
+| E9 | T5 | payload and tools in a caret-range dependency | **allow** | — | block (H1, H2) |
+| E10 | T2/T4 | extra file added to a locked PyPI release | **allow** | — | block (H3) |
+| E11 | any | 22 command shapes | 13/22 blocked | parser | 21/22 (H5); `echo … \| base64 -d \| sh` stays open |
+
+G stops 5 of 12 (1 block, 4 warns). With all switches on, 10 of 12 block; E1 still warns and E4 is allowed. A
+compromised release pipeline (T3) is outside what any lock can see.
+
+### Exposure (existing data, Wilson 95%)
+- E2: locks without provenance 4,919/8,180 = 60.1% [59.1, 61.2] (Phase 4 B).
+- E6/E8: versions whose tools static extraction cannot see 2,774/12,768 = 21.7% [21.0, 22.5] (Phase 2).
+- E9: npm servers with a floating `@modelcontextprotocol/sdk` range 1,027/1,094 = 93.9% [92.3, 95.2] (proxy: SDK only).
+
+### Hardening (exploratory) and its cost on the 8,180 benign upgrades
+| Switch | Implementation | Closes | Cost on B |
+|---|---|---|---|
+| H1 dependency-tree lock | gate code, `gate/deptree.py` (+ `gate/semver.py`); S2–S4 rules per dependency | E9 | npm n = 5,652: extra blocks over G 0.53% [0.37, 0.76] (lock just before t) – 1.03% [0.79, 1.32] (lock at v_old's release); allow → warn 0.09–3.52% |
+| H2 runtime `tools/list` pin | stdio proxy, `gate/proxy.py` (`mcplock proxy`); per-tool pin, trust on first use | E5–E9 | blocks 27.1% [26.1, 28.0] – 27.6% [26.7, 28.6], all in the MCP stratum (33.1% of MCP upgrades) |
+| H3 PyPI all-files lock | gate code, `gate/signals.py` | E10 | 0 on B (upgrades only); 12/2,528 = 0.47% [0.27, 0.83] of locked releases gained a file > 1 h after the first |
+| H4 require provenance | policy rule | E2 | blocks 4,700/8,180 = 57.5% [56.4, 58.5] |
+| H5 command normalisation | parser rule | E11 | 0 decisions changed |
+
+- For comparison, a strict tree lock (`npm ci` reading: any dependency change blocks) would block 12.4–48.9% of npm
+  upgrades. H1's continuity rules cost 1/20 to 1/50 of that. In the early-lock bound, H1's warns are mostly a new
+  dependency publisher (486 cases).
+- H2 assumes the live tool list equals the static extraction for benign upgrades (unobservable for historical versions),
+  and 1,483 upgrades with no static tools are counted as no cost. In the matrix, each attack's live list is written down
+  from its source code; no server was executed.
+- Lock format v0.2 (`lockfile/SPEC.md` §6): optional `dependencies`, `files` and `tools.runtime` fields.
+
+### Deviations from the Phase 5 plan
+1. E10 is a hand-built bundle, not a package on a local pypiserver: the attack is a metadata fact (a file added to an
+   existing release), and the gate reads only metadata for it.
+2. H2 pins each tool separately (not one hash at start-up) and checks every listing, so pagination and later changes
+   (E8a after its date) are covered; a removed tool is reported, not blocked.
+3. H1 applies continuity rules instead of blocking every dependency change. The strict reading is reported alongside it.
+4. The first full H1 cost run errored on 63 cases (old packument shapes, a cache race between workers, a 404
+   attestation). The gate code was fixed and the run repeated with 0 errors; both runs are in git history.
+
+### Open
+- Paper (IEEEtran, plan §5): `paper/` is still empty.
+- Stop and remove the local Verdaccio container (`mcplock-verdaccio`) after the paper's figures are final.
+
 ## Phase 4: pre-registered evaluation (2026-10-11). **Complete: kill rule NOT triggered**
 
 Registered: OSF https://osf.io/2amj3 (plan text `914d2b3`, gate code tag `prereg-v1`, unchanged; harness tag
@@ -54,7 +115,7 @@ afterwards only in the `mcplock-mal` Docker volume. Static analysis ran with `--
 were clean. No new malicious package was found (35 still-listed malicious npm versions are already public in OSV/DataDog).
 
 ## Next gate
-Phase 5: adaptive attacker (RQ3) and the paper. **Waiting for Aakash's go-ahead.**
+Phase 5 paper (plan §5). Attack and hardening results above.
 
 ## Phase 2: full census + MCP-Lock spec (2026-10-09). Complete
 

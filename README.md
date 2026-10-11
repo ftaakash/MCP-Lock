@@ -46,9 +46,34 @@ and tests the gate against an attacker who knows its checks (RQ3).
 | 2 | Census (15,272 packages metadata · 2,000 tool diffs) + MCP-Lock spec | ✅ done |
 | 3 | Gate (S1–S5) + baseline parity | ✅ done |
 | 4 | Pre-registered evaluation ([PREREG.md](PREREG.md), [OSF](https://osf.io/2amj3)) | ✅ **not killed** (+99 detections) |
-| 5 | Adaptive attacker + paper ([plan](docs/PHASE5_PLAN.md)) | 📝 plan for review |
+| 5 | Adaptive attacker + hardening ([plan](docs/PHASE5_PLAN.md)) · paper | ✅ attack & defence done · 📝 paper next |
 
 ---
+
+## 📊 Phase 5 results — RQ3 adaptive attacker (11 Oct 2026, exploratory)
+
+Twelve attacks (E1–E11) by attackers who know every check, run against the **frozen** gate on a local registry with
+inert payloads ([matrix](results/candidate/phase5/evasion_matrix.md)):
+
+- The pre-registered gate stops **5 of 12** (E3 block; E1, E5, E7, E8a warn) and 13 of 22 command-shape variants.
+- It misses a stolen token on a server without provenance (E2), tools fetched at runtime or from a URL (E6, E8b), a
+  takeover of a dependency (E9), an extra file in a locked PyPI release (E10) and a payload shipped through the
+  genuine release workflow (E4).
+- Exposure: 60.1% of benign locks have no provenance (E2), 21.7% of versions hide their tools from static extraction
+  (E6/E8), and 93.9% of npm servers float their SDK dependency (E9).
+
+Hardening switches, off by default, each with its cost on the 8,180 benign upgrades:
+
+| Switch | Closes | Extra cost on benign upgrades |
+|---|---|---|
+| H1 dependency-tree lock (`gate/deptree.py`) | E9 | 0.5–1.0% extra blocks on npm (a strict `npm ci` lock: 12–49%) |
+| H2 runtime `tools/list` pin (`mcplock proxy`) | E5–E9 | 27% blocks, all MCP upgrades that change tools |
+| H3 lock every PyPI file | E10 | 0 on upgrades; 0.47% of releases gain a file later |
+| H4 require provenance | E2 | 57% blocks |
+| H5 command normalisation | E11 (21/22) | none |
+
+With all five on, 10 of 12 attacks block; a compromised release pipeline (E4) remains out of reach for any lock.
+Details: [STATUS](STATUS.md).
 
 ## 📊 Phase 4 results — RQ2 pre-registered evaluation (11 Oct 2026)
 
@@ -242,7 +267,8 @@ WARN: S5 tool_drift: @modelcontextprotocol/server-filesystem@2026.8.31 changes t
 ```
 
 It runs as a Claude Code `PreToolUse` hook on `Bash` and on writes to MCP config files; block → deny,
-warn → ask ([setup](docs/GATE.md)).
+warn → ask ([setup](docs/GATE.md)). Exploratory hardening: `--signals …,H1,H3` and the runtime pin proxy
+`mcplock proxy --server ID -- <server command>` ([details](docs/GATE.md#exploratory-hardening-phase-5-off-by-default)).
 
 ## 🔐 The lockfile
 
@@ -269,7 +295,7 @@ python -m lockfile.generate .mcp.json -o mcp-lock.json
 ```
 census/        RQ1 pipeline: frame, eligibility, sampling, versions, extraction, analysis
 lockfile/      MCP-Lock format (JSON schema)
-gate/          S1–S5 signals, policy, Claude Code PreToolUse hook, `mcplock` CLI
+gate/          S1–S5 signals, H1–H3 hardening, MCP proxy, policy, PreToolUse hook, `mcplock` CLI
 eval/          Bagmar scenarios, parity and false-positive scoring; corpora   (Phase 4)
 paper/         IEEEtran manuscript                                              (Phase 5)
 results/
