@@ -1,0 +1,16 @@
+{
+  "result": "results/candidate/phase4/benign/bundles.jsonl.gz",
+  "result_sha256": "bffade4c221b0afb1812fc5105540919b10838eda2836c100414bb507fd6d743",
+  "command": "python.exe C:\\Users\\Administrator\\Desktop\\Major Project\\mcp-lock\\eval\\corpora\\benign.py bundle results/candidate/phase4/benign --workers 8",
+  "commit": "a6ee342ad457ef672b51c076a0c87c0319ef1e30-dirty",
+  "timestamp_utc": "2026-10-11T08:06:58Z",
+  "python": "3.11.9",
+  "inputs": {
+    "results/candidate/phase4/benign/transitions.jsonl.gz": "c9b61c52f9feda430219ceca8fedbc2d85f1db94bbb8c70e808241a51baa9d99"
+  },
+  "params": {
+    "bundles": 8180,
+    "errors": 0
+  },
+  "note": ""
+}

@@ -1,0 +1,13 @@
+{
+  "result": "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase4/checks/tool_hash_recompute.json",
+  "result_sha256": "dff76500c31487b64169f039490f5f19eec971664ac25c25a46121d639554896",
+  "command": "python.exe eval/scoring/recompute_tool_hashes.py",
+  "commit": "a6ee342ad457ef672b51c076a0c87c0319ef1e30-dirty",
+  "timestamp_utc": "2026-10-11T08:10:19Z",
+  "python": "3.11.9",
+  "inputs": {
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase4/benign/transitions.jsonl.gz": "c9b61c52f9feda430219ceca8fedbc2d85f1db94bbb8c70e808241a51baa9d99"
+  },
+  "params": {},
+  "note": ""
+}

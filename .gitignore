@@ -19,3 +19,7 @@ results/census/phase2/extractions.jsonl
 
 # local editable install metadata
 *.egg-info/
+
+# phase 4 working files (rebuildable)
+results/**/bundles.part.jsonl
+results/candidate/phase4/synthetic/work/

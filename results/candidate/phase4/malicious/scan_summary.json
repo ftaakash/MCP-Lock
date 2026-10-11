@@ -1,0 +1,21 @@
+{
+ "osv_commit": "1861f95ffacc04ed9d9c6049639098146030f14b",
+ "datadog_commit": "805fcd72db525244cae8dd32056efbd50b8b0e19",
+ "record_floor": "2024-01-01",
+ "skipped": {
+  "pre_floor": 16269,
+  "other_ecosystem": 0,
+  "no_versions": 510
+ },
+ "rows": {
+  "osv:npm": 212311,
+  "osv:pypi": 5308,
+  "datadog:npm": 1443,
+  "datadog:pypi": 28
+ },
+ "packages": {
+  "npm": 212360,
+  "pypi": 5309
+ },
+ "osv_all_versions": 197714
+}

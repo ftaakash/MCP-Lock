@@ -1,0 +1,326 @@
+{
+ "n": 40,
+ "match": 40,
+ "rows": [
+  {
+   "ecosystem": "npm",
+   "package": "@xrpl-utilities/mcp",
+   "version": "0.2.179",
+   "stored": "sha256:7c0576a5b0450de334778f26c9adea6fec66c6d0e3d7c7673bf59c835b0c0936",
+   "recomputed": "sha256:7c0576a5b0450de334778f26c9adea6fec66c6d0e3d7c7673bf59c835b0c0936",
+   "match": true
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "lynx-mcp",
+   "version": "1.9.0",
+   "stored": "sha256:bd316c205668dfd447462b8f2a14d88319be6f1e9458a3aaf87c9504b9359637",
+   "recomputed": "sha256:bd316c205668dfd447462b8f2a14d88319be6f1e9458a3aaf87c9504b9359637",
+   "match": true
+  },
+  {
+   "ecosystem": "npm",
+   "package": "@chrischall/flightaware-mcp",
+   "version": "1.1.0",
+   "stored": "sha256:d524d16debf7b029a152f9e8b32d56dd274042b3479dda2527f141d229876a9a",
+   "recomputed": "sha256:d524d16debf7b029a152f9e8b32d56dd274042b3479dda2527f141d229876a9a",
+   "match": true
+  },
+  {
+   "ecosystem": "npm",
+   "package": "@yummybait/uniswap-tx-builder-mcp",
+   "version": "0.3.8",
+   "stored": "sha256:cb1c241e4acca3553410e25b102d9d91cf4b86635c76ee72811a4170e6030630",
+   "recomputed": "sha256:cb1c241e4acca3553410e25b102d9d91cf4b86635c76ee72811a4170e6030630",
+   "match": true
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "tube-bridge",
+   "version": "1.0.0",
+   "stored": "sha256:fb249e4deaa372561f994d150fd815e93b8b76ab64afe41f49561f1b3424a9b8",
+   "recomputed": "sha256:fb249e4deaa372561f994d150fd815e93b8b76ab64afe41f49561f1b3424a9b8",
+   "match": true
+  },
+  {
+   "ecosystem": "npm",
+   "package": "@upstash/context7-mcp",
+   "version": "3.2.4",
+   "stored": "sha256:67576a2a1ffe077f4809e1b50c1d206868ff0bf41edc051a8070606617cab912",
+   "recomputed": "sha256:67576a2a1ffe077f4809e1b50c1d206868ff0bf41edc051a8070606617cab912",
+   "match": true
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "nexus-dev-toolkit",
+   "version": "3.1.3",
+   "stored": "sha256:aba9bb4c36fa0910417f830ab1f9e78aaf39f0acaa4fe67561f5c93301228a43",
+   "recomputed": "sha256:aba9bb4c36fa0910417f830ab1f9e78aaf39f0acaa4fe67561f5c93301228a43",
+   "match": true
+  },
+  {
+   "ecosystem": "npm",
+   "package": "mal-mcp",
+   "version": "0.3.0",
+   "stored": "sha256:de6d65db3b0fb1d03acb8281312521acddab6190d7c8e3f4e76d44bd38a8a0f4",
+   "recomputed": "sha256:de6d65db3b0fb1d03acb8281312521acddab6190d7c8e3f4e76d44bd38a8a0f4",
+   "match": true
+  },
+  {
+   "ecosystem": "npm",
+   "package": "@forgemeshlabs/library-mcp",
+   "version": "0.1.5",
+   "stored": "sha256:669088d522329e1216d08b68ac318e8e8310fdf5798181b80e5a2e886ff687b8",
+   "recomputed": "sha256:669088d522329e1216d08b68ac318e8e8310fdf5798181b80e5a2e886ff687b8",
+   "match": true
+  },
+  {
+   "ecosystem": "npm",
+   "package": "@remotion/mcp",
+   "version": "4.0.523",
+   "stored": "sha256:ba2897a4b39252902ba5a8a010d846869199d787b7a470bc75308b3e889e6671",
+   "recomputed": "sha256:ba2897a4b39252902ba5a8a010d846869199d787b7a470bc75308b3e889e6671",
+   "match": true
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "ai-guardian-aiops",
+   "version": "0.4.0",
+   "stored": "sha256:2471d0f886734862756f6c5efe7a5b1521c77d7681e9dde20bc77ce496871371",
+   "recomputed": "sha256:2471d0f886734862756f6c5efe7a5b1521c77d7681e9dde20bc77ce496871371",
+   "match": true
+  },
+  {
+   "ecosystem": "npm",
+   "package": "@kalkulatory-place/mcp",
+   "version": "1.0.1",
+   "stored": "sha256:0fb429a4fb7face07179828f54a7632b8f3670f9b008716967e371c0376cd158",
+   "recomputed": "sha256:0fb429a4fb7face07179828f54a7632b8f3670f9b008716967e371c0376cd158",
+   "match": true
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "novelai-image-mcp",
+   "version": "0.1.1",
+   "stored": "sha256:ceae36a7fcd7b1a58505d57a430df0d226dea352b6a986b108ffe9e5195dcc7c",
+   "recomputed": "sha256:ceae36a7fcd7b1a58505d57a430df0d226dea352b6a986b108ffe9e5195dcc7c",
+   "match": true
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "civitae-mcp",
+   "version": "0.3.0",
+   "stored": "sha256:6052fd20f16eaf65a4060f3aab5a8be281f080bbcfa8a9f3a830e89014c03026",
+   "recomputed": "sha256:6052fd20f16eaf65a4060f3aab5a8be281f080bbcfa8a9f3a830e89014c03026",
+   "match": true
+  },
+  {
+   "ecosystem": "npm",
+   "package": "@n24q02m/better-godot-mcp",
+   "version": "1.22.0",
+   "stored": "sha256:353d019342c60f3d6e31745d1cf6be07a3ddefe53f6a3583c10c70109b3de471",
+   "recomputed": "sha256:353d019342c60f3d6e31745d1cf6be07a3ddefe53f6a3583c10c70109b3de471",
+   "match": true
+  },
+  {
+   "ecosystem": "npm",
+   "package": "@clocknext/mcp",
+   "version": "0.11.0",
+   "stored": "sha256:3b1782485245b3f6e96c8bcf0ad3345a29b8e32f85b06faf1db29d1b8472ab38",
+   "recomputed": "sha256:3b1782485245b3f6e96c8bcf0ad3345a29b8e32f85b06faf1db29d1b8472ab38",
+   "match": true
+  },
+  {
+   "ecosystem": "npm",
+   "package": "vibemovie",
+   "version": "0.1.0",
+   "stored": "sha256:7c41e291ad36e06e79eb2ca0132f793303939444f3b56e2f9aea38bb10099d84",
+   "recomputed": "sha256:7c41e291ad36e06e79eb2ca0132f793303939444f3b56e2f9aea38bb10099d84",
+   "match": true
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "fittok",
+   "version": "0.8.4",
+   "stored": "sha256:adda5d8ec58e48500eebd9ff6295c5f60045cc05416686b04022926352920505",
+   "recomputed": "sha256:adda5d8ec58e48500eebd9ff6295c5f60045cc05416686b04022926352920505",
+   "match": true
+  },
+  {
+   "ecosystem": "npm",
+   "package": "flipside-mcp",
+   "version": "1.0.2",
+   "stored": "sha256:16c8d67389a0460630aa1b26af54870fd55a96d2c4892da3328f1e1bf2a755e2",
+   "recomputed": "sha256:16c8d67389a0460630aa1b26af54870fd55a96d2c4892da3328f1e1bf2a755e2",
+   "match": true
+  },
+  {
+   "ecosystem": "npm",
+   "package": "@tokenlabai/mcp-server",
+   "version": "0.6.4",
+   "stored": "sha256:77e4c7b5b7ccfb5d9c4ed0a41ea718c86af0ea9687a6fef0ab8b5f8ed231fb10",
+   "recomputed": "sha256:77e4c7b5b7ccfb5d9c4ed0a41ea718c86af0ea9687a6fef0ab8b5f8ed231fb10",
+   "match": true
+  },
+  {
+   "ecosystem": "npm",
+   "package": "@phantomid/mcp-server",
+   "version": "0.1.6",
+   "stored": "sha256:817947c5984383d4cfe927359897c72cec304c6a8153cd4a4c5a4e7f274589b4",
+   "recomputed": "sha256:817947c5984383d4cfe927359897c72cec304c6a8153cd4a4c5a4e7f274589b4",
+   "match": true
+  },
+  {
+   "ecosystem": "npm",
+   "package": "@zereight/mcp-gitlab",
+   "version": "2.1.54",
+   "stored": "sha256:011e54984d97ab5a2cb81856692ef087927be80812933dac2baf2d3fc0e2126e",
+   "recomputed": "sha256:011e54984d97ab5a2cb81856692ef087927be80812933dac2baf2d3fc0e2126e",
+   "match": true
+  },
+  {
+   "ecosystem": "npm",
+   "package": "@seatable/mcp-seatable",
+   "version": "1.6.4",
+   "stored": "sha256:65236214d4f623d19abca49f73ebc7c7c61f9fe6a7b49e79cf62df2450ee1637",
+   "recomputed": "sha256:65236214d4f623d19abca49f73ebc7c7c61f9fe6a7b49e79cf62df2450ee1637",
+   "match": true
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "forgetful-ai",
+   "version": "0.5.1",
+   "stored": "sha256:1d3f41a7ba46ec9a35ea3374ec86844f1c2ea92156debc95efa5754de279b376",
+   "recomputed": "sha256:1d3f41a7ba46ec9a35ea3374ec86844f1c2ea92156debc95efa5754de279b376",
+   "match": true
+  },
+  {
+   "ecosystem": "npm",
+   "package": "npm-advisor-mcp",
+   "version": "0.1.0",
+   "stored": "sha256:8a0c25d175d21c118240093568a620146fbfdbf624cae7162a8ea3a45924ea23",
+   "recomputed": "sha256:8a0c25d175d21c118240093568a620146fbfdbf624cae7162a8ea3a45924ea23",
+   "match": true
+  },
+  {
+   "ecosystem": "npm",
+   "package": "@mrfentmen/greenhouse-mcp",
+   "version": "1.0.1",
+   "stored": "sha256:7a5fa0ca52255a29d470bd42219dcc46773db123abeaf04e8371df6eed427b21",
+   "recomputed": "sha256:7a5fa0ca52255a29d470bd42219dcc46773db123abeaf04e8371df6eed427b21",
+   "match": true
+  },
+  {
+   "ecosystem": "npm",
+   "package": "korean-patent-mcp",
+   "version": "1.0.0",
+   "stored": "sha256:86fa882477cbea5ecb1527e8c8dc0932ae006079fe936fe3065b75bf8f0868f2",
+   "recomputed": "sha256:86fa882477cbea5ecb1527e8c8dc0932ae006079fe936fe3065b75bf8f0868f2",
+   "match": true
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "world-model-mcp",
+   "version": "0.15.6",
+   "stored": "sha256:3624b296c8bb333fd8f65abd5d48232dea7db09558eb04edae90cf6d8da8ed7d",
+   "recomputed": "sha256:3624b296c8bb333fd8f65abd5d48232dea7db09558eb04edae90cf6d8da8ed7d",
+   "match": true
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "rai-governance-platform",
+   "version": "1.2.3",
+   "stored": "sha256:e3a9fba94de1b39e34e8b67cf7e406eedafaba312148d30a67b85d0cc63fbc45",
+   "recomputed": "sha256:e3a9fba94de1b39e34e8b67cf7e406eedafaba312148d30a67b85d0cc63fbc45",
+   "match": true
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "darwin-rag",
+   "version": "0.2.11",
+   "stored": "sha256:aec5e0ea6a026bdea7d1f43373c4f7ccaac9330f3c434e19f1461305fc250ab2",
+   "recomputed": "sha256:aec5e0ea6a026bdea7d1f43373c4f7ccaac9330f3c434e19f1461305fc250ab2",
+   "match": true
+  },
+  {
+   "ecosystem": "npm",
+   "package": "turnback",
+   "version": "0.1.0",
+   "stored": "sha256:f8f687da5bd54c9363bed743b401ce3395d940e93b48e8660304496ce2a7f331",
+   "recomputed": "sha256:f8f687da5bd54c9363bed743b401ce3395d940e93b48e8660304496ce2a7f331",
+   "match": true
+  },
+  {
+   "ecosystem": "npm",
+   "package": "xiangguangyu-mcp-skills",
+   "version": "2.1.6",
+   "stored": "sha256:57d6dbabc70d860c68eefa6994af8e360ffaf1dc91a376d37c96425471a03bc3",
+   "recomputed": "sha256:57d6dbabc70d860c68eefa6994af8e360ffaf1dc91a376d37c96425471a03bc3",
+   "match": true
+  },
+  {
+   "ecosystem": "npm",
+   "package": "mcp-mongo-server",
+   "version": "3.0.1",
+   "stored": "sha256:243aaa17601ba8fb7247e6612432ee3df867558ac016edfe96ababdb186e3089",
+   "recomputed": "sha256:243aaa17601ba8fb7247e6612432ee3df867558ac016edfe96ababdb186e3089",
+   "match": true
+  },
+  {
+   "ecosystem": "npm",
+   "package": "@mnemoverse/mcp-memory-server",
+   "version": "0.8.2",
+   "stored": "sha256:182910a57899b41ba9b3209fe8f7e92d90c3c240aa034ba608ebdc15f0c2fefd",
+   "recomputed": "sha256:182910a57899b41ba9b3209fe8f7e92d90c3c240aa034ba608ebdc15f0c2fefd",
+   "match": true
+  },
+  {
+   "ecosystem": "npm",
+   "package": "@ai-hub-open/vk-ads-mcp",
+   "version": "0.6.0",
+   "stored": "sha256:45a3eaf0d529a413af912c9f538042800645c7d6e1793934c84ea3913cfa247a",
+   "recomputed": "sha256:45a3eaf0d529a413af912c9f538042800645c7d6e1793934c84ea3913cfa247a",
+   "match": true
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "openinvest",
+   "version": "0.36.1",
+   "stored": "sha256:14f5a1b8e82b65e80530c45d8f652e43840e1fa724f91ca495a9d2c3c08ceea0",
+   "recomputed": "sha256:14f5a1b8e82b65e80530c45d8f652e43840e1fa724f91ca495a9d2c3c08ceea0",
+   "match": true
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "mysql-aiops",
+   "version": "0.5.0",
+   "stored": "sha256:f7d9a64af5a39bff05bbbce921b0ae92b7a3e27fccd980a5298704e6345125a2",
+   "recomputed": "sha256:f7d9a64af5a39bff05bbbce921b0ae92b7a3e27fccd980a5298704e6345125a2",
+   "match": true
+  },
+  {
+   "ecosystem": "npm",
+   "package": "odds-api-mcp-server",
+   "version": "1.5.2",
+   "stored": "sha256:9bfd7600c4a86fb7b137b3827caa93422ce2fb69840e92b28e717bf3082acab1",
+   "recomputed": "sha256:9bfd7600c4a86fb7b137b3827caa93422ce2fb69840e92b28e717bf3082acab1",
+   "match": true
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "qrz-mcp",
+   "version": "0.3.6",
+   "stored": "sha256:4043ab5fb0d7d816ac53d0dadd7616a64fe7b39ffb7263b284da2a04ba4b5c6f",
+   "recomputed": "sha256:4043ab5fb0d7d816ac53d0dadd7616a64fe7b39ffb7263b284da2a04ba4b5c6f",
+   "match": true
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "mcp-guardian-scan",
+   "version": "0.8.5",
+   "stored": "sha256:7dcaa39713fe22383ede8578cef687a8b6e07c584c03725efcb1e358093e9deb",
+   "recomputed": "sha256:7dcaa39713fe22383ede8578cef687a8b6e07c584c03725efcb1e358093e9deb",
+   "match": true
+  }
+ ]
+}
