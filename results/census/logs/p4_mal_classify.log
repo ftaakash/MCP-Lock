@@ -1,0 +1,21 @@
+19955 packages need a registry history
+1000/19955 histories, 0 failures
+2000/19955 histories, 0 failures
+3000/19955 histories, 0 failures
+4000/19955 histories, 0 failures
+5000/19955 histories, 0 failures
+6000/19955 histories, 0 failures
+7000/19955 histories, 0 failures
+8000/19955 histories, 0 failures
+9000/19955 histories, 0 failures
+10000/19955 histories, 0 failures
+11000/19955 histories, 0 failures
+12000/19955 histories, 0 failures
+13000/19955 histories, 0 failures
+14000/19955 histories, 0 failures
+15000/19955 histories, 0 failures
+16000/19955 histories, 0 failures
+17000/19955 histories, 0 failures
+18000/19955 histories, 0 failures
+19000/19955 histories, 0 failures
+{"window": ["2024-01-01T00:00:00+00:00", "2026-10-08T23:59:59+00:00"], "c_min_days": 7, "histories": 19955, "lookup_failures": 0, "dropped": {"out_of_window": 2064, "no_version": 510, "lookup_failed": 0}, "cases": {"C:npm": 3285, "C:pypi": 64, "N:npm": 207141, "N:pypi": 5246}}

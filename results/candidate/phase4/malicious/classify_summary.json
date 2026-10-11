@@ -1,0 +1,20 @@
+{
+ "window": [
+  "2024-01-01T00:00:00+00:00",
+  "2026-10-08T23:59:59+00:00"
+ ],
+ "c_min_days": 7,
+ "histories": 19955,
+ "lookup_failures": 0,
+ "dropped": {
+  "out_of_window": 2064,
+  "no_version": 510,
+  "lookup_failed": 0
+ },
+ "cases": {
+  "C:npm": 3285,
+  "C:pypi": 64,
+  "N:npm": 207141,
+  "N:pypi": 5246
+ }
+}

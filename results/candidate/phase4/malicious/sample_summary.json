@@ -1,0 +1,23 @@
+{
+ "C_eligible": 3349,
+ "C_selected": 400,
+ "C_by_ecosystem": {
+  "npm": 336,
+  "pypi": 64
+ },
+ "N_pool": {
+  "npm": 207141,
+  "pypi": 5246
+ },
+ "N_quota": {
+  "npm": 98,
+  "pypi": 2
+ },
+ "N_selected": 100,
+ "N_rejected": {
+  "out_of_window_after_registry_check": 16,
+  "lookup_failed": 0
+ },
+ "R_M_total": 500,
+ "seed": 20261011
+}
