@@ -227,6 +227,16 @@ def phase5() -> None:
     macro("HOneMedNodes", str(h1["early"]["median_nodes_now"]), src)
     macro("HOneNewPub", num(h1["early"]["cases_by_check"].get("dep_new_publisher", 0)), src)
 
+    src = "results/candidate/phase5/age_rule_sensitivity.json"
+    a = load(src)
+    prop("AgeFb", a["B"]["G_waived_false_block"], src, 2)
+    prop("AgeWarn", a["B"]["G_waived_warn"], src)
+    prop("AgeInter", a["B"]["G_waived_interruption"], src)
+    prop("AgeDet", a["R"]["G_waived_detected"], src)
+    macro("AgeLost", str(a["R"]["detections_lost"]), src)
+    r4 = load("results/candidate/phase4/phase4_results.json")
+    macro("AgeAdded", str(a["R"]["G_waived_detected"]["k"] - r4["detection_R"]["S1-C"]["k"]), src)
+
 
 def main():
     import sys

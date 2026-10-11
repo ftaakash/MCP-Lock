@@ -47,6 +47,9 @@ compromised release pipeline (T3) is outside what any lock can see.
   and 1,483 upgrades with no static tools are counted as no cost. In the matrix, each attack's live list is written down
   from its source code; no server was executed.
 - Lock format v0.2 (`lockfile/SPEC.md` §6): optional `dependencies`, `files` and `tools.runtime` fields.
+- **Age-rule sensitivity** (`age_rule_sensitivity.json`): 2,695 of G's 2,729 false blocks on B involve S1's 30-day age
+  rule. Waiving it for servers already in the lock: false blocks 0.73% [0.57, 0.94] (from 33.4%), interruptions 28.4%
+  (from 49.8%; warnings 27.7%), detection on R 187/490 (8 young hijacked packages lost; still 91 more than S1-C).
 
 ### Deviations from the Phase 5 plan
 1. E10 is a hand-built bundle, not a package on a local pypiserver: the attack is a metadata fact (a file added to an
@@ -59,7 +62,9 @@ compromised release pipeline (T3) is outside what any lock can see.
 
 ### Open
 - Paper (IEEEtran, plan §5): first full draft in `paper/` (5 pages, `bash paper/build.sh`); every number is a macro
-  generated from the result files by `paper/make_numbers.py`. Next: hostile review and revision (pipeline Stage 8.4).
+  generated from the result files by `paper/make_numbers.py`. Hostile review done and its open items fixed
+  (`paper/REVIEW.md`): new title, age-rule sensitivity, shorter abstract, architecture figure. Next: human read-through,
+  venue choice, novelty sweep again in the week before submission.
 - Local Verdaccio container `mcplock-verdaccio` is stopped (storage volume kept); remove it once the paper is final.
 
 ## Phase 4: pre-registered evaluation (2026-10-11). **Complete: kill rule NOT triggered**

@@ -73,6 +73,10 @@ Hardening switches, off by default, each with its cost on the 8,180 benign upgra
 | H5 command normalisation | E11 (21/22) | none |
 
 With all five on, 10 of 12 attacks block; a compromised release pipeline (E4) remains out of reach for any lock.
+
+Almost all of the gate's false blocks come from the baseline's 30-day age rule re-firing on servers that are already
+locked; waiving it for locked servers lowers false blocks on benign upgrades from 33.4% to **0.73%**, at a cost of 8 of
+195 real-attack detections (exploratory).
 Details: [STATUS](STATUS.md).
 
 ## 📊 Phase 4 results — RQ2 pre-registered evaluation (11 Oct 2026)

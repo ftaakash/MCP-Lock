@@ -8,6 +8,8 @@
 \usepackage{xcolor}
 \usepackage[hidelinks]{hyperref}
 \usepackage{url}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,fit}
 \input{numbers}
 
 \newcommand{\G}{\textsf{G}}
@@ -16,7 +18,7 @@
 
 \begin{document}
 
-\title{MCP-Lock: Pinning Provenance and Tool Definitions for Coding-Agent MCP Servers}
+\title{MCP-Lock: Lockfiles and Pre-Launch Gating for Coding-Agent MCP Servers}
 
 \author{\IEEEauthorblockN{Aakash}
 \IEEEauthorblockA{Department of Computer Science and Engineering (Data Science)\\
@@ -26,17 +28,16 @@ gsaakash05@gmail.com}}
 \maketitle
 
 \begin{abstract}
-Coding agents launch Model Context Protocol (MCP) servers with unpinned commands such as \code{npx -y pkg}, so every
-start may fetch a new version whose code and whose tool descriptions, which go straight into the model's context, have
-never been reviewed. We measure this exposure and build a defence. A census of \CensusSample{} sampled MCP packages finds
-that \DriftPkgsP{} \DriftPkgsCI{} changed the tools they advertise within 90 days, and that \NoSignalP{} of tool changes
-carry no provenance, publisher, maintainer or install-script signal. We present MCP-Lock, a lockfile that pins version,
-archive digest, build identity, publisher, install scripts and a canonical hash of the tool definitions, and a pre-launch
-gate that compares every launch against it. In a pre-registered evaluation against the closest prior gate, MCP-Lock
-detects \DetGP{} of \NR{} real attacks versus \DetSCP{} (exact McNemar $p = \McNemarHOne$), at a false-block rate of
-\FbGP{} versus \FbSCP{} on \NB{} benign upgrades. The gain comes almost entirely from install-script diffs. An adaptive
-attacker who knows every check gets past the frozen gate in \EGAllow{} of \ENCases{} attacks; five exploratory hardening switches
-close all but two, at costs that range from no benign upgrades newly blocked to more than a third of them.
+Coding agents start Model Context Protocol (MCP) servers with unpinned commands such as \code{npx -y pkg}, so each start
+may run a version whose code, and whose tool descriptions that the model reads as instructions, nobody has reviewed. A
+census of \CensusSample{} MCP packages finds that \DriftPkgsP{} changed their advertised tools within 90 days, and that
+\NoSignalP{} of these changes carry no provenance, publisher or install-script signal. We present MCP-Lock, a lockfile
+that pins each server's archive, build identity, publisher, install scripts and tool definitions, and a gate that checks
+every launch against it. In a pre-registered evaluation, MCP-Lock detects twice as many real attacks as the closest prior
+gate (\DetGP{} vs.\ \DetSCP{} of \NR), almost entirely through install-script diffs. Almost all its false blocks come from the
+baseline's age rule; exempting locked servers from that rule cuts them from \FbGP{} to \AgeFbP. An adaptive attacker
+still gets past the gate in \EGAllow{} of \ENCases{} attacks; five exploratory hardening switches close all but two, and
+we measure what each costs on \NB{} benign upgrades.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -112,7 +113,7 @@ and drift figures are lower bounds.
 a 90-day window; among packages that shipped any release in the window, \DriftWinRelP{} \DriftWinRelCI{} did. Across
 release transitions with extractable tools on both sides, \DriftTransP{} (\DriftTrans) changed tools: \KindAdded{}
 added a tool, \KindRemoved{} removed one, \KindDesc{} changed a description and \KindSchema{} an input schema.
-\DriftTransP{} of releases is therefore not a rare event that a reviewer can wait for.
+Tool change is a routine event, not a rare one that a reviewer can wait for.
 
 Tool changes are also invisible to supply-chain metadata. \NoSignalP{} \NoSignalCI{} of tool-changing transitions had
 no provenance loss, publisher change, maintainer change or new install script on the same release, and none of these
@@ -132,10 +133,37 @@ provenance exists, the npm publisher and maintainers, the install scripts, and t
 names. The continuity identity deliberately excludes ref and commit, which change on every honest release. A clean
 upgrade is a regenerated entry and a reviewable diff.
 
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[font=\footnotesize, node distance=4mm and 7mm,
+  box/.style={draw, rounded corners=1.5pt, align=center, inner sep=3pt, minimum height=7mm},
+  data/.style={box, fill=black!6},
+  arr/.style={-{Stealth[length=2mm]}, thick}]
+\node[box] (agent) {coding agent\\(shell command or\\MCP config write)};
+\node[box, right=of agent, minimum width=2.6cm] (gate) {\textbf{MCP-Lock gate}\\parse $\rightarrow$ resolve $\rightarrow$\\compare (S1--S5)};
+\node[data, above=of gate] (lock) {\code{mcp-lock.json}\\version, digest, identity,\\publisher, scripts, tool hash};
+\node[data, below=of gate] (reg) {npm / PyPI (read only)\\metadata, attestations,\\archives};
+\node[box, right=of gate, minimum width=1.4cm] (dec) {allow\\warn: ask\\block: deny};
+\node[box, below=7mm of reg, minimum width=2.6cm] (proxy) {\code{mcplock proxy} (H2)\\pins live \code{tools/list}};
+\node[box, left=of proxy] (client) {MCP client};
+\node[box, right=of proxy] (server) {MCP server};
+\draw[arr] (agent) -- node[above, font=\scriptsize, yshift=1pt]{hook} (gate);
+\draw[arr] (lock) -- (gate);
+\draw[arr] (reg) -- (gate);
+\draw[arr] (gate) -- (dec);
+\draw[arr, <->] (client) -- (proxy);
+\draw[arr, <->] (proxy) -- (server);
+\node[draw, dashed, rounded corners, fit=(client)(proxy)(server), inner sep=2pt, label={[font=\scriptsize]left:run time}] {};
+\end{tikzpicture}
+\caption{MCP-Lock. Before launch, the gate compares what a command would fetch with the lock and never runs package
+code. At run time, the optional proxy (hardening H2) checks every tool listing against a pin.}
+\label{fig:arch}
+\end{figure}
+
 \textbf{Gate.} Before a command runs, the gate parses it (installs and runner launches, including \code{npx},
 \code{pnpm dlx}, \code{bunx}, \code{uvx}, \code{pipx run}), resolves what the launch would fetch now, and compares it with
 the lock entry. It reads registry metadata, attestations and archives, and never executes package code.
-Table~\ref{tab:signals} lists the signals; S1 is our reimplementation of the Bagmar and Saraf checks~\cite{bagmar2026setup}.
+Fig.~\ref{fig:arch} shows the flow and Table~\ref{tab:signals} lists the signals; S1 is our reimplementation of the Bagmar and Saraf checks~\cite{bagmar2026setup}.
 A block denies the command; a warning asks the user. The gate runs as a Claude Code \code{PreToolUse} hook on shell
 commands and on writes to MCP configuration files, and fails closed to ``ask'' on internal errors.
 
@@ -211,6 +239,14 @@ added detection, \G{} costs \FbPerDet{} extra false blocks and \WarnPerDet{} ext
 \FbSCP{} false-block rate comes from its 30-day age rule replayed at upgrade time (\FbSCMcpP{} of MCP upgrades).
 Median gate latency is \LatColdMed{}\,s on a cold cache (p95 \LatColdPNF{}\,s; $n = \LatN$) and \LatWarmMed{}\,s warm.
 
+\textbf{Age-rule sensitivity (exploratory).} Almost all of \G's false blocks come from S1's 30-day age rule, which
+guards the first use of a name but fires again on every upgrade of a young server that the user has already locked.
+Waiving it for locked servers, and changing nothing else, lowers \G's false blocks on B from \FbGP{} to \AgeFbP{}
+\AgeFbCI. Interruptions (block or warn) fall from \InterGP{} to \AgeInterP; warnings rise to \AgeWarnP, because some former
+blocks also carried a tool-drift warning, which now surfaces on its own. Detection on R drops by \AgeLost{} hijacked packages that were young
+enough for the age rule to catch, to \AgeDetP{} (\AgeDet), still \AgeAdded{} more than \SC. This was not
+pre-registered; the confirmatory results above are unchanged.
+
 % ------------------------------------------------------------------------------------------------
 \section{RQ3: Adaptive Attacker}
 \label{sec:adaptive}
@@ -281,7 +317,9 @@ statically visible tools are counted as costless.
 % ------------------------------------------------------------------------------------------------
 \section{Discussion and Limitations}
 \textbf{What the evidence supports.} Pinning catches real attacks that the name-and-source checks miss, but the
-confirmed gain is an install-script diff (S4), a classic supply-chain signal rather than an MCP-specific one. Tool pinning
+confirmed gain is an install-script diff (S4), a classic supply-chain signal rather than an MCP-specific one. A deployable
+gate should not re-apply first-use checks to servers already in the lock: doing so is what made both gates block a third
+of honest upgrades. Tool pinning
 (S5) is what catches MCP rug pulls, and it is necessary because metadata signals do not accompany tool changes (RQ1),
 yet it warns on \WarnGMcpP{} of honest MCP upgrades. Provenance continuity is sound but rarely applicable: most
 packages have none, and attackers who remove their versions take the evidence with them.
