@@ -1,0 +1,182 @@
+"""Offline, as-of-time replay of the frozen gate (PREREG §3.2, §3.4).
+
+A *bundle* is a JSON object holding everything the gate would have fetched from the registries at
+time `t` for one case. Building a bundle needs the network; replaying it does not. During replay
+every network entry point (`census.http`) raises, and the gate's registry lookups are answered from
+the bundle, so the frozen gate code (tag `prereg-v1`) runs unchanged on historical data.
+
+Bundle fields:
+  case_id, corpus, ecosystem, package, t (ISO 8601), command, cwd_files {relpath: text}
+  versions        version records as census.versions returns them, already truncated to t
+  lock            MCP-Lock entry or null
+  registry_info   {name: {"exists": bool, "first_release": ISO|null}}
+  osv             {"name@version": [{"id", "lowest_fix"}]} (advisories published <= t)
+  identities      {version: identity | null}  (null = observed: no provenance)
+  tools           {version: {"hash": str|null, "names": [...]} | {"too_large": true}}
+  evaluable       {"S2": bool, "S3": bool, "S4": bool, "S5": bool}
+  labels          free-form (malicious/benign, class, stratum, ...)
+
+A signal marked not evaluable is disabled for that case (PREREG §3.2: no finding, counts as a miss).
+"""
+
+from __future__ import annotations
+
+import contextlib
+import json
+import tempfile
+from datetime import datetime
+from pathlib import Path
+
+from census import http, tarballs
+from census import versions as V
+from gate import core, s1, signals
+
+SIGNALS_23 = ("S2", "S3", "S4", "S5")
+# Findings that count as a detection (PREREG §2.1). gate unlocked / lookup_failed / unresolvable
+# and info findings never count.
+COUNTED_GATE_CHECKS = {"integrity_mismatch"}
+
+
+class OfflineViolation(RuntimeError):
+    pass
+
+
+def _ts(s: str | None) -> datetime | None:
+    return datetime.fromisoformat(s.replace("Z", "+00:00")) if s else None
+
+
+def systems(evaluable: dict) -> dict[str, tuple[str, frozenset]]:
+    """System id -> (S1 variant, enabled signals). G drops signals that are not evaluable."""
+    ok = frozenset(s for s in SIGNALS_23 if evaluable.get(s, True))
+    out = {"S1-L": ("literal", frozenset({"S1"})),
+           "S1-C": ("charitable", frozenset({"S1"})),
+           "G": ("charitable", frozenset({"S1"}) | ok)}
+    for k in SIGNALS_23:
+        out[f"G-{k}"] = ("charitable", frozenset({"S1"}) | (ok - {k}))
+    return out
+
+
+@contextlib.contextmanager
+def offline(bundle: dict):
+    """Answer every registry lookup from `bundle`; any real network call raises."""
+    pkg, eco = bundle["package"], bundle["ecosystem"]
+    saved = {}
+
+    def patch(mod, name, fn):
+        saved[(mod, name)] = getattr(mod, name)
+        setattr(mod, name, fn)
+
+    def no_net(*a, **k):
+        raise OfflineViolation(f"network call during replay: {a[:1]}")
+
+    def versions(name):
+        if name != pkg:
+            raise OfflineViolation(f"versions for unexpected package {name}")
+        return [dict(v) for v in bundle["versions"]]
+
+    def registry_info(e, name, now=None, age_days=30):
+        info = (bundle.get("registry_info") or {}).get(name)
+        if info is None:
+            raise OfflineViolation(f"registry_info for unexpected package {name}")
+        return {"exists": info["exists"], "first_release": _ts(info.get("first_release"))}
+
+    def osv_fixable(e, name, version):
+        return list((bundle.get("osv") or {}).get(f"{name}@{version}", []))
+
+    def identity(e, name, v):
+        ids = bundle.get("identities") or {}
+        if v["version"] not in ids:
+            raise OfflineViolation(f"identity for {name}@{v['version']} not in bundle")
+        return ids[v["version"]]
+
+    def static_tools(e, name, v):
+        t = (bundle.get("tools") or {}).get(v["version"])
+        if t is None:
+            raise OfflineViolation(f"tools for {name}@{v['version']} not in bundle")
+        if t.get("too_large"):
+            raise tarballs.TooLarge(f"{name}@{v['version']} archive over the size cap")
+        return t["hash"], list(t["names"])
+
+    patch(http, "get", no_net)
+    patch(http, "get_json", no_net)
+    patch(http, "post_json", no_net)
+    patch(tarballs, "fetch", no_net)
+    patch(V, "npm_versions" if eco == "npm" else "pypi_versions", versions)
+    patch(s1, "registry_info", registry_info)
+    patch(s1, "osv_fixable", osv_fixable)
+    patch(signals, "_identity", identity)
+    patch(signals, "static_tools", static_tools)
+    try:
+        yield
+    finally:
+        for (mod, name), fn in saved.items():
+            setattr(mod, name, fn)
+
+
+def detected(decision: dict, block_only: bool = False) -> bool:
+    """PREREG §2.1: block/warn caused by at least one counted finding."""
+    levels = {"block"} if block_only else {"block", "warn"}
+    if decision["decision"] not in levels:
+        return False
+    for f in decision["findings"]:
+        if f["severity"] not in levels:
+            continue
+        if f["signal"] in ("S1", "S2", "S3", "S4", "S5") or f["check"] in COUNTED_GATE_CHECKS:
+            return True
+    return False
+
+
+def run(bundle: dict) -> dict:
+    """Evaluate one bundle with every system. Returns {system: decision dict + detection flags}."""
+    t = _ts(bundle["t"])
+    out = {}
+    with tempfile.TemporaryDirectory() as d:
+        cwd = Path(d)
+        for rel, text in (bundle.get("cwd_files") or {}).items():
+            p = cwd / rel
+            p.parent.mkdir(parents=True, exist_ok=True)
+            p.write_text(text, encoding="utf-8")
+        lock_path = None
+        if bundle.get("lock"):
+            lock_path = cwd / ".mcplock-replay.json"
+            lock_path.write_text(json.dumps({"lockfileVersion": 1, "servers": {
+                bundle["package"]: bundle["lock"]}}), encoding="utf-8")
+        with offline(bundle):
+            for sid, (variant, enabled) in systems(bundle.get("evaluable") or {}).items():
+                cfg = (s1.S1Config.charitable if variant == "charitable"
+                       else s1.S1Config.literal)(now=t)
+                dec = core.evaluate(bundle["command"], cwd, lock_path, cfg, enabled).to_dict()
+                dec["detected"] = detected(dec)
+                dec["detected_block"] = detected(dec, block_only=True)
+                dec["enabled"] = sorted(enabled)
+                out[sid] = dec
+    return out
+
+
+def main():
+    import argparse
+    import gzip
+
+    from census import provenance
+
+    ap = argparse.ArgumentParser(description="Replay bundles offline with every system")
+    ap.add_argument("bundles", help="bundles .jsonl(.gz)")
+    ap.add_argument("out", help="output .jsonl")
+    a = ap.parse_args()
+    opener = gzip.open if a.bundles.endswith(".gz") else open
+    n = 0
+    with opener(a.bundles, "rt", encoding="utf-8") as f, open(a.out, "w", encoding="utf-8") as g:
+        for line in f:
+            b = json.loads(line)
+            res = run(b)
+            g.write(json.dumps({"case_id": b["case_id"], "corpus": b["corpus"],
+                                "ecosystem": b["ecosystem"], "package": b["package"],
+                                "labels": b.get("labels") or {},
+                                "evaluable": b.get("evaluable") or {}, "systems": res}) + "\n")
+            n += 1
+    provenance.write(a.out, inputs=[a.bundles], params={"cases": n})
+    print(f"replayed {n} cases -> {a.out}")
+
+
+if __name__ == "__main__":
+    main()

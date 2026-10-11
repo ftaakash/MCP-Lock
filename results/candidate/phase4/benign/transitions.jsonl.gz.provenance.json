@@ -1,0 +1,20 @@
+{
+  "result": "results/candidate/phase4/benign/transitions.jsonl.gz",
+  "result_sha256": "c9b61c52f9feda430219ceca8fedbc2d85f1db94bbb8c70e808241a51baa9d99",
+  "command": "python.exe C:\\Users\\Administrator\\Desktop\\Major Project\\mcp-lock\\eval\\corpora\\benign.py select results/candidate/phase4/benign",
+  "commit": "a15e4ccae7683e3ab302961b651fa87e7d8122c9-dirty",
+  "timestamp_utc": "2026-10-11T07:38:25Z",
+  "python": "3.11.9",
+  "inputs": {
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/census/phase2/versions.jsonl": "f4d1d7374e7ab914bf9f56a2d99022296e68973a7b38679d98b9f7c133094fce",
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/census/phase2/extractions.jsonl": "4de64b9c4fb593cb6e0ccd91f53c2a0fb78082ab7856cb473d52b4aa9b4afc93",
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/gate/data/top_npm.json": "24df107637180f8b1e2d7a4ee5e43fba3876227b8e8f2aa43a2812ce9ad6a4e3",
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/gate/data/top_pypi.json": "6e14fb9f5949f86ca8ab5c487cf68911f4c9ea3a1bc9f76eb0cece890de3229c"
+  },
+  "params": {
+    "cutoff": "2026-10-08T23:59:59+00:00",
+    "n_npm": 1000,
+    "n_pypi": 500
+  },
+  "note": ""
+}

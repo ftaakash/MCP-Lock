@@ -1,0 +1,66 @@
+{
+ "npm-top": [
+  {
+   "package": "supports-preserve-symlinks-flag",
+   "reason": "fewer than 2 stable versions"
+  },
+  {
+   "package": "json-stable-stringify-without-jsonify",
+   "reason": "fewer than 2 stable versions"
+  },
+  {
+   "package": "gensync",
+   "reason": "fewer than 2 stable versions"
+  },
+  {
+   "package": "unpipe",
+   "reason": "fewer than 2 stable versions"
+  },
+  {
+   "package": "resolve-pkg-maps",
+   "reason": "fewer than 2 stable versions"
+  },
+  {
+   "package": "safe-push-apply",
+   "reason": "fewer than 2 stable versions"
+  },
+  {
+   "package": "set-proto",
+   "reason": "fewer than 2 stable versions"
+  },
+  {
+   "package": "get-package-type",
+   "reason": "fewer than 2 stable versions"
+  }
+ ],
+ "pypi-top": [
+  {
+   "package": "opentelemetry-semantic-conventions",
+   "reason": "fewer than 2 stable versions"
+  },
+  {
+   "package": "opentelemetry-instrumentation",
+   "reason": "fewer than 2 stable versions"
+  },
+  {
+   "package": "opentelemetry-util-http",
+   "reason": "fewer than 2 stable versions"
+  },
+  {
+   "package": "opentelemetry-instrumentation-requests",
+   "reason": "fewer than 2 stable versions"
+  },
+  {
+   "package": "opentelemetry-instrumentation-fastapi",
+   "reason": "fewer than 2 stable versions"
+  },
+  {
+   "package": "opentelemetry-instrumentation-asgi",
+   "reason": "fewer than 2 stable versions"
+  },
+  {
+   "package": "opentelemetry-instrumentation-httpx",
+   "reason": "fewer than 2 stable versions"
+  }
+ ]
+}
