@@ -1,5 +1,24 @@
 # STATUS
 
+## Phase 4: pre-registered evaluation (started 2026-10-11). **In progress: corpora being built, no scored run yet**
+
+Registered: OSF https://osf.io/2amj3 (plan text commit `914d2b3`, code tag `prereg-v1`). Deviations: `docs/DEVIATIONS.md`.
+Replay rules: `docs/REPLAY.md`.
+
+| Corpus | State | Size |
+|---|---|---|
+| B benign upgrades | bundles frozen | 8,180 (6,695 MCP, 992 npm-top, 493 PyPI-top; 15 top packages excluded by rule) |
+| R-S synthetic rug pulls | built on local Verdaccio; bundles frozen | 40 attacks + 10 controls (7 candidate servers skipped, logged) |
+| R-M real malicious versions | Docker-only pipeline; classification running | OSV 217,619 rows + DataDog 1,471 samples scanned |
+| R-B Bagmar scenarios | runner ready | 22 core + R6b, two forms |
+| L latency | runner ready | 200 packages |
+
+Checks so far (allowed by the plan): Phase 2 tool hashes recomputed with the gate's own code, 40/40 identical; the 10
+synthetic negative controls are allowed by all 7 systems.
+
+**Safety incident (2026-10-11):** Defender quarantined 5 OSV advisory JSON files (they quote malware code) from a host
+checkout. Nothing executed. Host copies deleted; malware data now lives only in a Docker volume (DEVIATIONS #3).
+
 ## Phase 3: gate + baseline (2026-10-10). **Complete: gate built, S1 parity reproduced; awaiting go-ahead for Phase 4 (PREREG)**
 
 No reply from Bagmar & Saraf (email sent 2026-10-08), so S1 is reimplemented from Appendix I in two variants.
