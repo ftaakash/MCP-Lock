@@ -153,29 +153,49 @@ def run(bundle: dict) -> dict:
     return out
 
 
+BASELINE_SYSTEMS = ("S1-L", "S1-C")
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def write_split(rows: list[dict], name: str, inputs: list) -> tuple[Path, Path]:
+    """Baseline and candidate results go to separate folders (PREREG §2)."""
+    from census import provenance
+    paths = []
+    for group, keep in (("baseline", lambda s: s in BASELINE_SYSTEMS),
+                        ("candidate", lambda s: s not in BASELINE_SYSTEMS)):
+        out = ROOT / "results" / group / "phase4" / "runs" / f"{name}.jsonl"
+        out.parent.mkdir(parents=True, exist_ok=True)
+        with open(out, "w", encoding="utf-8") as g:
+            for r in rows:
+                g.write(json.dumps({**r, "systems": {k: v for k, v in r["systems"].items()
+                                                     if keep(k)}}) + "\n")
+        provenance.write(out, inputs=inputs, params={"cases": len(rows), "group": group})
+        paths.append(out)
+    return paths[0], paths[1]
+
+
 def main():
     import argparse
     import gzip
 
-    from census import provenance
-
     ap = argparse.ArgumentParser(description="Replay bundles offline with every system")
     ap.add_argument("bundles", help="bundles .jsonl(.gz)")
-    ap.add_argument("out", help="output .jsonl")
+    ap.add_argument("name", help="run name, e.g. B or R-M or R-S")
     a = ap.parse_args()
     opener = gzip.open if a.bundles.endswith(".gz") else open
-    n = 0
-    with opener(a.bundles, "rt", encoding="utf-8") as f, open(a.out, "w", encoding="utf-8") as g:
+    rows = []
+    with opener(a.bundles, "rt", encoding="utf-8") as f:
         for line in f:
             b = json.loads(line)
-            res = run(b)
-            g.write(json.dumps({"case_id": b["case_id"], "corpus": b["corpus"],
-                                "ecosystem": b["ecosystem"], "package": b["package"],
-                                "labels": b.get("labels") or {},
-                                "evaluable": b.get("evaluable") or {}, "systems": res}) + "\n")
-            n += 1
-    provenance.write(a.out, inputs=[a.bundles], params={"cases": n})
-    print(f"replayed {n} cases -> {a.out}")
+            rows.append({"case_id": b["case_id"], "corpus": b["corpus"],
+                         "ecosystem": b["ecosystem"], "package": b["package"],
+                         "labels": b.get("labels") or {}, "evaluable": b.get("evaluable") or {},
+                         "lock_provenance": bool((b.get("lock") or {}).get("provenance")),
+                         "systems": run(b)})
+            if len(rows) % 500 == 0:
+                print(f"{len(rows)} replayed", flush=True)
+    base, cand = write_split(rows, a.name, [a.bundles])
+    print(f"replayed {len(rows)} cases -> {base} | {cand}")
 
 
 if __name__ == "__main__":

@@ -27,3 +27,24 @@ A case counts as detected only for block or warn caused by an S1–S5 finding or
 | tools (top strata) | computed with the gate's own `signals.static_tools` |
 | lock archive too large / digest error | lock `tools.method = "unavailable"`, so S5 cannot fire, as for a real lock without a static hash |
 | identity lookup error after retries | S2 not evaluable for that case; reported as a lookup failure |
+
+## Real malicious versions (R-M)
+All stages run in Docker (`eval/corpora/malicious.py`, image `eval/docker/Dockerfile`). Malware data stays in the
+`mcplock-mal` volume (DEVIATIONS #3).
+
+| Stage | Network | What it does |
+|---|---|---|
+| scan | none | OSV `MAL-` records (pinned commit) + DataDog `compromised_lib` index → candidate rows |
+| classify | metadata only | registry histories where class C is possible; class rule and window applied |
+| sample | metadata only | all C (cap 400, all PyPI C kept), seeded N sample per ecosystem (largest-remainder quota) |
+| fetch | yes | registry records, identities, raw archives (registry tarball, else DataDog zip); nothing is opened |
+| analyse | none | static unpacking (DataDog zips: password `infected`) and tool extraction; npm install scripts from `package.json` |
+| assemble | none | replay bundles |
+
+| Item | Rule |
+|---|---|
+| affected versions | union of versions listed by every OSV / DataDog record for the package; "all versions" records make every version affected |
+| class C lock | the most recent version that is still listed, unaffected, and published before `t` |
+| class C command | `npx -y <pkg>` / `uvx <pkg>`; pinned to the malicious version when it is a pre-release or not above the locked version, because an unpinned launch would not select it |
+| class N commands | `npm install <pkg>` / `pip install <pkg>` (primary) and `npx -y` / `uvx` (secondary), no lock |
+| removed version | stub record (version, `t`); S2/S3 not evaluable; S4 evaluable for npm only if the DataDog sample has `package.json`; S5 evaluable only with an archive |
