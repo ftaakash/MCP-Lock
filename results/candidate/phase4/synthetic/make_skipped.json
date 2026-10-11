@@ -1,0 +1,37 @@
+[
+ {
+  "package": "@feedthrough/mcp",
+  "version": "0.4.0",
+  "reason": "A1: no tool description found verbatim exactly once"
+ },
+ {
+  "package": "openalex-research-mcp",
+  "version": "0.5.0",
+  "reason": "A2: static check failed"
+ },
+ {
+  "package": "@factmem/mcp",
+  "version": "0.26.0",
+  "reason": "A1: no tool description found verbatim exactly once"
+ },
+ {
+  "package": "ai-usage-mcp",
+  "version": "0.12.1",
+  "reason": "A1: no tool description found verbatim exactly once"
+ },
+ {
+  "package": "@boxlab/yandex-webmaster-mcp",
+  "version": "0.1.1",
+  "reason": "A1: no tool description found verbatim exactly once"
+ },
+ {
+  "package": "@infisical/mcp",
+  "version": "0.0.24",
+  "reason": "A2: static check failed"
+ },
+ {
+  "package": "docfork",
+  "version": "2.2.5",
+  "reason": "A1: no tool description found verbatim exactly once"
+ }
+]

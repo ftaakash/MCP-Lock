@@ -1,0 +1,352 @@
+[
+ {
+  "base_package": "scrcpy-mcp",
+  "base_version": "0.5.0",
+  "name": "@mcplock-eval/scrcpy-mcp",
+  "v1": "0.5.0",
+  "v2": "0.5.1",
+  "base_attestation_url": "https://registry.npmjs.org/-/npm/v1/attestations/scrcpy-mcp@0.5.0",
+  "files": {
+   "v1": "results\\candidate\\phase4\\synthetic\\work\\tgz\\scrcpy-mcp\\v1.tgz",
+   "A1": "results\\candidate\\phase4\\synthetic\\work\\tgz\\scrcpy-mcp\\A1.tgz",
+   "A2": "results\\candidate\\phase4\\synthetic\\work\\tgz\\scrcpy-mcp\\A2.tgz",
+   "A3": "results\\candidate\\phase4\\synthetic\\work\\tgz\\scrcpy-mcp\\A3.tgz",
+   "A4": "results\\candidate\\phase4\\synthetic\\work\\tgz\\scrcpy-mcp\\A4.tgz",
+   "CTRL": "results\\candidate\\phase4\\synthetic\\work\\tgz\\scrcpy-mcp\\CTRL.tgz"
+  },
+  "variants": {
+   "A1": {
+    "tool": "app_current",
+    "tools_hash": "sha256:15b022af98fcfc562be7c75adaa485ba19c243cfd76c567b66e7648d096264ce"
+   },
+   "A2": {
+    "copied_from": "app_current",
+    "tools_hash": "sha256:b89763d8746473221dfd8e813f46cbd7fdff2e43644197e12fa80bd8ef7a1989"
+   },
+   "A3": {
+    "tools_hash": "sha256:8a6e5bb6e973fa20359ef4e7d7b64b155bd04fad8b751d44718ea800a41081d0"
+   },
+   "A4": {
+    "tools_hash": "sha256:8a6e5bb6e973fa20359ef4e7d7b64b155bd04fad8b751d44718ea800a41081d0"
+   },
+   "CTRL": {
+    "tools_hash": "sha256:8a6e5bb6e973fa20359ef4e7d7b64b155bd04fad8b751d44718ea800a41081d0"
+   }
+  }
+ },
+ {
+  "base_package": "@seatable/mcp-seatable",
+  "base_version": "1.6.4",
+  "name": "@mcplock-eval/seatable-mcp-seatable",
+  "v1": "1.6.4",
+  "v2": "1.6.5",
+  "base_attestation_url": "https://registry.npmjs.org/-/npm/v1/attestations/@seatable%2fmcp-seatable@1.6.4",
+  "files": {
+   "v1": "results\\candidate\\phase4\\synthetic\\work\\tgz\\seatable-mcp-seatable\\v1.tgz",
+   "A1": "results\\candidate\\phase4\\synthetic\\work\\tgz\\seatable-mcp-seatable\\A1.tgz",
+   "A2": "results\\candidate\\phase4\\synthetic\\work\\tgz\\seatable-mcp-seatable\\A2.tgz",
+   "A3": "results\\candidate\\phase4\\synthetic\\work\\tgz\\seatable-mcp-seatable\\A3.tgz",
+   "A4": "results\\candidate\\phase4\\synthetic\\work\\tgz\\seatable-mcp-seatable\\A4.tgz",
+   "CTRL": "results\\candidate\\phase4\\synthetic\\work\\tgz\\seatable-mcp-seatable\\CTRL.tgz"
+  },
+  "variants": {
+   "A1": {
+    "tool": "add_row",
+    "tools_hash": "sha256:5b7382c4792039d331e2ce0d3f1babc172811d53e827089ae70138592606517c"
+   },
+   "A2": {
+    "copied_from": "add_row",
+    "tools_hash": "sha256:782577147b2644c8c3a456a5d1ee9f28c8e0a6e161a672a46fe2514b0efde231"
+   },
+   "A3": {
+    "tools_hash": "sha256:65236214d4f623d19abca49f73ebc7c7c61f9fe6a7b49e79cf62df2450ee1637"
+   },
+   "A4": {
+    "tools_hash": "sha256:65236214d4f623d19abca49f73ebc7c7c61f9fe6a7b49e79cf62df2450ee1637"
+   },
+   "CTRL": {
+    "tools_hash": "sha256:65236214d4f623d19abca49f73ebc7c7c61f9fe6a7b49e79cf62df2450ee1637"
+   }
+  }
+ },
+ {
+  "base_package": "hevy-coach-mcp",
+  "base_version": "0.4.2",
+  "name": "@mcplock-eval/hevy-coach-mcp",
+  "v1": "0.4.2",
+  "v2": "0.4.3",
+  "base_attestation_url": "https://registry.npmjs.org/-/npm/v1/attestations/hevy-coach-mcp@0.4.2",
+  "files": {
+   "v1": "results\\candidate\\phase4\\synthetic\\work\\tgz\\hevy-coach-mcp\\v1.tgz",
+   "A1": "results\\candidate\\phase4\\synthetic\\work\\tgz\\hevy-coach-mcp\\A1.tgz",
+   "A2": "results\\candidate\\phase4\\synthetic\\work\\tgz\\hevy-coach-mcp\\A2.tgz",
+   "A3": "results\\candidate\\phase4\\synthetic\\work\\tgz\\hevy-coach-mcp\\A3.tgz",
+   "A4": "results\\candidate\\phase4\\synthetic\\work\\tgz\\hevy-coach-mcp\\A4.tgz",
+   "CTRL": "results\\candidate\\phase4\\synthetic\\work\\tgz\\hevy-coach-mcp\\CTRL.tgz"
+  },
+  "variants": {
+   "A1": {
+    "tool": "compare-periods",
+    "tools_hash": "sha256:152018e8701914c7fb8a731495981215e85be38df3975c4903b84001487dd91a"
+   },
+   "A2": {
+    "copied_from": "compare-periods",
+    "tools_hash": "sha256:8f4403a9cd8388ed178f4ad85358fef64738b8f40137914b20a1e569b3723134"
+   },
+   "A3": {
+    "tools_hash": "sha256:6657508f5f400b3e7c2bbf6515623306e889cb36098206a4c34cfa4ea4c09c8f"
+   },
+   "A4": {
+    "tools_hash": "sha256:6657508f5f400b3e7c2bbf6515623306e889cb36098206a4c34cfa4ea4c09c8f"
+   },
+   "CTRL": {
+    "tools_hash": "sha256:6657508f5f400b3e7c2bbf6515623306e889cb36098206a4c34cfa4ea4c09c8f"
+   }
+  }
+ },
+ {
+  "base_package": "@litportnet/litport-mcp",
+  "base_version": "0.2.0",
+  "name": "@mcplock-eval/litportnet-litport-mcp",
+  "v1": "0.2.0",
+  "v2": "0.2.1",
+  "base_attestation_url": "https://registry.npmjs.org/-/npm/v1/attestations/@litportnet%2flitport-mcp@0.2.0",
+  "files": {
+   "v1": "results\\candidate\\phase4\\synthetic\\work\\tgz\\litportnet-litport-mcp\\v1.tgz",
+   "A1": "results\\candidate\\phase4\\synthetic\\work\\tgz\\litportnet-litport-mcp\\A1.tgz",
+   "A2": "results\\candidate\\phase4\\synthetic\\work\\tgz\\litportnet-litport-mcp\\A2.tgz",
+   "A3": "results\\candidate\\phase4\\synthetic\\work\\tgz\\litportnet-litport-mcp\\A3.tgz",
+   "A4": "results\\candidate\\phase4\\synthetic\\work\\tgz\\litportnet-litport-mcp\\A4.tgz",
+   "CTRL": "results\\candidate\\phase4\\synthetic\\work\\tgz\\litportnet-litport-mcp\\CTRL.tgz"
+  },
+  "variants": {
+   "A1": {
+    "tool": "get_balance",
+    "tools_hash": "sha256:9b9c49b8c08598551a7063b70dbce5e4ac70bc4c66975992f7d23caf8652e961"
+   },
+   "A2": {
+    "copied_from": "add_allowed_ip",
+    "tools_hash": "sha256:fe5c78e9df81534080f5a3e517afd1bc2a8154d11721948d7d7c8fce583ad578"
+   },
+   "A3": {
+    "tools_hash": "sha256:df94ba1172f69022f17404181a7d6452de4cc7b3d1fb3846ad253109bc0aa440"
+   },
+   "A4": {
+    "tools_hash": "sha256:df94ba1172f69022f17404181a7d6452de4cc7b3d1fb3846ad253109bc0aa440"
+   },
+   "CTRL": {
+    "tools_hash": "sha256:df94ba1172f69022f17404181a7d6452de4cc7b3d1fb3846ad253109bc0aa440"
+   }
+  }
+ },
+ {
+  "base_package": "ghost-blog-mcp",
+  "base_version": "0.1.4",
+  "name": "@mcplock-eval/ghost-blog-mcp",
+  "v1": "0.1.4",
+  "v2": "0.1.5",
+  "base_attestation_url": "https://registry.npmjs.org/-/npm/v1/attestations/ghost-blog-mcp@0.1.4",
+  "files": {
+   "v1": "results\\candidate\\phase4\\synthetic\\work\\tgz\\ghost-blog-mcp\\v1.tgz",
+   "A1": "results\\candidate\\phase4\\synthetic\\work\\tgz\\ghost-blog-mcp\\A1.tgz",
+   "A2": "results\\candidate\\phase4\\synthetic\\work\\tgz\\ghost-blog-mcp\\A2.tgz",
+   "A3": "results\\candidate\\phase4\\synthetic\\work\\tgz\\ghost-blog-mcp\\A3.tgz",
+   "A4": "results\\candidate\\phase4\\synthetic\\work\\tgz\\ghost-blog-mcp\\A4.tgz",
+   "CTRL": "results\\candidate\\phase4\\synthetic\\work\\tgz\\ghost-blog-mcp\\CTRL.tgz"
+  },
+  "variants": {
+   "A1": {
+    "tool": "ghost_image_upload",
+    "tools_hash": "sha256:0390c42e814c8cdff489ccefe3b24acabe48ea03f567b96cc9c26d0eafbdc4b9"
+   },
+   "A2": {
+    "copied_from": "ghost_image_upload",
+    "tools_hash": "sha256:5b0e41c614d859cc9b519491482328061bc9a82cc63948a7ac84f46c883f94de"
+   },
+   "A3": {
+    "tools_hash": "sha256:25a105a6b2f5b833cb1097c44effe3db8d918aad2939909eb9bae544dc3a3688"
+   },
+   "A4": {
+    "tools_hash": "sha256:25a105a6b2f5b833cb1097c44effe3db8d918aad2939909eb9bae544dc3a3688"
+   },
+   "CTRL": {
+    "tools_hash": "sha256:25a105a6b2f5b833cb1097c44effe3db8d918aad2939909eb9bae544dc3a3688"
+   }
+  }
+ },
+ {
+  "base_package": "@ranchbot/mcp-server",
+  "base_version": "0.1.5",
+  "name": "@mcplock-eval/ranchbot-mcp-server",
+  "v1": "0.1.5",
+  "v2": "0.1.6",
+  "base_attestation_url": "https://registry.npmjs.org/-/npm/v1/attestations/@ranchbot%2fmcp-server@0.1.5",
+  "files": {
+   "v1": "results\\candidate\\phase4\\synthetic\\work\\tgz\\ranchbot-mcp-server\\v1.tgz",
+   "A1": "results\\candidate\\phase4\\synthetic\\work\\tgz\\ranchbot-mcp-server\\A1.tgz",
+   "A2": "results\\candidate\\phase4\\synthetic\\work\\tgz\\ranchbot-mcp-server\\A2.tgz",
+   "A3": "results\\candidate\\phase4\\synthetic\\work\\tgz\\ranchbot-mcp-server\\A3.tgz",
+   "A4": "results\\candidate\\phase4\\synthetic\\work\\tgz\\ranchbot-mcp-server\\A4.tgz",
+   "CTRL": "results\\candidate\\phase4\\synthetic\\work\\tgz\\ranchbot-mcp-server\\CTRL.tgz"
+  },
+  "variants": {
+   "A1": {
+    "tool": "add_identifier",
+    "tools_hash": "sha256:050902dd69e836c74846aec41895b92ef63eb66bca1f842e40af6ad265abd288"
+   },
+   "A2": {
+    "copied_from": "add_identifier",
+    "tools_hash": "sha256:a2a6cf35e5c9a69473a47f25e5434ef7ac7f6887de38fab86375d756e3eceded"
+   },
+   "A3": {
+    "tools_hash": "sha256:5794914c97181fbb362fb0ef94912b87afd93dc681474cc565129a1ca43d8475"
+   },
+   "A4": {
+    "tools_hash": "sha256:5794914c97181fbb362fb0ef94912b87afd93dc681474cc565129a1ca43d8475"
+   },
+   "CTRL": {
+    "tools_hash": "sha256:5794914c97181fbb362fb0ef94912b87afd93dc681474cc565129a1ca43d8475"
+   }
+  }
+ },
+ {
+  "base_package": "@nugehs/gate",
+  "base_version": "0.3.0",
+  "name": "@mcplock-eval/nugehs-gate",
+  "v1": "0.3.0",
+  "v2": "0.3.1",
+  "base_attestation_url": "https://registry.npmjs.org/-/npm/v1/attestations/@nugehs%2fgate@0.3.0",
+  "files": {
+   "v1": "results\\candidate\\phase4\\synthetic\\work\\tgz\\nugehs-gate\\v1.tgz",
+   "A1": "results\\candidate\\phase4\\synthetic\\work\\tgz\\nugehs-gate\\A1.tgz",
+   "A2": "results\\candidate\\phase4\\synthetic\\work\\tgz\\nugehs-gate\\A2.tgz",
+   "A3": "results\\candidate\\phase4\\synthetic\\work\\tgz\\nugehs-gate\\A3.tgz",
+   "A4": "results\\candidate\\phase4\\synthetic\\work\\tgz\\nugehs-gate\\A4.tgz",
+   "CTRL": "results\\candidate\\phase4\\synthetic\\work\\tgz\\nugehs-gate\\CTRL.tgz"
+  },
+  "variants": {
+   "A1": {
+    "tool": "gate_check",
+    "tools_hash": "sha256:3d286ee99fc44eeb8db2a4cf2c32e244a35716e645ca31fd2c11808bab85f7fb"
+   },
+   "A2": {
+    "copied_from": "gate_check",
+    "tools_hash": "sha256:faf41b5e661c8a6c50f39408d627899556206abe0cf05d8b84cbae22883d19f2"
+   },
+   "A3": {
+    "tools_hash": "sha256:4f2928dee0f075c67b2c5f33b290d8b8df536e11ee299243af67560abc60d118"
+   },
+   "A4": {
+    "tools_hash": "sha256:4f2928dee0f075c67b2c5f33b290d8b8df536e11ee299243af67560abc60d118"
+   },
+   "CTRL": {
+    "tools_hash": "sha256:4f2928dee0f075c67b2c5f33b290d8b8df536e11ee299243af67560abc60d118"
+   }
+  }
+ },
+ {
+  "base_package": "marklayer-mcp",
+  "base_version": "0.5.0",
+  "name": "@mcplock-eval/marklayer-mcp",
+  "v1": "0.5.0",
+  "v2": "0.5.1",
+  "base_attestation_url": "https://registry.npmjs.org/-/npm/v1/attestations/marklayer-mcp@0.5.0",
+  "files": {
+   "v1": "results\\candidate\\phase4\\synthetic\\work\\tgz\\marklayer-mcp\\v1.tgz",
+   "A1": "results\\candidate\\phase4\\synthetic\\work\\tgz\\marklayer-mcp\\A1.tgz",
+   "A2": "results\\candidate\\phase4\\synthetic\\work\\tgz\\marklayer-mcp\\A2.tgz",
+   "A3": "results\\candidate\\phase4\\synthetic\\work\\tgz\\marklayer-mcp\\A3.tgz",
+   "A4": "results\\candidate\\phase4\\synthetic\\work\\tgz\\marklayer-mcp\\A4.tgz",
+   "CTRL": "results\\candidate\\phase4\\synthetic\\work\\tgz\\marklayer-mcp\\CTRL.tgz"
+  },
+  "variants": {
+   "A1": {
+    "tool": "marklayer_acknowledge",
+    "tools_hash": "sha256:10401ee84b7f70a7a086e3ff62cbcd1f419ac72c5d05b33482cd6373efa43726"
+   },
+   "A2": {
+    "copied_from": "marklayer_acknowledge",
+    "tools_hash": "sha256:56f93f18ab2ac95888723a7721848ea7fdceb34e1233be6fdc7aa2f1cdc98797"
+   },
+   "A3": {
+    "tools_hash": "sha256:46650c210ff58cd154bf8ea05e0aa14b8bbd07b579cdea6a4be4828e11412f16"
+   },
+   "A4": {
+    "tools_hash": "sha256:46650c210ff58cd154bf8ea05e0aa14b8bbd07b579cdea6a4be4828e11412f16"
+   },
+   "CTRL": {
+    "tools_hash": "sha256:46650c210ff58cd154bf8ea05e0aa14b8bbd07b579cdea6a4be4828e11412f16"
+   }
+  }
+ },
+ {
+  "base_package": "@open-state/camping",
+  "base_version": "1.0.7",
+  "name": "@mcplock-eval/open-state-camping",
+  "v1": "1.0.7",
+  "v2": "1.0.8",
+  "base_attestation_url": "https://registry.npmjs.org/-/npm/v1/attestations/@open-state%2fcamping@1.0.7",
+  "files": {
+   "v1": "results\\candidate\\phase4\\synthetic\\work\\tgz\\open-state-camping\\v1.tgz",
+   "A1": "results\\candidate\\phase4\\synthetic\\work\\tgz\\open-state-camping\\A1.tgz",
+   "A2": "results\\candidate\\phase4\\synthetic\\work\\tgz\\open-state-camping\\A2.tgz",
+   "A3": "results\\candidate\\phase4\\synthetic\\work\\tgz\\open-state-camping\\A3.tgz",
+   "A4": "results\\candidate\\phase4\\synthetic\\work\\tgz\\open-state-camping\\A4.tgz",
+   "CTRL": "results\\candidate\\phase4\\synthetic\\work\\tgz\\open-state-camping\\CTRL.tgz"
+  },
+  "variants": {
+   "A1": {
+    "tool": "connection_status",
+    "tools_hash": "sha256:2f297c35828829f50a931d923589f75778deca3dbbf38a91a861100e3ae8216f"
+   },
+   "A2": {
+    "copied_from": "connect_account",
+    "tools_hash": "sha256:0b5b860e8dad5cf216dcbce43293da5278367cbc8ebe2ca91efdecc17fd498a1"
+   },
+   "A3": {
+    "tools_hash": "sha256:e12143946bdbb5021fe4bf2664650af23bf84605656d704e25a5e3d84da2977a"
+   },
+   "A4": {
+    "tools_hash": "sha256:e12143946bdbb5021fe4bf2664650af23bf84605656d704e25a5e3d84da2977a"
+   },
+   "CTRL": {
+    "tools_hash": "sha256:e12143946bdbb5021fe4bf2664650af23bf84605656d704e25a5e3d84da2977a"
+   }
+  }
+ },
+ {
+  "base_package": "mcp-mongo-server",
+  "base_version": "3.0.1",
+  "name": "@mcplock-eval/mcp-mongo-server",
+  "v1": "3.0.1",
+  "v2": "3.0.2",
+  "base_attestation_url": "https://registry.npmjs.org/-/npm/v1/attestations/mcp-mongo-server@3.0.1",
+  "files": {
+   "v1": "results\\candidate\\phase4\\synthetic\\work\\tgz\\mcp-mongo-server\\v1.tgz",
+   "A1": "results\\candidate\\phase4\\synthetic\\work\\tgz\\mcp-mongo-server\\A1.tgz",
+   "A2": "results\\candidate\\phase4\\synthetic\\work\\tgz\\mcp-mongo-server\\A2.tgz",
+   "A3": "results\\candidate\\phase4\\synthetic\\work\\tgz\\mcp-mongo-server\\A3.tgz",
+   "A4": "results\\candidate\\phase4\\synthetic\\work\\tgz\\mcp-mongo-server\\A4.tgz",
+   "CTRL": "results\\candidate\\phase4\\synthetic\\work\\tgz\\mcp-mongo-server\\CTRL.tgz"
+  },
+  "variants": {
+   "A1": {
+    "tool": "aggregate",
+    "tools_hash": "sha256:c09cb6ec0790fa44d53a6cd21162130ef7d9f54de0a075041cd3c1ed9448e5f4"
+   },
+   "A2": {
+    "copied_from": "aggregate",
+    "tools_hash": "sha256:3896cf86d7fe3135e6029baa86b975c9c795a38dbba3b8bd46c37181a85030bd"
+   },
+   "A3": {
+    "tools_hash": "sha256:243aaa17601ba8fb7247e6612432ee3df867558ac016edfe96ababdb186e3089"
+   },
+   "A4": {
+    "tools_hash": "sha256:243aaa17601ba8fb7247e6612432ee3df867558ac016edfe96ababdb186e3089"
+   },
+   "CTRL": {
+    "tools_hash": "sha256:243aaa17601ba8fb7247e6612432ee3df867558ac016edfe96ababdb186e3089"
+   }
+  }
+ }
+]

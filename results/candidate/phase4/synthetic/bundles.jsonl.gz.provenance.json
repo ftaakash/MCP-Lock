@@ -1,0 +1,16 @@
+{
+  "result": "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase4/synthetic/bundles.jsonl.gz",
+  "result_sha256": "d0a8f0033426cfb8ea5273052065a0f3a6f3571c0a7be97be088d45ae9da1f17",
+  "command": "python.exe C:\\Users\\Administrator\\Desktop\\Major Project\\mcp-lock\\eval\\synthetic\\rugpull.py bundle",
+  "commit": "22519b8a85cba8f794b753a30e5b931d64b92b80-dirty",
+  "timestamp_utc": "2026-10-11T08:14:02Z",
+  "python": "3.11.9",
+  "inputs": {
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase4/synthetic/servers.json": "4fb80a11846727ceb7330ffd61b10d29db11275d63b30f1b5c8441f773d64a33"
+  },
+  "params": {
+    "registry": "http://127.0.0.1",
+    "bundles": 50
+  },
+  "note": ""
+}

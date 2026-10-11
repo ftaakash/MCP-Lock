@@ -1,0 +1,352 @@
+[
+ {
+  "package": "@mcplock-eval/scrcpy-mcp-a1",
+  "class": "A1",
+  "v1": "0.5.0",
+  "v2": "0.5.1",
+  "base_package": "scrcpy-mcp"
+ },
+ {
+  "package": "@mcplock-eval/scrcpy-mcp-a2",
+  "class": "A2",
+  "v1": "0.5.0",
+  "v2": "0.5.1",
+  "base_package": "scrcpy-mcp"
+ },
+ {
+  "package": "@mcplock-eval/scrcpy-mcp-a3",
+  "class": "A3",
+  "v1": "0.5.0",
+  "v2": "0.5.1",
+  "base_package": "scrcpy-mcp"
+ },
+ {
+  "package": "@mcplock-eval/scrcpy-mcp-a4",
+  "class": "A4",
+  "v1": "0.5.0",
+  "v2": "0.5.1",
+  "base_package": "scrcpy-mcp"
+ },
+ {
+  "package": "@mcplock-eval/scrcpy-mcp-ctrl",
+  "class": "CTRL",
+  "v1": "0.5.0",
+  "v2": "0.5.1",
+  "base_package": "scrcpy-mcp"
+ },
+ {
+  "package": "@mcplock-eval/seatable-mcp-seatable-a1",
+  "class": "A1",
+  "v1": "1.6.4",
+  "v2": "1.6.5",
+  "base_package": "@seatable/mcp-seatable"
+ },
+ {
+  "package": "@mcplock-eval/seatable-mcp-seatable-a2",
+  "class": "A2",
+  "v1": "1.6.4",
+  "v2": "1.6.5",
+  "base_package": "@seatable/mcp-seatable"
+ },
+ {
+  "package": "@mcplock-eval/seatable-mcp-seatable-a3",
+  "class": "A3",
+  "v1": "1.6.4",
+  "v2": "1.6.5",
+  "base_package": "@seatable/mcp-seatable"
+ },
+ {
+  "package": "@mcplock-eval/seatable-mcp-seatable-a4",
+  "class": "A4",
+  "v1": "1.6.4",
+  "v2": "1.6.5",
+  "base_package": "@seatable/mcp-seatable"
+ },
+ {
+  "package": "@mcplock-eval/seatable-mcp-seatable-ctrl",
+  "class": "CTRL",
+  "v1": "1.6.4",
+  "v2": "1.6.5",
+  "base_package": "@seatable/mcp-seatable"
+ },
+ {
+  "package": "@mcplock-eval/hevy-coach-mcp-a1",
+  "class": "A1",
+  "v1": "0.4.2",
+  "v2": "0.4.3",
+  "base_package": "hevy-coach-mcp"
+ },
+ {
+  "package": "@mcplock-eval/hevy-coach-mcp-a2",
+  "class": "A2",
+  "v1": "0.4.2",
+  "v2": "0.4.3",
+  "base_package": "hevy-coach-mcp"
+ },
+ {
+  "package": "@mcplock-eval/hevy-coach-mcp-a3",
+  "class": "A3",
+  "v1": "0.4.2",
+  "v2": "0.4.3",
+  "base_package": "hevy-coach-mcp"
+ },
+ {
+  "package": "@mcplock-eval/hevy-coach-mcp-a4",
+  "class": "A4",
+  "v1": "0.4.2",
+  "v2": "0.4.3",
+  "base_package": "hevy-coach-mcp"
+ },
+ {
+  "package": "@mcplock-eval/hevy-coach-mcp-ctrl",
+  "class": "CTRL",
+  "v1": "0.4.2",
+  "v2": "0.4.3",
+  "base_package": "hevy-coach-mcp"
+ },
+ {
+  "package": "@mcplock-eval/litportnet-litport-mcp-a1",
+  "class": "A1",
+  "v1": "0.2.0",
+  "v2": "0.2.1",
+  "base_package": "@litportnet/litport-mcp"
+ },
+ {
+  "package": "@mcplock-eval/litportnet-litport-mcp-a2",
+  "class": "A2",
+  "v1": "0.2.0",
+  "v2": "0.2.1",
+  "base_package": "@litportnet/litport-mcp"
+ },
+ {
+  "package": "@mcplock-eval/litportnet-litport-mcp-a3",
+  "class": "A3",
+  "v1": "0.2.0",
+  "v2": "0.2.1",
+  "base_package": "@litportnet/litport-mcp"
+ },
+ {
+  "package": "@mcplock-eval/litportnet-litport-mcp-a4",
+  "class": "A4",
+  "v1": "0.2.0",
+  "v2": "0.2.1",
+  "base_package": "@litportnet/litport-mcp"
+ },
+ {
+  "package": "@mcplock-eval/litportnet-litport-mcp-ctrl",
+  "class": "CTRL",
+  "v1": "0.2.0",
+  "v2": "0.2.1",
+  "base_package": "@litportnet/litport-mcp"
+ },
+ {
+  "package": "@mcplock-eval/ghost-blog-mcp-a1",
+  "class": "A1",
+  "v1": "0.1.4",
+  "v2": "0.1.5",
+  "base_package": "ghost-blog-mcp"
+ },
+ {
+  "package": "@mcplock-eval/ghost-blog-mcp-a2",
+  "class": "A2",
+  "v1": "0.1.4",
+  "v2": "0.1.5",
+  "base_package": "ghost-blog-mcp"
+ },
+ {
+  "package": "@mcplock-eval/ghost-blog-mcp-a3",
+  "class": "A3",
+  "v1": "0.1.4",
+  "v2": "0.1.5",
+  "base_package": "ghost-blog-mcp"
+ },
+ {
+  "package": "@mcplock-eval/ghost-blog-mcp-a4",
+  "class": "A4",
+  "v1": "0.1.4",
+  "v2": "0.1.5",
+  "base_package": "ghost-blog-mcp"
+ },
+ {
+  "package": "@mcplock-eval/ghost-blog-mcp-ctrl",
+  "class": "CTRL",
+  "v1": "0.1.4",
+  "v2": "0.1.5",
+  "base_package": "ghost-blog-mcp"
+ },
+ {
+  "package": "@mcplock-eval/ranchbot-mcp-server-a1",
+  "class": "A1",
+  "v1": "0.1.5",
+  "v2": "0.1.6",
+  "base_package": "@ranchbot/mcp-server"
+ },
+ {
+  "package": "@mcplock-eval/ranchbot-mcp-server-a2",
+  "class": "A2",
+  "v1": "0.1.5",
+  "v2": "0.1.6",
+  "base_package": "@ranchbot/mcp-server"
+ },
+ {
+  "package": "@mcplock-eval/ranchbot-mcp-server-a3",
+  "class": "A3",
+  "v1": "0.1.5",
+  "v2": "0.1.6",
+  "base_package": "@ranchbot/mcp-server"
+ },
+ {
+  "package": "@mcplock-eval/ranchbot-mcp-server-a4",
+  "class": "A4",
+  "v1": "0.1.5",
+  "v2": "0.1.6",
+  "base_package": "@ranchbot/mcp-server"
+ },
+ {
+  "package": "@mcplock-eval/ranchbot-mcp-server-ctrl",
+  "class": "CTRL",
+  "v1": "0.1.5",
+  "v2": "0.1.6",
+  "base_package": "@ranchbot/mcp-server"
+ },
+ {
+  "package": "@mcplock-eval/nugehs-gate-a1",
+  "class": "A1",
+  "v1": "0.3.0",
+  "v2": "0.3.1",
+  "base_package": "@nugehs/gate"
+ },
+ {
+  "package": "@mcplock-eval/nugehs-gate-a2",
+  "class": "A2",
+  "v1": "0.3.0",
+  "v2": "0.3.1",
+  "base_package": "@nugehs/gate"
+ },
+ {
+  "package": "@mcplock-eval/nugehs-gate-a3",
+  "class": "A3",
+  "v1": "0.3.0",
+  "v2": "0.3.1",
+  "base_package": "@nugehs/gate"
+ },
+ {
+  "package": "@mcplock-eval/nugehs-gate-a4",
+  "class": "A4",
+  "v1": "0.3.0",
+  "v2": "0.3.1",
+  "base_package": "@nugehs/gate"
+ },
+ {
+  "package": "@mcplock-eval/nugehs-gate-ctrl",
+  "class": "CTRL",
+  "v1": "0.3.0",
+  "v2": "0.3.1",
+  "base_package": "@nugehs/gate"
+ },
+ {
+  "package": "@mcplock-eval/marklayer-mcp-a1",
+  "class": "A1",
+  "v1": "0.5.0",
+  "v2": "0.5.1",
+  "base_package": "marklayer-mcp"
+ },
+ {
+  "package": "@mcplock-eval/marklayer-mcp-a2",
+  "class": "A2",
+  "v1": "0.5.0",
+  "v2": "0.5.1",
+  "base_package": "marklayer-mcp"
+ },
+ {
+  "package": "@mcplock-eval/marklayer-mcp-a3",
+  "class": "A3",
+  "v1": "0.5.0",
+  "v2": "0.5.1",
+  "base_package": "marklayer-mcp"
+ },
+ {
+  "package": "@mcplock-eval/marklayer-mcp-a4",
+  "class": "A4",
+  "v1": "0.5.0",
+  "v2": "0.5.1",
+  "base_package": "marklayer-mcp"
+ },
+ {
+  "package": "@mcplock-eval/marklayer-mcp-ctrl",
+  "class": "CTRL",
+  "v1": "0.5.0",
+  "v2": "0.5.1",
+  "base_package": "marklayer-mcp"
+ },
+ {
+  "package": "@mcplock-eval/open-state-camping-a1",
+  "class": "A1",
+  "v1": "1.0.7",
+  "v2": "1.0.8",
+  "base_package": "@open-state/camping"
+ },
+ {
+  "package": "@mcplock-eval/open-state-camping-a2",
+  "class": "A2",
+  "v1": "1.0.7",
+  "v2": "1.0.8",
+  "base_package": "@open-state/camping"
+ },
+ {
+  "package": "@mcplock-eval/open-state-camping-a3",
+  "class": "A3",
+  "v1": "1.0.7",
+  "v2": "1.0.8",
+  "base_package": "@open-state/camping"
+ },
+ {
+  "package": "@mcplock-eval/open-state-camping-a4",
+  "class": "A4",
+  "v1": "1.0.7",
+  "v2": "1.0.8",
+  "base_package": "@open-state/camping"
+ },
+ {
+  "package": "@mcplock-eval/open-state-camping-ctrl",
+  "class": "CTRL",
+  "v1": "1.0.7",
+  "v2": "1.0.8",
+  "base_package": "@open-state/camping"
+ },
+ {
+  "package": "@mcplock-eval/mcp-mongo-server-a1",
+  "class": "A1",
+  "v1": "3.0.1",
+  "v2": "3.0.2",
+  "base_package": "mcp-mongo-server"
+ },
+ {
+  "package": "@mcplock-eval/mcp-mongo-server-a2",
+  "class": "A2",
+  "v1": "3.0.1",
+  "v2": "3.0.2",
+  "base_package": "mcp-mongo-server"
+ },
+ {
+  "package": "@mcplock-eval/mcp-mongo-server-a3",
+  "class": "A3",
+  "v1": "3.0.1",
+  "v2": "3.0.2",
+  "base_package": "mcp-mongo-server"
+ },
+ {
+  "package": "@mcplock-eval/mcp-mongo-server-a4",
+  "class": "A4",
+  "v1": "3.0.1",
+  "v2": "3.0.2",
+  "base_package": "mcp-mongo-server"
+ },
+ {
+  "package": "@mcplock-eval/mcp-mongo-server-ctrl",
+  "class": "CTRL",
+  "v1": "3.0.1",
+  "v2": "3.0.2",
+  "base_package": "mcp-mongo-server"
+ }
+]

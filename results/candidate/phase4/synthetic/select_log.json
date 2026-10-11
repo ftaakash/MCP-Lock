@@ -1,0 +1,1382 @@
+[
+ {
+  "package": "@austencloud/tka-domain-mcp",
+  "version": "2.6.0",
+  "skip": "no provenance"
+ },
+ {
+  "package": "scrcpy-mcp",
+  "version": "0.5.0",
+  "skip": null
+ },
+ {
+  "package": "@canido/mcp-server",
+  "version": "0.1.3",
+  "skip": "no provenance"
+ },
+ {
+  "package": "agent-api-gateway-mcp",
+  "version": "1.3.2",
+  "skip": "no provenance"
+ },
+ {
+  "package": "jsonplaceholder-mcp",
+  "version": "1.0.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "lowdown-proxy",
+  "version": "0.1.14",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@theyahia/sendpulse-mcp",
+  "version": "1.1.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@kenwea/mcp",
+  "version": "0.3.0",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@binaryandthread/mcp",
+  "version": "0.4.14",
+  "skip": "no provenance"
+ },
+ {
+  "package": "mcp-interactive",
+  "version": "0.2.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@dockndevai/mcp-macos",
+  "version": "0.2.0",
+  "skip": "publisher not CI"
+ },
+ {
+  "package": "tdx-mcp",
+  "version": "1.0.2",
+  "skip": "no provenance"
+ },
+ {
+  "package": "at-explore-mcp",
+  "version": "0.14.2",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@infoinlet/mcp-qdrant",
+  "version": "0.1.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "frugal-mcp",
+  "version": "0.1.1",
+  "skip": "publisher not CI"
+ },
+ {
+  "package": "@fullstackdegen/agent-audit",
+  "version": "0.3.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "dingdawg-finance-agent",
+  "version": "2.0.11",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@nyxory/mcp",
+  "version": "0.15.0",
+  "skip": "no provenance"
+ },
+ {
+  "package": "dingdawg-agent-wallet",
+  "version": "1.0.7",
+  "skip": "no provenance"
+ },
+ {
+  "package": "dida365-mcp-server",
+  "version": "0.2.2",
+  "skip": "no provenance"
+ },
+ {
+  "package": "magnitude-mcp",
+  "version": "0.1.3",
+  "skip": "no provenance"
+ },
+ {
+  "package": "contextpull",
+  "version": "0.2.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@ikeytz/mcp",
+  "version": "1.1.52",
+  "skip": "no provenance"
+ },
+ {
+  "package": "mcp-heimdall-scan",
+  "version": "0.5.1",
+  "skip": "publisher not CI"
+ },
+ {
+  "package": "24htrack-mcp",
+  "version": "1.0.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "amanat-mcp",
+  "version": "0.1.3",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@omophub/omophub-mcp",
+  "version": "1.6.3",
+  "skip": "no provenance"
+ },
+ {
+  "package": "korea-business-verify",
+  "version": "0.1.2",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@infoinlet/mcp-openapi",
+  "version": "0.1.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "agent-signal",
+  "version": "0.7.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@seatable/mcp-seatable",
+  "version": "1.6.4",
+  "skip": null
+ },
+ {
+  "package": "@xrpl-utilities/mcp",
+  "version": "0.2.201",
+  "skip": "publisher not CI"
+ },
+ {
+  "package": "personalinsights-feed-mcp",
+  "version": "1.0.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "scrivener-mcp",
+  "version": "0.12.0",
+  "skip": "publisher not CI"
+ },
+ {
+  "package": "pplz-agent",
+  "version": "1.1.3",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@kansei-link/mcp-server",
+  "version": "1.2.4",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@guardbee/mcp-slopsquat-scanner",
+  "version": "0.1.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "crash-mcp",
+  "version": "3.0.2",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@getsquish/squish",
+  "version": "0.3.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@mhrj/whatsapp-mcp",
+  "version": "2.0.3",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@feedthrough/mcp",
+  "version": "0.4.0",
+  "skip": null
+ },
+ {
+  "package": "hevy-coach-mcp",
+  "version": "0.4.2",
+  "skip": null
+ },
+ {
+  "package": "@litportnet/litport-mcp",
+  "version": "0.2.0",
+  "skip": null
+ },
+ {
+  "package": "@nodemint/projectmind",
+  "version": "0.6.0",
+  "skip": "no provenance"
+ },
+ {
+  "package": "compendio-mcp",
+  "version": "1.7.2",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@database-mcp/sqlite",
+  "version": "0.4.2",
+  "skip": "no extracted tools"
+ },
+ {
+  "package": "zevian-mcp",
+  "version": "0.1.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@giftcardshop/mcp",
+  "version": "0.1.2",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@mrfentmen/html-to-markdown-mcp",
+  "version": "1.0.2",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@handset/mcp",
+  "version": "0.1.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "interpro-mcp",
+  "version": "1.0.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "openverse-mcp",
+  "version": "1.0.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@eamonboyle/mssql-mcp",
+  "version": "1.6.0",
+  "skip": "no extracted tools"
+ },
+ {
+  "package": "huddoai",
+  "version": "0.7.0",
+  "skip": "no extracted tools"
+ },
+ {
+  "package": "@mrfentmen/bitwarden-mcp",
+  "version": "1.0.2",
+  "skip": "no provenance"
+ },
+ {
+  "package": "highstory-mcp",
+  "version": "1.1.12",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@readystack/bestellabschluss-pflichten-de",
+  "version": "1.0.4",
+  "skip": "no provenance"
+ },
+ {
+  "package": "openalex-research-mcp",
+  "version": "0.5.0",
+  "skip": null
+ },
+ {
+  "package": "@supericons/mcp",
+  "version": "0.4.37",
+  "skip": "no provenance"
+ },
+ {
+  "package": "x-openapi-flow",
+  "version": "1.8.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "prompt-discovery-mcp",
+  "version": "1.0.3",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@winor30/mcp-server-datadog",
+  "version": "1.8.0",
+  "skip": "publisher not CI"
+ },
+ {
+  "package": "@fidensa/mcp-server",
+  "version": "0.4.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "ghost-blog-mcp",
+  "version": "0.1.4",
+  "skip": null
+ },
+ {
+  "package": "@weiseer/status-aggregator-mcp",
+  "version": "0.1.2",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@ranchbot/mcp-server",
+  "version": "0.1.5",
+  "skip": null
+ },
+ {
+  "package": "mcp-server-petkit",
+  "version": "0.3.1",
+  "skip": "publisher not CI"
+ },
+ {
+  "package": "@factmem/mcp",
+  "version": "0.26.0",
+  "skip": null
+ },
+ {
+  "package": "code-auditor-mcp",
+  "version": "4.1.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "prelude-context",
+  "version": "1.11.0",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@1a7432/kimi-search-mcp",
+  "version": "0.1.2",
+  "skip": "no provenance"
+ },
+ {
+  "package": "gecko-mcp",
+  "version": "2.2.4",
+  "skip": "publisher not CI"
+ },
+ {
+  "package": "@tanstack/cli",
+  "version": "0.71.1",
+  "skip": "no extracted tools"
+ },
+ {
+  "package": "@phantomid/mcp-server",
+  "version": "0.2.0",
+  "skip": "no provenance"
+ },
+ {
+  "package": "appcrane-mcp",
+  "version": "1.3.4",
+  "skip": "no extracted tools"
+ },
+ {
+  "package": "chmi-mcp",
+  "version": "1.0.2",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@openzeppelin/contracts-mcp",
+  "version": "0.7.1",
+  "skip": "no extracted tools"
+ },
+ {
+  "package": "mcp-vue",
+  "version": "1.0.2",
+  "skip": "no provenance"
+ },
+ {
+  "package": "miniframe-tools-mcp",
+  "version": "1.3.0",
+  "skip": "no provenance"
+ },
+ {
+  "package": "content-repurposer-mcp",
+  "version": "1.0.2",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@discord-mcp/cli",
+  "version": "0.31.1",
+  "skip": "publisher not CI"
+ },
+ {
+  "package": "@gera-services/mcp-gera-clone",
+  "version": "0.1.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@2hemi/backendgen-mcp",
+  "version": "0.2.2",
+  "skip": "publisher not CI"
+ },
+ {
+  "package": "langchain-mcp",
+  "version": "2.0.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@pulsemcp/svg-tracer-mcp-server",
+  "version": "0.1.3",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@xverum/mcp",
+  "version": "1.0.2",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@execuro-sw-ecosystem/sw-dev-knowledge-base-mcp",
+  "version": "0.1.6",
+  "skip": "unpacked size 10461641"
+ },
+ {
+  "package": "colorblind-mcp",
+  "version": "0.2.0",
+  "skip": "no provenance"
+ },
+ {
+  "package": "ai-usage-mcp",
+  "version": "0.12.1",
+  "skip": null
+ },
+ {
+  "package": "@uzqw/mcp",
+  "version": "0.1.11",
+  "skip": "no provenance"
+ },
+ {
+  "package": "mcp-diagram-generator",
+  "version": "1.2.0",
+  "skip": "no provenance"
+ },
+ {
+  "package": "vatcomply-mcp",
+  "version": "1.0.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@thrain/blackout-mcp",
+  "version": "1.4.0",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@vooster/mcp",
+  "version": "0.0.44",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@mrfentmen/uuid-mcp",
+  "version": "1.0.4",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@marcelo-ochoa/server-postgres",
+  "version": "1.0.8",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@usekaval/mcp",
+  "version": "0.8.2",
+  "skip": "publisher not CI"
+ },
+ {
+  "package": "@cookwala/mcp",
+  "version": "0.3.0",
+  "skip": "publisher not CI"
+ },
+ {
+  "package": "@ordercore/mcp",
+  "version": "0.2.18",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@pv-bhat/vibe-check-mcp",
+  "version": "2.7.6",
+  "skip": "no provenance"
+ },
+ {
+  "package": "obsidian-mcp",
+  "version": "2.0.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@asktian/mcp-server",
+  "version": "0.3.3",
+  "skip": "no provenance"
+ },
+ {
+  "package": "scopeblind-mcp",
+  "version": "1.0.4",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@kieksme/mcp-hashnode",
+  "version": "1.1.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "claude-amplifier",
+  "version": "1.6.0",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@theyahia/bitrix24-mcp",
+  "version": "3.0.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@theyahia/robokassa-mcp",
+  "version": "1.2.0",
+  "skip": "no provenance"
+ },
+ {
+  "package": "wynncraft-mcp",
+  "version": "1.0.3",
+  "skip": "no provenance"
+ },
+ {
+  "package": "mcp-aider-executor",
+  "version": "1.1.0",
+  "skip": "no provenance"
+ },
+ {
+  "package": "babelwrap-mcp",
+  "version": "0.1.0",
+  "skip": "no provenance"
+ },
+ {
+  "package": "composio-mcp-server",
+  "version": "1.0.4",
+  "skip": "no provenance"
+ },
+ {
+  "package": "open-design-mcp",
+  "version": "0.16.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@postfleet/mcp",
+  "version": "0.1.4",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@agentpay-dev/mcp-server",
+  "version": "0.1.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "chassis-mcp",
+  "version": "0.1.2",
+  "skip": "no provenance"
+ },
+ {
+  "package": "flyonui-mcp",
+  "version": "1.0.4",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@nugehs/gate",
+  "version": "0.3.0",
+  "skip": null
+ },
+ {
+  "package": "marklayer-mcp",
+  "version": "0.5.0",
+  "skip": null
+ },
+ {
+  "package": "nan-forget",
+  "version": "0.6.8",
+  "skip": "no provenance"
+ },
+ {
+  "package": "f-droid-mcp",
+  "version": "1.0.2",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@boxlab/yandex-webmaster-mcp",
+  "version": "0.1.1",
+  "skip": null
+ },
+ {
+  "package": "@imagin.studio/api-docs-mcp",
+  "version": "0.1.24",
+  "skip": "no extracted tools"
+ },
+ {
+  "package": "@houtini/seo-crawler-mcp",
+  "version": "2.1.5",
+  "skip": "no provenance"
+ },
+ {
+  "package": "github-intel-mcp",
+  "version": "1.0.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@vexralabs/zerodom",
+  "version": "0.0.9",
+  "skip": "no extracted tools"
+ },
+ {
+  "package": "@akr1166org/rules-mcp",
+  "version": "0.3.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@arielbk/anki-mcp",
+  "version": "0.5.0",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@cyanheads/wikipedia-mcp-server",
+  "version": "0.2.5",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@nanobanana/mcp",
+  "version": "0.1.2",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@flydocs/cli",
+  "version": "1.3.24",
+  "skip": "no provenance"
+ },
+ {
+  "package": "meigen",
+  "version": "2.0.2",
+  "skip": "no provenance"
+ },
+ {
+  "package": "wanderlog-mcp",
+  "version": "0.3.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "dblp-mcp",
+  "version": "1.0.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "cognigy-ai-mcp-management-server",
+  "version": "0.2.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@automattic/simplenote-mcp",
+  "version": "2.0.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "af360",
+  "version": "0.1.15",
+  "skip": "no provenance"
+ },
+ {
+  "package": "honeycheck-mcp",
+  "version": "1.0.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "vocadb-mcp",
+  "version": "1.0.2",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@clusteragent/cluster-mcp",
+  "version": "1.0.12",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@open-state/camping",
+  "version": "1.0.7",
+  "skip": null
+ },
+ {
+  "package": "@regle/mcp-server",
+  "version": "1.29.4",
+  "skip": "no extracted tools"
+ },
+ {
+  "package": "@infisical/mcp",
+  "version": "0.0.24",
+  "skip": null
+ },
+ {
+  "package": "@cyanheads/sports-mcp-server",
+  "version": "0.2.3",
+  "skip": "no provenance"
+ },
+ {
+  "package": "tactus-mcp",
+  "version": "0.1.2",
+  "skip": "no provenance"
+ },
+ {
+  "package": "docfork",
+  "version": "2.2.5",
+  "skip": null
+ },
+ {
+  "package": "wpagent-mcp",
+  "version": "1.1.4",
+  "skip": "no provenance"
+ },
+ {
+  "package": "osf-data-marketplace",
+  "version": "1.0.2",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@getfacade/mcp",
+  "version": "0.2.0",
+  "skip": "no extracted tools"
+ },
+ {
+  "package": "maven-indexer-mcp",
+  "version": "1.1.0",
+  "skip": "no provenance"
+ },
+ {
+  "package": "twitter-signal-mcp",
+  "version": "0.5.0",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@humanops/mcp-server",
+  "version": "0.3.3",
+  "skip": "no provenance"
+ },
+ {
+  "package": "secure-privacy-mcp",
+  "version": "1.1.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@supabase/mcp-server-postgrest",
+  "version": "0.2.0",
+  "skip": "no extracted tools"
+ },
+ {
+  "package": "vibe-kanban",
+  "version": "0.1.44",
+  "skip": "no extracted tools"
+ },
+ {
+  "package": "@lore-context/server",
+  "version": "1.0.0-rc.2",
+  "skip": "no provenance"
+ },
+ {
+  "package": "mcp-server-cloud-regions",
+  "version": "1.0.4",
+  "skip": "no provenance"
+ },
+ {
+  "package": "leadharbor-mcp",
+  "version": "0.1.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@raytien/git-mcp-server",
+  "version": "0.2.3",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@infoinlet/mcp-fetch",
+  "version": "0.1.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "mcp-loom",
+  "version": "0.3.2",
+  "skip": "no provenance"
+ },
+ {
+  "package": "uisight",
+  "version": "0.34.0",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@infoinlet/mcp-social",
+  "version": "0.1.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@langcare/langcare-mcp-fhir",
+  "version": "2.5.0",
+  "skip": "no provenance"
+ },
+ {
+  "package": "mcp-mongo-server",
+  "version": "3.0.1",
+  "skip": null
+ },
+ {
+  "package": "@matematicsolutions/mcp-fr-legal",
+  "version": "0.1.3",
+  "skip": "no provenance"
+ },
+ {
+  "package": "almxppmcp",
+  "version": "1.5.1",
+  "skip": "no extracted tools"
+ },
+ {
+  "package": "@upstash/context7-mcp",
+  "version": "4.2.0",
+  "skip": "no provenance"
+ },
+ {
+  "package": "episodate-mcp",
+  "version": "1.0.2",
+  "skip": "no provenance"
+ },
+ {
+  "package": "vedurstofa-mcp",
+  "version": "1.0.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@ubaranzorlu/fonzip-mcp",
+  "version": "0.1.2",
+  "skip": "no extracted tools"
+ },
+ {
+  "package": "@g-digital/mcp-ead-enterprise-suite",
+  "version": "2.0.0",
+  "skip": null
+ },
+ {
+  "package": "@brainfeather/mcp",
+  "version": "1.8.0",
+  "skip": "no provenance"
+ },
+ {
+  "package": "godot-mcp-server",
+  "version": "0.6.0",
+  "skip": "no provenance"
+ },
+ {
+  "package": "ourpr-mcp-server",
+  "version": "0.5.0",
+  "skip": null
+ },
+ {
+  "package": "knowledgebased",
+  "version": "0.7.1",
+  "skip": null
+ },
+ {
+  "package": "@robot-resources/scraper-mcp",
+  "version": "0.1.3",
+  "skip": "no provenance"
+ },
+ {
+  "package": "market-data-analyzer",
+  "version": "2.1.4",
+  "skip": "no provenance"
+ },
+ {
+  "package": "supplement-advisor-mcp",
+  "version": "1.1.0",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@rocklerson/openai-mcp-qdrant",
+  "version": "0.1.3",
+  "skip": "no provenance"
+ },
+ {
+  "package": "gold-prices-mcp",
+  "version": "1.0.2",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@cookwith/recipe-mcp",
+  "version": "1.0.4",
+  "skip": "no provenance"
+ },
+ {
+  "package": "recourse-cli",
+  "version": "0.1.40",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@paddle/paddle-mcp",
+  "version": "0.1.6",
+  "skip": "no extracted tools"
+ },
+ {
+  "package": "claude-presence",
+  "version": "0.4.0",
+  "skip": "no provenance"
+ },
+ {
+  "package": "en",
+  "version": "1.0.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "createwithoscar",
+  "version": "1.0.2",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@clocknext/mcp",
+  "version": "0.13.0",
+  "skip": "publisher not CI"
+ },
+ {
+  "package": "@usetheo/skills-mcp",
+  "version": "0.3.0",
+  "skip": "publisher not CI"
+ },
+ {
+  "package": "@io.github.hj1003862396/draw-flow-mcp-server",
+  "version": "1.0.2",
+  "skip": "no provenance"
+ },
+ {
+  "package": "engramx",
+  "version": "4.5.0",
+  "skip": "no provenance"
+ },
+ {
+  "package": "next-finance-mcp",
+  "version": "0.9.188",
+  "skip": "no provenance"
+ },
+ {
+  "package": "figuard-mcp",
+  "version": "1.2.0",
+  "skip": "no provenance"
+ },
+ {
+  "package": "agent-skills",
+  "version": "1.0.4",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@depixapp/mcp",
+  "version": "2.8.7",
+  "skip": null
+ },
+ {
+  "package": "@codespar/mcp-certta",
+  "version": "0.1.3",
+  "skip": "no provenance"
+ },
+ {
+  "package": "postgres-mcp-hardened",
+  "version": "0.1.10",
+  "skip": "publisher not CI"
+ },
+ {
+  "package": "email-validator-mcp",
+  "version": "1.0.3",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@czagents/isir",
+  "version": "0.2.4",
+  "skip": "no provenance"
+ },
+ {
+  "package": "wikimedia-image-search-mcp",
+  "version": "1.0.2",
+  "skip": "no provenance"
+ },
+ {
+  "package": "openfigi-mcp",
+  "version": "0.4.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@gatewerk/mcp",
+  "version": "1.1.4",
+  "skip": "no extracted tools"
+ },
+ {
+  "package": "blixtworks-mcp",
+  "version": "1.1.0",
+  "skip": "no provenance"
+ },
+ {
+  "package": "wickedapi-mcp",
+  "version": "0.4.0",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@sharedmemory/mcp-server",
+  "version": "2.8.0",
+  "skip": "no provenance"
+ },
+ {
+  "package": "stock-scanner-mcp",
+  "version": "1.18.0",
+  "skip": "no provenance"
+ },
+ {
+  "package": "pharma-signal-mcp",
+  "version": "1.0.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "clutter-mcp",
+  "version": "0.1.4",
+  "skip": "no provenance"
+ },
+ {
+  "package": "skim-mcp",
+  "version": "0.2.5",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@codespar/mcp-x402",
+  "version": "0.1.5",
+  "skip": "no provenance"
+ },
+ {
+  "package": "mcp-sqlite-server",
+  "version": "1.0.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "canusign-mcp-server",
+  "version": "1.2.0",
+  "skip": "no provenance"
+ },
+ {
+  "package": "apexapi-mcp",
+  "version": "0.5.0",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@gitwand/mcp",
+  "version": "3.12.0",
+  "skip": null
+ },
+ {
+  "package": "@aarna-ai/mcp-server-atv",
+  "version": "1.0.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@mailsai/mcp-server",
+  "version": "0.2.12",
+  "skip": "no provenance"
+ },
+ {
+  "package": "mcp-await",
+  "version": "0.1.3",
+  "skip": "no provenance"
+ },
+ {
+  "package": "brandkit-mcp",
+  "version": "2.1.0",
+  "skip": "publisher not CI"
+ },
+ {
+  "package": "konid-ai",
+  "version": "1.0.5",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@thenextgennexus/redfin-mcp-server",
+  "version": "1.0.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "devloop-mcp",
+  "version": "0.10.2",
+  "skip": "no extracted tools"
+ },
+ {
+  "package": "@serpstat/llm-brand-monitor-mcp",
+  "version": "1.0.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "octagon-mcp",
+  "version": "1.2.0",
+  "skip": "no provenance"
+ },
+ {
+  "package": "swissco-mcp",
+  "version": "0.1.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "sigmap",
+  "version": "8.71.0",
+  "skip": null
+ },
+ {
+  "package": "@clize/inbox",
+  "version": "0.36.0",
+  "skip": "no provenance"
+ },
+ {
+  "package": "fitbit-mcp-unofficial",
+  "version": "0.6.3",
+  "skip": "no provenance"
+ },
+ {
+  "package": "ccs-mcp-server",
+  "version": "1.4.0",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@extension.dev/mcp",
+  "version": "10.11.1",
+  "skip": null
+ },
+ {
+  "package": "@topicforge/mcp",
+  "version": "1.0.0",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@striderlabs/mcp-grubhub",
+  "version": "0.2.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@shodh/memory-mcp",
+  "version": "0.2.0",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@contrie/mcp",
+  "version": "0.1.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "pch-x402-mcp",
+  "version": "0.1.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "social0-mcp",
+  "version": "0.5.0",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@lifeup/mcp",
+  "version": "0.1.4",
+  "skip": null
+ },
+ {
+  "package": "needle-cloud",
+  "version": "2.9.0",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@bitbonsai/mcpvault",
+  "version": "0.16.0",
+  "skip": "no provenance"
+ },
+ {
+  "package": "the-trivia-api-mcp",
+  "version": "1.0.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "panelui-cli",
+  "version": "0.6.2",
+  "skip": null
+ },
+ {
+  "package": "enchantedcolony-mcp",
+  "version": "0.1.4",
+  "skip": "no provenance"
+ },
+ {
+  "package": "cyberchef-mcp",
+  "version": "4.2.0",
+  "skip": "publisher not CI"
+ },
+ {
+  "package": "@three-ws/vanity-mcp",
+  "version": "0.1.3",
+  "skip": "no provenance"
+ },
+ {
+  "package": "tailwindcss-mcp-server",
+  "version": "0.1.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "billing-doctor",
+  "version": "0.1.1",
+  "skip": null
+ },
+ {
+  "package": "@simonmak-ascent/mcp",
+  "version": "1.9.2",
+  "skip": "no provenance"
+ },
+ {
+  "package": "realtime-avatar-mcp",
+  "version": "0.27.0",
+  "skip": "publisher not CI"
+ },
+ {
+  "package": "node9-ai",
+  "version": "2.27.0",
+  "skip": "no extracted tools"
+ },
+ {
+  "package": "xiangguangyu-mcp-skills",
+  "version": "2.2.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@icedq/mcp-server",
+  "version": "2.0.10-beta.0",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@readystack/age-gate-lint",
+  "version": "1.0.6",
+  "skip": "no provenance"
+ },
+ {
+  "package": "metavr",
+  "version": "1.8.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "openligadb-soccer-mcp",
+  "version": "1.0.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@arkheia/mcp-server",
+  "version": "1.2.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "cachetank-mcp",
+  "version": "2.1.2",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@chrischall/flightaware-mcp",
+  "version": "1.3.0",
+  "skip": null
+ },
+ {
+  "package": "wiktionary-mcp",
+  "version": "1.0.2",
+  "skip": "no provenance"
+ },
+ {
+  "package": "abuseipdb-mcp",
+  "version": "1.1.0",
+  "skip": "no provenance"
+ },
+ {
+  "package": "umd-mcp",
+  "version": "0.0.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@celorodrigues/token-safety-mcp",
+  "version": "2.0.2",
+  "skip": "no provenance"
+ },
+ {
+  "package": "short-video-maker",
+  "version": "1.3.0",
+  "skip": "no provenance"
+ },
+ {
+  "package": "geckoterminal-mcp",
+  "version": "1.0.4",
+  "skip": "no provenance"
+ },
+ {
+  "package": "mssql-mcp-server",
+  "version": "1.3.0",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@getscaleforge/mcp-meta-ads",
+  "version": "0.2.3",
+  "skip": "no provenance"
+ },
+ {
+  "package": "pce-memory",
+  "version": "0.14.0",
+  "skip": "no provenance"
+ },
+ {
+  "package": "mcp-mermaid",
+  "version": "0.4.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "google-ai-search-mcp",
+  "version": "1.1.1",
+  "skip": null
+ },
+ {
+  "package": "@helm-protocol/ttt-mcp",
+  "version": "0.4.7",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@10iii/air-mcp-server",
+  "version": "0.2.8",
+  "skip": "no provenance"
+ },
+ {
+  "package": "neuromcp",
+  "version": "0.29.5",
+  "skip": "licence 'AGPL-3.0-only'"
+ },
+ {
+  "package": "interactive-brokers-mcp",
+  "version": "1.24.1",
+  "skip": "no extracted tools"
+ },
+ {
+  "package": "@mcp-z/mcp-pdf",
+  "version": "3.2.2",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@mrfentmen/reddit-mcp",
+  "version": "1.1.0",
+  "skip": "no provenance"
+ },
+ {
+  "package": "talos-mcp",
+  "version": "2.5.1",
+  "skip": "no extracted tools"
+ },
+ {
+  "package": "@qr-branding/mcp-server",
+  "version": "0.1.2",
+  "skip": "no provenance"
+ },
+ {
+  "package": "formslist-mcp",
+  "version": "0.3.1",
+  "skip": "no provenance"
+ },
+ {
+  "package": "@czagents/eu-registry",
+  "version": "0.8.0",
+  "skip": null
+ }
+]

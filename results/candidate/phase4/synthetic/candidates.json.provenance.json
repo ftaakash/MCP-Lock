@@ -1,0 +1,16 @@
+{
+  "result": "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase4/synthetic/candidates.json",
+  "result_sha256": "1a39690714a5ad4d85f14e26597a583752ea0442903c263e4acbe2926587ad26",
+  "command": "python.exe C:\\Users\\Administrator\\Desktop\\Major Project\\mcp-lock\\eval\\synthetic\\rugpull.py select",
+  "commit": "22519b8a85cba8f794b753a30e5b931d64b92b80-dirty",
+  "timestamp_utc": "2026-10-11T08:11:12Z",
+  "python": "3.11.9",
+  "inputs": {
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/census/phase2/versions.jsonl": "f4d1d7374e7ab914bf9f56a2d99022296e68973a7b38679d98b9f7c133094fce"
+  },
+  "params": {
+    "seed": 20261011,
+    "spares": 30
+  },
+  "note": ""
+}
