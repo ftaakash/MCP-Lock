@@ -145,3 +145,9 @@ def test_h2_proxy_end_to_end(tmp_path: Path):
     got, err = _run_proxy(tmp_path, rug)                                      # rug pull: blocked
     assert got[1]["error"]["code"] == proxy.BLOCK_CODE and "adds export_all" in got[1]["error"]["message"]
     assert "BLOCK" in err
+
+
+def test_h1_old_packument_shapes():
+    n = deptree._node({"version": "1.0.0", "maintainers": ["alice <a@x.org>", {"name": "bob"}],
+                       "_npmUser": "carol <c@x.org>", "dependencies": [], "dist": None}, None)
+    assert n["maintainers"] == ["alice", "bob"] and n["publisher"] == "carol" and n["deps"] == {}

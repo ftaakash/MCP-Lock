@@ -39,23 +39,34 @@ def _ts(s: str | None) -> datetime | None:
     return datetime.fromisoformat(s.replace("Z", "+00:00")) if s else None
 
 
+def _person(x) -> str | None:
+    """npm user/maintainer: {"name": ...} in current packuments, "name <email>" in old ones."""
+    if isinstance(x, dict):
+        return x.get("name")
+    return x.split("<")[0].strip() or None if isinstance(x, str) else None
+
+
+def _dict(x) -> dict:
+    return x if isinstance(x, dict) else {}
+
+
 def _node(meta: dict, published: str | None) -> dict:
-    deps = dict(meta.get("optionalDependencies") or {})
-    peer_opt = meta.get("peerDependenciesMeta") or {}
-    for k, r in (meta.get("peerDependencies") or {}).items():
-        if not (peer_opt.get(k) or {}).get("optional"):
+    deps = dict(_dict(meta.get("optionalDependencies")))
+    peer_opt = _dict(meta.get("peerDependenciesMeta"))
+    for k, r in _dict(meta.get("peerDependencies")).items():
+        if not _dict(peer_opt.get(k)).get("optional"):
             deps.setdefault(k, r)
-    deps.update(meta.get("dependencies") or {})
-    scripts = meta.get("scripts") or {}
+    deps.update(_dict(meta.get("dependencies")))
+    scripts = _dict(meta.get("scripts"))
     inst = sorted(k for k in INSTALL_SCRIPTS if k in scripts)
     if meta.get("gypfile") and "install" not in inst:
         inst = sorted(inst + ["install"])
-    dist = meta.get("dist") or {}
+    dist = _dict(meta.get("dist"))
     return {"version": meta.get("version"), "published": published,
             "integrity": dist.get("integrity") or (f"sha1-{dist['shasum']}" if dist.get("shasum") else None),
-            "attestation_url": (dist.get("attestations") or {}).get("url"),
-            "publisher": (meta.get("_npmUser") or {}).get("name"),
-            "maintainers": sorted(m.get("name", "") for m in meta.get("maintainers") or []),
+            "attestation_url": _dict(dist.get("attestations")).get("url"),
+            "publisher": _person(meta.get("_npmUser")),
+            "maintainers": sorted(n for m in meta.get("maintainers") or [] if (n := _person(m))),
             "install_scripts": inst, "deps": deps}
 
 
@@ -73,7 +84,12 @@ def versions(pkg: str, as_of: datetime | None = None) -> dict[str, dict]:
 
 
 def _identity(node: dict) -> dict | None:
-    return identity.npm_identity(node.get("attestation_url"))
+    try:
+        return identity.npm_identity(node.get("attestation_url"))
+    except http.HttpError as e:
+        if e.status == 404:  # attestation advertised but not served: treated as no provenance
+            return None
+        raise
 
 
 def _target(name: str, rng: str) -> tuple[str, str]:
