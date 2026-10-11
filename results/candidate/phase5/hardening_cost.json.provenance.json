@@ -1,0 +1,13 @@
+{
+  "result": "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase5/hardening_cost.json",
+  "result_sha256": "06cf0ecadcf66269a714616bf7244c540f4fe9e059e78984b18ae635b6ac4fd8",
+  "command": "python.exe eval/adaptive/hardening_cost.py",
+  "commit": "ff9f20d6f3a4e322aeca7c961633fdbc6663252d-dirty",
+  "timestamp_utc": "2026-10-11T12:42:02Z",
+  "python": "3.11.9",
+  "inputs": {
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase4/benign/bundles.jsonl.gz": "bffade4c221b0afb1812fc5105540919b10838eda2836c100414bb507fd6d743"
+  },
+  "params": {},
+  "note": ""
+}

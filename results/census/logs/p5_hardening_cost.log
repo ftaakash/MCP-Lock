@@ -1,0 +1,203 @@
+{
+ "n": 8180,
+ "H2_runtime_tool_pin": {
+  "block_lower": {
+   "k": 2213,
+   "n": 8180,
+   "pct": 27.05,
+   "ci95": [
+    26.1,
+    28.03
+   ]
+  },
+  "block_upper": {
+   "k": 2259,
+   "n": 8180,
+   "pct": 27.62,
+   "ci95": [
+    26.66,
+    28.6
+   ]
+  },
+  "block_lower_of_measurable": {
+   "k": 2213,
+   "n": 6697,
+   "pct": 33.04,
+   "ci95": [
+    31.93,
+    34.18
+   ]
+  },
+  "block_upper_of_measurable": {
+   "k": 2259,
+   "n": 6697,
+   "pct": 33.73,
+   "ci95": [
+    32.61,
+    34.87
+   ]
+  },
+  "classes": {
+   "same": 4438,
+   "added": 987,
+   "changed": 1226,
+   "removal_only": 46,
+   "unmeasurable": 1483
+  },
+  "note": "live tools/list assumed equal to static extraction; unmeasurable = no static tools"
+ },
+ "H3_pypi_all_files": {
+  "block_on_B": {
+   "k": 0,
+   "n": 2528,
+   "pct": 0.0,
+   "ci95": [
+    0.0,
+    0.15
+   ]
+  },
+  "note": "B holds upgrades only; H3 fires on a relaunch of the locked version",
+  "exposure_pinned_relaunch": {
+   "releases": 2528,
+   "gained_file_after_1h": {
+    "k": 12,
+    "n": 2528,
+    "pct": 0.47,
+    "ci95": [
+     0.27,
+     0.83
+    ]
+   },
+   "gained_file_after_24h": {
+    "k": 3,
+    "n": 2528,
+    "pct": 0.12,
+    "ci95": [
+     0.04,
+     0.35
+    ]
+   },
+   "examples_24h": [
+    "brotli==1.1.0",
+    "jsonpath-ng==1.8.0",
+    "ruamel-yaml-clib==0.2.14"
+   ]
+  }
+ },
+ "H4_require_provenance": {
+  "block": {
+   "k": 4700,
+   "n": 8180,
+   "pct": 57.46,
+   "ci95": [
+    56.38,
+    58.52
+   ]
+  },
+  "note": "blocks every upgrade without build provenance"
+ },
+ "H5_command_normalise": {
+  "decisions_changed": {
+   "k": 0,
+   "n": 8180,
+   "pct": 0.0,
+   "ci95": [
+    0.0,
+    0.05
+   ]
+  },
+  "note": "must be 0: H5 only rewrites evasive shapes"
+ },
+ "by_stratum": {
+  "mcp": {
+   "n": 6695,
+   "H4_block": {
+    "k": 3737,
+    "n": 6695,
+    "pct": 55.82,
+    "ci95": [
+     54.63,
+     57.0
+    ]
+   },
+   "H2_block_lower": {
+    "k": 2213,
+    "n": 6695,
+    "pct": 33.05,
+    "ci95": [
+     31.94,
+     34.19
+    ]
+   },
+   "H2_block_upper": {
+    "k": 2259,
+    "n": 6695,
+    "pct": 33.74,
+    "ci95": [
+     32.62,
+     34.88
+    ]
+   }
+  },
+  "npm-top": {
+   "n": 992,
+   "H4_block": {
+    "k": 683,
+    "n": 992,
+    "pct": 68.85,
+    "ci95": [
+     65.9,
+     71.66
+    ]
+   },
+   "H2_block_lower": {
+    "k": 0,
+    "n": 992,
+    "pct": 0.0,
+    "ci95": [
+     0.0,
+     0.39
+    ]
+   },
+   "H2_block_upper": {
+    "k": 0,
+    "n": 992,
+    "pct": 0.0,
+    "ci95": [
+     0.0,
+     0.39
+    ]
+   }
+  },
+  "pypi-top": {
+   "n": 493,
+   "H4_block": {
+    "k": 280,
+    "n": 493,
+    "pct": 56.8,
+    "ci95": [
+     52.39,
+     61.1
+    ]
+   },
+   "H2_block_lower": {
+    "k": 0,
+    "n": 493,
+    "pct": 0.0,
+    "ci95": [
+     0.0,
+     0.77
+    ]
+   },
+   "H2_block_upper": {
+    "k": 0,
+    "n": 493,
+    "pct": 0.0,
+    "ci95": [
+     0.0,
+     0.77
+    ]
+   }
+  }
+ }
+}
