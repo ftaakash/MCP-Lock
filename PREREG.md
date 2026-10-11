@@ -154,7 +154,7 @@ All corpora are fixed by the procedures below before any gate run. Seed for ever
 |---|---|---|
 | B-npm | top 1,000 npm (`gate/data/top_npm.json`, npm-high-impact 1.13.0) | latest consecutive stable pair, newer version published on or before 2026-10-08 |
 | B-pypi | top 500 PyPI (`gate/data/top_pypi.json`) | same |
-| B-mcp | Phase 2 Part T sample | **all** 6,695 window transitions (2026-07-10 → 2026-10-08), lock = older version |
+| B-mcp | Phase 2 Part T sample | **all** 6,695 window transitions (2026-07-10 → 2026-10-08) where both versions are statically extractable, from 984 packages; lock = older version |
 
 - **Replay.** Each transition is replayed as of the newer version's publish time. Command: `npx -y <pkg>` or
   `uvx <pkg>`, with the lock pinned to the older version.
@@ -193,8 +193,9 @@ All corpora are fixed by the procedures below before any gate run. Seed for ever
     10,000 resamples, seed 20261011.
 - **H1:** exact McNemar test (binomial on discordant pairs) for G vs S1-C on R, two-sided, α = 0.05.
   - G contains S1-C, so only one discordant direction is possible, and the test reduces to "Δ > 0".
-  - At least 5 discordant cases are needed to reach p < 0.05. This is stated so that "Δ = 2 passes the kill rule
-    but not the test" is not a surprise.
+  - Two-sided exact p = 2 × 0.5^Δ, so at least 6 discordant cases are needed for p < 0.05 unadjusted, and at least 7
+    if H1 has the smaller p under Holm (p ≤ 0.025). This is stated so that "Δ = 2 to 5 passes the kill rule but not
+    the test" is not a surprise.
 - **H2:** exact McNemar test on B, paired by transition, for false blocks G vs S1-C, two-sided. The difference is
   reported with a Newcombe paired score interval.
 - **Multiplicity:** Holm correction across H1 and H2. Everything else is descriptive, with no p-values beyond those
