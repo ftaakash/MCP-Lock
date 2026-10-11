@@ -1,0 +1,17 @@
+{
+  "result": "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase5/age_rule_sensitivity.json",
+  "result_sha256": "00a5fda663ec6fa466012f9cf549d50af9a1fbd43d0f7dcd1f9c06866b7042ea",
+  "command": "python.exe eval/adaptive/age_rule_sensitivity.py",
+  "commit": "ed28a1b74022f8ec4d5c2263fc71ecad5a775ebf-dirty",
+  "timestamp_utc": "2026-10-11T16:58:06Z",
+  "python": "3.11.9",
+  "inputs": {
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase4/benign/bundles.jsonl.gz": "bffade4c221b0afb1812fc5105540919b10838eda2836c100414bb507fd6d743",
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase4/malicious/bundles.jsonl.gz": "123b09a69b7b63dbe9e03a41b5defb95035fdc9be7b24b2310b1905b02f5b1ae",
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase4/runs/B.jsonl": "d998c778df7af2fe730cf1b5098b02d4311d4781f745b6e638c99b7f52c217af",
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase4/runs/R-M.jsonl": "3c6bc82c7d71a25d6bcbc4c720886b0c77430ccdbe279a8676dcd214de3aeb43",
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase4/runs/R-B.jsonl": "52ca2541526484ae8fa42726e2fce44d2e2199cd3b83095a36737aa853e756d6"
+  },
+  "params": {},
+  "note": ""
+}

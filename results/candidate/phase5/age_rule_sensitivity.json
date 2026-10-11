@@ -1,0 +1,74 @@
+{
+ "note": "exploratory; S1 new_package waived only where the case had a lock entry",
+ "B": {
+  "locked_cases": 8180,
+  "G_false_block": {
+   "k": 2729,
+   "n": 8180,
+   "pct": 33.36,
+   "ci95": [
+    32.35,
+    34.39
+   ]
+  },
+  "G_waived_false_block": {
+   "k": 60,
+   "n": 8180,
+   "pct": 0.73,
+   "ci95": [
+    0.57,
+    0.94
+   ]
+  },
+  "G_waived_warn": {
+   "k": 2264,
+   "n": 8180,
+   "pct": 27.68,
+   "ci95": [
+    26.72,
+    28.66
+   ]
+  },
+  "G_waived_interruption": {
+   "k": 2324,
+   "n": 8180,
+   "pct": 28.41,
+   "ci95": [
+    27.44,
+    29.4
+   ]
+  }
+ },
+ "R": {
+  "n": 490,
+  "G_detected": {
+   "k": 195,
+   "n": 490,
+   "pct": 39.8,
+   "ci95": [
+    35.56,
+    44.19
+   ]
+  },
+  "G_waived_detected": {
+   "k": 187,
+   "n": 490,
+   "pct": 38.16,
+   "ci95": [
+    33.97,
+    42.54
+   ]
+  },
+  "detections_lost": 8,
+  "lost_cases": [
+   "RM:C:pypi:buddyme@0.2.3:launch",
+   "RM:C:npm:proxy-seller-mcp@0.1.7:launch",
+   "RM:C:npm:fastgrc-openclaw@1.0.33:launch",
+   "RM:C:npm:mmagrt@0.1.10:launch",
+   "RM:C:npm:ezymail@2.0.2:launch",
+   "RM:C:npm:@mastra/agentcore@0.2.2:launch",
+   "RM:C:npm:bricks-builder-mcp@3.6.1:launch",
+   "RM:C:npm:my-saeed-lib@0.1.1:launch"
+  ]
+ }
+}
