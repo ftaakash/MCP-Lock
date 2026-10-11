@@ -1,8 +1,178 @@
 {
  "n": 8180,
  "H1_dependency_lock": {
-  "measured": false,
-  "note": "run eval/adaptive/h1_cost.py"
+  "n_npm_cases": 5652,
+  "sample": null,
+  "seed": null,
+  "early": {
+   "n_evaluated": 5652,
+   "n_error": 0,
+   "h1_block": {
+    "k": 72,
+    "n": 5652,
+    "pct": 1.27,
+    "ci95": [
+     1.01,
+     1.6
+    ]
+   },
+   "h1_warn_only": {
+    "k": 475,
+    "n": 5652,
+    "pct": 8.4,
+    "ci95": [
+     7.71,
+     9.16
+    ]
+   },
+   "strict_tree_lock_block": {
+    "k": 2765,
+    "n": 5652,
+    "pct": 48.92,
+    "ci95": [
+     47.62,
+     50.22
+    ]
+   },
+   "added_block_over_G": {
+    "k": 58,
+    "n": 5652,
+    "pct": 1.03,
+    "ci95": [
+     0.79,
+     1.32
+    ]
+   },
+   "allow_to_warn_over_G": {
+    "k": 199,
+    "n": 5652,
+    "pct": 3.52,
+    "ci95": [
+     3.07,
+     4.03
+    ]
+   },
+   "G_allow": {
+    "k": 2736,
+    "n": 5652,
+    "pct": 48.41,
+    "ci95": [
+     47.11,
+     49.71
+    ]
+   },
+   "G_plus_H1_allow": {
+    "k": 2502,
+    "n": 5652,
+    "pct": 44.27,
+    "ci95": [
+     42.98,
+     45.57
+    ]
+   },
+   "cases_by_check": {
+    "dep_new_publisher": 486,
+    "dep_builder_changed": 35,
+    "dep_ci_to_human": 30,
+    "dep_new_install_script": 22,
+    "dep_provenance_lost": 19
+   },
+   "trees_with_unresolved": {
+    "k": 266,
+    "n": 5652,
+    "pct": 4.71,
+    "ci95": [
+     4.18,
+     5.29
+    ]
+   },
+   "median_nodes_now": 96
+  },
+  "late": {
+   "n_evaluated": 5652,
+   "n_error": 0,
+   "h1_block": {
+    "k": 42,
+    "n": 5652,
+    "pct": 0.74,
+    "ci95": [
+     0.55,
+     1.0
+    ]
+   },
+   "h1_warn_only": {
+    "k": 21,
+    "n": 5652,
+    "pct": 0.37,
+    "ci95": [
+     0.24,
+     0.57
+    ]
+   },
+   "strict_tree_lock_block": {
+    "k": 698,
+    "n": 5652,
+    "pct": 12.35,
+    "ci95": [
+     11.52,
+     13.23
+    ]
+   },
+   "added_block_over_G": {
+    "k": 30,
+    "n": 5652,
+    "pct": 0.53,
+    "ci95": [
+     0.37,
+     0.76
+    ]
+   },
+   "allow_to_warn_over_G": {
+    "k": 5,
+    "n": 5652,
+    "pct": 0.09,
+    "ci95": [
+     0.04,
+     0.21
+    ]
+   },
+   "G_allow": {
+    "k": 2736,
+    "n": 5652,
+    "pct": 48.41,
+    "ci95": [
+     47.11,
+     49.71
+    ]
+   },
+   "G_plus_H1_allow": {
+    "k": 2720,
+    "n": 5652,
+    "pct": 48.12,
+    "ci95": [
+     46.82,
+     49.43
+    ]
+   },
+   "cases_by_check": {
+    "dep_new_install_script": 25,
+    "dep_ci_to_human": 21,
+    "dep_builder_changed": 11,
+    "dep_new_publisher": 10,
+    "dep_provenance_lost": 8
+   },
+   "trees_with_unresolved": {
+    "k": 233,
+    "n": 5652,
+    "pct": 4.12,
+    "ci95": [
+     3.63,
+     4.67
+    ]
+   },
+   "median_nodes_now": 96
+  },
+  "note": "exploratory (docs/PHASE5_PLAN.md \u00a74); early = lock at v_old publish (upper bound), late = lock just before t (lower bound)"
  },
  "H2_runtime_tool_pin": {
   "block_lower": {
