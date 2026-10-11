@@ -35,6 +35,8 @@ SIGNALS_23 = ("S2", "S3", "S4", "S5")
 # Findings that count as a detection (PREREG §2.1). gate unlocked / lookup_failed / unresolvable
 # and info findings never count.
 COUNTED_GATE_CHECKS = {"integrity_mismatch"}
+# S1-S5 (PREREG §2.1) plus the exploratory Phase 5 hardening checks H1-H5.
+COUNTED_SIGNALS = {"S1", "S2", "S3", "S4", "S5", "H1", "H2", "H3", "H4", "H5"}
 
 
 class OfflineViolation(RuntimeError):
@@ -60,6 +62,9 @@ def systems(evaluable: dict) -> dict[str, tuple[str, frozenset]]:
 def offline(bundle: dict):
     """Answer every registry lookup from `bundle`; any real network call raises."""
     pkg, eco = bundle["package"], bundle["ecosystem"]
+    # Phase 4 corpora: any lookup outside the bundle fails loudly. Only the Phase 5 command-shape
+    # cases (corpus "ADV") may hit auxiliary names, which are answered conservatively and recorded.
+    tolerant = bundle.get("corpus") == "ADV"
     saved = {}
 
     def patch(mod, name, fn):
@@ -71,6 +76,8 @@ def offline(bundle: dict):
 
     def versions(name):
         if name != pkg:
+            if not tolerant:
+                raise OfflineViolation(f"versions for unexpected package {name}")
             # The gate parsed a different package than the attack's (e.g. an E11 `-p PKG bin` shape):
             # it never sees the real package, so it cannot resolve this one. Recorded, returns empty
             # (-> gate "unresolvable", which §2.1 does not count as a detection).
@@ -81,6 +88,8 @@ def offline(bundle: dict):
     def registry_info(e, name, now=None, age_days=30):
         info = (bundle.get("registry_info") or {}).get(name)
         if info is None:
+            if not tolerant:
+                raise OfflineViolation(f"registry_info for unexpected package {name}")
             # A multi-command shape (e.g. `npm install -g X && adv-notes`) can make S1 look up an
             # auxiliary token. Treat it as an existing, non-new package: conservative (it cannot add
             # an S1 detection) and recorded, so it never hides or fabricates a finding.
@@ -129,8 +138,7 @@ def detected(decision: dict, block_only: bool = False) -> bool:
     for f in decision["findings"]:
         if f["severity"] not in levels:
             continue
-        sig = f["signal"]
-        if sig[0] in ("S", "H") or f["check"] in COUNTED_GATE_CHECKS:
+        if f["signal"] in COUNTED_SIGNALS or f["check"] in COUNTED_GATE_CHECKS:
             return True
     return False
 

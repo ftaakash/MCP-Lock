@@ -95,3 +95,12 @@ def test_integrity_mismatch_counts():
     res = replay.run(copy.deepcopy(b))
     assert res["G"]["decision"] == "block" and res["G"]["detected"]
     assert not res["S1-C"]["detected"]
+
+
+def test_unexpected_lookups_fail_loudly_outside_adv():
+    b = _bundle(command="npm install zqx-toy-server && npm install other-thing")
+    with pytest.raises(replay.OfflineViolation):
+        replay.run(b)
+    b["corpus"] = "ADV"
+    replay.run(b)  # tolerated and recorded for the Phase 5 command-shape corpus only
+    assert "other-thing" in b["_aux_lookups"]
