@@ -1,0 +1,341 @@
+\documentclass[conference]{IEEEtran}
+\usepackage[T1]{fontenc}
+\usepackage{cite}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage{url}
+\input{numbers}
+
+\newcommand{\G}{\textsf{G}}
+\newcommand{\SC}{\textsf{S1-C}}
+\newcommand{\code}[1]{\texttt{#1}}
+
+\begin{document}
+
+\title{MCP-Lock: Pinning Provenance and Tool Definitions for Coding-Agent MCP Servers}
+
+\author{\IEEEauthorblockN{Aakash}
+\IEEEauthorblockA{Department of Computer Science and Engineering (Data Science)\\
+SRM Institute of Science and Technology\\
+gsaakash05@gmail.com}}
+
+\maketitle
+
+\begin{abstract}
+Coding agents launch Model Context Protocol (MCP) servers with unpinned commands such as \code{npx -y pkg}, so every
+start may fetch a new version whose code and whose tool descriptions, which go straight into the model's context, have
+never been reviewed. We measure this exposure and build a defence. A census of \CensusSample{} sampled MCP packages finds
+that \DriftPkgsP{} \DriftPkgsCI{} changed the tools they advertise within 90 days, and that \NoSignalP{} of tool changes
+carry no provenance, publisher, maintainer or install-script signal. We present MCP-Lock, a lockfile that pins version,
+archive digest, build identity, publisher, install scripts and a canonical hash of the tool definitions, and a pre-launch
+gate that compares every launch against it. In a pre-registered evaluation against the closest prior gate, MCP-Lock
+detects \DetGP{} of \NR{} real attacks versus \DetSCP{} (exact McNemar $p = \McNemarHOne$), at a false-block rate of
+\FbGP{} versus \FbSCP{} on \NB{} benign upgrades. The gain comes almost entirely from install-script diffs. An adaptive
+attacker who knows every check gets past the frozen gate in \EGAllow{} of \ENCases{} attacks; five exploratory hardening switches
+close all but two, at costs that range from no benign upgrades newly blocked to more than a third of them.
+\end{abstract}
+
+\begin{IEEEkeywords}
+software supply chain, Model Context Protocol, coding agents, provenance, lockfiles, pre-registration
+\end{IEEEkeywords}
+
+% ------------------------------------------------------------------------------------------------
+\section{Introduction}
+An MCP server gives a language-model agent its tools. Coding-agent harnesses start most of them from package
+registries with a runner command: \code{npx -y @scope/server}, \code{uvx server}. Kapner et al.\ found unpinned MCP
+declarations in 9.8\% of 2,660 agent setups~\cite{kapner2026harness}. An unpinned launch resolves to whatever version is
+latest at that moment, so the code that runs, and the tool descriptions the model reads as instructions, can change
+between two sessions without any user action. Tool descriptions are an injection channel~\cite{invariant2025poisoning},
+and a server that changes them after it has been approved is the ``rug pull'' of the MCP threat
+literature~\cite{invariant2025poisoning,hou2025mcp}.
+
+Existing pre-install checks do not look at this layer. The hook of Bagmar and Saraf~\cite{bagmar2026setup} checks names,
+sources and age before \code{pip install}; registry provenance (SLSA~\cite{slsa2023provenance}, Sigstore~\cite{newman2022sigstore},
+PEP~740~\cite{pep740}) says who built an archive, not what tools it advertises; and the public MCP registry does not
+version tool definitions at all~\cite{kraishan2026drift}.
+
+We ask three questions. \textbf{RQ1:} how often do MCP servers change their tool definitions, and do metadata signals
+reveal those changes? \textbf{RQ2:} does pinning provenance and tool definitions catch more real attacks than the
+existing gate, and at what cost? \textbf{RQ3:} what does an attacker who knows every check do, and what would stop them?
+
+\textbf{Contributions.}
+(i)~A census of MCP packages on npm and PyPI: metadata for all \MetaPkgs{} eligible packages and statically extracted
+tool definitions for a stratified sample of \CensusSample{} (Section~\ref{sec:census}).
+(ii)~MCP-Lock, a lockfile format and a gate that never executes package code (Section~\ref{sec:design}).
+(iii)~A pre-registered evaluation against the closest prior gate on real malicious versions, synthetic rug pulls and
+benign upgrades, with a kill rule fixed in advance (Section~\ref{sec:eval}).
+(iv)~An adaptive-attacker study with five hardening switches, each reported with its cost on benign upgrades
+(Section~\ref{sec:adaptive}). Code, data and the registration are public (Section~\ref{sec:artifact}).
+
+% ------------------------------------------------------------------------------------------------
+\section{Background and Threat Model}
+\label{sec:background}
+\textbf{MCP.} A server exposes tools; the client sends \code{tools/list} and receives, for each tool, a name, a
+description and an input schema, which it places in the model's context~\cite{mcpspec2025tools}. The list may change at
+run time, signalled by \code{notifications/tools/list\_changed}. Security surveys catalogue tool poisoning, rug pulls and
+malicious servers~\cite{hou2025mcp,zhao2025attack}.
+
+\textbf{Registry provenance.} npm can attach a SLSA provenance attestation, signed through Sigstore, that names the
+source repository, workflow and builder of a release~\cite{npmprovenance,slsa2023provenance,newman2022sigstore}; PyPI
+offers the same through PEP~740~\cite{pep740}. npm also records the publishing account and lifecycle scripts, which run
+at install time. Hijacked maintainer accounts and malicious install scripts are recurring attack
+patterns~\cite{ohm2020backstabber,ladisa2023sok,zahan2022weak,zimmermann2019small}; the 2025 Shai-Hulud worm combined
+both~\cite{cisa2025shaihulud}.
+
+\textbf{Threat model.} A developer runs a coding agent with the MCP-Lock hook and a lockfile created while each
+server was benign. The attacker wants their code to run, or their text to reach the model, through a later launch. We
+consider five tiers: \emph{T1} a squatter with a new package name; \emph{T2} a thief of one maintainer's registry
+token; \emph{T3} an attacker inside the release pipeline (workflow or merged commit); \emph{T4} the package owner
+(malicious or sold); \emph{T5} the owner of a dependency. Registry compromise, Sigstore forgery and attacks on the
+model itself are out of scope.
+
+% ------------------------------------------------------------------------------------------------
+\section{RQ1: Tool-Definition Drift}
+\label{sec:census}
+\textbf{Frame and sample.} We built a frame of MCP packages from the official MCP registry and from MCP configuration
+files on GitHub, and kept packages with at least two versions that resolve on their registry: \MetaPkgs{} packages.
+From these we drew a stratified random sample of \CensusSample{} (by ecosystem and download tercile; fixed seed).
+
+\textbf{Extraction.} For every selected version we fetched the archive, verified its registry digest, and extracted
+tool definitions statically from the source (registration calls in JavaScript/TypeScript, decorators and
+registrations in Python). Values that cannot be resolved without execution become an opaque marker, so a rebuild of
+unchanged source keeps its hash. The canonical hash is SHA-256 over the sorted, canonically serialised
+(name, description, input schema) triples. On \ValN{} held-out servers that we started in a network-less container
+and queried with \code{tools/list}, tool-name precision was \ValPrec{} and recall \ValRec{}: detected changes are real,
+and drift figures are lower bounds.
+
+\textbf{Results.} \DriftPkgsP{} \DriftPkgsCI{} of sampled packages (\DriftPkgs) changed their tool definitions within
+a 90-day window; among packages that shipped any release in the window, \DriftWinRelP{} \DriftWinRelCI{} did. Across
+release transitions with extractable tools on both sides, \DriftTransP{} (\DriftTrans) changed tools: \KindAdded{}
+added a tool, \KindRemoved{} removed one, \KindDesc{} changed a description and \KindSchema{} an input schema.
+\DriftTransP{} of releases is therefore not a rare event that a reviewer can wait for.
+
+Tool changes are also invisible to supply-chain metadata. \NoSignalP{} \NoSignalCI{} of tool-changing transitions had
+no provenance loss, publisher change, maintainer change or new install script on the same release, and none of these
+signals was more frequent on tool-changing than on other releases (Fisher's exact test, all $p \ge \CoSignalMinP$).
+Over twelve months of all \MetaTrans{} releases in the frame, \MetaProvLostNpmP{} of active npm packages lost build
+provenance at least once, \MetaCiHumanP{} went from CI publishing to a human account, and \MetaInstallNpmP{} added an
+install script; only \MetaLatestProvNpmP{} (npm) and \MetaLatestProvPyP{} (PyPI) of latest versions carry provenance.
+Metadata signals are rare, provenance is a minority property, and tool changes are frequent and orthogonal to both:
+a gate that wants to see tool changes has to look at the tools.
+
+% ------------------------------------------------------------------------------------------------
+\section{MCP-Lock Design}
+\label{sec:design}
+\textbf{Lockfile.} \code{mcp-lock.json} sits next to the harness configuration. For each server it pins the exact
+version, the archive digest (npm SRI or PyPI SHA-256), the build identity (repository, workflow, builder) when
+provenance exists, the npm publisher and maintainers, the install scripts, and the canonical tool hash with the tool
+names. The continuity identity deliberately excludes ref and commit, which change on every honest release. A clean
+upgrade is a regenerated entry and a reviewable diff.
+
+\textbf{Gate.} Before a command runs, the gate parses it (installs and runner launches, including \code{npx},
+\code{pnpm dlx}, \code{bunx}, \code{uvx}, \code{pipx run}), resolves what the launch would fetch now, and compares it with
+the lock entry. It reads registry metadata, attestations and archives, and never executes package code.
+Table~\ref{tab:signals} lists the signals; S1 is our reimplementation of the Bagmar and Saraf checks~\cite{bagmar2026setup}.
+A block denies the command; a warning asks the user. The gate runs as a Claude Code \code{PreToolUse} hook on shell
+commands and on writes to MCP configuration files, and fails closed to ``ask'' on internal errors.
+
+\begin{table}[t]
+\caption{Gate signals. S2--S5 compare a launch against its lock entry.}
+\label{tab:signals}
+\centering\footnotesize
+\begin{tabular}{@{}lp{4.6cm}l@{}}
+\toprule
+Signal & Fires when & Action \\
+\midrule
+S1 & name confusable, absent or younger than 30 days; untrusted source; hidden index; known-vulnerable pin & block \\
+S2 & provenance disappears, or a different repository / workflow / builder built the new version & block \\
+S3 & npm: published by hand after CI releases, or by a non-maintainer & warn \\
+S4 & new install-time lifecycle script (PyPI: sdist-only release after wheels) & block \\
+S5 & canonical tool hash differs (diff shown) & warn \\
+gate & server not locked / same version, different digest & warn / block \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ------------------------------------------------------------------------------------------------
+\section{RQ2: Pre-Registered Evaluation}
+\label{sec:eval}
+\textbf{Design.} Hypotheses, corpora, scoring and a kill rule were registered on OSF before any scored run, with the
+gate frozen at a tagged commit. \textbf{H1:} on real attacks, \G{} (S1--S5) detects more cases than \SC{}, the stronger
+reading of the baseline. \textbf{H2:} on benign upgrades, \G{}'s false-block rate differs from \SC{}'s. \textbf{Kill
+rule:} the method claim is withdrawn if S2--S5 add fewer than two detections while \G{}'s false-block rate is equal or
+worse. Detection is block or warn; H1 and H2 use exact McNemar tests~\cite{mcnemar1947} with Holm
+correction~\cite{holm1979}; proportions carry Wilson 95\% intervals~\cite{wilson1927}. Six deviations, all logged before
+the affected results, concern replay mechanics and corpus construction.
+
+\textbf{Corpora.} R-B: \NRB{} scenarios of the baseline paper. R-M: \NRM{} real malicious npm/PyPI versions from OpenSSF and
+Datadog reports~\cite{ossfmalicious,datadogmalicious}, \NRMC{} hijacked existing packages (class C, locked at the last
+clean version) and \NRMN{} new or typosquatted ones (class N). R $=$ R-B $\cup$ R-M, $n = \NR$. R-S: synthetic rug
+pulls on a local registry (four classes $\times$ 10 servers, 10 controls), reported separately. B: \NB{} benign upgrades
+(\NBMcp{} MCP, \NBNpmTop{} top npm, \NBPyTop{} top PyPI). Every case is replayed offline as of its publication time.
+
+\begin{table}[t]
+\caption{Confirmatory results (Wilson 95\% CIs).}
+\label{tab:rq2}
+\centering\footnotesize
+\begin{tabular}{@{}lll@{}}
+\toprule
+ & \SC & \G \\
+\midrule
+Detection on R & \DetSCP{} \DetSCCI & \DetGP{} \DetGCI \\
+False blocks on B & \FbSCP{} \FbSCCI & \FbGP{} \FbGCI \\
+Warnings on B & 0 & \WarnGP{} \WarnGCI \\
+\midrule
+H1 & \multicolumn{2}{p{5.1cm}}{\AddedDet{} \G-only vs.\ \SCOnly{} \SC-only cases; exact McNemar $p = \McNemarHOne$
+(Holm $\HolmHOne$)} \\
+H2 & \multicolumn{2}{p{5.1cm}}{false blocks +\FbDiffPP{} pp \FbDiffCI; $p = \McNemarHTwo$} \\
+Kill rule & \multicolumn{2}{p{5.1cm}}{\AddedDet{} added detections $\ge 2$: not killed} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Results.} Table~\ref{tab:rq2} gives the confirmatory results: both hypotheses hold and the kill rule is not
+triggered. The ablation explains where the gain comes from. Removing S4 loses \AblFour{} of \G's detections, removing
+S5 \AblFive, S3 \AblThree{} and S2 \AblTwo. On hijacked packages (class C) \G{} detects \RMCGP{} \RMCGCI{} against
+\RMCSCP{} for \SC, mostly install scripts added by the 2025 worm campaigns~\cite{cisa2025shaihulud}; on new names (class
+N) both detect \RMNGP{} through the baseline's age rule. Provenance continuity (S2) added nothing on real attacks,
+for a structural reason: removed malicious versions leave no registry record, so S2 and S3 were evaluable on only
+\EvalSTwo{} of \NRM{} R-M cases, and only \STwoRMCP{} of class-C locks had provenance to begin with.
+
+On the synthetic rug pulls, \G{} detects \RSG{} and \SC{} \RSSC; S5 alone carries the two tool-definition classes, S4 the
+install-script class, and S2 and S3 each catch the stolen-token class. No control was flagged (\RSCtrl).
+
+The cost is the review burden. \G's false blocks barely move (\FbExtra{} more than \SC), but S5 adds warnings on
+\WarnGP{} of benign upgrades, essentially all in the MCP stratum, where honest servers change tools often (RQ1). Per
+added detection, \G{} costs \FbPerDet{} extra false blocks and \WarnPerDet{} extra warnings. The baseline's own
+\FbSCP{} false-block rate comes from its 30-day age rule replayed at upgrade time (\FbSCMcpP{} of MCP upgrades).
+Median gate latency is \LatColdMed{}\,s on a cold cache (p95 \LatColdPNF{}\,s; $n = \LatN$) and \LatWarmMed{}\,s warm.
+
+% ------------------------------------------------------------------------------------------------
+\section{RQ3: Adaptive Attacker}
+\label{sec:adaptive}
+\textbf{Setup.} For each tier we built the cheapest attack we could find against a gate whose checks, lock format and
+parser are known, as \ENCases{} packages on a local registry with inert payloads, plus \EElevenN{} command-line variants of one
+attack (Table~\ref{tab:matrix}). All runs use the frozen gate; nothing was published publicly or executed.
+
+\begin{table}[t]
+\caption{Evasion matrix. \G: frozen gate; H: all hardening switches.}
+\label{tab:matrix}
+\centering\footnotesize
+\begin{tabular}{@{}llp{3.55cm}ll@{}}
+\toprule
+Case & Tier & Attack & \G & H \\
+\midrule
+E1 & T1 & new name, edit distance $\ge 2$, older than 30 days & warn & warn \\
+E2 & T2 & stolen token; lock has no provenance & allow & block \\
+E3 & T2 & stolen token; lock has provenance & block & block \\
+E4 & T3 & payload via the genuine release workflow & allow & allow \\
+E5 & T4 & poisoned description built at run time & warn & block \\
+E6a/b & T4 & tools fetched from a URL; new / no new version & allow & block \\
+E7 & T4 & poison in an input-schema field description & warn & block \\
+E8a/b & T4 & time-bomb tool / tool from a base64 blob & warn/allow & block \\
+E9 & T5 & payload and tools in a caret-range dependency & allow & block \\
+E10 & T2/T4 & extra file added to a locked PyPI release & allow & block \\
+E11 & any & \EElevenN{} command shapes (detected) & \EElevenG/\EElevenN & \EElevenH/\EElevenN \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{What evades.} The frozen gate blocks \EGBlock{} and warns on \EGWarn{} of the \ENCases{} attacks; \EGAllow{}
+pass. The pattern is systematic. Static extraction cannot see tools built at run time or fetched from a URL (E6, E8b),
+and a rug pull through a remote file needs no new version at all (E6b). Locking the top-level archive leaves
+dependencies free to move (E9). A stolen token defeats S2 and S3 whenever the lock never had provenance (E2), and the
+same-version check compares only the locked file (E10). Commands hidden behind \code{npm exec}, \code{sh -c} or a shell
+variable escape the parser. These attacks apply widely: \ExpNoProvP{} of benign locks have no provenance (E2),
+\ExpNonStaticP{} of versions hide their tools from static extraction (E6/E8), and \ExpFloatSdkP{} of npm servers
+float their MCP SDK dependency (E9, a lower bound that counts one dependency). A payload shipped through the genuine
+release pipeline (E4) carries genuine provenance; no lock can tell it apart from an honest release.
+
+\textbf{Hardening (exploratory).} We implemented five switches, off by default; with all off the gate is the frozen
+code, and a re-replay of every Phase-4 corpus is identical case by case. \emph{H1} locks the resolved npm dependency
+tree and applies the S2--S4 rules to every dependency whose version changed. \emph{H2} is a stdio proxy that pins the
+live \code{tools/list} per tool (trust on first use), rejects listings that add or change a tool, and refuses calls to
+unpinned tools; it checks every listing, so a time bomb is caught when it fires. \emph{H3} locks every file of a PyPI
+release. \emph{H4} requires provenance. \emph{H5} normalises the evasive command shapes. With all five, \EAllBlock{} of
+\ENCases{} attacks block and \EElevenH{} of \EElevenN{} command shapes are caught; E1 still only warns and E4 passes.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/hardening_cost.pdf}
+\caption{Cost of each hardening switch: benign upgrades it would newly block on top of the frozen gate (bar: upper
+estimate with Wilson 95\% CI; tick: lower estimate). H1 is measured on the \HOneN{} npm upgrades, H3 on PyPI.}
+\label{fig:cost}
+\end{figure}
+
+\textbf{Cost.} Figure~\ref{fig:cost} shows that the switches split cleanly. H3 and H5 cost nothing on benign upgrades:
+H5 changes no decision (\HFive), and H3 only acts when the locked version is relaunched, which no upgrade does; as an
+exposure measure, \HThreeLateP{} of locked PyPI releases later gained a file. H1 adds blocks to
+\HOneBlockLateP--\HOneBlockEarlyP{} of npm upgrades, depending on whether the lock was taken just before the upgrade or
+when the old version was released. A strict tree lock that blocks every dependency change, as \code{npm ci} would,
+blocks \HOneStrictLateP--\HOneStrictEarlyP{} instead, so continuity rules rather than exact pins are what make
+dependency locking usable. H2 and H4 are expensive: H2 newly blocks \HTwoAddLoP--\HTwoAddHiP{} of benign upgrades, all
+MCP servers that changed tools, and H4 \HFourAddP. The live tool list of a historical version cannot be observed without
+running it, so H2's benign cost assumes it equals the static extraction, and the \HTwoUnmeas{} upgrades without
+statically visible tools are counted as costless.
+
+% ------------------------------------------------------------------------------------------------
+\section{Discussion and Limitations}
+\textbf{What the evidence supports.} Pinning catches real attacks that the name-and-source checks miss, but the
+confirmed gain is an install-script diff (S4), a classic supply-chain signal rather than an MCP-specific one. Tool pinning
+(S5) is what catches MCP rug pulls, and it is necessary because metadata signals do not accompany tool changes (RQ1),
+yet it warns on \WarnGMcpP{} of honest MCP upgrades. Provenance continuity is sound but rarely applicable: most
+packages have none, and attackers who remove their versions take the evidence with them.
+
+\textbf{Limits of a lock.} Every lock in this paper trusts the state at lock time and flags change. An attacker in the
+release pipeline (T3) produces change that is indistinguishable from an honest release, and a runtime pin can only
+compare against what was trusted first. Reviewing the diff remains the user's job; the gate makes the diff visible.
+
+\textbf{Threats to validity.} Static extraction under-counts tools (recall \ValRec{}), so drift and S5 coverage are lower
+bounds. R-M contains only attacks that were caught and reported; attacks still undetected are absent by definition.
+Replay reconstructs metadata as of each case's time but cannot recover removed versions, which is why S2/S3 evaluability
+is low. Class C follows a mechanical rule (an earlier clean version exists) and may include attacker-owned packages with
+a benign first release. The adaptive attacks were built by the authors of the defence; the hardening results are
+exploratory and were not pre-registered, and H2's matrix verdicts use live tool lists written down from each attack's
+source rather than observed from running servers. Time of lock is unknown in practice, which is why H1 is reported as a
+range.
+
+% ------------------------------------------------------------------------------------------------
+\section{Related Work}
+\textbf{MCP security.} Surveys and taxonomies describe tool poisoning, rug pulls and malicious
+servers~\cite{hou2025mcp,zhao2025attack}, and practitioners described the rug-pull pattern early on~\cite{invariant2025poisoning}.
+Hasan et al.\ analyse the security and maintainability of open-source servers~\cite{hasan2025glance}. Closest to RQ1,
+Kraishan measures drift of the fields the MCP registry versions (descriptions, packages, endpoints) across 8,900
+multi-version servers and notes that tool definitions are not versioned there~\cite{kraishan2026drift}; we measure the
+tool definitions themselves from package archives, and build the client-side pinning that work recommends. Metere
+proposes signed admission and per-server tool allowlists for remote servers~\cite{metere2026attested}; MCP-Lock instead
+needs no change to servers or registries.
+
+\textbf{Agent supply chains.} Bagmar and Saraf weaponise setup instructions against coding agents and propose the
+pre-install hook we use as baseline~\cite{bagmar2026setup}. Kapner et al.\ scan agent configurations and report unpinned
+MCP declarations~\cite{kapner2026harness}. Shan finds in a pre-registered audit that coding assistants almost never
+check trust signals before installing~\cite{shan2026check}, which motivates a gate that checks on their behalf.
+
+\textbf{Package supply chains.} Attack catalogues~\cite{ohm2020backstabber,ladisa2023sok} and ecosystem
+studies~\cite{zimmermann2019small,zahan2022weak} document account takeover and install-script abuse, the patterns behind
+S3 and S4. Sigstore~\cite{newman2022sigstore}, SLSA~\cite{slsa2023provenance} and PEP~740~\cite{pep740} make build
+identity verifiable; MCP-Lock uses that identity for continuity rather than for absolute trust.
+
+% ------------------------------------------------------------------------------------------------
+\section{Conclusion}
+MCP servers change the tools they present to models often, and nothing in their metadata says so. A lock that pins
+archive, provenance, publisher, install scripts and tool definitions catches \AddedDet{} real attacks that the existing
+gate misses, at a cost paid mostly in reviews of honest tool changes. Against an adaptive attacker, the frozen gate
+stops \EGStop{} of \ENCases{} attacks; dependency-tree locking, runtime tool pinning, file-level PyPI locking and command
+normalisation close most of the rest, and the price of each is now measured. Two gaps remain open for any lock-based
+defence: attacks shipped through the legitimate release pipeline, and the review fatigue of honest change.
+
+\section{Artifact Availability}
+\label{sec:artifact}
+Code, lockfile specification, replay bundles, results and logs:
+\url{https://github.com/ftaakash/MCP-Lock}. Pre-registration: \url{https://osf.io/2amj3}. Every number in this paper is
+generated from the result files by \code{paper/make\_numbers.py}.
+
+\bibliographystyle{IEEEtran}
+\bibliography{refs}
+
+\end{document}

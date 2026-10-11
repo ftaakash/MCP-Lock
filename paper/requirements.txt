@@ -1,0 +1,2 @@
+# Extra packages for building the paper (bash paper/build.sh); the analysis itself uses requirements.lock.
+matplotlib==3.9.2
