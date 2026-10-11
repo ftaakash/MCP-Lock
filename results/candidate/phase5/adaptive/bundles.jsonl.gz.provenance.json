@@ -1,9 +1,9 @@
 {
   "result": "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase5/adaptive/bundles.jsonl.gz",
-  "result_sha256": "e403b37367191a56eb0c4386ecb7e7edd8ad428c3c76b1c07f7a8817b656d978",
+  "result_sha256": "7024b45b234d98a21de2e92b1c14f89633643c64698af1de5d61a028c43243bb",
   "command": "python.exe C:\\Users\\Administrator\\Desktop\\Major Project\\mcp-lock\\eval\\adaptive\\attacks.py bundle",
-  "commit": "6182e0ef356e2fbd02cdaf8383e71baf8f2b2cd2-dirty",
-  "timestamp_utc": "2026-10-11T11:28:39Z",
+  "commit": "55210b3c76be4a251014c63ce295a51e46907b22-dirty",
+  "timestamp_utc": "2026-10-11T12:14:16Z",
   "python": "3.11.9",
   "inputs": {},
   "params": {

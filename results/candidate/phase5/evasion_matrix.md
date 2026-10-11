@@ -1,7 +1,9 @@
 # Phase 5 evasion matrix (adaptive attacker, RQ3)
 
-Frozen gate (`prereg-v1`) on local-registry attacks. G = all signals; hardening switches in
-`eval/adaptive/hardening.py` are exploratory (re-run on the Phase 4 benign corpus separately).
+Frozen gate (`prereg-v1`) on local-registry attacks. G = all signals. Hardening is exploratory:
+H1/H3 are gate checks (`gate/deptree.py`, `gate/signals.py`), H2 the runtime proxy
+(`gate/proxy.py`), H4/H5 rules in `eval/adaptive/hardening.py`; costs on the Phase 4 benign
+corpus are reported separately.
 
 | Case | Tier | Attack | S1-C | G | signal | +all hardening |
 |---|---|---|---|---|---|---|
@@ -36,7 +38,7 @@ Missed by G:
 | Switch | Target cases | Closed (allow/warn → block, or blind spot removed) |
 |---|---|---|
 | H1 | E9 | E9 |
-| H2 | E5, E6a, E6b, E8a, E8b | E6a, E6b, E8b |
+| H2 | E5, E6a, E6b, E7, E8a, E8b, E9 | E5, E6a, E6b, E7, E8a, E8b, E9 |
 | H3 | E10 | E10 |
 | H4 | E2 | E10, E2 |
 | H5 | E11 | E11 |

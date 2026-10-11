@@ -622,10 +622,11 @@
     "aux": []
    },
    "ADV:E9:npx -y @mcplock-eval/adv-e9": {
-    "S1-C": "block",
+    "S1-C": "allow",
     "G": "block",
     "signals": [
-     "H1:dependency_continuity"
+     "H1:dep_provenance_lost",
+     "H1:dep_ci_to_human"
     ],
     "detected": true,
     "aux": []
@@ -911,7 +912,7 @@
     "aux": []
    },
    "ADV:E5:npx -y @mcplock-eval/adv-e5": {
-    "S1-C": "block",
+    "S1-C": "allow",
     "G": "block",
     "signals": [
      "S5:tool_drift",
@@ -921,7 +922,7 @@
     "aux": []
    },
    "ADV:E6a:npx -y @mcplock-eval/adv-e6a": {
-    "S1-C": "block",
+    "S1-C": "allow",
     "G": "block",
     "signals": [
      "H2:runtime_tool_drift"
@@ -930,7 +931,7 @@
     "aux": []
    },
    "ADV:E6b:npx -y @mcplock-eval/adv-e6b": {
-    "S1-C": "block",
+    "S1-C": "allow",
     "G": "block",
     "signals": [
      "H2:runtime_tool_drift"
@@ -939,7 +940,7 @@
     "aux": []
    },
    "ADV:E7:npx -y @mcplock-eval/adv-e7": {
-    "S1-C": "block",
+    "S1-C": "allow",
     "G": "block",
     "signals": [
      "S5:tool_drift",
@@ -949,7 +950,7 @@
     "aux": []
    },
    "ADV:E8a:npx -y @mcplock-eval/adv-e8a": {
-    "S1-C": "block",
+    "S1-C": "allow",
     "G": "block",
     "signals": [
      "S5:tool_drift",
@@ -959,7 +960,7 @@
     "aux": []
    },
    "ADV:E8b:npx -y @mcplock-eval/adv-e8b": {
-    "S1-C": "block",
+    "S1-C": "allow",
     "G": "block",
     "signals": [
      "H2:runtime_tool_drift"
@@ -969,9 +970,11 @@
    },
    "ADV:E9:npx -y @mcplock-eval/adv-e9": {
     "S1-C": "allow",
-    "G": "allow",
-    "signals": [],
-    "detected": false,
+    "G": "block",
+    "signals": [
+     "H2:runtime_tool_drift"
+    ],
+    "detected": true,
     "aux": []
    },
    "ADV:E11:npx -y @mcplock-eval/adv-e11": {
@@ -1548,7 +1551,7 @@
     "aux": []
    },
    "ADV:E10:pip install": {
-    "S1-C": "block",
+    "S1-C": "allow",
     "G": "block",
     "signals": [
      "H3:unlocked_file"
@@ -1568,7 +1571,7 @@
     "aux": []
    },
    "ADV:E2:npx -y @mcplock-eval/adv-e2": {
-    "S1-C": "block",
+    "S1-C": "allow",
     "G": "block",
     "signals": [
      "H4:provenance_required"
@@ -1577,7 +1580,7 @@
     "aux": []
    },
    "ADV:E3:npx -y @mcplock-eval/adv-e3": {
-    "S1-C": "block",
+    "S1-C": "allow",
     "G": "block",
     "signals": [
      "S2:provenance_lost",
@@ -1888,7 +1891,7 @@
     "aux": []
    },
    "ADV:E10:pip install": {
-    "S1-C": "block",
+    "S1-C": "allow",
     "G": "block",
     "signals": [
      "H4:provenance_required"
@@ -2258,7 +2261,7 @@
    "aux": []
   },
   "ADV:E2:npx -y @mcplock-eval/adv-e2": {
-   "S1-C": "block",
+   "S1-C": "allow",
    "G": "block",
    "signals": [
     "H4:provenance_required"
@@ -2267,7 +2270,7 @@
    "aux": []
   },
   "ADV:E3:npx -y @mcplock-eval/adv-e3": {
-   "S1-C": "block",
+   "S1-C": "allow",
    "G": "block",
    "signals": [
     "S2:provenance_lost",
@@ -2285,7 +2288,7 @@
    "aux": []
   },
   "ADV:E5:npx -y @mcplock-eval/adv-e5": {
-   "S1-C": "block",
+   "S1-C": "allow",
    "G": "block",
    "signals": [
     "S5:tool_drift",
@@ -2295,7 +2298,7 @@
    "aux": []
   },
   "ADV:E6a:npx -y @mcplock-eval/adv-e6a": {
-   "S1-C": "block",
+   "S1-C": "allow",
    "G": "block",
    "signals": [
     "H2:runtime_tool_drift"
@@ -2304,7 +2307,7 @@
    "aux": []
   },
   "ADV:E6b:npx -y @mcplock-eval/adv-e6b": {
-   "S1-C": "block",
+   "S1-C": "allow",
    "G": "block",
    "signals": [
     "H2:runtime_tool_drift"
@@ -2313,7 +2316,7 @@
    "aux": []
   },
   "ADV:E7:npx -y @mcplock-eval/adv-e7": {
-   "S1-C": "block",
+   "S1-C": "allow",
    "G": "block",
    "signals": [
     "S5:tool_drift",
@@ -2323,7 +2326,7 @@
    "aux": []
   },
   "ADV:E8a:npx -y @mcplock-eval/adv-e8a": {
-   "S1-C": "block",
+   "S1-C": "allow",
    "G": "block",
    "signals": [
     "S5:tool_drift",
@@ -2333,7 +2336,7 @@
    "aux": []
   },
   "ADV:E8b:npx -y @mcplock-eval/adv-e8b": {
-   "S1-C": "block",
+   "S1-C": "allow",
    "G": "block",
    "signals": [
     "H2:runtime_tool_drift"
@@ -2342,10 +2345,12 @@
    "aux": []
   },
   "ADV:E9:npx -y @mcplock-eval/adv-e9": {
-   "S1-C": "block",
+   "S1-C": "allow",
    "G": "block",
    "signals": [
-    "H1:dependency_continuity"
+    "H1:dep_provenance_lost",
+    "H1:dep_ci_to_human",
+    "H2:runtime_tool_drift"
    ],
    "detected": true,
    "aux": []
@@ -2603,11 +2608,11 @@
    "aux": []
   },
   "ADV:E10:pip install": {
-   "S1-C": "block",
+   "S1-C": "allow",
    "G": "block",
    "signals": [
-    "H4:provenance_required",
-    "H3:unlocked_file"
+    "H3:unlocked_file",
+    "H4:provenance_required"
    ],
    "detected": true,
    "aux": []

@@ -1,18 +1,19 @@
-"""Phase 5 hardening switches H1-H5 (docs/PHASE5_PLAN.md §4), as overlays on the frozen gate.
+"""Phase 5 hardening switches H1-H5 (docs/PHASE5_PLAN.md §4) on top of the frozen gate.
 
-These are *exploratory* proposals, not the pre-registered gate. Each is a transparent post-hoc rule
-that adds findings to G's decision; the frozen gate code is never modified. Ground truth that static
-analysis cannot see (the live tool list, a dependency's continuity, a release's extra files) is carried
-in bundle["hardening"], known by construction of the synthetic attack, never by executing anything.
+These are *exploratory*, not the pre-registered gate: with no switch on, the gate runs exactly as tagged
+`prereg-v1`. H1-H3 are gate code; H4-H5 remain transparent post-hoc rules here.
 
-  H1 dependency-tree lock : a locked dependency's continuity identity breaks            -> block
-  H2 runtime tools/list   : the server's live tool list differs maliciously from lock   -> block
-  H3 PyPI all-files lock   : the release gained a file the lock does not cover            -> block
+  H1 dependency-tree lock : gate/deptree.py via replay (bundle `deps`, lock `dependencies`)
+  H2 runtime tools/list   : gate/proxy.check on the case's pinned vs live tool list (bundle `runtime`).
+                            The live list is known by construction of the synthetic attack (derived from
+                            its source), never by executing the server.
+  H3 PyPI all-files lock   : gate/signals.py via replay (bundle `files`, lock `files`)
   H4 require-provenance    : the resolved version has no build provenance                -> block
   H5 command normalisation : rewrite npm exec / x / dlx / sh -c / $VAR / && chains to the
                              underlying npx launch so S1-S5 run on it
 
-run(bundle, switches) returns the same shape as replay.run, with G (and its ablations) adjusted.
+run(bundle, switches) returns the same shape as replay.run, with G (and its ablations) adjusted; the
+baselines S1-L / S1-C never get hardening.
 """
 
 from __future__ import annotations
@@ -20,7 +21,7 @@ from __future__ import annotations
 import re
 
 from eval import replay
-from gate import command, core
+from gate import command, core, proxy
 from gate.findings import Finding
 
 LAUNCH_RE = re.compile(r"(?:npx|pnpx|bunx)\b|(?:pnpm|yarn|bun)\s+(?:dlx|x)\b|"
@@ -66,7 +67,6 @@ def _resolved_npm_launch(cmd: str):
 
 def _apply(bundle: dict, switches: set[str], decision: dict) -> dict:
     """Add hardening findings to one system's decision dict and recompute detection."""
-    h = bundle.get("hardening") or {}
     extra: list[Finding] = []
     pkg = bundle["package"]
     if "H4" in switches and bundle.get("lock") is not None:
@@ -75,15 +75,9 @@ def _apply(bundle: dict, switches: set[str], decision: dict) -> dict:
         if ids.get(tv) is None:
             extra.append(Finding("H4", "provenance_required", "block", pkg,
                                  f"{pkg}@{tv} has no build provenance and the policy requires it"))
-    if "H1" in switches and h.get("dep_break"):
-        extra.append(Finding("H1", "dependency_continuity", "block", pkg,
-                             f"a locked dependency of {pkg} changed its build identity / publisher"))
-    if "H2" in switches and (h.get("runtime_poison") or h.get("no_version_change")):
-        extra.append(Finding("H2", "runtime_tool_drift", "block", pkg,
-                             f"{pkg} live tool list differs from the locked runtime hash"))
-    if "H3" in switches and h.get("pypi_extra_file"):
-        extra.append(Finding("H3", "unlocked_file", "block", pkg,
-                             f"{pkg} release gained a file not covered by the lock's hashes"))
+    rt = bundle.get("runtime")
+    if "H2" in switches and bundle.get("lock") is not None and rt is not None:
+        extra += proxy.check(proxy.pin(rt["pinned"]), rt["live"], pkg)
     if not extra:
         return decision
     findings = [Finding(f["signal"], f["check"], f["severity"], f["package"], f["reason"])
@@ -99,6 +93,7 @@ def run(bundle: dict, switches: set[str]) -> dict:
     b = dict(bundle)
     if "H5" in switches:
         b = {**bundle, "command": normalize_command(bundle["command"])}
-    res = replay.run(b)
-    # H2/H3/H4 count as detections too; "detected" here means G would block/warn the attack.
-    return {sid: _apply(bundle, switches, dec) for sid, dec in res.items()}
+    res = replay.run(b, frozenset(switches) & core.HARDENING)
+    # H1-H4 findings count as detections (replay.COUNTED_SIGNALS); baselines are left untouched.
+    return {sid: dec if sid in replay.BASELINE_SYSTEMS else _apply(bundle, switches, dec)
+            for sid, dec in res.items()}

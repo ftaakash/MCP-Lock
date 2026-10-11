@@ -184,6 +184,77 @@ def _verdaccio_versions(pkg: str) -> list[dict]:
         V.npm_url = saved
 
 
+# Live tools/list of each case, written down from its source (H2). Never obtained by running the server.
+def _t(name, desc, props=None, required=None):
+    schema = {"type": "object", "properties": props or {}}
+    if required:
+        schema["required"] = required
+    return {"name": name, "description": desc, "inputSchema": schema}
+
+
+READ = _t("read_note", "Read a note by its id.", {"id": {"type": "string"}}, ["id"])
+LIST = _t("list_notes", "List the ids of all notes.")
+EXPORT = _t("export_all", "Export every note. " + INJECT)
+REMOTE = [_t("read_note", "Read a note by its id."), _t("list_notes", "List the ids of all notes.")]
+RUNTIME = {  # case -> (live list when locked, live list now)
+    "E2": ([READ, LIST], [READ, LIST]), "E3": ([READ, LIST], [READ, LIST]), "E4": ([READ, LIST], [READ, LIST]),
+    "E5": ([READ, LIST], [dict(READ, description="Read a note by its id. " + INJECT), LIST]),
+    "E6a": (REMOTE, REMOTE + [EXPORT]),  # the remote JSON is rug-pulled after the lock
+    "E6b": (REMOTE, REMOTE + [EXPORT]),
+    "E7": ([READ, LIST], [_t("read_note", "Read a note by its id.",
+                             {"id": {"type": "string", "description": INJECT}}, ["id"]), LIST]),
+    "E8a": ([READ, LIST], [READ, LIST, EXPORT]),  # live list once the date passes (the proxy checks every list)
+    "E8b": ([READ, LIST], [READ, LIST, EXPORT]),
+    "E9": ([READ], [dict(READ, description="Read a note by its id. " + INJECT)]),  # via helper 1.0.1
+    "E11": ([READ, LIST], [READ, LIST]),
+}
+
+
+def _registry_router() -> dict:
+    """deptree patches: the eval scope resolves on the local Verdaccio, everything else on registry.npmjs.org."""
+    from census.meta import npm_url
+
+    def url(p):
+        return f"{R.REGISTRY}/{p.replace('/', '%2f')}" if p.startswith(SCOPE + "/") else npm_url(p)
+
+    def ident(node):  # the eval scope's attestations stand for the synthetic CI identity, as at the top level
+        if (node.get("attestation_url") or "").startswith(R.REGISTRY):
+            return CI_ID
+        return identity.npm_identity(node.get("attestation_url"))
+    return {"npm_url": url, "_identity": ident}
+
+
+def _lock_at(c: dict, published: dict) -> datetime | None:
+    """The lock is taken just before the first version the attack adds after it (E9: helper 1.0.1)."""
+    later = [published[(c["pkg"], v)] for v, *_ in c["versions"]
+             if V._semver_key(v) > V._semver_key(c["lock"])]
+    later += [published[(c["helper"], v)] for v, *_ in (c.get("helper_versions") or [])[1:]]
+    return min(later) - timedelta(milliseconds=1) if later else None  # versions are ms apart
+
+
+def _dep_data(c: dict, target: str, lock_at: datetime | None, now: datetime) -> tuple[dict, dict, dict]:
+    """(lock `dependencies`, bundle `deps`, bundle `dep_identities`) for H1, from the real registries."""
+    from gate import deptree as dt
+    patches = _registry_router()
+    saved = {k: getattr(dt, k) for k in patches}
+    for k, fn in patches.items():
+        setattr(dt, k, fn)
+    try:
+        locked = dt.lock_tree(c["pkg"], c["lock"], lock_at)
+        before, _ = dt.resolve(c["pkg"], c["lock"], lock_at)
+        after, _ = dt.resolve(c["pkg"], target, now)
+        root = dt.versions(c["pkg"], now)
+        deps = {c["pkg"]: {v: root[v] for v in {c["lock"], target}}}
+        for key, n in {**before, **after}.items():
+            deps.setdefault(key.rpartition("@")[0], {})[n["version"]] = n
+        ids = {n["attestation_url"]: patches["_identity"](n)
+               for key, n in after.items() if n.get("attestation_url") and key not in before}
+    finally:
+        for k, fn in saved.items():
+            setattr(dt, k, fn)
+    return locked, deps, ids
+
+
 def bundle_for(c: dict, command: str) -> dict:
     """Replay bundle for one case (eval/replay.py format), built from the local registry."""
     from eval.corpora.benign import _lock_entry
@@ -193,6 +264,10 @@ def bundle_for(c: dict, command: str) -> dict:
     V.npm_url = lambda p: f"{R.REGISTRY}/{p.replace('/', '%2f')}"
     try:
         vs = V.npm_versions(c["pkg"])
+        published = {(c["pkg"], v["version"]): V._ts(v["published"]) for v in vs}
+        if c.get("helper"):
+            published |= {(c["helper"], v["version"]): V._ts(v["published"])
+                          for v in V.npm_versions(c["helper"])}
         ids = {v["version"]: (CI_ID if v.get("attestation_url") else None) for v in vs}
         tools = {}
         for v in vs:
@@ -202,26 +277,21 @@ def bundle_for(c: dict, command: str) -> dict:
         V.npm_url = saved
     now = datetime.now(UTC)
     first = now - timedelta(days=c.get("age_days", 365))
-    lock = None
+    target = vs[-1]
+    lock, deps, dep_ids = None, {}, {}
     if c["lock"]:
         lv = next(v for v in vs if v["version"] == c["lock"])
         lock = _lock_entry("npm", c["pkg"], lv, ids[lv["version"]], tools[lv["version"]])
-    target = vs[-1]
-    # Ground truth for hardening overlays (known by construction, never executed):
-    #   h_runtime_poison: the *live* tool list the server would expose differs maliciously from the
-    #     lock even if static extraction cannot see it (H2 target).
-    #   h_dep_break: a locked dependency's continuity identity changes to an untrusted publisher (H1).
-    #   h_no_version_change: the rug pull needs no new version (E6b), so no static signal can fire.
-    hp = {"E5", "E6a", "E6b", "E7", "E8a", "E8b"}  # effect is a poisoned/extra tool at runtime
+        lock["dependencies"], deps, dep_ids = _dep_data(c, target["version"], _lock_at(c, published), now)
+    rt = RUNTIME.get(c["id"])
     return {"case_id": f"ADV:{c['id']}:{command}", "corpus": "ADV", "ecosystem": "npm", "package": c["pkg"],
             "t": now.isoformat(), "command": command, "versions": vs, "lock": lock,
             "registry_info": {c["pkg"]: {"exists": True, "first_release": first.isoformat()}},
             "osv": {}, "identities": {target["version"]: ids[target["version"]]},
             "tools": {target["version"]: tools[target["version"]]},
             "evaluable": {"S2": True, "S3": True, "S4": True, "S5": True},
-            "hardening": {"runtime_poison": c["id"] in hp,
-                          "dep_break": c["id"] == "E9",
-                          "no_version_change": c["id"] == "E6b"},
+            "deps": deps, "dep_identities": dep_ids,
+            "runtime": {"pinned": rt[0], "live": rt[1]} if rt else None,
             "labels": {"case": c["id"], "tier": c["tier"], "what": c["what"], "command": command}}
 
 
@@ -239,15 +309,18 @@ def e10_bundle() -> dict:
                    "packagetype": "bdist_wheel"}
     lock = {"ecosystem": "pypi", "name": name, "version": ver, "integrity": "sha256-" + "a" * 64,
             "archive": locked_file["filename"], "provenance": None,
-            "tools": {"hash": "sha256:old", "method": "static", "names": ["read_note"]}}
+            "tools": {"hash": "sha256:old", "method": "static", "names": ["read_note"]},
+            "files": {locked_file["filename"]: "sha256-" + "a" * 64}}
+    # what the release holds at t: the locked wheel plus a platform wheel uploaded after the lock
+    files_now = {locked_file["filename"]: "sha256-" + "a" * 64,
+                 f"{name}-{ver}-cp312-cp312-win_amd64.whl": "sha256-" + "b" * 64}
     now = datetime.now(UTC).isoformat()
     return {"case_id": "ADV:E10:pip install", "corpus": "ADV", "ecosystem": "pypi", "package": name,
             "t": now, "command": f"uvx {name}", "versions": [locked_file], "lock": lock,
             "registry_info": {name: {"exists": True, "first_release": "2026-05-01T00:00:00+00:00"}},
             "osv": {}, "identities": {}, "tools": {ver: {"hash": "sha256:old", "names": ["read_note"]}},
             "evaluable": {"S2": True, "S3": True, "S4": True, "S5": True},
-            "hardening": {"runtime_poison": False, "dep_break": False, "no_version_change": False,
-                          "pypi_extra_file": True},
+            "files": {ver: files_now}, "runtime": {"pinned": [READ], "live": [READ]},
             "labels": {"case": "E10", "tier": "T2/T4", "command": "uvx " + name,
                        "what": "extra file added to an already-locked PyPI release"}}
 

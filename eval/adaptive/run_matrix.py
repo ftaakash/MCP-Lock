@@ -21,7 +21,7 @@ ROOT = Path(__file__).resolve().parents[2]
 BUNDLES = ROOT / "results/candidate/phase5/adaptive/bundles.jsonl.gz"
 OUT = ROOT / "results/candidate/phase5"
 # Which E-cases each hardening switch is expected to close (for the report only).
-CLOSES = {"H1": {"E9"}, "H2": {"E5", "E6a", "E6b", "E8a", "E8b"}, "H3": {"E10"}, "H4": {"E2"},
+CLOSES = {"H1": {"E9"}, "H2": {"E5", "E6a", "E6b", "E7", "E8a", "E8b", "E9"}, "H3": {"E10"}, "H4": {"E2"},
           "H5": {"E11"}}
 
 
@@ -57,8 +57,11 @@ def markdown(res: dict) -> str:
     base, hard, allh = res["baseline"], res["hardening"], res["all_hardening"]
     main = {cid: v for cid, v in base.items() if v["labels"]["case"] != "E11"}
     L = ["# Phase 5 evasion matrix (adaptive attacker, RQ3)", "",
-         "Frozen gate (`prereg-v1`) on local-registry attacks. G = all signals; hardening switches in",
-         "`eval/adaptive/hardening.py` are exploratory (re-run on the Phase 4 benign corpus separately).", "",
+         "Frozen gate (`prereg-v1`) on local-registry attacks. G = all signals. Hardening is exploratory:",
+         "H1/H3 are gate checks (`gate/deptree.py`, `gate/signals.py`), H2 the runtime proxy",
+         "(`gate/proxy.py`), H4/H5 rules in `eval/adaptive/hardening.py`; costs on the Phase 4 benign",
+         "corpus are reported separately.",
+         "",
          "| Case | Tier | Attack | S1-C | G | signal | +all hardening |", "|---|---|---|---|---|---|---|"]
     for cid, v in main.items():
         lab = v["labels"]
@@ -77,7 +80,7 @@ def markdown(res: dict) -> str:
           "| Switch | Target cases | Closed (allow/warn → block, or blind spot removed) |", "|---|---|---|"]
     for h in ("H1", "H2", "H3", "H4", "H5"):
         closed = [cid.split(":")[1] for cid, v in hard[h].items()
-                  if not base[cid]["detected"] and v["detected"]]
+                  if base[cid]["G"] != "block" and v["G"] == "block"]
         L.append(f"| {h} | {', '.join(sorted(CLOSES[h])) or '—'} | {', '.join(sorted(set(closed))) or '—'} |")
     return "\n".join(L) + "\n"
 

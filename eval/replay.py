@@ -14,6 +14,9 @@ Bundle fields:
   identities      {version: identity | null}  (null = observed: no provenance)
   tools           {version: {"hash": str|null, "names": [...]} | {"too_large": true}}
   evaluable       {"S2": bool, "S3": bool, "S4": bool, "S5": bool}
+  deps            {name: {version: node}} npm dependency nodes (gate/deptree.py), for H1 only
+  dep_identities  {attestation_url: identity | null}, for H1 only
+  files           {version: {filename: "sha256-..."}} every file of a PyPI release, for H3 only
   labels          free-form (malicious/benign, class, stratum, ...)
 
 A signal marked not evaluable is disabled for that case (PREREG §3.2: no finding, counts as a miss).
@@ -29,7 +32,7 @@ from pathlib import Path
 
 from census import http, tarballs
 from census import versions as V
-from gate import core, s1, signals
+from gate import core, deptree, s1, signals
 
 SIGNALS_23 = ("S2", "S3", "S4", "S5")
 # Findings that count as a detection (PREREG §2.1). gate unlocked / lookup_failed / unresolvable
@@ -47,9 +50,10 @@ def _ts(s: str | None) -> datetime | None:
     return datetime.fromisoformat(s.replace("Z", "+00:00")) if s else None
 
 
-def systems(evaluable: dict) -> dict[str, tuple[str, frozenset]]:
-    """System id -> (S1 variant, enabled signals). G drops signals that are not evaluable."""
-    ok = frozenset(s for s in SIGNALS_23 if evaluable.get(s, True))
+def systems(evaluable: dict, hardening: frozenset = frozenset()) -> dict[str, tuple[str, frozenset]]:
+    """System id -> (S1 variant, enabled signals). G drops signals that are not evaluable.
+    `hardening` (exploratory H1/H3 gate checks) is added to G and its ablations, never to S1-L/S1-C."""
+    ok = frozenset(s for s in SIGNALS_23 if evaluable.get(s, True)) | hardening
     out = {"S1-L": ("literal", frozenset({"S1"})),
            "S1-C": ("charitable", frozenset({"S1"})),
            "G": ("charitable", frozenset({"S1"}) | ok)}
@@ -123,6 +127,27 @@ def offline(bundle: dict):
     patch(s1, "osv_fixable", osv_fixable)
     patch(signals, "_identity", identity)
     patch(signals, "static_tools", static_tools)
+
+    def dep_versions(name, as_of=None):  # bundle data is already truncated to t
+        if name not in (bundle.get("deps") or {}):
+            raise OfflineViolation(f"dependency {name} not in bundle")
+        return {v: dict(n) for v, n in bundle["deps"][name].items()}
+
+    def dep_identity(node):
+        ids = bundle.get("dep_identities") or {}
+        if node.get("attestation_url") not in ids:
+            raise OfflineViolation(f"identity for {node.get('attestation_url')} not in bundle")
+        return ids[node["attestation_url"]]
+
+    def pypi_files(name, version):
+        files = (bundle.get("files") or {}).get(version)
+        if files is None:
+            raise OfflineViolation(f"file list for {name}=={version} not in bundle")
+        return dict(files)
+
+    patch(deptree, "versions", dep_versions)
+    patch(deptree, "_identity", dep_identity)
+    patch(signals, "pypi_files", pypi_files)
     try:
         yield
     finally:
@@ -143,7 +168,7 @@ def detected(decision: dict, block_only: bool = False) -> bool:
     return False
 
 
-def run(bundle: dict) -> dict:
+def run(bundle: dict, hardening: frozenset = frozenset()) -> dict:
     """Evaluate one bundle with every system. Returns {system: decision dict + detection flags}."""
     t = _ts(bundle["t"])
     out = {}
@@ -159,7 +184,7 @@ def run(bundle: dict) -> dict:
             lock_path.write_text(json.dumps({"lockfileVersion": 1, "servers": {
                 bundle["package"]: bundle["lock"]}}), encoding="utf-8")
         with offline(bundle):
-            for sid, (variant, enabled) in systems(bundle.get("evaluable") or {}).items():
+            for sid, (variant, enabled) in systems(bundle.get("evaluable") or {}, hardening).items():
                 cfg = (s1.S1Config.charitable if variant == "charitable"
                        else s1.S1Config.literal)(now=t)
                 dec = core.evaluate(bundle["command"], cwd, lock_path, cfg, enabled).to_dict()
