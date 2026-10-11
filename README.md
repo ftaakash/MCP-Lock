@@ -6,7 +6,8 @@
 
 *Pinning what an MCP server is, who built it, and what tools it advertises — before an agent runs it.*
 
-![Phase](https://img.shields.io/badge/phase-3%20gate%20built-2ea44f)
+![Phase](https://img.shields.io/badge/phase-4%20pre--registered-2ea44f)
+[![Preregistered](https://img.shields.io/badge/OSF-preregistered-blue)](https://osf.io/2amj3)
 ![Kill test](https://img.shields.io/badge/kill%20test-PASS-2ea44f)
 ![Python](https://img.shields.io/badge/python-3.11-3776AB?logo=python&logoColor=white)
 ![Packages](https://img.shields.io/badge/frame-18%2C067%20MCP%20packages-blue)
@@ -43,7 +44,7 @@ and tests the gate against an attacker who knows its checks (RQ3).
 | 1 | Census pilot (200 packages) + kill test | ✅ **PASS** |
 | 2 | Census (15,272 packages metadata · 2,000 tool diffs) + MCP-Lock spec | ✅ done |
 | 3 | Gate (S1–S5) + baseline parity | ✅ done |
-| 4 | Pre-registered evaluation ([PREREG.md](PREREG.md)) | 📝 plan written, awaiting registration |
+| 4 | Pre-registered evaluation ([PREREG.md](PREREG.md), [OSF](https://osf.io/2amj3)) | 🔄 registered 2026-10-11, building corpora |
 | 5 | Adaptive attacker + paper | ⏳ |
 
 ---

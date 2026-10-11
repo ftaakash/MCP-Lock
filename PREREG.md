@@ -7,7 +7,7 @@
 | Repository | https://github.com/ftaakash/MCP-Lock |
 | Version | PREREG v1, written 2026-10-10, decisions settled 2026-10-11, **before any Phase 4 evaluation run** |
 | Code frozen at | tag `prereg-v1`. The commit hash goes into the registration form. |
-| Registry | OSF or Zenodo. The DOI or URL is added here after registration in a separate commit; the plan itself is not edited. |
+| Registry | OSF Registries, OSF Preregistration, registered 2026-10-11: https://osf.io/2amj3 (associated project https://osf.io/ksrwp). Registered plan text = commit `914d2b3`; code freeze = tag `prereg-v1` (`9a59fdf`). |
 
 ## 0. What is already known (disclosed so readers can judge what is confirmatory)
 Phases 1–3 have already been run and published in this repository. The following results were seen before this plan

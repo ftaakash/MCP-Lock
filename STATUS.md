@@ -52,8 +52,8 @@ The charitable variant is at least as good as the paper on false positives, so i
 
 ## Next gate
 Phase 4: `PREREG.md` written (2026-10-10), §9 decisions settled and code frozen at tag `prereg-v1` (2026-10-11).
-**Waiting for Aakash** to register it on
-OSF Registries. Then build the corpora and the replay adapter. No evaluation run until registration.
+**Registered** on OSF Registries 2026-10-11: https://osf.io/2amj3 (plan text commit `914d2b3`).
+Now: build the corpora, the replay adapter and the scoring scripts; test them on toy fixtures and synthetic controls only.
 
 ## Phase 2: full census + MCP-Lock spec (2026-10-09). Complete
 
