@@ -1,0 +1,10 @@
+{
+  "pinned": "2026-10-11",
+  "sources": [
+    {"name": "ossf/malicious-packages", "url": "https://github.com/ossf/malicious-packages",
+     "commit": "1861f95ffacc04ed9d9c6049639098146030f14b", "license": "Apache-2.0", "use": "MAL- OSV records (npm, PyPI)"},
+    {"name": "DataDog/malicious-software-packages-dataset", "url": "https://github.com/DataDog/malicious-software-packages-dataset",
+     "commit": "805fcd72db525244cae8dd32056efbd50b8b0e19", "license": "Apache-2.0",
+     "use": "compromised_lib cases and per-case archives (encrypted zip); never cloned in full (~20 GB)"}
+  ]
+}

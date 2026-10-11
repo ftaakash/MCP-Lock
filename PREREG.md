@@ -5,7 +5,7 @@
 | Title | Does build-provenance and tool-definition pinning catch MCP-server supply-chain attacks that name/source checks miss, and at what false-block cost? |
 | Author | Aakash (GitHub: ftaakash) |
 | Repository | https://github.com/ftaakash/MCP-Lock |
-| Version | PREREG v1, written 2026-10-10, **before any Phase 4 evaluation run** |
+| Version | PREREG v1, written 2026-10-10, decisions settled 2026-10-11, **before any Phase 4 evaluation run** |
 | Code frozen at | tag `prereg-v1`. The commit hash goes into the registration form. |
 | Registry | OSF or Zenodo. The DOI or URL is added here after registration in a separate commit; the plan itself is not edited. |
 
@@ -78,8 +78,12 @@ All corpora are fixed by the procedures below before any gate run. Seed for ever
   expected. This corpus checks that G loses no baseline detection.
 
 ### 3.2 R-M: real malicious versions from OSV / OpenSSF (real-attack corpus, part 2)
-- **Source.** `ossf/malicious-packages` (GitHub), OSV records with `MAL-` IDs, ecosystems npm and PyPI.
-  - The repository commit is pinned on the day of registration and recorded in `eval/corpora/mal_commit.txt`.
+- **Sources (pinned 2026-10-11, recorded in `eval/corpora/sources.json`):**
+  - `ossf/malicious-packages` (Apache-2.0) at commit `1861f95ffacc04ed9d9c6049639098146030f14b`: OSV records with
+    `MAL-` IDs, ecosystems npm and PyPI.
+  - `DataDog/malicious-software-packages-dataset` (Apache-2.0, verified 2026-10-11) at commit
+    `805fcd72db525244cae8dd32056efbd50b8b0e19`: the `compromised_lib` samples, npm and PyPI.
+  - Cases from both sources are merged and deduplicated by (ecosystem, normalized name, version).
 - **Window.** Malicious versions published 2024-01-01 to 2026-10-08. Publish time comes from the registry `time`
   field, or from the record's `published` date when the registry no longer lists the version.
 - **Classes**, assigned by rule before any gate run:
@@ -87,7 +91,8 @@ All corpora are fixed by the procedures below before any gate run. Seed for ever
     the malicious version, that no `MAL-` record lists as affected. These are the cases S2–S5 are designed for.
   - **N (new or typosquat package):** every other record.
 - **Selection:**
-  - All C cases.
+  - All C cases. If there are more than 400 (the DataDog npm folder alone lists at least 1,000 packages), keep every
+    PyPI C case and draw a seeded random sample of npm C cases to reach 400.
   - Plus a seeded random sample of N cases, stratified by ecosystem in proportion to the frame, so that
     |R-M| ≥ 200.
   - When fewer than 100 N cases would be included this way, draw 100.
@@ -113,8 +118,8 @@ All corpora are fixed by the procedures below before any gate run. Seed for ever
 - **Allowed sources:**
   1. The live registry (read-only, cached, rate-limited).
   2. The OSV record.
-  3. A published malware-sample dataset with archives, if Aakash approves the download. The candidate is
-     `DataDog/malicious-software-packages-dataset`; its availability and licence are **UNVERIFIED**.
+  3. The DataDog dataset's archive for that exact version (encrypted zip). Only the zips for selected cases are
+     downloaded, one file at a time; the full repository (about 20 GB) is never cloned.
   - No other sources may be added after registration without a logged deviation.
 - **Safety.** Malicious archives are opened only inside Docker with `--network none` and a read-only mount, and are
   parsed statically. No code from them runs.
@@ -228,11 +233,10 @@ All corpora are fixed by the procedures below before any gate run. Seed for ever
   - Popularity lists and the OSV snapshot are newer than t, which introduces lookahead.
   - Latency depends on the network and the machine; it is measured live, not in replay.
 
-## 9. Decisions for Aakash before registering
-1. **Kill rule on real attacks only**, with the synthetic rug pulls excluded. *Recommended*: including attacks we built
-   for our own signals would make the rule trivial to pass.
-2. **Warn counts as a detection** (primary block ∪ warn, secondary block only). *Recommended*: the hook turns warn
-   into a human prompt.
-3. **Approve downloading a malware-sample dataset** for R-M archives. Size and licence are to be checked first. If
-   not approved, S4 and S5 on removed versions are not evaluable.
-4. **Registry:** OSF (supports embargo) or Zenodo (DOI).
+## 9. Decisions (settled by Aakash, 2026-10-11)
+1. **The kill rule uses real attacks only** (R = R-B ∪ R-M). The synthetic rug pulls (R-S) are reported separately.
+2. **A warning counts as a detection** (primary: block ∪ warn). Block-only results are secondary.
+3. **Malware archives:** only the DataDog zips for selected cases are downloaded (§3.2), inside the safety rules. Nothing
+   is downloaded before registration.
+4. **Registry:** OSF Registries (timestamped, DOI, optional embargo). This file and the `prereg-v1` commit hash are
+   registered.
