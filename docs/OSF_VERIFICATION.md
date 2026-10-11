@@ -19,6 +19,7 @@ no embargo. Checked through the public OSF API (`api.osf.io/v2/registrations/2am
 | Hypotheses, kill rule, Holm, McNemar, primary definitions | match `PREREG.md` §1 and §5 and the reported Phase 4 analysis |
 | Phase 5 (adaptive attacker, hardening) | outside this registration (stated in its "other" field); reported as exploratory |
 
-Contributor name: the OSF profile has given name "Aakash", middle name "G", family name "S", so citation styles print
-"S, A. G.". OSF builds citations from the profile, so changing the name fields there corrects the registration's
-citations; the registration itself does not need to change.
+Contributor name: originally given "Aakash", middle "G", family "S" (citations printed "S, A. G."). Changed in the
+OSF profile on 2026-10-11 to given "Aakash", family "G S"; the registration's citation now reads "G S, A. (2026,
+October 11). MCP-Lock: ... https://doi.org/10.17605/OSF.IO/2AMJ3" (checked through the API). The paper's reference
+(`osf2026prereg`) uses the same name form.
