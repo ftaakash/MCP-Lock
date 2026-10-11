@@ -1,0 +1,17 @@
+{
+  "result": "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase5/h1_cost.json",
+  "result_sha256": "ace0dc9a78beea694a07eacc063b5c4f6de891f988f69b3fed54ba079e35f0c8",
+  "command": "python.exe eval/adaptive/h1_cost.py --workers 6",
+  "commit": "2d0543f7b08062a22c891224208e6ca6214bfe83-dirty",
+  "timestamp_utc": "2026-10-11T13:42:58Z",
+  "python": "3.11.9",
+  "inputs": {
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase4/benign/bundles.jsonl.gz": "bffade4c221b0afb1812fc5105540919b10838eda2836c100414bb507fd6d743",
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase4/runs/B.jsonl": "d998c778df7af2fe730cf1b5098b02d4311d4781f745b6e638c99b7f52c217af"
+  },
+  "params": {
+    "sample": 0,
+    "seed": 20261011
+  },
+  "note": ""
+}
