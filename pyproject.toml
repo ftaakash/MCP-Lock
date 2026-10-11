@@ -35,4 +35,5 @@ testpaths = ["tests"]
 
 [tool.ruff.lint.per-file-ignores]
 "census/dynamic.py" = ["E501"]  # embedded JS/Python entry scripts
+"eval/adaptive/attacks.py" = ["E501"]  # embedded JS sources of the synthetic attack servers
 "eval/scoring/s1_popular_set_calibration.py" = ["E", "B", "UP", "I"]  # kept exactly as run in phase 0

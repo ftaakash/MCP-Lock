@@ -1,0 +1,163 @@
+[
+ {
+  "case": "E1",
+  "package": "@mcplock-eval/adv-e1-notesmith",
+  "version": "1.0.0",
+  "publisher": "squatter",
+  "attested": false
+ },
+ {
+  "case": "E2",
+  "package": "@mcplock-eval/adv-e2",
+  "version": "1.0.0",
+  "publisher": "alice",
+  "attested": false
+ },
+ {
+  "case": "E2",
+  "package": "@mcplock-eval/adv-e2",
+  "version": "1.0.1",
+  "publisher": "alice",
+  "attested": false
+ },
+ {
+  "case": "E3",
+  "package": "@mcplock-eval/adv-e3",
+  "version": "1.0.0",
+  "publisher": "GitHub Actions",
+  "attested": true
+ },
+ {
+  "case": "E3",
+  "package": "@mcplock-eval/adv-e3",
+  "version": "1.0.1",
+  "publisher": "alice",
+  "attested": false
+ },
+ {
+  "case": "E4",
+  "package": "@mcplock-eval/adv-e4",
+  "version": "1.0.0",
+  "publisher": "GitHub Actions",
+  "attested": true
+ },
+ {
+  "case": "E4",
+  "package": "@mcplock-eval/adv-e4",
+  "version": "1.0.1",
+  "publisher": "GitHub Actions",
+  "attested": true
+ },
+ {
+  "case": "E5",
+  "package": "@mcplock-eval/adv-e5",
+  "version": "1.0.0",
+  "publisher": "GitHub Actions",
+  "attested": true
+ },
+ {
+  "case": "E5",
+  "package": "@mcplock-eval/adv-e5",
+  "version": "1.0.1",
+  "publisher": "GitHub Actions",
+  "attested": true
+ },
+ {
+  "case": "E6a",
+  "package": "@mcplock-eval/adv-e6a",
+  "version": "1.0.0",
+  "publisher": "GitHub Actions",
+  "attested": true
+ },
+ {
+  "case": "E6a",
+  "package": "@mcplock-eval/adv-e6a",
+  "version": "1.0.1",
+  "publisher": "GitHub Actions",
+  "attested": true
+ },
+ {
+  "case": "E6b",
+  "package": "@mcplock-eval/adv-e6b",
+  "version": "1.0.0",
+  "publisher": "GitHub Actions",
+  "attested": true
+ },
+ {
+  "case": "E7",
+  "package": "@mcplock-eval/adv-e7",
+  "version": "1.0.0",
+  "publisher": "GitHub Actions",
+  "attested": true
+ },
+ {
+  "case": "E7",
+  "package": "@mcplock-eval/adv-e7",
+  "version": "1.0.1",
+  "publisher": "GitHub Actions",
+  "attested": true
+ },
+ {
+  "case": "E8a",
+  "package": "@mcplock-eval/adv-e8a",
+  "version": "1.0.0",
+  "publisher": "GitHub Actions",
+  "attested": true
+ },
+ {
+  "case": "E8a",
+  "package": "@mcplock-eval/adv-e8a",
+  "version": "1.0.1",
+  "publisher": "GitHub Actions",
+  "attested": true
+ },
+ {
+  "case": "E8b",
+  "package": "@mcplock-eval/adv-e8b",
+  "version": "1.0.0",
+  "publisher": "GitHub Actions",
+  "attested": true
+ },
+ {
+  "case": "E8b",
+  "package": "@mcplock-eval/adv-e8b",
+  "version": "1.0.1",
+  "publisher": "GitHub Actions",
+  "attested": true
+ },
+ {
+  "case": "E9",
+  "package": "@mcplock-eval/adv-e9",
+  "version": "1.0.0",
+  "publisher": "GitHub Actions",
+  "attested": true
+ },
+ {
+  "case": "E9",
+  "package": "@mcplock-eval/adv-e9-helper",
+  "version": "1.0.0",
+  "publisher": "GitHub Actions",
+  "attested": true
+ },
+ {
+  "case": "E9",
+  "package": "@mcplock-eval/adv-e9-helper",
+  "version": "1.0.1",
+  "publisher": "mallory",
+  "attested": false
+ },
+ {
+  "case": "E11",
+  "package": "@mcplock-eval/adv-e11",
+  "version": "1.0.0",
+  "publisher": "GitHub Actions",
+  "attested": true
+ },
+ {
+  "case": "E11",
+  "package": "@mcplock-eval/adv-e11",
+  "version": "1.0.1",
+  "publisher": "GitHub Actions",
+  "attested": true
+ }
+]

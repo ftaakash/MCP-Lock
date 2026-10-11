@@ -1,0 +1,36 @@
+{
+ "E2_no_provenance_lock": {
+  "k": 4919,
+  "n": 8180,
+  "pct": 60.13,
+  "ci95": [
+   59.07,
+   61.19
+  ],
+  "attack": "stolen-token runtime payload; S2/S3 blind",
+  "source": "Phase 4 benign locks"
+ },
+ "E6_E8_non_extractable_tools": {
+  "k": 2774,
+  "n": 12768,
+  "pct": 21.73,
+  "ci95": [
+   21.02,
+   22.45
+  ],
+  "attack": "runtime/remote/time-bomb tools; S5 blind",
+  "source": "Phase 2 G1 (10 recent versions per package)"
+ },
+ "E9_floating_sdk_dependency": {
+  "k": 1027,
+  "n": 1094,
+  "pct": 93.88,
+  "ci95": [
+   92.3,
+   95.15
+  ],
+  "attack": "dependency substitution; top-level lock blind",
+  "source": "Phase 2 npm latest version @modelcontextprotocol/sdk range",
+  "caveat": "proxy: measures the SDK dep only, not every dependency"
+ }
+}

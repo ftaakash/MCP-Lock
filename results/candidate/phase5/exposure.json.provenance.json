@@ -1,0 +1,15 @@
+{
+  "result": "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase5/exposure.json",
+  "result_sha256": "a1313c29014f7b5d127f3ae82af4d5ac0e8ac71d9cdf0e165276ed15ddcf78da",
+  "command": "python.exe eval/adaptive/exposure.py",
+  "commit": "6182e0ef356e2fbd02cdaf8383e71baf8f2b2cd2-dirty",
+  "timestamp_utc": "2026-10-11T11:41:13Z",
+  "python": "3.11.9",
+  "inputs": {
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/census/phase2/rq1.json": "89d0ca1f48b0adf6eee0612a057682e127b759961be549262ffa72a8a9cd8cfd",
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase4/phase4_results.json": "efcfc4fd737fae2b982a1616376c7d2ed84610e490a21d442c57497b773bad4c",
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/census/phase2/versions.jsonl": "f4d1d7374e7ab914bf9f56a2d99022296e68973a7b38679d98b9f7c133094fce"
+  },
+  "params": {},
+  "note": ""
+}

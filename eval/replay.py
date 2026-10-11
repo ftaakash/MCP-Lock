@@ -71,13 +71,21 @@ def offline(bundle: dict):
 
     def versions(name):
         if name != pkg:
-            raise OfflineViolation(f"versions for unexpected package {name}")
+            # The gate parsed a different package than the attack's (e.g. an E11 `-p PKG bin` shape):
+            # it never sees the real package, so it cannot resolve this one. Recorded, returns empty
+            # (-> gate "unresolvable", which §2.1 does not count as a detection).
+            bundle.setdefault("_aux_lookups", []).append(name)
+            return []
         return [dict(v) for v in bundle["versions"]]
 
     def registry_info(e, name, now=None, age_days=30):
         info = (bundle.get("registry_info") or {}).get(name)
         if info is None:
-            raise OfflineViolation(f"registry_info for unexpected package {name}")
+            # A multi-command shape (e.g. `npm install -g X && adv-notes`) can make S1 look up an
+            # auxiliary token. Treat it as an existing, non-new package: conservative (it cannot add
+            # an S1 detection) and recorded, so it never hides or fabricates a finding.
+            bundle.setdefault("_aux_lookups", []).append(name)
+            return {"exists": True, "first_release": None}
         return {"exists": info["exists"], "first_release": _ts(info.get("first_release"))}
 
     def osv_fixable(e, name, version):
@@ -121,7 +129,8 @@ def detected(decision: dict, block_only: bool = False) -> bool:
     for f in decision["findings"]:
         if f["severity"] not in levels:
             continue
-        if f["signal"] in ("S1", "S2", "S3", "S4", "S5") or f["check"] in COUNTED_GATE_CHECKS:
+        sig = f["signal"]
+        if sig[0] in ("S", "H") or f["check"] in COUNTED_GATE_CHECKS:
             return True
     return False
 

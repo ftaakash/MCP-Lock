@@ -1,0 +1,2616 @@
+{
+ "baseline": {
+  "ADV:E1:npx -y @mcplock-eval/adv-e1-notesmith": {
+   "S1-C": "allow",
+   "G": "warn",
+   "signals": [
+    "gate:unlocked"
+   ],
+   "detected": false,
+   "aux": [],
+   "labels": {
+    "case": "E1",
+    "tier": "T1",
+    "what": "new name, edit distance >= 2, older than 30 days",
+    "command": "npx -y @mcplock-eval/adv-e1-notesmith"
+   }
+  },
+  "ADV:E2:npx -y @mcplock-eval/adv-e2": {
+   "S1-C": "allow",
+   "G": "allow",
+   "signals": [],
+   "detected": false,
+   "aux": [],
+   "labels": {
+    "case": "E2",
+    "tier": "T2",
+    "what": "stolen token of the same maintainer; locked version had no provenance; runtime payload",
+    "command": "npx -y @mcplock-eval/adv-e2"
+   }
+  },
+  "ADV:E3:npx -y @mcplock-eval/adv-e3": {
+   "S1-C": "allow",
+   "G": "block",
+   "signals": [
+    "S2:provenance_lost",
+    "S3:ci_to_human"
+   ],
+   "detected": true,
+   "aux": [],
+   "labels": {
+    "case": "E3",
+    "tier": "T2",
+    "what": "stolen token; locked version had provenance",
+    "command": "npx -y @mcplock-eval/adv-e3"
+   }
+  },
+  "ADV:E4:npx -y @mcplock-eval/adv-e4": {
+   "S1-C": "allow",
+   "G": "allow",
+   "signals": [],
+   "detected": false,
+   "aux": [],
+   "labels": {
+    "case": "E4",
+    "tier": "T3",
+    "what": "payload shipped through the genuine release workflow",
+    "command": "npx -y @mcplock-eval/adv-e4"
+   }
+  },
+  "ADV:E5:npx -y @mcplock-eval/adv-e5": {
+   "S1-C": "allow",
+   "G": "warn",
+   "signals": [
+    "S5:tool_drift"
+   ],
+   "detected": true,
+   "aux": [],
+   "labels": {
+    "case": "E5",
+    "tier": "T4",
+    "what": "poisoned description built at runtime (base64 + join)",
+    "command": "npx -y @mcplock-eval/adv-e5"
+   }
+  },
+  "ADV:E6a:npx -y @mcplock-eval/adv-e6a": {
+   "S1-C": "allow",
+   "G": "allow",
+   "signals": [],
+   "detected": false,
+   "aux": [],
+   "labels": {
+    "case": "E6a",
+    "tier": "T4",
+    "what": "tools fetched from a remote URL; new version with identical code",
+    "command": "npx -y @mcplock-eval/adv-e6a"
+   }
+  },
+  "ADV:E6b:npx -y @mcplock-eval/adv-e6b": {
+   "S1-C": "allow",
+   "G": "allow",
+   "signals": [],
+   "detected": false,
+   "aux": [],
+   "labels": {
+    "case": "E6b",
+    "tier": "T4",
+    "what": "tools fetched from a remote URL; rug pull changes the remote file only (no new version)",
+    "command": "npx -y @mcplock-eval/adv-e6b"
+   }
+  },
+  "ADV:E7:npx -y @mcplock-eval/adv-e7": {
+   "S1-C": "allow",
+   "G": "warn",
+   "signals": [
+    "S5:tool_drift"
+   ],
+   "detected": true,
+   "aux": [],
+   "labels": {
+    "case": "E7",
+    "tier": "T4",
+    "what": "poisoning moved into an input-schema field description",
+    "command": "npx -y @mcplock-eval/adv-e7"
+   }
+  },
+  "ADV:E8a:npx -y @mcplock-eval/adv-e8a": {
+   "S1-C": "allow",
+   "G": "warn",
+   "signals": [
+    "S5:tool_drift"
+   ],
+   "detected": true,
+   "aux": [],
+   "labels": {
+    "case": "E8a",
+    "tier": "T4",
+    "what": "time bomb: extra tool registered only after a date",
+    "command": "npx -y @mcplock-eval/adv-e8a"
+   }
+  },
+  "ADV:E8b:npx -y @mcplock-eval/adv-e8b": {
+   "S1-C": "allow",
+   "G": "allow",
+   "signals": [],
+   "detected": false,
+   "aux": [],
+   "labels": {
+    "case": "E8b",
+    "tier": "T4",
+    "what": "extra tool registered from a base64 blob decoded at runtime",
+    "command": "npx -y @mcplock-eval/adv-e8b"
+   }
+  },
+  "ADV:E9:npx -y @mcplock-eval/adv-e9": {
+   "S1-C": "allow",
+   "G": "allow",
+   "signals": [],
+   "detected": false,
+   "aux": [],
+   "labels": {
+    "case": "E9",
+    "tier": "T5",
+    "what": "tools and payload live in a caret-range dependency; the locked server never changes",
+    "command": "npx -y @mcplock-eval/adv-e9"
+   }
+  },
+  "ADV:E11:npx -y @mcplock-eval/adv-e11": {
+   "S1-C": "allow",
+   "G": "block",
+   "signals": [
+    "S4:new_install_script"
+   ],
+   "detected": true,
+   "aux": [],
+   "labels": {
+    "case": "E11",
+    "tier": "any",
+    "what": "S4-detectable version used to test command shapes",
+    "command": "npx -y @mcplock-eval/adv-e11"
+   }
+  },
+  "ADV:E11:npx --yes @mcplock-eval/adv-e11": {
+   "S1-C": "allow",
+   "G": "block",
+   "signals": [
+    "S4:new_install_script"
+   ],
+   "detected": true,
+   "aux": [],
+   "labels": {
+    "case": "E11",
+    "tier": "any",
+    "what": "S4-detectable version used to test command shapes",
+    "command": "npx --yes @mcplock-eval/adv-e11"
+   }
+  },
+  "ADV:E11:npx @mcplock-eval/adv-e11@latest": {
+   "S1-C": "allow",
+   "G": "block",
+   "signals": [
+    "S4:new_install_script"
+   ],
+   "detected": true,
+   "aux": [],
+   "labels": {
+    "case": "E11",
+    "tier": "any",
+    "what": "S4-detectable version used to test command shapes",
+    "command": "npx @mcplock-eval/adv-e11@latest"
+   }
+  },
+  "ADV:E11:npx -y \"@mcplock-eval/adv-e11\"": {
+   "S1-C": "allow",
+   "G": "block",
+   "signals": [
+    "S4:new_install_script"
+   ],
+   "detected": true,
+   "aux": [],
+   "labels": {
+    "case": "E11",
+    "tier": "any",
+    "what": "S4-detectable version used to test command shapes",
+    "command": "npx -y \"@mcplock-eval/adv-e11\""
+   }
+  },
+  "ADV:E11:npx -p @mcplock-eval/adv-e11 adv-notes": {
+   "S1-C": "allow",
+   "G": "block",
+   "signals": [
+    "S4:new_install_script"
+   ],
+   "detected": true,
+   "aux": [],
+   "labels": {
+    "case": "E11",
+    "tier": "any",
+    "what": "S4-detectable version used to test command shapes",
+    "command": "npx -p @mcplock-eval/adv-e11 adv-notes"
+   }
+  },
+  "ADV:E11:npx --package=@mcplock-eval/adv-e11 adv-notes": {
+   "S1-C": "allow",
+   "G": "block",
+   "signals": [
+    "S4:new_install_script"
+   ],
+   "detected": true,
+   "aux": [],
+   "labels": {
+    "case": "E11",
+    "tier": "any",
+    "what": "S4-detectable version used to test command shapes",
+    "command": "npx --package=@mcplock-eval/adv-e11 adv-notes"
+   }
+  },
+  "ADV:E11:npm exec -y @mcplock-eval/adv-e11": {
+   "S1-C": "allow",
+   "G": "allow",
+   "signals": [],
+   "detected": false,
+   "aux": [],
+   "labels": {
+    "case": "E11",
+    "tier": "any",
+    "what": "S4-detectable version used to test command shapes",
+    "command": "npm exec -y @mcplock-eval/adv-e11"
+   }
+  },
+  "ADV:E11:npm exec --package=@mcplock-eval/adv-e11 -- adv-notes": {
+   "S1-C": "allow",
+   "G": "allow",
+   "signals": [],
+   "detected": false,
+   "aux": [],
+   "labels": {
+    "case": "E11",
+    "tier": "any",
+    "what": "S4-detectable version used to test command shapes",
+    "command": "npm exec --package=@mcplock-eval/adv-e11 -- adv-notes"
+   }
+  },
+  "ADV:E11:npm x -y @mcplock-eval/adv-e11": {
+   "S1-C": "allow",
+   "G": "allow",
+   "signals": [],
+   "detected": false,
+   "aux": [],
+   "labels": {
+    "case": "E11",
+    "tier": "any",
+    "what": "S4-detectable version used to test command shapes",
+    "command": "npm x -y @mcplock-eval/adv-e11"
+   }
+  },
+  "ADV:E11:pnpm dlx @mcplock-eval/adv-e11": {
+   "S1-C": "allow",
+   "G": "block",
+   "signals": [
+    "S4:new_install_script"
+   ],
+   "detected": true,
+   "aux": [],
+   "labels": {
+    "case": "E11",
+    "tier": "any",
+    "what": "S4-detectable version used to test command shapes",
+    "command": "pnpm dlx @mcplock-eval/adv-e11"
+   }
+  },
+  "ADV:E11:pnpx @mcplock-eval/adv-e11": {
+   "S1-C": "allow",
+   "G": "block",
+   "signals": [
+    "S4:new_install_script"
+   ],
+   "detected": true,
+   "aux": [],
+   "labels": {
+    "case": "E11",
+    "tier": "any",
+    "what": "S4-detectable version used to test command shapes",
+    "command": "pnpx @mcplock-eval/adv-e11"
+   }
+  },
+  "ADV:E11:yarn dlx @mcplock-eval/adv-e11": {
+   "S1-C": "allow",
+   "G": "block",
+   "signals": [
+    "S4:new_install_script"
+   ],
+   "detected": true,
+   "aux": [],
+   "labels": {
+    "case": "E11",
+    "tier": "any",
+    "what": "S4-detectable version used to test command shapes",
+    "command": "yarn dlx @mcplock-eval/adv-e11"
+   }
+  },
+  "ADV:E11:bunx @mcplock-eval/adv-e11": {
+   "S1-C": "allow",
+   "G": "block",
+   "signals": [
+    "S4:new_install_script"
+   ],
+   "detected": true,
+   "aux": [],
+   "labels": {
+    "case": "E11",
+    "tier": "any",
+    "what": "S4-detectable version used to test command shapes",
+    "command": "bunx @mcplock-eval/adv-e11"
+   }
+  },
+  "ADV:E11:bun x @mcplock-eval/adv-e11": {
+   "S1-C": "allow",
+   "G": "block",
+   "signals": [
+    "S4:new_install_script"
+   ],
+   "detected": true,
+   "aux": [],
+   "labels": {
+    "case": "E11",
+    "tier": "any",
+    "what": "S4-detectable version used to test command shapes",
+    "command": "bun x @mcplock-eval/adv-e11"
+   }
+  },
+  "ADV:E11:env FOO=1 npx -y @mcplock-eval/adv-e11": {
+   "S1-C": "allow",
+   "G": "block",
+   "signals": [
+    "S4:new_install_script"
+   ],
+   "detected": true,
+   "aux": [],
+   "labels": {
+    "case": "E11",
+    "tier": "any",
+    "what": "S4-detectable version used to test command shapes",
+    "command": "env FOO=1 npx -y @mcplock-eval/adv-e11"
+   }
+  },
+  "ADV:E11:cmd /c npx -y @mcplock-eval/adv-e11": {
+   "S1-C": "allow",
+   "G": "block",
+   "signals": [
+    "S4:new_install_script"
+   ],
+   "detected": true,
+   "aux": [],
+   "labels": {
+    "case": "E11",
+    "tier": "any",
+    "what": "S4-detectable version used to test command shapes",
+    "command": "cmd /c npx -y @mcplock-eval/adv-e11"
+   }
+  },
+  "ADV:E11:sh -c \"npx -y @mcplock-eval/adv-e11\"": {
+   "S1-C": "allow",
+   "G": "allow",
+   "signals": [],
+   "detected": false,
+   "aux": [],
+   "labels": {
+    "case": "E11",
+    "tier": "any",
+    "what": "S4-detectable version used to test command shapes",
+    "command": "sh -c \"npx -y @mcplock-eval/adv-e11\""
+   }
+  },
+  "ADV:E11:bash -lc 'npx -y @mcplock-eval/adv-e11'": {
+   "S1-C": "allow",
+   "G": "allow",
+   "signals": [],
+   "detected": false,
+   "aux": [],
+   "labels": {
+    "case": "E11",
+    "tier": "any",
+    "what": "S4-detectable version used to test command shapes",
+    "command": "bash -lc 'npx -y @mcplock-eval/adv-e11'"
+   }
+  },
+  "ADV:E11:PKG=@mcplock-eval/adv-e11; npx -y $PKG": {
+   "S1-C": "allow",
+   "G": "allow",
+   "signals": [],
+   "detected": false,
+   "aux": [],
+   "labels": {
+    "case": "E11",
+    "tier": "any",
+    "what": "S4-detectable version used to test command shapes",
+    "command": "PKG=@mcplock-eval/adv-e11; npx -y $PKG"
+   }
+  },
+  "ADV:E11:npm install -g @mcplock-eval/adv-e11 && adv-notes": {
+   "S1-C": "allow",
+   "G": "allow",
+   "signals": [],
+   "detected": false,
+   "aux": [],
+   "labels": {
+    "case": "E11",
+    "tier": "any",
+    "what": "S4-detectable version used to test command shapes",
+    "command": "npm install -g @mcplock-eval/adv-e11 && adv-notes"
+   }
+  },
+  "ADV:E11:npm i @mcplock-eval/adv-e11 && npx adv-notes": {
+   "S1-C": "allow",
+   "G": "block",
+   "signals": [
+    "gate:unresolvable"
+   ],
+   "detected": false,
+   "aux": [
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes"
+   ],
+   "labels": {
+    "case": "E11",
+    "tier": "any",
+    "what": "S4-detectable version used to test command shapes",
+    "command": "npm i @mcplock-eval/adv-e11 && npx adv-notes"
+   }
+  },
+  "ADV:E11:echo bnB4IC15IEBtY3Bsb2NrLWV2YWwvYWR2LWUxMQ== | base64 -d | sh": {
+   "S1-C": "allow",
+   "G": "allow",
+   "signals": [],
+   "detected": false,
+   "aux": [],
+   "labels": {
+    "case": "E11",
+    "tier": "any",
+    "what": "S4-detectable version used to test command shapes",
+    "command": "echo bnB4IC15IEBtY3Bsb2NrLWV2YWwvYWR2LWUxMQ== | base64 -d | sh"
+   }
+  },
+  "ADV:E10:pip install": {
+   "S1-C": "allow",
+   "G": "allow",
+   "signals": [],
+   "detected": false,
+   "aux": [],
+   "labels": {
+    "case": "E10",
+    "tier": "T2/T4",
+    "command": "uvx mcplock-eval-notes",
+    "what": "extra file added to an already-locked PyPI release"
+   }
+  }
+ },
+ "hardening": {
+  "H1": {
+   "ADV:E1:npx -y @mcplock-eval/adv-e1-notesmith": {
+    "S1-C": "allow",
+    "G": "warn",
+    "signals": [
+     "gate:unlocked"
+    ],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E2:npx -y @mcplock-eval/adv-e2": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E3:npx -y @mcplock-eval/adv-e3": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S2:provenance_lost",
+     "S3:ci_to_human"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E4:npx -y @mcplock-eval/adv-e4": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E5:npx -y @mcplock-eval/adv-e5": {
+    "S1-C": "allow",
+    "G": "warn",
+    "signals": [
+     "S5:tool_drift"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E6a:npx -y @mcplock-eval/adv-e6a": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E6b:npx -y @mcplock-eval/adv-e6b": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E7:npx -y @mcplock-eval/adv-e7": {
+    "S1-C": "allow",
+    "G": "warn",
+    "signals": [
+     "S5:tool_drift"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E8a:npx -y @mcplock-eval/adv-e8a": {
+    "S1-C": "allow",
+    "G": "warn",
+    "signals": [
+     "S5:tool_drift"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E8b:npx -y @mcplock-eval/adv-e8b": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E9:npx -y @mcplock-eval/adv-e9": {
+    "S1-C": "block",
+    "G": "block",
+    "signals": [
+     "H1:dependency_continuity"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:npx -y @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:npx --yes @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:npx @mcplock-eval/adv-e11@latest": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:npx -y \"@mcplock-eval/adv-e11\"": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:npx -p @mcplock-eval/adv-e11 adv-notes": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:npx --package=@mcplock-eval/adv-e11 adv-notes": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:npm exec -y @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E11:npm exec --package=@mcplock-eval/adv-e11 -- adv-notes": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E11:npm x -y @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E11:pnpm dlx @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:pnpx @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:yarn dlx @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:bunx @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:bun x @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:env FOO=1 npx -y @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:cmd /c npx -y @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:sh -c \"npx -y @mcplock-eval/adv-e11\"": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E11:bash -lc 'npx -y @mcplock-eval/adv-e11'": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E11:PKG=@mcplock-eval/adv-e11; npx -y $PKG": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E11:npm install -g @mcplock-eval/adv-e11 && adv-notes": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E11:npm i @mcplock-eval/adv-e11 && npx adv-notes": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "gate:unresolvable"
+    ],
+    "detected": false,
+    "aux": [
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes"
+    ]
+   },
+   "ADV:E11:echo bnB4IC15IEBtY3Bsb2NrLWV2YWwvYWR2LWUxMQ== | base64 -d | sh": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E10:pip install": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   }
+  },
+  "H2": {
+   "ADV:E1:npx -y @mcplock-eval/adv-e1-notesmith": {
+    "S1-C": "allow",
+    "G": "warn",
+    "signals": [
+     "gate:unlocked"
+    ],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E2:npx -y @mcplock-eval/adv-e2": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E3:npx -y @mcplock-eval/adv-e3": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S2:provenance_lost",
+     "S3:ci_to_human"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E4:npx -y @mcplock-eval/adv-e4": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E5:npx -y @mcplock-eval/adv-e5": {
+    "S1-C": "block",
+    "G": "block",
+    "signals": [
+     "S5:tool_drift",
+     "H2:runtime_tool_drift"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E6a:npx -y @mcplock-eval/adv-e6a": {
+    "S1-C": "block",
+    "G": "block",
+    "signals": [
+     "H2:runtime_tool_drift"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E6b:npx -y @mcplock-eval/adv-e6b": {
+    "S1-C": "block",
+    "G": "block",
+    "signals": [
+     "H2:runtime_tool_drift"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E7:npx -y @mcplock-eval/adv-e7": {
+    "S1-C": "block",
+    "G": "block",
+    "signals": [
+     "S5:tool_drift",
+     "H2:runtime_tool_drift"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E8a:npx -y @mcplock-eval/adv-e8a": {
+    "S1-C": "block",
+    "G": "block",
+    "signals": [
+     "S5:tool_drift",
+     "H2:runtime_tool_drift"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E8b:npx -y @mcplock-eval/adv-e8b": {
+    "S1-C": "block",
+    "G": "block",
+    "signals": [
+     "H2:runtime_tool_drift"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E9:npx -y @mcplock-eval/adv-e9": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E11:npx -y @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:npx --yes @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:npx @mcplock-eval/adv-e11@latest": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:npx -y \"@mcplock-eval/adv-e11\"": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:npx -p @mcplock-eval/adv-e11 adv-notes": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:npx --package=@mcplock-eval/adv-e11 adv-notes": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:npm exec -y @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E11:npm exec --package=@mcplock-eval/adv-e11 -- adv-notes": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E11:npm x -y @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E11:pnpm dlx @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:pnpx @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:yarn dlx @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:bunx @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:bun x @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:env FOO=1 npx -y @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:cmd /c npx -y @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:sh -c \"npx -y @mcplock-eval/adv-e11\"": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E11:bash -lc 'npx -y @mcplock-eval/adv-e11'": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E11:PKG=@mcplock-eval/adv-e11; npx -y $PKG": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E11:npm install -g @mcplock-eval/adv-e11 && adv-notes": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E11:npm i @mcplock-eval/adv-e11 && npx adv-notes": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "gate:unresolvable"
+    ],
+    "detected": false,
+    "aux": [
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes"
+    ]
+   },
+   "ADV:E11:echo bnB4IC15IEBtY3Bsb2NrLWV2YWwvYWR2LWUxMQ== | base64 -d | sh": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E10:pip install": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   }
+  },
+  "H3": {
+   "ADV:E1:npx -y @mcplock-eval/adv-e1-notesmith": {
+    "S1-C": "allow",
+    "G": "warn",
+    "signals": [
+     "gate:unlocked"
+    ],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E2:npx -y @mcplock-eval/adv-e2": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E3:npx -y @mcplock-eval/adv-e3": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S2:provenance_lost",
+     "S3:ci_to_human"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E4:npx -y @mcplock-eval/adv-e4": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E5:npx -y @mcplock-eval/adv-e5": {
+    "S1-C": "allow",
+    "G": "warn",
+    "signals": [
+     "S5:tool_drift"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E6a:npx -y @mcplock-eval/adv-e6a": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E6b:npx -y @mcplock-eval/adv-e6b": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E7:npx -y @mcplock-eval/adv-e7": {
+    "S1-C": "allow",
+    "G": "warn",
+    "signals": [
+     "S5:tool_drift"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E8a:npx -y @mcplock-eval/adv-e8a": {
+    "S1-C": "allow",
+    "G": "warn",
+    "signals": [
+     "S5:tool_drift"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E8b:npx -y @mcplock-eval/adv-e8b": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E9:npx -y @mcplock-eval/adv-e9": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E11:npx -y @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:npx --yes @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:npx @mcplock-eval/adv-e11@latest": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:npx -y \"@mcplock-eval/adv-e11\"": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:npx -p @mcplock-eval/adv-e11 adv-notes": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:npx --package=@mcplock-eval/adv-e11 adv-notes": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:npm exec -y @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E11:npm exec --package=@mcplock-eval/adv-e11 -- adv-notes": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E11:npm x -y @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E11:pnpm dlx @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:pnpx @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:yarn dlx @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:bunx @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:bun x @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:env FOO=1 npx -y @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:cmd /c npx -y @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:sh -c \"npx -y @mcplock-eval/adv-e11\"": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E11:bash -lc 'npx -y @mcplock-eval/adv-e11'": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E11:PKG=@mcplock-eval/adv-e11; npx -y $PKG": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E11:npm install -g @mcplock-eval/adv-e11 && adv-notes": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E11:npm i @mcplock-eval/adv-e11 && npx adv-notes": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "gate:unresolvable"
+    ],
+    "detected": false,
+    "aux": [
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes"
+    ]
+   },
+   "ADV:E11:echo bnB4IC15IEBtY3Bsb2NrLWV2YWwvYWR2LWUxMQ== | base64 -d | sh": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E10:pip install": {
+    "S1-C": "block",
+    "G": "block",
+    "signals": [
+     "H3:unlocked_file"
+    ],
+    "detected": true,
+    "aux": []
+   }
+  },
+  "H4": {
+   "ADV:E1:npx -y @mcplock-eval/adv-e1-notesmith": {
+    "S1-C": "allow",
+    "G": "warn",
+    "signals": [
+     "gate:unlocked"
+    ],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E2:npx -y @mcplock-eval/adv-e2": {
+    "S1-C": "block",
+    "G": "block",
+    "signals": [
+     "H4:provenance_required"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E3:npx -y @mcplock-eval/adv-e3": {
+    "S1-C": "block",
+    "G": "block",
+    "signals": [
+     "S2:provenance_lost",
+     "S3:ci_to_human",
+     "H4:provenance_required"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E4:npx -y @mcplock-eval/adv-e4": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E5:npx -y @mcplock-eval/adv-e5": {
+    "S1-C": "allow",
+    "G": "warn",
+    "signals": [
+     "S5:tool_drift"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E6a:npx -y @mcplock-eval/adv-e6a": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E6b:npx -y @mcplock-eval/adv-e6b": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E7:npx -y @mcplock-eval/adv-e7": {
+    "S1-C": "allow",
+    "G": "warn",
+    "signals": [
+     "S5:tool_drift"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E8a:npx -y @mcplock-eval/adv-e8a": {
+    "S1-C": "allow",
+    "G": "warn",
+    "signals": [
+     "S5:tool_drift"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E8b:npx -y @mcplock-eval/adv-e8b": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E9:npx -y @mcplock-eval/adv-e9": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E11:npx -y @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:npx --yes @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:npx @mcplock-eval/adv-e11@latest": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:npx -y \"@mcplock-eval/adv-e11\"": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:npx -p @mcplock-eval/adv-e11 adv-notes": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:npx --package=@mcplock-eval/adv-e11 adv-notes": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:npm exec -y @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E11:npm exec --package=@mcplock-eval/adv-e11 -- adv-notes": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E11:npm x -y @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E11:pnpm dlx @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:pnpx @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:yarn dlx @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:bunx @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:bun x @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:env FOO=1 npx -y @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:cmd /c npx -y @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:sh -c \"npx -y @mcplock-eval/adv-e11\"": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E11:bash -lc 'npx -y @mcplock-eval/adv-e11'": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E11:PKG=@mcplock-eval/adv-e11; npx -y $PKG": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E11:npm install -g @mcplock-eval/adv-e11 && adv-notes": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E11:npm i @mcplock-eval/adv-e11 && npx adv-notes": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "gate:unresolvable"
+    ],
+    "detected": false,
+    "aux": [
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes"
+    ]
+   },
+   "ADV:E11:echo bnB4IC15IEBtY3Bsb2NrLWV2YWwvYWR2LWUxMQ== | base64 -d | sh": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E10:pip install": {
+    "S1-C": "block",
+    "G": "block",
+    "signals": [
+     "H4:provenance_required"
+    ],
+    "detected": true,
+    "aux": []
+   }
+  },
+  "H5": {
+   "ADV:E1:npx -y @mcplock-eval/adv-e1-notesmith": {
+    "S1-C": "allow",
+    "G": "warn",
+    "signals": [
+     "gate:unlocked"
+    ],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E2:npx -y @mcplock-eval/adv-e2": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E3:npx -y @mcplock-eval/adv-e3": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S2:provenance_lost",
+     "S3:ci_to_human"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E4:npx -y @mcplock-eval/adv-e4": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E5:npx -y @mcplock-eval/adv-e5": {
+    "S1-C": "allow",
+    "G": "warn",
+    "signals": [
+     "S5:tool_drift"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E6a:npx -y @mcplock-eval/adv-e6a": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E6b:npx -y @mcplock-eval/adv-e6b": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E7:npx -y @mcplock-eval/adv-e7": {
+    "S1-C": "allow",
+    "G": "warn",
+    "signals": [
+     "S5:tool_drift"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E8a:npx -y @mcplock-eval/adv-e8a": {
+    "S1-C": "allow",
+    "G": "warn",
+    "signals": [
+     "S5:tool_drift"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E8b:npx -y @mcplock-eval/adv-e8b": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E9:npx -y @mcplock-eval/adv-e9": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E11:npx -y @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:npx --yes @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:npx @mcplock-eval/adv-e11@latest": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:npx -y \"@mcplock-eval/adv-e11\"": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:npx -p @mcplock-eval/adv-e11 adv-notes": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:npx --package=@mcplock-eval/adv-e11 adv-notes": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:npm exec -y @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:npm exec --package=@mcplock-eval/adv-e11 -- adv-notes": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:npm x -y @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:pnpm dlx @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:pnpx @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:yarn dlx @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:bunx @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:bun x @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:env FOO=1 npx -y @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:cmd /c npx -y @mcplock-eval/adv-e11": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:sh -c \"npx -y @mcplock-eval/adv-e11\"": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:bash -lc 'npx -y @mcplock-eval/adv-e11'": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:PKG=@mcplock-eval/adv-e11; npx -y $PKG": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:npm install -g @mcplock-eval/adv-e11 && adv-notes": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": []
+   },
+   "ADV:E11:npm i @mcplock-eval/adv-e11 && npx adv-notes": {
+    "S1-C": "allow",
+    "G": "block",
+    "signals": [
+     "S4:new_install_script"
+    ],
+    "detected": true,
+    "aux": [
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes",
+     "adv-notes"
+    ]
+   },
+   "ADV:E11:echo bnB4IC15IEBtY3Bsb2NrLWV2YWwvYWR2LWUxMQ== | base64 -d | sh": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   },
+   "ADV:E10:pip install": {
+    "S1-C": "allow",
+    "G": "allow",
+    "signals": [],
+    "detected": false,
+    "aux": []
+   }
+  }
+ },
+ "all_hardening": {
+  "ADV:E1:npx -y @mcplock-eval/adv-e1-notesmith": {
+   "S1-C": "allow",
+   "G": "warn",
+   "signals": [
+    "gate:unlocked"
+   ],
+   "detected": false,
+   "aux": []
+  },
+  "ADV:E2:npx -y @mcplock-eval/adv-e2": {
+   "S1-C": "block",
+   "G": "block",
+   "signals": [
+    "H4:provenance_required"
+   ],
+   "detected": true,
+   "aux": []
+  },
+  "ADV:E3:npx -y @mcplock-eval/adv-e3": {
+   "S1-C": "block",
+   "G": "block",
+   "signals": [
+    "S2:provenance_lost",
+    "S3:ci_to_human",
+    "H4:provenance_required"
+   ],
+   "detected": true,
+   "aux": []
+  },
+  "ADV:E4:npx -y @mcplock-eval/adv-e4": {
+   "S1-C": "allow",
+   "G": "allow",
+   "signals": [],
+   "detected": false,
+   "aux": []
+  },
+  "ADV:E5:npx -y @mcplock-eval/adv-e5": {
+   "S1-C": "block",
+   "G": "block",
+   "signals": [
+    "S5:tool_drift",
+    "H2:runtime_tool_drift"
+   ],
+   "detected": true,
+   "aux": []
+  },
+  "ADV:E6a:npx -y @mcplock-eval/adv-e6a": {
+   "S1-C": "block",
+   "G": "block",
+   "signals": [
+    "H2:runtime_tool_drift"
+   ],
+   "detected": true,
+   "aux": []
+  },
+  "ADV:E6b:npx -y @mcplock-eval/adv-e6b": {
+   "S1-C": "block",
+   "G": "block",
+   "signals": [
+    "H2:runtime_tool_drift"
+   ],
+   "detected": true,
+   "aux": []
+  },
+  "ADV:E7:npx -y @mcplock-eval/adv-e7": {
+   "S1-C": "block",
+   "G": "block",
+   "signals": [
+    "S5:tool_drift",
+    "H2:runtime_tool_drift"
+   ],
+   "detected": true,
+   "aux": []
+  },
+  "ADV:E8a:npx -y @mcplock-eval/adv-e8a": {
+   "S1-C": "block",
+   "G": "block",
+   "signals": [
+    "S5:tool_drift",
+    "H2:runtime_tool_drift"
+   ],
+   "detected": true,
+   "aux": []
+  },
+  "ADV:E8b:npx -y @mcplock-eval/adv-e8b": {
+   "S1-C": "block",
+   "G": "block",
+   "signals": [
+    "H2:runtime_tool_drift"
+   ],
+   "detected": true,
+   "aux": []
+  },
+  "ADV:E9:npx -y @mcplock-eval/adv-e9": {
+   "S1-C": "block",
+   "G": "block",
+   "signals": [
+    "H1:dependency_continuity"
+   ],
+   "detected": true,
+   "aux": []
+  },
+  "ADV:E11:npx -y @mcplock-eval/adv-e11": {
+   "S1-C": "allow",
+   "G": "block",
+   "signals": [
+    "S4:new_install_script"
+   ],
+   "detected": true,
+   "aux": []
+  },
+  "ADV:E11:npx --yes @mcplock-eval/adv-e11": {
+   "S1-C": "allow",
+   "G": "block",
+   "signals": [
+    "S4:new_install_script"
+   ],
+   "detected": true,
+   "aux": []
+  },
+  "ADV:E11:npx @mcplock-eval/adv-e11@latest": {
+   "S1-C": "allow",
+   "G": "block",
+   "signals": [
+    "S4:new_install_script"
+   ],
+   "detected": true,
+   "aux": []
+  },
+  "ADV:E11:npx -y \"@mcplock-eval/adv-e11\"": {
+   "S1-C": "allow",
+   "G": "block",
+   "signals": [
+    "S4:new_install_script"
+   ],
+   "detected": true,
+   "aux": []
+  },
+  "ADV:E11:npx -p @mcplock-eval/adv-e11 adv-notes": {
+   "S1-C": "allow",
+   "G": "block",
+   "signals": [
+    "S4:new_install_script"
+   ],
+   "detected": true,
+   "aux": []
+  },
+  "ADV:E11:npx --package=@mcplock-eval/adv-e11 adv-notes": {
+   "S1-C": "allow",
+   "G": "block",
+   "signals": [
+    "S4:new_install_script"
+   ],
+   "detected": true,
+   "aux": []
+  },
+  "ADV:E11:npm exec -y @mcplock-eval/adv-e11": {
+   "S1-C": "allow",
+   "G": "block",
+   "signals": [
+    "S4:new_install_script"
+   ],
+   "detected": true,
+   "aux": []
+  },
+  "ADV:E11:npm exec --package=@mcplock-eval/adv-e11 -- adv-notes": {
+   "S1-C": "allow",
+   "G": "block",
+   "signals": [
+    "S4:new_install_script"
+   ],
+   "detected": true,
+   "aux": []
+  },
+  "ADV:E11:npm x -y @mcplock-eval/adv-e11": {
+   "S1-C": "allow",
+   "G": "block",
+   "signals": [
+    "S4:new_install_script"
+   ],
+   "detected": true,
+   "aux": []
+  },
+  "ADV:E11:pnpm dlx @mcplock-eval/adv-e11": {
+   "S1-C": "allow",
+   "G": "block",
+   "signals": [
+    "S4:new_install_script"
+   ],
+   "detected": true,
+   "aux": []
+  },
+  "ADV:E11:pnpx @mcplock-eval/adv-e11": {
+   "S1-C": "allow",
+   "G": "block",
+   "signals": [
+    "S4:new_install_script"
+   ],
+   "detected": true,
+   "aux": []
+  },
+  "ADV:E11:yarn dlx @mcplock-eval/adv-e11": {
+   "S1-C": "allow",
+   "G": "block",
+   "signals": [
+    "S4:new_install_script"
+   ],
+   "detected": true,
+   "aux": []
+  },
+  "ADV:E11:bunx @mcplock-eval/adv-e11": {
+   "S1-C": "allow",
+   "G": "block",
+   "signals": [
+    "S4:new_install_script"
+   ],
+   "detected": true,
+   "aux": []
+  },
+  "ADV:E11:bun x @mcplock-eval/adv-e11": {
+   "S1-C": "allow",
+   "G": "block",
+   "signals": [
+    "S4:new_install_script"
+   ],
+   "detected": true,
+   "aux": []
+  },
+  "ADV:E11:env FOO=1 npx -y @mcplock-eval/adv-e11": {
+   "S1-C": "allow",
+   "G": "block",
+   "signals": [
+    "S4:new_install_script"
+   ],
+   "detected": true,
+   "aux": []
+  },
+  "ADV:E11:cmd /c npx -y @mcplock-eval/adv-e11": {
+   "S1-C": "allow",
+   "G": "block",
+   "signals": [
+    "S4:new_install_script"
+   ],
+   "detected": true,
+   "aux": []
+  },
+  "ADV:E11:sh -c \"npx -y @mcplock-eval/adv-e11\"": {
+   "S1-C": "allow",
+   "G": "block",
+   "signals": [
+    "S4:new_install_script"
+   ],
+   "detected": true,
+   "aux": []
+  },
+  "ADV:E11:bash -lc 'npx -y @mcplock-eval/adv-e11'": {
+   "S1-C": "allow",
+   "G": "block",
+   "signals": [
+    "S4:new_install_script"
+   ],
+   "detected": true,
+   "aux": []
+  },
+  "ADV:E11:PKG=@mcplock-eval/adv-e11; npx -y $PKG": {
+   "S1-C": "allow",
+   "G": "block",
+   "signals": [
+    "S4:new_install_script"
+   ],
+   "detected": true,
+   "aux": []
+  },
+  "ADV:E11:npm install -g @mcplock-eval/adv-e11 && adv-notes": {
+   "S1-C": "allow",
+   "G": "block",
+   "signals": [
+    "S4:new_install_script"
+   ],
+   "detected": true,
+   "aux": []
+  },
+  "ADV:E11:npm i @mcplock-eval/adv-e11 && npx adv-notes": {
+   "S1-C": "allow",
+   "G": "block",
+   "signals": [
+    "S4:new_install_script"
+   ],
+   "detected": true,
+   "aux": [
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes",
+    "adv-notes"
+   ]
+  },
+  "ADV:E11:echo bnB4IC15IEBtY3Bsb2NrLWV2YWwvYWR2LWUxMQ== | base64 -d | sh": {
+   "S1-C": "allow",
+   "G": "allow",
+   "signals": [],
+   "detected": false,
+   "aux": []
+  },
+  "ADV:E10:pip install": {
+   "S1-C": "block",
+   "G": "block",
+   "signals": [
+    "H4:provenance_required",
+    "H3:unlocked_file"
+   ],
+   "detected": true,
+   "aux": []
+  }
+ }
+}

@@ -1,0 +1,13 @@
+{
+  "result": "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase5/evasion_matrix.json",
+  "result_sha256": "a793c418e1652c703d763135139e383f6e04568b120d2e927f829e264eb9c783",
+  "command": "python.exe C:\\Users\\Administrator\\Desktop\\Major Project\\mcp-lock\\eval\\adaptive\\run_matrix.py",
+  "commit": "6182e0ef356e2fbd02cdaf8383e71baf8f2b2cd2-dirty",
+  "timestamp_utc": "2026-10-11T11:30:37Z",
+  "python": "3.11.9",
+  "inputs": {
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase5/adaptive/bundles.jsonl.gz": "e403b37367191a56eb0c4386ecb7e7edd8ad428c3c76b1c07f7a8817b656d978"
+  },
+  "params": {},
+  "note": ""
+}

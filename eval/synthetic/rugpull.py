@@ -330,6 +330,8 @@ def _token(user: str) -> str:
     if r.status_code not in (200, 201):
         r = requests.put(f"{REGISTRY}/-/user/org.couchdb.user:{user}",
                          json={"name": user, "password": f"{user}-local-only"}, timeout=30)
+    if r.status_code == 409:  # account exists from an earlier run: authenticate with basic auth
+        return "Basic " + base64.b64encode(f"{user}:{user}-local-only".encode()).decode()
     r.raise_for_status()
     return r.json()["token"]
 
@@ -351,8 +353,9 @@ def _publish(name: str, version: str, tgz: bytes, user: str, token: str, attest:
             "_attachments": {fname: {"content_type": "application/octet-stream",
                                      "data": base64.b64encode(tgz).decode(),
                                      "length": len(tgz)}}}
+    auth = token if token.startswith("Basic ") else f"Bearer {token}"
     r = requests.put(f"{REGISTRY}/{name.replace('/', '%2f')}", json=body,
-                     headers={"Authorization": f"Bearer {token}"}, timeout=60)
+                     headers={"Authorization": auth}, timeout=60)
     if r.status_code not in (200, 201):
         raise RuntimeError(f"publish {name}@{version}: HTTP {r.status_code} {r.text[:200]}")
 
