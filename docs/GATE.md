@@ -56,6 +56,25 @@ Add to `.claude/settings.json` in a project. This is a manual step; the reposito
 - Caches live in `~/.cache/mcplock` (override with `MCPLOCK_CACHE`). The lockfile defaults to `<cwd>/mcp-lock.json`
   (override with `MCPLOCK_LOCKFILE`).
 
+## Exploratory hardening (Phase 5, off by default)
+These are not part of the pre-registered gate. With no switch on, the gate runs exactly as tagged `prereg-v1`.
+Lock fields: [spec §6](../lockfile/SPEC.md). Evasion matrix and benign cost: `results/candidate/phase5/`.
+
+| Switch | What | How to turn it on |
+|---|---|---|
+| H1 | dependency-tree continuity: S2–S4 rules applied to every dependency of the locked server (closes E9) | `mcplock check --signals S1,S2,S3,S4,S5,H1` |
+| H2 | runtime `tools/list` pin, enforced by a stdio proxy between client and server (closes E5–E9) | launch the server through `mcplock proxy` (below) |
+| H3 | PyPI: every file of the locked release is pinned; an added file blocks (closes E10) | `mcplock check --signals S1,S2,S3,S4,S5,H3` |
+
+H2 wraps the server command in the MCP config. The first run with `--record` writes the pin into the lock:
+```json
+{"mcpServers": {"notes": {"command": "mcplock",
+  "args": ["proxy", "--server", "notes", "--lock", "mcp-lock.json", "--record", "--", "npx", "-y", "notes-mcp@1.0.0"]}}}
+```
+`--record` writes only when the lock has no pin, so it never overwrites one. With a pin, a changed or added tool is
+answered with a JSON-RPC error and the reason is logged on stderr. A new server version that legitimately changes its
+tools needs a new pin: delete `tools.runtime` and run once with `--record`.
+
 ## Known limitations (to be measured in Phase 4)
 - S5 inherits the static extractor's recall (held-out 78.0%): drift in runtime-generated tools is missed.
 - v0.1 records build identity without verifying the Sigstore signature.

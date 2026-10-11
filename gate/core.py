@@ -12,6 +12,8 @@ from gate import command, s1, signals
 from gate.findings import SEVERITY_ORDER, Finding
 
 ALL_SIGNALS = frozenset({"S1", "S2", "S3", "S4", "S5"})
+# Exploratory Phase 5 hardening checks run by the pre-launch gate (H2 lives in gate/proxy.py).
+HARDENING = frozenset({"H1", "H3"})
 
 
 def use_user_cache() -> None:
@@ -59,7 +61,8 @@ def evaluate(cmd: str, cwd: Path, lock_path: Path | None = None,
     for inv in command.parse(cmd):
         if "S1" in enabled:
             findings += s1.check_invocation(inv, Path(cwd), s1cfg)
-        if inv.kind == "launch" and inv.launch is not None and enabled & {"S2", "S3", "S4", "S5"}:
+        if inv.kind == "launch" and inv.launch is not None and \
+                enabled & ({"S2", "S3", "S4", "S5"} | HARDENING):
             lt = inv.launch
             if lt.ecosystem == "npm":
                 _, ver = launch.split_npm_spec(lt.spec)

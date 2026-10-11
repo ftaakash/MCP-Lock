@@ -3,6 +3,8 @@
     mcplock check [--lock mcp-lock.json] [--s1 charitable|literal] [--signals S1,S2,...] -- <command>
     mcplock lock <config.json> [-o mcp-lock.json]
     mcplock hook                       (Claude Code PreToolUse hook; reads JSON on stdin)
+    mcplock proxy --server ID [--lock mcp-lock.json] [--record] -- <server command>
+                                       (exploratory H2: pin the live tools/list; gate/proxy.py)
 
 `check` prints one line: ALLOW / WARN / BLOCK and the reason. Exit code 0 allow, 1 warn, 2 block.
 """
@@ -17,6 +19,9 @@ from pathlib import Path
 
 def main(argv: list[str] | None = None) -> int:
     argv = list(sys.argv[1:] if argv is None else argv)
+    if argv[:1] == ["proxy"]:  # own parser: everything after `--` belongs to the server
+        from gate import proxy
+        return proxy.main(argv[1:])
     ap = argparse.ArgumentParser(prog="mcplock")
     sub = ap.add_subparsers(dest="cmd", required=True)
     c = sub.add_parser("check")

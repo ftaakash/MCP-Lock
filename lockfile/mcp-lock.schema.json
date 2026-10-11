@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/ftaakash/mcp-lock/lockfile/mcp-lock.schema.json",
-  "title": "MCP-Lock lockfile (DRAFT v0.1)",
+  "title": "MCP-Lock lockfile (DRAFT v0.2)",
   "description": "Pins every MCP server launched by an agent harness to an exact package version, archive digest, provenance identity and tool-definition hash.",
   "type": "object",
   "required": [
@@ -11,7 +11,10 @@
   "additionalProperties": false,
   "properties": {
     "lockfileVersion": {
-      "const": "0.1"
+      "enum": [
+        "0.1",
+        "0.2"
+      ]
     },
     "generated": {
       "type": "string",
@@ -214,7 +217,96 @@
               "items": {
                 "type": "string"
               }
+            },
+            "runtime": {
+              "type": "object",
+              "description": "v0.2, exploratory H2: the live tools/list pinned by the MCP proxy (`mcplock proxy --record`).",
+              "required": [
+                "hash",
+                "tools"
+              ],
+              "properties": {
+                "hash": {
+                  "type": "string",
+                  "pattern": "^sha256:[0-9a-f]{64}$"
+                },
+                "tools": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string",
+                    "pattern": "^sha256:[0-9a-f]{64}$"
+                  }
+                },
+                "recorded": {
+                  "type": "string"
+                }
+              }
             }
+          }
+        },
+        "dependencies": {
+          "type": "object",
+          "description": "v0.2, npm, exploratory H1: every node of the dependency tree resolved at lock time.",
+          "required": [
+            "nodes"
+          ],
+          "properties": {
+            "nodes": {
+              "type": "object",
+              "description": "Keyed by name@version.",
+              "additionalProperties": {
+                "type": "object",
+                "required": [
+                  "integrity"
+                ],
+                "properties": {
+                  "integrity": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "provenance": {
+                    "type": [
+                      "object",
+                      "null"
+                    ]
+                  },
+                  "publisher": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "maintainers": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "installScripts": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "unresolved": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "files": {
+          "type": "object",
+          "description": "v0.2, PyPI, exploratory H3: digest of every file of the release at lock time, keyed by file name.",
+          "additionalProperties": {
+            "type": "string",
+            "pattern": "^sha256-[0-9a-f]{64}$"
           }
         }
       }

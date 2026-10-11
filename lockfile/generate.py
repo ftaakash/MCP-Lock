@@ -13,12 +13,13 @@ import time
 from pathlib import Path
 
 from census import extract_js, extract_py, launch, tarballs
+from gate import deptree, signals
 from census import versions as V
 from census.run_extract import _key
 from census.tooldefs import dedupe, tools_hash
 from lockfile import identity
 
-LOCK_VERSION = "0.1"
+LOCK_VERSION = "0.2"
 
 
 def _servers(text: str) -> dict[str, dict]:
@@ -64,6 +65,9 @@ def lock_entry(eco: str, pkg: str, version_meta: dict, runner: str, args: list[s
     if eco == "npm":
         entry["publisher"] = {"publisher": v.get("publisher"), "maintainers": v.get("maintainers")}
         entry["installScripts"] = sorted(v.get("install_scripts") or {})
+        entry["dependencies"] = deptree.lock_tree(pkg, v["version"])  # H1
+    else:
+        entry["files"] = signals.pypi_files(pkg, v["version"])  # H3
     return entry
 
 

@@ -58,3 +58,24 @@ When a launch resolves to a version **different** from the lock entry:
 
 When the launch resolves to the **same** version but the archive digest differs, block (tampering or a registry
 problem). A clean upgrade happens by re-running the generator, which rewrites the entry and produces a reviewable diff.
+
+## 6. v0.2: exploratory hardening fields (Phase 5, not part of the pre-registered gate)
+v0.2 adds three optional fields. A v0.1 lock stays valid; a gate that finds the field missing reports an `info`
+finding and nothing else. Measured cost and coverage: `results/candidate/phase5/`.
+
+| Field | Ecosystem | Content | Checked by |
+|---|---|---|---|
+| `dependencies.nodes` | npm | every node of the dependency tree resolved at lock time, keyed `name@version`: `integrity`, `provenance`, `publisher`, `maintainers`, `installScripts`; ranges that are not registry ranges go to `dependencies.unresolved` | H1, `gate/deptree.py` |
+| `files` | PyPI | `{filename: "sha256-…"}` for **every** file of the locked release, yanked ones included | H3, `gate/signals.py` |
+| `tools.runtime` | both | live `tools/list` pin: one `sha256:` per tool over its canonical `(name, description, inputSchema)` (§3), plus the hash of the whole list | H2, `gate/proxy.py` |
+
+- **H1.** The gate re-resolves the tree npm would install now (`dependencies`, `optionalDependencies`, non-optional
+  `peerDependencies`; highest satisfying stable version) and applies S2–S4 to every node whose version changed, with the
+  highest locked version of that dependency as the baseline. A changed digest for the same `name@version` blocks, and a
+  dependency not in the lock blocks only when it runs an install script.
+- **H2.** `mcplock proxy --record` writes the pin on first use (trust on first use). Afterwards, a `tools/list` that
+  adds a tool or changes one is answered with a JSON-RPC error, and `tools/call` for a tool that is not pinned is refused.
+  A tool that disappears is only reported. The check runs on every listing, so a time-triggered or remote change is
+  caught when it appears, not only at upgrade time.
+- **H3.** On a launch that resolves to the locked version, a file the lock does not list blocks (E10). An installer can
+  enforce the same thing with `--require-hashes` over the `files` digests.

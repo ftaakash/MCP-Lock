@@ -2,16 +2,22 @@
 
 S2 provenance continuity, S3 publisher change (npm), S4 new install script, S5 tool-definition
 drift, plus an integrity check when the version is unchanged. Never executes package code.
+
+Exploratory Phase 5 hardening (docs/PHASE5_PLAN.md §4), off unless named in `enabled`:
+H1 dependency-tree continuity (gate/deptree.py) and H3 PyPI all-files lock. H2 (runtime tools/list
+pinning) runs in the MCP proxy, gate/proxy.py.
 """
 
 from __future__ import annotations
 
 import re
 
-from census import extract_js, extract_py, tarballs
+from census import extract_js, extract_py, http, tarballs
 from census import versions as V
+from census.meta import pypi_url
 from census.run_extract import _key
 from census.tooldefs import dedupe, tools_hash
+from gate import deptree
 from gate.findings import Finding
 from lockfile import identity
 
@@ -45,6 +51,30 @@ def _identity(eco: str, pkg: str, v: dict) -> dict | None:
     return identity.pypi_identity(pkg, v["version"], v["filename"])
 
 
+def pypi_files(pkg: str, version: str) -> dict[str, str]:
+    """H3: {filename: "sha256-..."} for every file of a PyPI release, yanked ones included (an exact
+    `==` pin still installs a yanked file)."""
+    doc = http.get_json(pypi_url(pkg))
+    return {f["filename"]: f"sha256-{f['digests']['sha256']}"
+            for f in (doc.get("releases") or {}).get(version) or []}
+
+
+def _check_files(pkg: str, version: str, entry: dict) -> list[Finding]:
+    locked = entry.get("files")
+    if locked is None:
+        return [Finding("H3", "files_not_locked", "info", pkg,
+                        f"{pkg}: the lock records one file only (re-run `mcplock lock`)")]
+    f = []
+    for name, digest in sorted(pypi_files(pkg, version).items()):
+        if name not in locked:
+            f.append(Finding("H3", "unlocked_file", "block", pkg,
+                             f"{pkg}=={version} gained {name}, which the lock does not cover"))
+        elif locked[name] != digest:
+            f.append(Finding("H3", "file_digest_changed", "block", pkg,
+                             f"{pkg}=={version} file {name} differs from the lock"))
+    return f
+
+
 def static_tools(eco: str, pkg: str, v: dict) -> tuple[str | None, list[str]]:
     key = _key(eco, pkg, v)
     if eco == "npm":
@@ -75,6 +105,10 @@ def check(eco: str, pkg: str, pinned: str | None, entry: dict | None,
                 _integrity(eco, target) != entry["integrity"]:
             f.append(Finding("gate", "integrity_mismatch", "block", pkg,
                              f"{pkg}@{tv} archive digest differs from the lock"))
+        if "H3" in enabled and eco == "pypi":
+            f += _check_files(pkg, tv, entry)
+        if "H1" in enabled and eco == "npm":
+            f += deptree.check(pkg, tv, entry.get("dependencies"))
         return f
     f.append(Finding("gate", "version_drift", "info", pkg, f"{pkg} resolves to {tv}, locked {lv}"))
     # S2: provenance continuity
@@ -115,6 +149,8 @@ def check(eco: str, pkg: str, pinned: str | None, entry: dict | None,
         elif target.get("packagetype") == "sdist" and str(entry.get("archive", "")).endswith(".whl"):
             f.append(Finding("S4", "sdist_build", "warn", pkg,
                              f"{pkg}@{tv} ships only an sdist (runs build code); {lv} was a wheel"))
+    if "H1" in enabled and eco == "npm":
+        f += deptree.check(pkg, tv, entry.get("dependencies"))
     # S5: tool-definition drift
     if "S5" in enabled and (entry.get("tools") or {}).get("method") == "static":
         try:
