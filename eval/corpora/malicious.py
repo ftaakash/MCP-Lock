@@ -380,16 +380,23 @@ def _dd_source(zpath: Path, dest: Path) -> tuple[Path, dict | None]:
     pj = None
     with zipfile.ZipFile(zpath) as zf:
         zf.setpassword(b"infected")
+        names = [n.replace("\\", "/") for n in zf.namelist()]
+        # samples sit under temp-folder prefixes; the package root is the shallowest folder that
+        # holds npm's package/package.json or a Python project marker
+        markers = [n for n in names if n.endswith("/package/package.json")
+                   or n.rsplit("/", 1)[-1] in ("PKG-INFO", "setup.py", "pyproject.toml")]
+        root = min((m.rsplit("/", 1)[0] + "/" for m in markers), key=lambda r: r.count("/"),
+                   default="")
         for info in zf.infolist():
-            if info.is_dir() or info.file_size > tarballs.MAX_FILE:
+            name = info.filename.replace("\\", "/")
+            if info.is_dir() or info.file_size > tarballs.MAX_FILE or not name.startswith(root):
                 continue
-            parts = info.filename.replace("\\", "/").split("/")
-            rel = "/".join(parts[1:]) if len(parts) > 1 else parts[0]  # drop the sample folder
+            rel = name[len(root):]
             p = tarballs._safe_name(rel)
             if p is None:
                 continue
             raw = zf.read(info)
-            if rel.count("/") <= 1 and rel.endswith("package.json") and pj is None:
+            if rel == "package.json" and pj is None:
                 try:
                     pj = json.loads(raw)
                 except ValueError:

@@ -1,0 +1,11 @@
+{
+ "bundles": 568,
+ "primary": 468,
+ "excluded": 32,
+ "evaluable_primary": {
+  "S2": 88,
+  "S3": 88,
+  "S4": 214,
+  "S5": 239
+ }
+}

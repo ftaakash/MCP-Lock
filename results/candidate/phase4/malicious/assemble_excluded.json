@@ -1,0 +1,194 @@
+[
+ {
+  "case": "pypi:apilogicserver@14.5.0",
+  "reason": [
+   "no listed unaffected version before t"
+  ]
+ },
+ {
+  "case": "npm:rei-browser-shim@99.99.99",
+  "reason": [
+   "no listed unaffected version before t"
+  ]
+ },
+ {
+  "case": "npm:drop-events-on-property-plugin@0.0.2",
+  "reason": [
+   "no listed unaffected version before t"
+  ]
+ },
+ {
+  "case": "npm:ts-browser-webpack@99.15.9",
+  "reason": [
+   "no listed unaffected version before t"
+  ]
+ },
+ {
+  "case": "npm:godsplan@3.0.2",
+  "reason": [
+   "no listed unaffected version before t"
+  ]
+ },
+ {
+  "case": "npm:epic-common-node@0.0.1-security",
+  "reason": [
+   "no listed unaffected version before t"
+  ]
+ },
+ {
+  "case": "npm:@postman-cse/okta-aio-linux-arm64@0.8.10",
+  "reason": [
+   "no listed unaffected version before t"
+  ]
+ },
+ {
+  "case": "npm:@warnermediacode/wme-theme-gelatam@99.50.55",
+  "reason": [
+   "no listed unaffected version before t"
+  ]
+ },
+ {
+  "case": "npm:appauthhelper-enduser@99.0.0",
+  "reason": [
+   "no listed unaffected version before t"
+  ]
+ },
+ {
+  "case": "npm:example-marko-webpack@100.0.2",
+  "reason": [
+   "no listed unaffected version before t"
+  ]
+ },
+ {
+  "case": "npm:proleis-web-file-input@10.0.0",
+  "reason": [
+   "no listed unaffected version before t"
+  ]
+ },
+ {
+  "case": "npm:tostpro@100.2.0",
+  "reason": [
+   "no listed unaffected version before t"
+  ]
+ },
+ {
+  "case": "npm:apc-official-icon@6.1.3",
+  "reason": [
+   "no listed unaffected version before t"
+  ]
+ },
+ {
+  "case": "npm:osep-react-antd@10.10.11",
+  "reason": [
+   "no listed unaffected version before t"
+  ]
+ },
+ {
+  "case": "npm:sendbird-moderation-dashboard-node@999.0.2",
+  "reason": [
+   "no listed unaffected version before t"
+  ]
+ },
+ {
+  "case": "npm:@vyzensockets/baileys@0.1.0",
+  "reason": [
+   "no listed unaffected version before t"
+  ]
+ },
+ {
+  "case": "npm:normal-store@1.3.4",
+  "reason": [
+   "no listed unaffected version before t"
+  ]
+ },
+ {
+  "case": "npm:graphpilot@0.1.0",
+  "reason": [
+   "no listed unaffected version before t"
+  ]
+ },
+ {
+  "case": "npm:node-ts-esm-web@99.5.9",
+  "reason": [
+   "no listed unaffected version before t"
+  ]
+ },
+ {
+  "case": "npm:mytmobile@99.2.0",
+  "reason": [
+   "no listed unaffected version before t"
+  ]
+ },
+ {
+  "case": "npm:@athena-portal/themes@99.99.99",
+  "reason": [
+   "no listed unaffected version before t"
+  ]
+ },
+ {
+  "case": "npm:winston-prisma@1.1.0",
+  "reason": [
+   "no listed unaffected version before t"
+  ]
+ },
+ {
+  "case": "npm:auth0-lock-browserify@1.0.0",
+  "reason": [
+   "no listed unaffected version before t"
+  ]
+ },
+ {
+  "case": "npm:composite-reducer@1.0.3",
+  "reason": [
+   "no listed unaffected version before t"
+  ]
+ },
+ {
+  "case": "npm:theme-check-vscode@4.0.0",
+  "reason": [
+   "no listed unaffected version before t"
+  ]
+ },
+ {
+  "case": "npm:message-compiler@9.2.0",
+  "reason": [
+   "no listed unaffected version before t"
+  ]
+ },
+ {
+  "case": "npm:vite-plugin-compress-js@0.5.5",
+  "reason": [
+   "no listed unaffected version before t"
+  ]
+ },
+ {
+  "case": "npm:@socialdeal/uikit-whitelabel@999.100.1",
+  "reason": [
+   "no listed unaffected version before t"
+  ]
+ },
+ {
+  "case": "npm:eslint-plus@6.0.4",
+  "reason": [
+   "no listed unaffected version before t"
+  ]
+ },
+ {
+  "case": "npm:amdocs-core-package@11.11.11",
+  "reason": [
+   "no listed unaffected version before t"
+  ]
+ },
+ {
+  "case": "npm:library-explorer@25.2.1",
+  "reason": [
+   "no listed unaffected version before t"
+  ]
+ },
+ {
+  "case": "npm:oneauth-mac@9.9.9",
+  "reason": [
+   "no listed unaffected version before t"
+  ]
+ }
+]
