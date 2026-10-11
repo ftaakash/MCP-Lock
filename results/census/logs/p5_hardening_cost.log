@@ -37,6 +37,24 @@
     34.87
    ]
   },
+  "added_block_over_G_lower": {
+   "k": 1286,
+   "n": 8180,
+   "pct": 15.72,
+   "ci95": [
+    14.95,
+    16.53
+   ]
+  },
+  "added_block_over_G_upper": {
+   "k": 1319,
+   "n": 8180,
+   "pct": 16.12,
+   "ci95": [
+    15.34,
+    16.94
+   ]
+  },
   "classes": {
    "same": 4438,
    "added": 987,
@@ -92,6 +110,15 @@
    "ci95": [
     56.38,
     58.52
+   ]
+  },
+  "added_block_over_G": {
+   "k": 3048,
+   "n": 8180,
+   "pct": 37.26,
+   "ci95": [
+    36.22,
+    38.32
    ]
   },
   "note": "blocks every upgrade without build provenance"

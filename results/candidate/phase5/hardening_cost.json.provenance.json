@@ -1,12 +1,13 @@
 {
   "result": "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase5/hardening_cost.json",
-  "result_sha256": "ea018b12435be92bfadcb061c0ead9bcc1e46ff3817ab6bd16f5dd2a4f0cf5c8",
+  "result_sha256": "264ccea1d71f2a784ceaf4c5ce66ad816721d905cb95f55fb99c51441f53a7d8",
   "command": "python.exe eval/adaptive/hardening_cost.py",
-  "commit": "44f6991f59c96284b1ad99edd8ac6951de7fcfc0-dirty",
-  "timestamp_utc": "2026-10-11T14:43:26Z",
+  "commit": "1022c8fde4ff3beb2a35ab63e5b2f9de35bd304d-dirty",
+  "timestamp_utc": "2026-10-11T16:36:33Z",
   "python": "3.11.9",
   "inputs": {
     "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase4/benign/bundles.jsonl.gz": "bffade4c221b0afb1812fc5105540919b10838eda2836c100414bb507fd6d743",
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase4/runs/B.jsonl": "d998c778df7af2fe730cf1b5098b02d4311d4781f745b6e638c99b7f52c217af",
     "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase5/h1_cost.json": "a126f3588fb15bd41e9d269d135211221abf74a170917ece8420987efec87667"
   },
   "params": {},

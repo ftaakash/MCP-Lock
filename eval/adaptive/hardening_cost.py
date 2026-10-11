@@ -35,6 +35,7 @@ from eval import replay  # noqa: E402
 from eval.adaptive import hardening  # noqa: E402
 
 BENIGN = ROOT / "results/candidate/phase4/benign/bundles.jsonl.gz"
+G_RUN = ROOT / "results/candidate/phase4/runs/B.jsonl"
 OUT = ROOT / "results/candidate/phase5"
 STRATA = ("mcp", "npm-top", "pypi-top")
 
@@ -85,8 +86,13 @@ def h3_late_files(rows: list[dict]) -> dict:
 def main():
     rows = [json.loads(x) for x in gzip.open(BENIGN, "rt", encoding="utf-8")]
     n = len(rows)
+    g = {}
+    for line in open(G_RUN, encoding="utf-8"):
+        r = json.loads(line)
+        g[r["case_id"]] = r["systems"]["G"]["decision"]
     cls = {}
     h4 = h5_changed = 0
+    add = {"H2_lo": 0, "H2_hi": 0, "H4": 0}  # newly blocked cases that frozen G did not block
     by = {s: {"n": 0, "H4": 0, "H2_lo": 0, "H2_hi": 0} for s in STRATA}
     for b in rows:
         strat = b["labels"]["stratum"]
@@ -95,6 +101,10 @@ def main():
         c = h2_class(b)
         cls[c] = cls.get(c, 0) + 1
         h4 += no_prov
+        not_blocked = g[b["case_id"]] != "block"
+        add["H4"] += no_prov and not_blocked
+        add["H2_lo"] += c in ("added", "changed") and not_blocked
+        add["H2_hi"] += c in ("added", "changed", "removal_only") and not_blocked
         by[strat]["n"] += 1
         by[strat]["H4"] += no_prov
         by[strat]["H2_lo"] += c in ("added", "changed")
@@ -110,13 +120,15 @@ def main():
         "H2_runtime_tool_pin": {
             "block_lower": prop(lo, n), "block_upper": prop(hi, n),
             "block_lower_of_measurable": prop(lo, meas), "block_upper_of_measurable": prop(hi, meas),
+            "added_block_over_G_lower": prop(add["H2_lo"], n),
+            "added_block_over_G_upper": prop(add["H2_hi"], n),
             "classes": cls,
             "note": "live tools/list assumed equal to static extraction; unmeasurable = no static tools"},
         "H3_pypi_all_files": {
             "block_on_B": prop(0, sum(b["ecosystem"] == "pypi" for b in rows)),
             "note": "B holds upgrades only; H3 fires on a relaunch of the locked version",
             "exposure_pinned_relaunch": h3_late_files(rows)},
-        "H4_require_provenance": {"block": prop(h4, n),
+        "H4_require_provenance": {"block": prop(h4, n), "added_block_over_G": prop(add["H4"], n),
                                   "note": "blocks every upgrade without build provenance"},
         "H5_command_normalise": {"decisions_changed": prop(h5_changed, n),
                                  "note": "must be 0: H5 only rewrites evasive shapes"},
@@ -125,7 +137,7 @@ def main():
                            "H2_block_upper": prop(v["H2_hi"], v["n"])} for s, v in by.items()},
     }
     h1 = OUT / "h1_cost.json"
-    inputs = [BENIGN]
+    inputs = [BENIGN, G_RUN]
     if h1.exists():
         res["H1_dependency_lock"] = json.loads(h1.read_text(encoding="utf-8"))
         inputs.append(h1)

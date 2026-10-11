@@ -35,9 +35,9 @@ compromised release pipeline (T3) is outside what any lock can see.
 | Switch | Implementation | Closes | Cost on B |
 |---|---|---|---|
 | H1 dependency-tree lock | gate code, `gate/deptree.py` (+ `gate/semver.py`); S2–S4 rules per dependency | E9 | npm n = 5,652: extra blocks over G 0.53% [0.37, 0.76] (lock just before t) – 1.03% [0.79, 1.32] (lock at v_old's release); allow → warn 0.09–3.52% |
-| H2 runtime `tools/list` pin | stdio proxy, `gate/proxy.py` (`mcplock proxy`); per-tool pin, trust on first use | E5–E9 | blocks 27.1% [26.1, 28.0] – 27.6% [26.7, 28.6], all in the MCP stratum (33.1% of MCP upgrades) |
+| H2 runtime `tools/list` pin | stdio proxy, `gate/proxy.py` (`mcplock proxy`); per-tool pin, trust on first use | E5–E9 | blocks 27.1% [26.1, 28.0] – 27.6% [26.7, 28.6], all in the MCP stratum (33.1% of MCP upgrades); newly blocked over G 15.7% [15.0, 16.5] – 16.1% [15.3, 16.9] |
 | H3 PyPI all-files lock | gate code, `gate/signals.py` | E10 | 0 on B (upgrades only); 12/2,528 = 0.47% [0.27, 0.83] of locked releases gained a file > 1 h after the first |
-| H4 require provenance | policy rule | E2 | blocks 4,700/8,180 = 57.5% [56.4, 58.5] |
+| H4 require provenance | policy rule | E2 | blocks 4,700/8,180 = 57.5% [56.4, 58.5]; newly blocked over G 3,048/8,180 = 37.3% [36.2, 38.3] |
 | H5 command normalisation | parser rule | E11 | 0 decisions changed |
 
 - For comparison, a strict tree lock (`npm ci` reading: any dependency change blocks) would block 12.4–48.9% of npm
@@ -58,8 +58,9 @@ compromised release pipeline (T3) is outside what any lock can see.
    attestation). The gate code was fixed and the run repeated with 0 errors; both runs are in git history.
 
 ### Open
-- Paper (IEEEtran, plan §5): `paper/` is still empty.
-- Stop and remove the local Verdaccio container (`mcplock-verdaccio`) after the paper's figures are final.
+- Paper (IEEEtran, plan §5): first full draft in `paper/` (5 pages, `bash paper/build.sh`); every number is a macro
+  generated from the result files by `paper/make_numbers.py`. Next: hostile review and revision (pipeline Stage 8.4).
+- Local Verdaccio container `mcplock-verdaccio` is stopped (storage volume kept); remove it once the paper is final.
 
 ## Phase 4: pre-registered evaluation (2026-10-11). **Complete: kill rule NOT triggered**
 

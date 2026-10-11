@@ -46,7 +46,7 @@ and tests the gate against an attacker who knows its checks (RQ3).
 | 2 | Census (15,272 packages metadata · 2,000 tool diffs) + MCP-Lock spec | ✅ done |
 | 3 | Gate (S1–S5) + baseline parity | ✅ done |
 | 4 | Pre-registered evaluation ([PREREG.md](PREREG.md), [OSF](https://osf.io/2amj3)) | ✅ **not killed** (+99 detections) |
-| 5 | Adaptive attacker + hardening ([plan](docs/PHASE5_PLAN.md)) · paper | ✅ attack & defence done · 📝 paper next |
+| 5 | Adaptive attacker + hardening ([plan](docs/PHASE5_PLAN.md)) · paper | ✅ attack & defence done · 📝 paper draft ([`paper/`](paper/)) |
 
 ---
 
@@ -67,9 +67,9 @@ Hardening switches, off by default, each with its cost on the 8,180 benign upgra
 | Switch | Closes | Extra cost on benign upgrades |
 |---|---|---|
 | H1 dependency-tree lock (`gate/deptree.py`) | E9 | 0.5–1.0% extra blocks on npm (a strict `npm ci` lock: 12–49%) |
-| H2 runtime `tools/list` pin (`mcplock proxy`) | E5–E9 | 27% blocks, all MCP upgrades that change tools |
+| H2 runtime `tools/list` pin (`mcplock proxy`) | E5–E9 | 16% newly blocked (27% in total), all MCP upgrades that change tools |
 | H3 lock every PyPI file | E10 | 0 on upgrades; 0.47% of releases gain a file later |
-| H4 require provenance | E2 | 57% blocks |
+| H4 require provenance | E2 | 37% newly blocked (57% in total) |
 | H5 command normalisation | E11 (21/22) | none |
 
 With all five on, 10 of 12 attacks block; a compromised release pipeline (E4) remains out of reach for any lock.
@@ -297,7 +297,7 @@ census/        RQ1 pipeline: frame, eligibility, sampling, versions, extraction,
 lockfile/      MCP-Lock format (JSON schema)
 gate/          S1–S5 signals, H1–H3 hardening, MCP proxy, policy, PreToolUse hook, `mcplock` CLI
 eval/          Bagmar scenarios, parity and false-positive scoring; corpora   (Phase 4)
-paper/         IEEEtran manuscript                                              (Phase 5)
+paper/         IEEEtran manuscript; numbers and figures generated from results/ (`bash paper/build.sh`)
 results/
   census/      frame, pilot sample, extractions, kill test (+ provenance JSON per result)
   baseline/    S1-only results, kept separate from candidate results
