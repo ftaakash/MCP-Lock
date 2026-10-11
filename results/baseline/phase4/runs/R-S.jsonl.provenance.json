@@ -1,0 +1,16 @@
+{
+  "result": "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/baseline/phase4/runs/R-S.jsonl",
+  "result_sha256": "4538160aa8bd4c333087cc09a7d43673f768594d2767f9724a7e8af1b5a9c0bf",
+  "command": "python.exe C:\\Users\\Administrator\\Desktop\\Major Project\\mcp-lock\\eval\\replay.py results/candidate/phase4/synthetic/bundles.jsonl.gz R-S",
+  "commit": "1a3101624ef31227f2728b5c9eeb9d809767cce0-dirty",
+  "timestamp_utc": "2026-10-11T09:31:22Z",
+  "python": "3.11.9",
+  "inputs": {
+    "results/candidate/phase4/synthetic/bundles.jsonl.gz": "d0a8f0033426cfb8ea5273052065a0f3a6f3571c0a7be97be088d45ae9da1f17"
+  },
+  "params": {
+    "cases": 50,
+    "group": "baseline"
+  },
+  "note": ""
+}

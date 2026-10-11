@@ -1,0 +1,8 @@
+{
+ "os": "Windows-10-10.0.26200-SP0",
+ "python": "3.11.9",
+ "cpu": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+ "logical_cpus": 20,
+ "date": "2026-10-11T09:53:28.494266+00:00",
+ "ram_gb": 31.8
+}

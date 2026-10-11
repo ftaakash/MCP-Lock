@@ -1,0 +1,16 @@
+{
+  "result": "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/baseline/phase4/runs/R-M.jsonl",
+  "result_sha256": "28f9ceae9f9ae0072a3c118b4475f156a1c470e9b80e8677209097592bd942e1",
+  "command": "python.exe C:\\Users\\Administrator\\Desktop\\Major Project\\mcp-lock\\eval\\replay.py results/candidate/phase4/malicious/bundles.jsonl.gz R-M",
+  "commit": "1a3101624ef31227f2728b5c9eeb9d809767cce0-dirty",
+  "timestamp_utc": "2026-10-11T09:32:01Z",
+  "python": "3.11.9",
+  "inputs": {
+    "results/candidate/phase4/malicious/bundles.jsonl.gz": "123b09a69b7b63dbe9e03a41b5defb95035fdc9be7b24b2310b1905b02f5b1ae"
+  },
+  "params": {
+    "cases": 568,
+    "group": "baseline"
+  },
+  "note": ""
+}

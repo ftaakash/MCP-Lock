@@ -23,3 +23,4 @@ results/census/phase2/extractions.jsonl
 # phase 4 working files (rebuildable)
 results/**/bundles.part.jsonl
 results/candidate/phase4/synthetic/work/
+results/candidate/phase4/runs/B.jsonl

@@ -79,13 +79,16 @@ def load(root: Path = ROOT) -> dict[str, list[dict]]:
         rows: dict[str, dict] = {}
         for group in ("baseline", "candidate"):
             p = root / "results" / group / "phase4" / "runs" / f"{corpus}.jsonl"
-            if not p.exists():
+            if not p.exists() and not Path(str(p) + ".gz").exists():
                 continue
-            for line in open(p, encoding="utf-8"):
+            for line in provenance.open_text(p):
                 r = json.loads(line)
                 cur = rows.setdefault(r["case_id"], {**r, "systems": {}})
                 cur["systems"].update(r["systems"])
         out[corpus] = list(rows.values())
+    lat = root / "results" / "candidate" / "phase4" / "runs" / "L.jsonl"
+    if lat.exists():
+        out["L"] = [json.loads(x) for x in open(lat, encoding="utf-8")]
     return out
 
 
@@ -228,7 +231,26 @@ def score(data: dict) -> dict:
                                        "false_blocks_per_detection": extra_fb / added if added else None,
                                        "warns_per_detection": extra_warn / added if added else None}
     res["lookup_failures"] = {c: lookup_failures(data.get(c, [])) for c in CORPORA}
+    if data.get("L"):
+        res["latency"] = latency(data["L"])
     return res
+
+
+def latency(rows: list[dict]) -> dict:
+    """PREREG §4: median, p95, max; share over 60 s and 120 s (hook timeout), cold and warm."""
+    out = {"n": len(rows), "errors": sum(any(k.endswith("_error") or k == "error" for k in r)
+                                         for r in rows)}
+    for system in ("G", "S1-C"):
+        for phase in ("cold", "warm"):
+            xs = np.array([r[f"{system}_{phase}_s"] for r in rows if f"{system}_{phase}_s" in r])
+            if not len(xs):
+                continue
+            out[f"{system}_{phase}"] = {
+                "n": int(len(xs)), "median_s": float(np.median(xs)),
+                "p95_s": float(np.percentile(xs, 95)), "max_s": float(xs.max()),
+                "over_60s": prop(int((xs > 60).sum()), len(xs)),
+                "over_120s": prop(int((xs > 120).sum()), len(xs))}
+    return out
 
 
 # ------------------------------------------------------------------ report
@@ -259,6 +281,14 @@ def markdown(res: dict) -> str:
           "| Class | " + " | ".join(SYSTEMS) + " |", "|---" * (len(SYSTEMS) + 1) + "|"]
     for k, v in sorted(res["detection_RS_by_class"].items()):
         L.append(f"| {k} | " + " | ".join(f"{v[s]['k']}/{v[s]['n']}" for s in SYSTEMS if s in v) + " |")
+    if "latency" in res:
+        lat = res["latency"]
+        L += ["", f"## Latency (live, n = {lat['n']}, {lat['errors']} with errors)",
+              "| System | median s | p95 s | max s | > 60 s | > 120 s |", "|---|---|---|---|---|---|"]
+        for k, v in lat.items():
+            if isinstance(v, dict):
+                L.append(f"| {k} | {v['median_s']:.2f} | {v['p95_s']:.2f} | {v['max_s']:.2f} | "
+                         f"{pct(v['over_60s'])} | {pct(v['over_120s'])} |")
     return "\n".join(L) + "\n"
 
 
@@ -278,6 +308,7 @@ def main():
             for p in (ROOT / "results" / g / "phase4" / "runs").glob("*.jsonl")]
     provenance.write(cand / "phase4_results.json", inputs=runs, params={"seed": SEED})
     provenance.write(base / "baseline_summary.json", inputs=runs)
+    sys.stdout.reconfigure(encoding="utf-8")
     print(markdown(res))
 
 

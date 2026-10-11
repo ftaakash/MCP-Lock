@@ -6,7 +6,8 @@
 
 *Pinning what an MCP server is, who built it, and what tools it advertises — before an agent runs it.*
 
-![Phase](https://img.shields.io/badge/phase-4%20pre--registered-2ea44f)
+![Phase](https://img.shields.io/badge/phase-4%20evaluated-2ea44f)
+![Kill rule](https://img.shields.io/badge/phase%204%20kill%20rule-not%20killed-2ea44f)
 [![Preregistered](https://img.shields.io/badge/OSF-preregistered-blue)](https://osf.io/2amj3)
 ![Kill test](https://img.shields.io/badge/kill%20test-PASS-2ea44f)
 ![Python](https://img.shields.io/badge/python-3.11-3776AB?logo=python&logoColor=white)
@@ -44,8 +45,40 @@ and tests the gate against an attacker who knows its checks (RQ3).
 | 1 | Census pilot (200 packages) + kill test | ✅ **PASS** |
 | 2 | Census (15,272 packages metadata · 2,000 tool diffs) + MCP-Lock spec | ✅ done |
 | 3 | Gate (S1–S5) + baseline parity | ✅ done |
-| 4 | Pre-registered evaluation ([PREREG.md](PREREG.md), [OSF](https://osf.io/2amj3)) | 🔄 registered 2026-10-11, building corpora |
+| 4 | Pre-registered evaluation ([PREREG.md](PREREG.md), [OSF](https://osf.io/2amj3)) | ✅ **not killed** (+99 detections) |
 | 5 | Adaptive attacker + paper | ⏳ |
+
+---
+
+## 📊 Phase 4 results — RQ2 pre-registered evaluation (11 Oct 2026)
+
+> **The gate catches twice as many real attacks as the strongest version of the Bagmar & Saraf hook
+> (39.8% vs 19.6% of 490 real attacks, +99, p < 10⁻²⁹) at +0.42 points of false blocks.** Almost all
+> of the gain is the install-script check (S4) on hijacked npm packages. Tool pinning (S5) catches
+> every synthetic tool rug pull, but it also asks for review on 1 in 5 benign MCP upgrades.
+
+Pre-registered on [OSF](https://osf.io/2amj3) before any run; deviations logged in
+[docs/DEVIATIONS.md](docs/DEVIATIONS.md); full tables in
+[results/candidate/phase4/phase4_results.md](results/candidate/phase4/phase4_results.md).
+
+| Corpus | S1-C (baseline, charitable) | **G (MCP-Lock gate)** |
+|---|---|---|
+| Real attacks R (22 Bagmar scenarios + 468 real malicious versions) | 96/490 = 19.6% [16.3, 23.3] | **195/490 = 39.8%** [35.6, 44.2] |
+| … hijacked existing packages (class C, n = 368) | 17 = 4.6% | **116 = 31.5%** |
+| … new / typosquat packages (class N, n = 100) | 59 | 59 |
+| Synthetic rug pulls (40, local Verdaccio) | 0/40 | **40/40** (controls: 0/10 blocked) |
+| False blocks on 8,180 benign upgrades | 32.9% | 33.4% (+34 = +0.42 pp [0.28, 0.56]) |
+| Warn (ask the user) on benign upgrades | 0% | 16.5% (19.7% of MCP upgrades; S5 tool drift) |
+| Latency, cold cache, median / p95 (n = 199, live) | 0.06 s / 0.30 s | 0.99 s / 3.19 s, none > 60 s |
+
+- **Kill rule** (S2–S5 add < 2 detections at equal or worse false blocks): 99 added → **not killed**.
+  H1 exact McNemar p = 3.2 × 10⁻³⁰, H2 p = 1.2 × 10⁻¹⁰ (Holm-corrected, both significant).
+- **Where the gain comes from** (ablation on R): S4 install script 96, S5 tool drift 2, S3 publisher 1,
+  S2 provenance 0. Most malicious versions were removed from the registries, so S2/S3 could be
+  evaluated for only 88 of 468 cases (S2 coverage of class C locks: 50/368).
+- **The baseline's 30-day age rule blocks 40% of benign MCP upgrades** (2,683/6,695), because MCP
+  servers are young and release often. Both systems inherit it; the comparison is unaffected.
+- PyPI is weak for both (G 6/65, S1-C 5/65): PyPI has no install scripts or per-release uploader.
 
 ---
 

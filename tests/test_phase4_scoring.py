@@ -66,3 +66,13 @@ def test_kill_rule_and_h1():
     res = phase4.score(_data(n_added=1, extra_fb=0))
     assert res["kill_rule"]["fb_equal_or_worse"] and res["kill_rule"]["kill"]
     assert "KILL" in phase4.markdown(res)
+
+
+def test_latency_summary():
+    rows = [{"G_cold_s": float(i), "G_warm_s": 0.1, "S1-C_cold_s": 1.0, "S1-C_warm_s": 0.1}
+            for i in range(1, 131)]
+    rows.append({"error": "lock generation: x"})
+    lat = phase4.latency(rows)
+    assert lat["n"] == 131 and lat["errors"] == 1
+    assert lat["G_cold"]["max_s"] == 130 and lat["G_cold"]["over_120s"]["k"] == 10
+    assert lat["G_cold"]["over_60s"]["k"] == 70 and lat["G_warm"]["median_s"] == 0.1

@@ -1,0 +1,20 @@
+{
+  "result": "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/baseline/phase4/baseline_summary.json",
+  "result_sha256": "75b5e71d6d1043a75570944b7756e8130c3de18a3eace2d31cd23c9579473664",
+  "command": "python.exe eval/scoring/phase4.py",
+  "commit": "1a3101624ef31227f2728b5c9eeb9d809767cce0-dirty",
+  "timestamp_utc": "2026-10-11T09:55:17Z",
+  "python": "3.11.9",
+  "inputs": {
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/baseline/phase4/runs/B.jsonl": "586573b4598a71cd355e370215944a51d075c0595cb535bab39e8fcc4ffee022",
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/baseline/phase4/runs/R-B.jsonl": "ad2210b01af5dc6b85d6b75a1e58e22aa81c16c2ecef7de0ceb58894874abf7c",
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/baseline/phase4/runs/R-M.jsonl": "28f9ceae9f9ae0072a3c118b4475f156a1c470e9b80e8677209097592bd942e1",
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/baseline/phase4/runs/R-S.jsonl": "4538160aa8bd4c333087cc09a7d43673f768594d2767f9724a7e8af1b5a9c0bf",
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase4/runs/L.jsonl": "3ce2904065e0abc1ef9e5d1eab3471e2e9bcdf478f75bae9e605b66afe27dc92",
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase4/runs/R-B.jsonl": "52ca2541526484ae8fa42726e2fce44d2e2199cd3b83095a36737aa853e756d6",
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase4/runs/R-M.jsonl": "3c6bc82c7d71a25d6bcbc4c720886b0c77430ccdbe279a8676dcd214de3aeb43",
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase4/runs/R-S.jsonl": "e1f5cc53d696a5a810bdc302a2314cc9e4dfe8b1f734d3b10499660f0f4ccf81"
+  },
+  "params": {},
+  "note": ""
+}

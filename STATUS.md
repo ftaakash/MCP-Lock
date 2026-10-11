@@ -1,78 +1,60 @@
 # STATUS
 
-## Phase 4: pre-registered evaluation (started 2026-10-11). **In progress: corpora being built, no scored run yet**
+## Phase 4: pre-registered evaluation (2026-10-11). **Complete: kill rule NOT triggered**
 
-Registered: OSF https://osf.io/2amj3 (plan text commit `914d2b3`, code tag `prereg-v1`). Deviations: `docs/DEVIATIONS.md`.
-Replay rules: `docs/REPLAY.md`.
+Registered: OSF https://osf.io/2amj3 (plan text `914d2b3`, gate code tag `prereg-v1`, unchanged; harness tag
+`phase4-harness`). Deviations #1–#6: `docs/DEVIATIONS.md`. Replay rules: `docs/REPLAY.md`.
+Results: `results/candidate/phase4/phase4_results.{json,md}`; baseline-only summary `results/baseline/phase4/`.
 
-| Corpus | State | Size |
-|---|---|---|
-| B benign upgrades | bundles frozen | 8,180 (6,695 MCP, 992 npm-top, 493 PyPI-top; 15 top packages excluded by rule) |
-| R-S synthetic rug pulls | built on local Verdaccio; bundles frozen | 40 attacks + 10 controls (7 candidate servers skipped, logged) |
-| R-M real malicious versions | Docker-only pipeline; classification running | OSV 217,619 rows + DataDog 1,471 samples scanned |
-| R-B Bagmar scenarios | runner ready | 22 core + R6b, two forms |
-| L latency | runner ready | 200 packages |
+### Corpora
+| Corpus | Size |
+|---|---|
+| R-B Bagmar & Saraf scenarios | 22 core (agent form primary) |
+| R-M real malicious versions (OSV `MAL-` + DataDog, 2024-01 → 2026-10) | 468 primary: 368 class C (hijacked existing package), 100 class N (new / typosquat); 32 C not replayable (no lock version left) |
+| R-S synthetic rug pulls (local Verdaccio) | 40 attacks (A1–A4 × 10 servers) + 10 controls |
+| B benign upgrades | 8,180 (6,695 MCP, 992 npm-top, 493 PyPI-top) |
+| L latency (live) | 200 packages (1 skipped) |
 
-Checks so far (allowed by the plan): Phase 2 tool hashes recomputed with the gate's own code, 40/40 identical; the 10
-synthetic negative controls are allowed by all 7 systems.
+### Confirmatory results
+| | S1-C | G | Test |
+|---|---|---|---|
+| Detection on R (block ∪ warn) | 96/490 = 19.6% [16.3, 23.3] | 195/490 = 39.8% [35.6, 44.2] | H1: G-only 99, S1-C-only 0, exact McNemar p = 3.2e-30, Holm 6.3e-30 |
+| False blocks on B | 2,695/8,180 = 32.9% [31.9, 34.0] | 2,729/8,180 = 33.4% [32.3, 34.4] | H2: G-only 34, p = 1.2e-10, Holm 1.2e-10; +0.42 pp [0.28, 0.56] |
+| **Kill rule** | | | 99 added detections ≥ 2 → **not killed** (block-only secondary: 96 added) |
 
-**Safety incident (2026-10-11):** Defender quarantined 5 OSV advisory JSON files (they quote malware code) from a host
-checkout. Nothing executed. Host copies deleted; malware data now lives only in a Docker volume (DEVIATIONS #3).
+### Descriptive results
+- Ablation on R (detections lost when removing one signal): S4 96, S5 2, S3 1, S2 0. The gain is almost entirely
+  install scripts added by hijacked npm versions (2025 worm campaigns).
+- Evaluability on R-M: S2/S3 88 of 468 (removed versions have no registry record), S4 214, S5 239.
+  Sensitivity on the 88 fully evaluable cases: G 61 vs S1-C 56.
+- R-M by class: C — G 116/368 vs S1-C 17/368; N — 59/100 for both (S1's 30-day age rule).
+- By ecosystem: npm G 169/403 vs S1-C 71/403; PyPI G 6/65 vs S1-C 5/65.
+- R-B: G = S1-C on every scenario (no lock, so S2–S5 cannot fire, as designed); agent form 20/22, command form 20/22.
+- R-S: G 40/40, S1-L/S1-C 0/40. Removing S5 loses A1 and A2, removing S4 loses A3; A4 is caught by S2 and S3 independently. Controls: 0/10 blocked.
+- B by stratum: MCP — S1-C blocks 2,683/6,695 = 40.1% (age rule on young servers), G warns on 1,321 (S5);
+  npm-top — S1-C 11, G 13 blocks + 25 warns; PyPI-top — S1-C 1, G 3.
+- Interruption rate (block ∪ warn) on B: S1-C 32.9%, G 49.8%. Cost per added detection: 0.34 extra false blocks and
+  13.6 extra warns.
+- S2 coverage: B 3,261/8,180 = 39.9% of locks have provenance; R-M class C 50/368.
+- Latency (live, n = 199): G cold median 0.99 s, p95 3.19 s, max 50.8 s; warm median 0.05 s; none over 60 s.
+- Lookup failures: 0 in every corpus.
 
-## Phase 3: gate + baseline (2026-10-10). **Complete: gate built, S1 parity reproduced; awaiting go-ahead for Phase 4 (PREREG)**
+### Interpretation and caveats
+- The method claim survives the pre-registered kill rule, but the gain comes from S4, an install-script diff. Provenance
+  continuity (S2) added nothing on real attacks, mainly because removed malicious versions leave no attestation record to
+  check. Tool pinning (S5) is what catches MCP-specific rug pulls (R-S), at a review cost of about 1 in 5 MCP upgrades.
+- S1-C's 32.9% false-block rate comes from its 30-day age rule replayed at upgrade time. This differs from Phase 3's
+  "top packages today" measurement (0%), and both are correct for their question.
+- Class C follows the pre-registered rule ("an earlier unaffected version exists"); some cases may be attacker-owned
+  packages with a benign first release rather than true takeovers.
 
-No reply from Bagmar & Saraf (email sent 2026-10-08), so S1 is reimplemented from Appendix I in two variants.
-Docker now works locally (Virtual Machine Platform enabled after the Windows repair).
-
-### Built
-| Component | Files | What it does |
-|---|---|---|
-| Command parser | `gate/command.py` | pip / `python -m pip` / `uv pip` / npm / pnpm / yarn / bun installs, `npx` / `uvx` launches, env prefixes, `export`, `make` |
-| S1 baseline | `gate/s1.py`, `gate/data/` | Appendix I's 7 checks for PyPI **and** npm; `literal` and `charitable` variants as recorded switches |
-| S2 to S5 | `gate/signals.py` | provenance continuity, publisher change (human → CI migration ignored), new install script, tool-definition drift with diff; integrity check on the same version |
-| Policy | `gate/core.py` | allow / warn / block with a one-line reason |
-| Claude Code hook | `gate/hook.py` | PreToolUse on `Bash` and on `Write` to MCP configs; block → deny, warn → ask; fails closed |
-| CLI | `gate/cli.py` (`mcplock`) | `mcplock check -- <cmd>`, `mcplock lock <config>`; installable (`pip install -e .`) |
-| Docs | `docs/GATE.md` | signals, variants, hook setup, limitations |
-
-End-to-end check against a real lock: older pinned filesystem server → `npx -y` resolves 2026.8.31 → **WARN S5 tool_drift**;
-unchanged `mcp-server-fetch` → ALLOW; unlocked server → WARN; untrusted index → BLOCK. The hook gives the same answers
-from real PreToolUse JSON.
-
-### S1 parity with Bagmar & Saraf Table 8 (`results/baseline/parity_2026-10-10/`)
-| S1 variant | PyPI, command form | PyPI, agent form | npm port, command form | npm port, agent form |
-|---|---|---|---|---|
-| literal | **10/11 (R7 missed) = Table 8** | 8/11 (misses R3, R10) | 7/11 | 4/11 |
-| charitable | 10/11 = Table 8 | 10/11 = Table 8 | 10/11 | 10/11 |
-
-The literal reading reproduces Table 8 exactly on explicit install lines. Its misses on `pip install -e .` and `make setup`
-indicate that the paper scored command lines, or that the real code does more than Appendix I.
-
-### S1 false positives on popular packages (`results/baseline/s1_fp_2026-10-10/`)
-| | top-1,000 PyPI | top-1,000 npm |
-|---|---|---|
-| literal (P = top-1,000) | 52 = 5.2% [4.0, 6.8] | 35 = 3.5% [2.5, 4.8] |
-| charitable | 0 = 0.0% [0.0, 0.38] | 0 = 0.0% [0.0, 0.38] |
-| paper | 5 = 0.5% | n/a |
-
-The paper's 5/1,000 is reproduced by the literal name rule only with P of about the top-100 to 150 (3 at 100, 8 at 150).
-The charitable variant is at least as good as the paper on false positives, so it is not a strawman.
-
-### Fixed during Phase 3
-- Parser bug: `npm install https-proxy-agent` was read as a URL install (name starts with "http"). Fixed with a regression
-  test; npm literal false positives were 33/1,000 before the fix and 35/1,000 after. The buggy run was discarded.
-- Registry lookups for the age check made cheap (PyPI JSON simple API; npm abbreviated document plus a downloads
-  probe), because full npm packuments of popular packages are tens of MB.
-
-### Open risks for Phase 4
-- S5 recall equals the extractor's held-out recall (78.0%), so runtime-generated tools escape it.
-- Build identity is recorded, not signature-verified (Sigstore verification not implemented).
-- Latency: a cold PyPI lookup for very large projects (boto3) takes about 14 s; Phase 4 must report latency per install.
+### Safety
+Defender quarantined 5 OSV advisory JSON files from a host checkout (DEVIATIONS #3). All malware data was handled
+afterwards only in the `mcplock-mal` Docker volume. Static analysis ran with `--network none`. Follow-up Defender scans
+were clean. No new malicious package was found (35 still-listed malicious npm versions are already public in OSV/DataDog).
 
 ## Next gate
-Phase 4: `PREREG.md` written (2026-10-10), §9 decisions settled and code frozen at tag `prereg-v1` (2026-10-11).
-**Registered** on OSF Registries 2026-10-11: https://osf.io/2amj3 (plan text commit `914d2b3`).
-Now: build the corpora, the replay adapter and the scoring scripts; test them on toy fixtures and synthetic controls only.
+Phase 5: adaptive attacker (RQ3) and the paper. **Waiting for Aakash's go-ahead.**
 
 ## Phase 2: full census + MCP-Lock spec (2026-10-09). Complete
 

@@ -1,0 +1,20 @@
+{
+  "result": "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase4/runs/L.jsonl",
+  "result_sha256": "3ce2904065e0abc1ef9e5d1eab3471e2e9bcdf478f75bae9e605b66afe27dc92",
+  "command": "python.exe eval/scoring/latency.py",
+  "commit": "1a3101624ef31227f2728b5c9eeb9d809767cce0-dirty",
+  "timestamp_utc": "2026-10-11T09:53:28Z",
+  "python": "3.11.9",
+  "inputs": {
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase4/benign/transitions.jsonl.gz": "c9b61c52f9feda430219ceca8fedbc2d85f1db94bbb8c70e808241a51baa9d99"
+  },
+  "params": {
+    "seed": 20261011,
+    "quota": {
+      "mcp": 100,
+      "npm-top": 50,
+      "pypi-top": 50
+    }
+  },
+  "note": ""
+}

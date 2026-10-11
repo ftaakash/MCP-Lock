@@ -1,0 +1,16 @@
+{
+  "result": "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase4/runs/R-B.jsonl",
+  "result_sha256": "52ca2541526484ae8fa42726e2fce44d2e2199cd3b83095a36737aa853e756d6",
+  "command": "python.exe eval/scoring/rb.py",
+  "commit": "1a3101624ef31227f2728b5c9eeb9d809767cce0-dirty",
+  "timestamp_utc": "2026-10-11T09:32:08Z",
+  "python": "3.11.9",
+  "inputs": {
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/eval/scenarios/bagmar.py": "c8ffb8add72a0fcdbc1b0dcec237c9796ed55800f33820c16901e9b735f6f054"
+  },
+  "params": {
+    "cases": 48,
+    "group": "candidate"
+  },
+  "note": ""
+}
