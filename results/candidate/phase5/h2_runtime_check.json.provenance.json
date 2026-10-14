@@ -2,8 +2,8 @@
   "result": "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase5/h2_runtime_check.json",
   "result_sha256": "583a504f9cca803d0afd662e2062f4f3a50a41f9254a81ea3c38c547bf38b7a5",
   "command": "python.exe eval/adaptive/runtime_check.py",
-  "commit": "08bf9d97394eccdb36d808f264d57411e0539688-dirty",
-  "timestamp_utc": "2026-10-14T09:00:43Z",
+  "commit": "f44fb7c0857ddf2b0e6dc961d47eea2567549d50",
+  "timestamp_utc": "2026-10-14T09:03:23Z",
   "python": "3.11.9",
   "inputs": {
     "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase5/adaptive/bundles.jsonl.gz": "7024b45b234d98a21de2e92b1c14f89633643c64698af1de5d61a028c43243bb",
