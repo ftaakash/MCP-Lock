@@ -184,7 +184,8 @@ def _verdaccio_versions(pkg: str) -> list[dict]:
         V.npm_url = saved
 
 
-# Live tools/list of each case, written down from its source (H2). Never obtained by running the server.
+# Live tools/list of each case, written down from its source (H2). eval/adaptive/runtime_check.py runs the servers
+# and confirms the H2 verdicts and findings (results/candidate/phase5/h2_runtime_check.json).
 def _t(name, desc, props=None, required=None):
     schema = {"type": "object", "properties": props or {}}
     if required:

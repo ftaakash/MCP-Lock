@@ -1,0 +1,37 @@
+{
+  "result": "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase5/h2_runtime_check.json",
+  "result_sha256": "583a504f9cca803d0afd662e2062f4f3a50a41f9254a81ea3c38c547bf38b7a5",
+  "command": "python.exe eval/adaptive/runtime_check.py",
+  "commit": "08bf9d97394eccdb36d808f264d57411e0539688-dirty",
+  "timestamp_utc": "2026-10-14T09:00:43Z",
+  "python": "3.11.9",
+  "inputs": {
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase5/adaptive/bundles.jsonl.gz": "7024b45b234d98a21de2e92b1c14f89633643c64698af1de5d61a028c43243bb",
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/eval/adaptive/attacks.py": "0859ec63447c3b842ad5238535e1e2c521d34d00a85784daa37446369dbc9314"
+  },
+  "params": {
+    "image": "node:22-slim",
+    "hardening": [
+      "--network",
+      "none",
+      "--read-only",
+      "--cap-drop",
+      "ALL",
+      "--security-opt",
+      "no-new-privileges",
+      "--user",
+      "65534:65534",
+      "--memory",
+      "1g",
+      "--pids-limit",
+      "256",
+      "--tmpfs",
+      "/tmp:rw,size=256m,mode=1777",
+      "-e",
+      "HOME=/tmp"
+    ],
+    "e8a_clock_ms": 1798761600001,
+    "registry": "http://127.0.0.1"
+  },
+  "note": ""
+}

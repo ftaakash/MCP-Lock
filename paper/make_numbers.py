@@ -249,6 +249,12 @@ def phase5() -> None:
     macro("SgRMNCand", str(g["R-M_N"]["with_candidate"]["k"]), src)
     prop("SgBCov", g["B"]["with_verified_suggestion"], src)
 
+    src = "results/candidate/phase5/h2_runtime_check.json"
+    rt = load(src)
+    macro("RtCases", str(rt["cases"]), src)
+    macro("RtAgree", f"{rt['verdicts_agree']}/{rt['cases']}", src)
+    macro("RtSame", f"{rt['findings_identical']}/{rt['cases']}", src)
+
 
 def main():
     import sys

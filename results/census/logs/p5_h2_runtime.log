@@ -1,0 +1,33 @@
+E2   written=allow observed=allow lists_equal={'locked': False, 'live': False}
+E3   written=allow observed=allow lists_equal={'locked': False, 'live': False}
+E4   written=allow observed=allow lists_equal={'locked': False, 'live': False}
+E5   written=block observed=block lists_equal={'locked': False, 'live': False}
+E6a  written=block observed=block lists_equal={'locked': False, 'live': False}
+E6b  written=block observed=block lists_equal={'locked': False, 'live': False}
+E7   written=block observed=block lists_equal={'locked': False, 'live': False}
+E8a  written=block observed=block lists_equal={'locked': False, 'live': False} real_clock=allow
+E8b  written=block observed=block lists_equal={'locked': False, 'live': False}
+E9   written=block observed=block lists_equal={'locked': False, 'live': False}
+E11  written=allow observed=allow lists_equal={'locked': False, 'live': False}
+{
+ "cases": 11,
+ "verdicts_agree": 11,
+ "findings_identical": 11,
+ "names_descriptions_equal": 11,
+ "lists_equal_locked": 0,
+ "lists_equal_live": 0,
+ "h2_blocks_written": 7,
+ "h2_blocks_observed": 7,
+ "resolved_dependencies": [
+  {
+   "@modelcontextprotocol/sdk": "1.32.1",
+   "zod": "3.25.76"
+  }
+ ],
+ "not_run": {
+  "E1": "no lock, so H2 has no pin to compare against",
+  "E10": "hand-built PyPI bundle with no runnable package; H3, not H2, closes it"
+ },
+ "why_lists_differ": "the SDK adds $schema and additionalProperties to every inputSchema (and an execution field); identical in the locked and live state of every case",
+ "note": "exploratory; observed lists come from running each server under the census/dynamic.py hardening; E8a 'live' sets Date.now() past its trigger date"
+}

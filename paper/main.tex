@@ -348,8 +348,9 @@ bounds. R-M contains only attacks that were caught and reported; attacks still u
 Replay reconstructs metadata as of each case's time but cannot recover removed versions, which is why S2/S3 evaluability
 is low. Class C follows a mechanical rule (an earlier clean version exists) and may include attacker-owned packages with
 a benign first release. The adaptive attacks were built by the authors of the defence; the hardening results are
-exploratory and were not pre-registered, as are the safer-alternative suggestions, and H2's matrix verdicts use live
-tool lists written down from each attack's source rather than observed from running servers. Time of lock is unknown in practice, which is why H1 is reported as a
+exploratory and were not pre-registered, as are the safer-alternative suggestions. H2's matrix verdicts use live tool
+lists written down from each attack's source; running the \RtCases{} locked servers in containers with no outside network gave
+the same H2 verdict in \RtAgree{} cases and the same findings in \RtSame, with E8a's clock set past its trigger date. Time of lock is unknown in practice, which is why H1 is reported as a
 range.
 
 % ------------------------------------------------------------------------------------------------

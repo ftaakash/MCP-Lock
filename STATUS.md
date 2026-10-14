@@ -45,7 +45,14 @@ compromised release pipeline (T3) is outside what any lock can see.
   dependency publisher (486 cases).
 - H2 assumes the live tool list equals the static extraction for benign upgrades (unobservable for historical versions),
   and 1,483 upgrades with no static tools are counted as no cost. In the matrix, each attack's live list is written down
-  from its source code; no server was executed.
+  from its source code. Robustness check (2026-10-14, `eval/adaptive/runtime_check.py` ->
+  `results/candidate/phase5/h2_runtime_check.json`, log `p5_h2_runtime.log`): the 11 locked attack servers were
+  installed from the archives the matrix evaluated (digests checked) and started under the census/dynamic.py hardening
+  (network none; E6's remote tool file on an internal-only network). Observed tools/list gave the same H2 verdict in
+  11/11 cases (7 block) and identical findings in 11/11; names and descriptions match the written lists exactly, and
+  the hashes differ only by fields the SDK adds to every schema ($schema, additionalProperties). E8a blocks once its
+  clock passes the trigger date and is allowed with today's clock, as the proxy is meant to catch it when it fires.
+  SDK 1.32.1, zod 3.25.76, node:22-slim. E1 (no lock) and E10 (no runnable package; closed by H3) were not run.
 - Lock format v0.2 (`lockfile/SPEC.md` §6): optional `dependencies`, `files` and `tools.runtime` fields.
 - **Age-rule sensitivity** (`age_rule_sensitivity.json`): 2,695 of G's 2,729 false blocks on B involve S1's 30-day age
   rule. Waiving it for servers already in the lock: false blocks 0.73% [0.57, 0.94] (from 33.4%), interruptions 28.4%
