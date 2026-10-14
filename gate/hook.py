@@ -7,6 +7,8 @@ it gates every npm/PyPI server the new config would launch.
   block -> permissionDecision "deny"   (the command does not run)
   warn  -> permissionDecision "ask"    (the user sees the reason and decides)
   allow -> no output, exit 0           (normal permission flow continues)
+On deny/ask the reason also carries the gate's verified safer alternative, if any ("Try instead: ..."), so the
+agent can retry with it.
 Internal errors fail closed to "ask". Configure with a generous timeout, because a timed-out
 PreToolUse hook does not block (see docs/GATE.md).
 """
@@ -62,14 +64,20 @@ def main() -> int:
         cfg = s1.S1Config.literal() if variant == "literal" else s1.S1Config.charitable()
         worst = None
         for c in cmds:
-            d = core.evaluate(c, cwd, lock, cfg)
+            d = core.evaluate(c, cwd, lock, cfg, suggest=True)
             if d.decision == "block" or (d.decision == "warn" and worst is None):
                 worst = d
             if d.decision == "block":
                 break
         if worst is None:
             return 0
-        _emit("deny" if worst.decision == "block" else "ask", worst.reason)
+        reason = worst.reason
+        runnable = [s for s in worst.suggestions if s.command]
+        if runnable:
+            reason += f" | Try instead: `{runnable[0].command}` ({runnable[0].because})"
+        elif worst.suggestions:
+            reason += f" | {worst.suggestions[0].because}"
+        _emit("deny" if worst.decision == "block" else "ask", reason)
         return 0
     except Exception:  # noqa: BLE001 - a security gate fails closed
         _emit("ask", "internal error, please review manually: "

@@ -168,8 +168,9 @@ def detected(decision: dict, block_only: bool = False) -> bool:
     return False
 
 
-def run(bundle: dict, hardening: frozenset = frozenset()) -> dict:
-    """Evaluate one bundle with every system. Returns {system: decision dict + detection flags}."""
+def run(bundle: dict, hardening: frozenset = frozenset(), suggest: bool = False) -> dict:
+    """Evaluate one bundle with every system. Returns {system: decision dict + detection flags}.
+    `suggest` adds verified safer alternatives (gate/suggest.py) to G only; decisions are unchanged."""
     t = _ts(bundle["t"])
     out = {}
     with tempfile.TemporaryDirectory() as d:
@@ -187,7 +188,8 @@ def run(bundle: dict, hardening: frozenset = frozenset()) -> dict:
             for sid, (variant, enabled) in systems(bundle.get("evaluable") or {}, hardening).items():
                 cfg = (s1.S1Config.charitable if variant == "charitable"
                        else s1.S1Config.literal)(now=t)
-                dec = core.evaluate(bundle["command"], cwd, lock_path, cfg, enabled).to_dict()
+                dec = core.evaluate(bundle["command"], cwd, lock_path, cfg, enabled,
+                                    suggest=suggest and sid == "G").to_dict()
                 dec["detected"] = detected(dec)
                 dec["detected_block"] = detected(dec, block_only=True)
                 dec["enabled"] = sorted(enabled)

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import json
 import os
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 
 from census import http, launch, tarballs
@@ -29,10 +29,14 @@ class Decision:
     decision: str  # "allow" | "warn" | "block"
     reason: str
     findings: list[Finding]
+    suggestions: list = field(default_factory=list)  # gate.suggest.Suggestion; never changes the decision
 
     def to_dict(self) -> dict:
-        return {"decision": self.decision, "reason": self.reason,
-                "findings": [f.to_dict() for f in self.findings]}
+        d = {"decision": self.decision, "reason": self.reason,
+             "findings": [f.to_dict() for f in self.findings]}
+        if self.suggestions:
+            d["suggestions"] = [s.to_dict() for s in self.suggestions]
+        return d
 
 
 def load_lock(path: Path | None) -> dict:
@@ -54,7 +58,10 @@ def decide(findings: list[Finding]) -> Decision:
 
 
 def evaluate(cmd: str, cwd: Path, lock_path: Path | None = None,
-             s1cfg: s1.S1Config | None = None, enabled: frozenset = ALL_SIGNALS) -> Decision:
+             s1cfg: s1.S1Config | None = None, enabled: frozenset = ALL_SIGNALS,
+             suggest: bool = False) -> Decision:
+    """Gate one command. With `suggest`, a flagged command also gets verified safer alternatives
+    (gate/suggest.py); the decision itself is identical either way."""
     s1cfg = s1cfg or s1.S1Config.charitable()
     lock = load_lock(lock_path)
     findings: list[Finding] = []
@@ -74,4 +81,12 @@ def evaluate(cmd: str, cwd: Path, lock_path: Path | None = None,
             except http.HttpError as e:
                 findings.append(Finding("gate", "lookup_failed", "warn", lt.package,
                                         f"registry lookup failed (HTTP {e.status})"))
-    return decide(findings)
+    d = decide(findings)
+    if suggest and d.decision != "allow":
+        from gate import suggest as sg
+
+        def verify(new_cmd: str) -> list[Finding]:
+            return evaluate(new_cmd, cwd, lock_path, s1cfg, enabled).findings
+        verify.cfg, verify.enabled = s1cfg, enabled
+        d.suggestions = sg.suggest(cmd, findings, lock, verify)
+    return d

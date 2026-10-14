@@ -56,6 +56,23 @@ Add to `.claude/settings.json` in a project. This is a manual step; the reposito
 - Caches live in `~/.cache/mcplock` (override with `MCPLOCK_CACHE`). The lockfile defaults to `<cwd>/mcp-lock.json`
   (override with `MCPLOCK_LOCKFILE`).
 
+## Safer alternatives (`gate/suggest.py`)
+When a command is flagged, the gate proposes a replacement and offers it only if the gate itself passes the
+rewritten command. Suggestions never change the decision.
+
+| Finding | Suggested replacement |
+|---|---|
+| S1 `name_proximity` (typosquat) | the popular package the name imitates |
+| S1 `vulnerable_pin` | the lowest release that fixes every listed advisory |
+| S2–S5 (and H1/H3) on a locked server, or a digest mismatch | the newest version between the locked and the new one that passes every lock check, then the locked version |
+| S1 `absent` / `new_package` | up to three popular names within edit distance 2 |
+| gate `unlocked` | advice only: review the server, then `mcplock lock` |
+
+Several flagged packages in one command are fixed together, and the combined command is checked as a whole.
+`mcplock check` prints `TRY:` lines (`--no-suggest` turns them off); the hook appends "Try instead: …" to the
+deny/ask reason, so the agent can retry with it. When checking a suggestion, the age rule is waived for a package
+that is already in the lock (it guards first use), and `gate unlocked` does not count against it.
+
 ## Exploratory hardening (Phase 5, off by default)
 These are not part of the pre-registered gate. With no switch on, the gate runs exactly as tagged `prereg-v1`.
 Lock fields: [spec §6](../lockfile/SPEC.md). Evasion matrix and benign cost: `results/candidate/phase5/`.

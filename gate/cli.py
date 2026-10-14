@@ -6,7 +6,8 @@
     mcplock proxy --server ID [--lock mcp-lock.json] [--record] -- <server command>
                                        (exploratory H2: pin the live tools/list; gate/proxy.py)
 
-`check` prints one line: ALLOW / WARN / BLOCK and the reason. Exit code 0 allow, 1 warn, 2 block.
+`check` prints one line: ALLOW / WARN / BLOCK and the reason, then any verified safer alternative as a
+`TRY:` line (or `NOTE:` for advice). Exit code 0 allow, 1 warn, 2 block; `--no-suggest` turns suggestions off.
 """
 
 from __future__ import annotations
@@ -30,6 +31,7 @@ def main(argv: list[str] | None = None) -> int:
     c.add_argument("--s1", choices=["charitable", "literal"], default="charitable")
     c.add_argument("--signals", default="S1,S2,S3,S4,S5")
     c.add_argument("--json", action="store_true")
+    c.add_argument("--no-suggest", action="store_true", help="do not propose safer alternatives")
     c.add_argument("command", nargs=argparse.REMAINDER)
     lk = sub.add_parser("lock")
     lk.add_argument("config", type=Path)
@@ -52,11 +54,13 @@ def main(argv: list[str] | None = None) -> int:
     cmd = " ".join(x for x in a.command if x != "--")
     cfg = s1.S1Config.literal() if a.s1 == "literal" else s1.S1Config.charitable()
     enabled = frozenset(s.strip().upper() for s in a.signals.split(",") if s.strip())
-    d = core.evaluate(cmd, a.cwd, a.lock, cfg, enabled)
+    d = core.evaluate(cmd, a.cwd, a.lock, cfg, enabled, suggest=not a.no_suggest)
     if a.json:
         print(json.dumps(d.to_dict(), indent=2))
     else:
         print(f"{d.decision.upper()}: {d.reason}")
+        for s in d.suggestions:
+            print(f"TRY: {s.command}  ({s.because})" if s.command else f"NOTE: {s.because}")
     return {"allow": 0, "warn": 1, "block": 2}[d.decision]
 
 
