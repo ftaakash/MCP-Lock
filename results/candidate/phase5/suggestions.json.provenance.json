@@ -1,0 +1,17 @@
+{
+  "result": "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase5/suggestions.json",
+  "result_sha256": "fc8206b94d6f7abec92387a1b875108676f10d8b9b200b526acb50943ea48598",
+  "command": "python.exe eval/adaptive/suggest_eval.py",
+  "commit": "302969b3fb8cee5ce97326478f260b6328fc86a9-dirty",
+  "timestamp_utc": "2026-10-14T07:44:07Z",
+  "python": "3.11.9",
+  "inputs": {
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase4/synthetic/bundles.jsonl.gz": "d0a8f0033426cfb8ea5273052065a0f3a6f3571c0a7be97be088d45ae9da1f17",
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase4/malicious/bundles.jsonl.gz": "123b09a69b7b63dbe9e03a41b5defb95035fdc9be7b24b2310b1905b02f5b1ae",
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase4/benign/bundles.jsonl.gz": "bffade4c221b0afb1812fc5105540919b10838eda2836c100414bb507fd6d743",
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase5/adaptive/bundles.jsonl.gz": "7024b45b234d98a21de2e92b1c14f89633643c64698af1de5d61a028c43243bb",
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/eval/scenarios/bagmar.py": "c8ffb8add72a0fcdbc1b0dcec237c9796ed55800f33820c16901e9b735f6f054"
+  },
+  "params": {},
+  "note": ""
+}

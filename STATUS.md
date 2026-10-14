@@ -51,6 +51,15 @@ compromised release pipeline (T3) is outside what any lock can see.
   rule. Waiving it for servers already in the lock: false blocks 0.73% [0.57, 0.94] (from 33.4%), interruptions 28.4%
   (from 49.8%; warnings 27.7%), detection on R 187/490 (8 young hijacked packages lost; still 91 more than S1-C).
 
+### Safer-alternative suggestions (2026-10-14, exploratory; `docs/SUGGESTIONS.md`)
+On a flagged command the gate proposes a replacement and shows it only if the gate passes it; decisions are
+unchanged (re-replay of every Phase 4 corpus identical: `results/census/logs/p5_suggest_recheck.log`).
+Hijacked packages (R-M class C): 114/116 flagged cases get a verified rollback, all to the last clean version, none to
+the malicious one. Synthetic rug pulls 40/40; adaptive attacks 17/18; typosquat scenarios 20/20 name the intended
+package; vulnerable pins 4/4 fixed. New / invented names (class N): 0/59, as no popular name is within edit distance
+2. Novelty sweep: typosquat and fixed-version suggestions are prior art (Socket, SpellBound, `npm audit fix`,
+`pip-audit`); verified rollback returned to the agent as a command was not found in prior work.
+
 ### Deviations from the Phase 5 plan
 1. E10 is a hand-built bundle, not a package on a local pypiserver: the attack is a metadata fact (a file added to an
    existing release), and the gate reads only metadata for it.

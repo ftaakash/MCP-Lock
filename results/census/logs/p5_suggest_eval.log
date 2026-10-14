@@ -1,0 +1,163 @@
+{
+ "R-S": {
+  "flagged": 40,
+  "with_verified_suggestion": {
+   "k": 40,
+   "n": 40,
+   "pct": 100.0,
+   "ci95": [
+    91.24,
+    100.0
+   ]
+  },
+  "suggests_locked_version": {
+   "k": 40,
+   "n": 40,
+   "pct": 100.0,
+   "ci95": [
+    91.24,
+    100.0
+   ]
+  },
+  "suggests_the_malicious_version": {
+   "k": 0,
+   "n": 40,
+   "pct": 0.0,
+   "ci95": [
+    0.0,
+    8.76
+   ]
+  },
+  "kinds": {
+   "locked_version": 40
+  },
+  "controls_flagged": 0
+ },
+ "R-M_C": {
+  "flagged": 116,
+  "with_verified_suggestion": {
+   "k": 114,
+   "n": 116,
+   "pct": 98.28,
+   "ci95": [
+    93.93,
+    99.53
+   ]
+  },
+  "suggests_locked_version": {
+   "k": 114,
+   "n": 114,
+   "pct": 100.0,
+   "ci95": [
+    96.74,
+    100.0
+   ]
+  },
+  "suggests_the_malicious_version": {
+   "k": 0,
+   "n": 114,
+   "pct": 0.0,
+   "ci95": [
+    0.0,
+    3.26
+   ]
+  },
+  "kinds": {
+   "locked_version": 114
+  }
+ },
+ "R-M_N": {
+  "flagged": 59,
+  "with_candidate": {
+   "k": 0,
+   "n": 59,
+   "pct": 0.0,
+   "ci95": [
+    0.0,
+    6.11
+   ]
+  },
+  "candidate_passes_gate_live": {
+   "k": 0,
+   "n": 0
+  },
+  "distinct_candidates": 0,
+  "note": "class N packages are attacker-owned; the candidate is the popular name it imitates. Whether the victim meant that package is not observable."
+ },
+ "ADV": {
+  "flagged": 18,
+  "with_verified_suggestion": {
+   "k": 17,
+   "n": 18,
+   "pct": 94.44,
+   "ci95": [
+    74.24,
+    99.01
+   ]
+  },
+  "suggests_locked_version": {
+   "k": 17,
+   "n": 17,
+   "pct": 100.0,
+   "ci95": [
+    81.57,
+    100.0
+   ]
+  },
+  "suggests_the_malicious_version": {
+   "k": 0,
+   "n": 17,
+   "pct": 0.0,
+   "ci95": [
+    0.0,
+    18.43
+   ]
+  },
+  "kinds": {
+   "locked_version": 17
+  }
+ },
+ "R-B": {
+  "typosquat_correct": {
+   "k": 20,
+   "n": 20,
+   "pct": 100.0,
+   "ci95": [
+    83.89,
+    100.0
+   ]
+  },
+  "vulnerable_pins_fixed": {
+   "k": 4,
+   "n": 4,
+   "pct": 100.0,
+   "ci95": [
+    51.01,
+    100.0
+   ]
+  },
+  "note": "agent forms that install from a project file (pip install -e ., npm install) have no package name on the command line; there the suggestion is a verified file edit"
+ },
+ "B": {
+  "flagged": 4075,
+  "with_verified_suggestion": {
+   "k": 4075,
+   "n": 4075,
+   "pct": 100.0,
+   "ci95": [
+    99.91,
+    100.0
+   ]
+  },
+  "kinds": {
+   "locked_version": 4075
+  },
+  "block_with_suggestion": 2729,
+  "block_without": 0,
+  "warn_with_suggestion": 1346,
+  "warn_without": 0,
+  "note": "every B case is an honest upgrade, so a locked_version suggestion rolls it back to the reviewed version: safe, but it defers the update until the user re-locks"
+ },
+ "note": "exploratory; decisions unchanged; a suggestion is shown only if the gate passes it"
+}
+exit 0

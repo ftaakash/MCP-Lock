@@ -270,6 +270,14 @@ mcplock check -- npx -y @modelcontextprotocol/server-filesystem /tmp      # allo
 WARN: S5 tool_drift: @modelcontextprotocol/server-filesystem@2026.8.31 changes tool descriptions or input schemas (locked 2025.8.21)
 ```
 
+When it blocks, it also proposes a safer command that it has checked itself (the real package for a typosquat,
+a fixed version for a vulnerable pin, the locked version after a rug pull):
+
+```text
+BLOCK: S1 name_proximity: 'exrpess' is confusable with popular package 'express'
+TRY: npm install express  ('exrpess' imitates the popular package 'express')
+```
+
 It runs as a Claude Code `PreToolUse` hook on `Bash` and on writes to MCP config files; block → deny,
 warn → ask ([setup](docs/GATE.md)). Exploratory hardening: `--signals …,H1,H3` and the runtime pin proxy
 `mcplock proxy --server ID -- <server command>` ([details](docs/GATE.md#exploratory-hardening-phase-5-off-by-default)).
