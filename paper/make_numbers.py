@@ -237,6 +237,18 @@ def phase5() -> None:
     r4 = load("results/candidate/phase4/phase4_results.json")
     macro("AgeAdded", str(a["R"]["G_waived_detected"]["k"] - r4["detection_R"]["S1-C"]["k"]), src)
 
+    src = "results/candidate/phase5/suggestions.json"
+    g = load(src)
+    for tag, key in (("RS", "R-S"), ("RMC", "R-M_C"), ("ADV", "ADV")):
+        prop(f"Sg{tag}Cov", g[key]["with_verified_suggestion"], src)
+        prop(f"Sg{tag}Lock", g[key]["suggests_locked_version"], src)
+        prop(f"Sg{tag}Bad", g[key]["suggests_the_malicious_version"], src)
+    prop("SgRBName", g["R-B"]["typosquat_correct"], src)
+    prop("SgRBVer", g["R-B"]["vulnerable_pins_fixed"], src)
+    macro("SgRMNFlag", str(g["R-M_N"]["flagged"]), src)
+    macro("SgRMNCand", str(g["R-M_N"]["with_candidate"]["k"]), src)
+    prop("SgBCov", g["B"]["with_verified_suggestion"], src)
+
 
 def main():
     import sys

@@ -314,6 +314,22 @@ MCP servers that changed tools, and H4 \HFourAddP. The live tool list of a histo
 running it, so H2's benign cost assumes it equals the static extraction, and the \HTwoUnmeas{} upgrades without
 statically visible tools are counted as costless.
 
+\textbf{Safer alternatives (exploratory).} A block tells the agent what not to run but not what to run instead, so an
+agent may retry with something worse. When the gate flags a command, it now proposes a replacement and shows it only if
+the gate itself passes the rewritten command; the decision is never changed. For a locked server it suggests the newest
+version between the lock and the target that passes every lock check, falling back to the locked version; for a
+typosquat, the popular package the name imitates; for a vulnerable pin, the lowest release with no advisory, stepping
+forward when a fix carries advisories of its own. The Claude Code hook appends the suggestion to its deny reason, so the
+agent can retry with it. A verified suggestion is offered for \SgRMCCov{} real hijacked versions (class C), \SgRSCov{}
+synthetic rug pulls and \SgADVCov{} flagged adaptive attacks. Every one of them is the locked version, and none is the
+malicious version (\SgRMCBad{} for class C, 95\% CI \SgRMCBadCI). For R-B it names the intended package in
+\SgRBName{} typosquat scenarios and a fixed release for \SgRBVer{} vulnerable pins. It stays silent on all \SgRMNFlag{}
+newly registered malicious names, none of which is within edit distance~2 of a popular package. Two caveats apply.
+Class C correctness holds by construction, since the lock is the last version no advisory lists. On benign upgrades the
+suggestion is always a rollback to the reviewed version (\SgBCov), which is safe but defers an honest update until the
+user re-locks. Suggesting a typosquat's target or a fixed version is existing practice (e.g.\ \code{npm audit fix});
+what this adds is handing the agent a gate-verified rollback at the moment of the block.
+
 % ------------------------------------------------------------------------------------------------
 \section{Discussion and Limitations}
 \textbf{What the evidence supports.} Pinning catches real attacks that the name-and-source checks miss, but the
@@ -333,7 +349,7 @@ bounds. R-M contains only attacks that were caught and reported; attacks still u
 Replay reconstructs metadata as of each case's time but cannot recover removed versions, which is why S2/S3 evaluability
 is low. Class C follows a mechanical rule (an earlier clean version exists) and may include attacker-owned packages with
 a benign first release. The adaptive attacks were built by the authors of the defence; the hardening results are
-exploratory and were not pre-registered, and H2's matrix verdicts use live tool lists written down from each attack's
+exploratory and were not pre-registered, as are the safer-alternative suggestions, and H2's matrix verdicts use live tool lists written down from each attack's
 source rather than observed from running servers. Time of lock is unknown in practice, which is why H1 is reported as a
 range.
 

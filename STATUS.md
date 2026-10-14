@@ -59,6 +59,8 @@ the malicious one. Synthetic rug pulls 40/40; adaptive attacks 17/18; typosquat 
 package; vulnerable pins 4/4 fixed. New / invented names (class N): 0/59, as no popular name is within edit distance
 2. Novelty sweep: typosquat and fixed-version suggestions are prior art (Socket, SpellBound, `npm audit fix`,
 `pip-audit`); verified rollback returned to the agent as a command was not found in prior work.
+In the paper as an exploratory paragraph in RQ3 (numbers from `suggestions.json` via `paper/make_numbers.py`); the
+OSF registration is unchanged, as this is reported outside the pre-registered analyses.
 
 ### Deviations from the Phase 5 plan
 1. E10 is a hand-built bundle, not a package on a local pypiserver: the attack is a metadata fact (a file added to an
