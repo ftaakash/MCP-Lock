@@ -113,7 +113,7 @@ and drift figures are lower bounds.
 a 90-day window; among packages that shipped any release in the window, \DriftWinRelP{} \DriftWinRelCI{} did. Across
 release transitions with extractable tools on both sides, \DriftTransP{} (\DriftTrans) changed tools: \KindAdded{}
 added a tool, \KindRemoved{} removed one, \KindDesc{} changed a description and \KindSchema{} an input schema.
-Tool change is a routine event, not a rare one that a reviewer can wait for.
+Tool changes are routine.
 
 Tool changes are also invisible to supply-chain metadata. \NoSignalP{} \NoSignalCI{} of tool-changing transitions had
 no provenance loss, publisher change, maintainer change or new install script on the same release, and none of these
@@ -121,8 +121,8 @@ signals was more frequent on tool-changing than on other releases (Fisher's exac
 Over twelve months of all \MetaTrans{} releases in the frame, \MetaProvLostNpmP{} of active npm packages lost build
 provenance at least once, \MetaCiHumanP{} went from CI publishing to a human account, and \MetaInstallNpmP{} added an
 install script; only \MetaLatestProvNpmP{} (npm) and \MetaLatestProvPyP{} (PyPI) of latest versions carry provenance.
-Metadata signals are rare, provenance is a minority property, and tool changes are frequent and orthogonal to both:
-a gate that wants to see tool changes has to look at the tools.
+Because tool changes are frequent and independent of these rare metadata signals, a gate can only see them by
+looking at the tools.
 
 % ------------------------------------------------------------------------------------------------
 \section{MCP-Lock Design}
@@ -223,17 +223,17 @@ Kill rule & \multicolumn{2}{p{5.1cm}}{\AddedDet{} added detections $\ge 2$: not 
 \end{table}
 
 \textbf{Results.} Table~\ref{tab:rq2} gives the confirmatory results: both hypotheses hold and the kill rule is not
-triggered. The ablation explains where the gain comes from. Removing S4 loses \AblFour{} of \G's detections, removing
-S5 \AblFive, S3 \AblThree{} and S2 \AblTwo. On hijacked packages (class C) \G{} detects \RMCGP{} \RMCGCI{} against
+triggered. In the ablation, removing S4 loses \AblFour{} of \G's detections, removing S5 \AblFive, S3 \AblThree{}
+and S2 \AblTwo. On hijacked packages (class C) \G{} detects \RMCGP{} \RMCGCI{} against
 \RMCSCP{} for \SC, mostly install scripts added by the 2025 worm campaigns~\cite{cisa2025shaihulud}; on new names (class
-N) both detect \RMNGP{} through the baseline's age rule. Provenance continuity (S2) added nothing on real attacks,
-for a structural reason: removed malicious versions leave no registry record, so S2 and S3 were evaluable on only
+N) both detect \RMNGP{} through the baseline's age rule. Provenance continuity (S2) added nothing on real attacks
+because removed malicious versions leave no registry record, so S2 and S3 were evaluable on only
 \EvalSTwo{} of \NRM{} R-M cases, and only \STwoRMCP{} of class-C locks had provenance to begin with.
 
 On the synthetic rug pulls, \G{} detects \RSG{} and \SC{} \RSSC; S5 alone carries the two tool-definition classes, S4 the
 install-script class, and S2 and S3 each catch the stolen-token class. No control was flagged (\RSCtrl).
 
-The cost is the review burden. \G's false blocks barely move (\FbExtra{} more than \SC), but S5 adds warnings on
+The cost is paid in reviews. \G's false blocks barely move (\FbExtra{} more than \SC), but S5 adds warnings on
 \WarnGP{} of benign upgrades, essentially all in the MCP stratum, where honest servers change tools often (RQ1). Per
 added detection, \G{} costs \FbPerDet{} extra false blocks and \WarnPerDet{} extra warnings. The baseline's own
 \FbSCP{} false-block rate comes from its 30-day age rule replayed at upgrade time (\FbSCMcpP{} of MCP upgrades).
@@ -278,11 +278,11 @@ E11 & any & \EElevenN{} command shapes (detected) & \EElevenG/\EElevenN & \EElev
 \end{table}
 
 \textbf{What evades.} The frozen gate blocks \EGBlock{} and warns on \EGWarn{} of the \ENCases{} attacks; \EGAllow{}
-pass. The pattern is systematic. Static extraction cannot see tools built at run time or fetched from a URL (E6, E8b),
+pass. Static extraction cannot see tools built at run time or fetched from a URL (E6, E8b),
 and a rug pull through a remote file needs no new version at all (E6b). Locking the top-level archive leaves
 dependencies free to move (E9). A stolen token defeats S2 and S3 whenever the lock never had provenance (E2), and the
 same-version check compares only the locked file (E10). Commands hidden behind \code{npm exec}, \code{sh -c} or a shell
-variable escape the parser. These attacks apply widely: \ExpNoProvP{} of benign locks have no provenance (E2),
+variable escape the parser. The conditions these attacks need are common: \ExpNoProvP{} of benign locks have no provenance (E2),
 \ExpNonStaticP{} of versions hide their tools from static extraction (E6/E8), and \ExpFloatSdkP{} of npm servers
 float their MCP SDK dependency (E9, a lower bound that counts one dependency). A payload shipped through the genuine
 release pipeline (E4) carries genuine provenance; no lock can tell it apart from an honest release.
@@ -303,13 +303,13 @@ estimate with Wilson 95\% CI; tick: lower estimate). H1 is measured on the \HOne
 \label{fig:cost}
 \end{figure}
 
-\textbf{Cost.} Figure~\ref{fig:cost} shows that the switches split cleanly. H3 and H5 cost nothing on benign upgrades:
+\textbf{Cost.} Figure~\ref{fig:cost} shows the cost of each switch. H3 and H5 cost nothing on benign upgrades:
 H5 changes no decision (\HFive), and H3 only acts when the locked version is relaunched, which no upgrade does; as an
 exposure measure, \HThreeLateP{} of locked PyPI releases later gained a file. H1 adds blocks to
 \HOneBlockLateP--\HOneBlockEarlyP{} of npm upgrades, depending on whether the lock was taken just before the upgrade or
 when the old version was released. A strict tree lock that blocks every dependency change, as \code{npm ci} would,
-blocks \HOneStrictLateP--\HOneStrictEarlyP{} instead, so continuity rules rather than exact pins are what make
-dependency locking usable. H2 and H4 are expensive: H2 newly blocks \HTwoAddLoP--\HTwoAddHiP{} of benign upgrades, all
+blocks \HOneStrictLateP--\HOneStrictEarlyP{} instead; applying continuity rules to dependencies, instead of
+pinning them exactly, is what keeps the tree lock usable. H2 and H4 are expensive: H2 newly blocks \HTwoAddLoP--\HTwoAddHiP{} of benign upgrades, all
 MCP servers that changed tools, and H4 \HFourAddP. The live tool list of a historical version cannot be observed without
 running it, so H2's benign cost assumes it equals the static extraction, and the \HTwoUnmeas{} upgrades without
 statically visible tools are counted as costless.
@@ -324,8 +324,8 @@ agent can retry with it. A verified suggestion is offered for \SgRMCCov{} real h
 synthetic rug pulls and \SgADVCov{} flagged adaptive attacks. Every one of them is the locked version, and none is the
 malicious version (\SgRMCBad{} for class C, 95\% CI \SgRMCBadCI). For R-B it names the intended package in
 \SgRBName{} typosquat scenarios and a fixed release for \SgRBVer{} vulnerable pins. It stays silent on all \SgRMNFlag{}
-newly registered malicious names, none of which is within edit distance~2 of a popular package. Two caveats apply.
-Class C correctness holds by construction, since the lock is the last version no advisory lists. On benign upgrades the
+newly registered malicious names, none of which is within edit distance~2 of a popular package. Class C correctness
+holds by construction, since the lock is the last version no advisory lists. On benign upgrades the
 suggestion is always a rollback to the reviewed version (\SgBCov), which is safe but defers an honest update until the
 user re-locks. Suggesting a typosquat's target or a fixed version is existing practice (e.g.\ \code{npm audit fix});
 what this adds is handing the agent a gate-verified rollback at the moment of the block.
@@ -335,8 +335,7 @@ what this adds is handing the agent a gate-verified rollback at the moment of th
 \textbf{What the evidence supports.} Pinning catches real attacks that the name-and-source checks miss, but the
 confirmed gain is an install-script diff (S4), a classic supply-chain signal rather than an MCP-specific one. A deployable
 gate should not re-apply first-use checks to servers already in the lock: doing so is what made both gates block a third
-of honest upgrades. Tool pinning
-(S5) is what catches MCP rug pulls, and it is necessary because metadata signals do not accompany tool changes (RQ1),
+of honest upgrades. Tool pinning (S5) is what catches MCP rug pulls, and it is necessary because metadata signals do not accompany tool changes (RQ1),
 yet it warns on \WarnGMcpP{} of honest MCP upgrades. Provenance continuity is sound but rarely applicable: most
 packages have none, and attackers who remove their versions take the evidence with them.
 
@@ -349,8 +348,8 @@ bounds. R-M contains only attacks that were caught and reported; attacks still u
 Replay reconstructs metadata as of each case's time but cannot recover removed versions, which is why S2/S3 evaluability
 is low. Class C follows a mechanical rule (an earlier clean version exists) and may include attacker-owned packages with
 a benign first release. The adaptive attacks were built by the authors of the defence; the hardening results are
-exploratory and were not pre-registered, as are the safer-alternative suggestions, and H2's matrix verdicts use live tool lists written down from each attack's
-source rather than observed from running servers. Time of lock is unknown in practice, which is why H1 is reported as a
+exploratory and were not pre-registered, as are the safer-alternative suggestions, and H2's matrix verdicts use live
+tool lists written down from each attack's source rather than observed from running servers. Time of lock is unknown in practice, which is why H1 is reported as a
 range.
 
 % ------------------------------------------------------------------------------------------------
@@ -380,7 +379,7 @@ MCP servers change the tools they present to models often, and nothing in their 
 archive, provenance, publisher, install scripts and tool definitions catches \AddedDet{} real attacks that the existing
 gate misses, at a cost paid mostly in reviews of honest tool changes. Against an adaptive attacker, the frozen gate
 stops \EGStop{} of \ENCases{} attacks; dependency-tree locking, runtime tool pinning, file-level PyPI locking and command
-normalisation close most of the rest, and the price of each is now measured. Two gaps remain open for any lock-based
+normalisation close most of the rest, and we measure what each costs. Two gaps remain open for any lock-based
 defence: attacks shipped through the legitimate release pipeline, and the review fatigue of honest change.
 
 \section{Artifact Availability}
