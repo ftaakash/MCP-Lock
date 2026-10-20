@@ -1,0 +1,18 @@
+{
+  "result": "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase5/s5_kinds.json",
+  "result_sha256": "74c319d280bedc77c400f90ce59ded63066559f93a531309b0dcaa298460069e",
+  "command": "python.exe eval/scoring/s5_kinds.py",
+  "commit": "2242923d0c4594f763a6ad880754fd83b6cccca3-dirty",
+  "timestamp_utc": "2026-10-20T15:58:56Z",
+  "python": "3.11.9",
+  "inputs": {
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase4/runs/B.jsonl": "d998c778df7af2fe730cf1b5098b02d4311d4781f745b6e638c99b7f52c217af",
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase4/runs/R-B.jsonl": "52ca2541526484ae8fa42726e2fce44d2e2199cd3b83095a36737aa853e756d6",
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase4/runs/R-M.jsonl": "3c6bc82c7d71a25d6bcbc4c720886b0c77430ccdbe279a8676dcd214de3aeb43",
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase4/runs/R-S.jsonl": "e1f5cc53d696a5a810bdc302a2314cc9e4dfe8b1f734d3b10499660f0f4ccf81",
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/census/phase2/change_events.jsonl": "9a2dde4ca9abf68f1323696f79f04bbac1da3a2b34a6215d47d4e1890f0db5f0",
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase5/adaptive/bundles.jsonl.gz": "7024b45b234d98a21de2e92b1c14f89633643c64698af1de5d61a028c43243bb"
+  },
+  "params": {},
+  "note": ""
+}

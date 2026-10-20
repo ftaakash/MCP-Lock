@@ -1,0 +1,141 @@
+{
+ "B": {
+  "s5_findings": 2259,
+  "mcp_upgrades": 6695,
+  "s5_findings_of_mcp": {
+   "k": 2259,
+   "n": 6695,
+   "p": 0.33741598207617624,
+   "ci95": [
+    0.326186091990417,
+    0.3488323401694549
+   ]
+  },
+  "by_kind": {
+   "adds": {
+    "k": 987,
+    "n": 2259,
+    "p": 0.43691899070385126,
+    "ci95": [
+     0.4165892788609184,
+     0.4574628784879526
+    ]
+   },
+   "description": {
+    "k": 989,
+    "n": 2259,
+    "p": 0.43780433820274456,
+    "ci95": [
+     0.4174685250804473,
+     0.45835132128808864
+    ]
+   },
+   "schema_only": {
+    "k": 267,
+    "n": 2259,
+    "p": 0.11819389110225764,
+    "ci95": [
+     0.10552463550873037,
+     0.132159474760752
+    ]
+   },
+   "removal_only": {
+    "k": 16,
+    "n": 2259,
+    "p": 0.007082779991146525,
+    "ci95": [
+     0.004364436824460741,
+     0.011474701477068045
+    ]
+   }
+  },
+  "ends_as_warning": {
+   "adds": 512,
+   "description": 618,
+   "schema_only": 177,
+   "removal_only": 12
+  },
+  "ends_as_warning_share": {
+   "adds": {
+    "k": 512,
+    "n": 1319,
+    "p": 0.38817285822592873,
+    "ci95": [
+     0.36223399264610945,
+     0.4147612035408992
+    ]
+   },
+   "description": {
+    "k": 618,
+    "n": 1319,
+    "p": 0.46853677028051555,
+    "ci95": [
+     0.441737249384792,
+     0.4955190261525697
+    ]
+   },
+   "schema_only": {
+    "k": 177,
+    "n": 1319,
+    "p": 0.13419257012888552,
+    "ci95": [
+     0.1168558581548754,
+     0.1536538514060177
+    ]
+   },
+   "removal_only": {
+    "k": 12,
+    "n": 1319,
+    "p": 0.009097801364670205,
+    "ci95": [
+     0.0052119179600279095,
+     0.015834790725315705
+    ]
+   }
+  },
+  "blocked_anyway": {
+   "adds": 475,
+   "description": 371,
+   "schema_only": 90,
+   "removal_only": 4
+  }
+ },
+ "attacks": {
+  "R-B": {
+   "detected_by_S5_alone": 0,
+   "reported": {},
+   "cases": null
+  },
+  "R-M": {
+   "detected_by_S5_alone": 2,
+   "reported": {
+    "removes": 2
+   },
+   "cases": [
+    "RM:C:npm:autotel-mcp@20.0.1:launch",
+    "RM:C:pypi:litellm@1.82.8:launch"
+   ]
+  },
+  "R-S": {
+   "detected_by_S5_alone": 20,
+   "reported": {
+    "changes descriptions or schemas": 10,
+    "adds": 10
+   },
+   "cases": null
+  },
+  "ADV": {
+   "detected_by_S5_alone": 3,
+   "reported": {
+    "changes descriptions or schemas": 2,
+    "adds": 1
+   },
+   "cases": [
+    "ADV:E5:npx -y @mcplock-eval/adv-e5",
+    "ADV:E7:npx -y @mcplock-eval/adv-e7",
+    "ADV:E8a:npx -y @mcplock-eval/adv-e8a"
+   ]
+  }
+ },
+ "note": "exploratory, post hoc; B classes are exclusive (adds > description > schema_only > removal_only) from the census diff; attack classes are what S5 reported"
+}
