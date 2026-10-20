@@ -1,0 +1,16 @@
+{
+  "result": "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase5/plain_baselines.json",
+  "result_sha256": "33a0b5f2b87a2bdd4ff28fab7afbd79194e9a2dc54f3a309c1f308ddcb68d1c4",
+  "command": "python.exe eval/scoring/plain_baselines.py",
+  "commit": "b8c3d89f0bba82029a0c65fa4bd46d96060296be-dirty",
+  "timestamp_utc": "2026-10-20T15:52:10Z",
+  "python": "3.11.9",
+  "inputs": {
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase4/runs/R-M.jsonl": "3c6bc82c7d71a25d6bcbc4c720886b0c77430ccdbe279a8676dcd214de3aeb43",
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/baseline/phase4/runs/R-M.jsonl": "28f9ceae9f9ae0072a3c118b4475f156a1c470e9b80e8677209097592bd942e1",
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase4/malicious/bundles.jsonl.gz": "123b09a69b7b63dbe9e03a41b5defb95035fdc9be7b24b2310b1905b02f5b1ae",
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase4/benign/bundles.jsonl.gz": "bffade4c221b0afb1812fc5105540919b10838eda2836c100414bb507fd6d743"
+  },
+  "params": {},
+  "note": ""
+}

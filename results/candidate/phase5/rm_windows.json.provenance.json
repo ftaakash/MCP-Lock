@@ -1,0 +1,26 @@
+{
+  "result": "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase5/rm_windows.json",
+  "result_sha256": "c7da329c2bf3cdf5301f8504c02f8099d38f88526475d3b758d3c054e35051d1",
+  "command": "python.exe eval/scoring/rm_windows.py",
+  "commit": "b8c3d89f0bba82029a0c65fa4bd46d96060296be-dirty",
+  "timestamp_utc": "2026-10-20T15:52:09Z",
+  "python": "3.11.9",
+  "inputs": {
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase4/runs/R-M.jsonl": "3c6bc82c7d71a25d6bcbc4c720886b0c77430ccdbe279a8676dcd214de3aeb43",
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/baseline/phase4/runs/R-M.jsonl": "28f9ceae9f9ae0072a3c118b4475f156a1c470e9b80e8677209097592bd942e1",
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase4/malicious/bundles.jsonl.gz": "123b09a69b7b63dbe9e03a41b5defb95035fdc9be7b24b2310b1905b02f5b1ae"
+  },
+  "params": {
+    "windows": {
+      "wave1": [
+        "2025-09-14",
+        "2025-09-30"
+      ],
+      "wave2": [
+        "2025-11-21",
+        "2025-12-05"
+      ]
+    }
+  },
+  "note": ""
+}
