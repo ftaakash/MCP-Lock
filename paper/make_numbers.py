@@ -273,6 +273,16 @@ def phase5() -> None:
                     ("GNpm", pb["R-M"]["G_detects_npm"]), ("GIgn", pb["R-M"]["G_or_IGN_npm"])):
         kn(name, d["k"], d["n"], *d["ci95"], src)
 
+    src = "results/candidate/phase5/s5_kinds.json"
+    sk = load(src)
+    macro("SfiveWarnN", num(sum(sk["B"]["ends_as_warning"].values())), src)
+    for key, name in (("adds", "SfAdds"), ("description", "SfDesc"), ("schema_only", "SfSchema"),
+                      ("removal_only", "SfRemove")):
+        prop(name, {**sk["B"]["ends_as_warning_share"][key],
+                    "pct": 100 * sk["B"]["ends_as_warning_share"][key]["p"],
+                    "ci95": [100 * x for x in sk["B"]["ends_as_warning_share"][key]["ci95"]]}, src)
+    macro("SfRealAlone", str(sk["attacks"]["R-M"]["detected_by_S5_alone"]), src)
+
     src = "results/candidate/phase5/h2_runtime_check.json"
     rt = load(src)
     macro("RtCases", str(rt["cases"]), src)

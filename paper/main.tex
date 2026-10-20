@@ -348,7 +348,11 @@ every suggestion, including the rollback, is checked by the gate before the agen
 confirmed gain is an install-script diff (S4), a classic supply-chain signal rather than an MCP-specific one. A deployable
 gate should not re-apply first-use checks to servers already in the lock: doing so is what made both gates block a third
 of honest upgrades. Tool pinning (S5) is what catches MCP rug pulls, and it is necessary because metadata signals do not accompany tool changes (RQ1),
-yet it warns on \WarnGMcpP{} of honest MCP upgrades. Provenance continuity is sound but rarely applicable: most
+yet it warns on \WarnGMcpP{} of honest MCP upgrades. Of these \SfiveWarnN{} warnings, \SfDescP{} change a
+description, \SfAddsP{} add a tool, \SfSchemaP{} change only an input schema and \SfRemoveP{} only remove tools
+(exploratory). The first three are what a rug pull changes, so S5 cannot be narrowed without losing the attacks it
+exists for. The \SfRealAlone{} real attacks that S5 alone detects both report removed tools; no case in R is a
+known tool-definition rug pull, so S5's value against that attack rests on R-S and the adaptive cases. Provenance continuity is sound but rarely applicable: most
 packages have none, and attackers who remove their versions take the evidence with them.
 
 \textbf{Simpler alternatives (exploratory).} Two steps need no gate. Pinning the exact version in the MCP

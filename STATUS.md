@@ -66,6 +66,8 @@ compromised release pipeline (T3) is outside what any lock can see.
 - Publication windows (`rm_windows.json`): 32 + 30 of G's 99 added detections fall in the two 2025 Shai-Hulud
   waves; outside both, G 32.0% vs S1-C 21.2% of 344 R-M cases (37 vs 0 discordant, p = 1.5e-11).
 - Block-only detection (pre-registered secondary): G 39.2% vs S1-C 19.6%.
+- S5 by kind of change (`s5_kinds.json`): of 1,319 S5 warnings on B, 46.9% description, 38.8% added tool,
+  13.4% schema only, 0.9% removal only. The 2 real attacks S5 alone detects report removed tools.
 - Prior art: tool-definition pinning exists (MCP-Scan, ETDI, mcp-pin, mcpseal); the paper now says so. Note that
   mcpseal's lockfile is also named `.mcp-lock.json`.
 - Paper: hardening switches renamed D1–D5 (code keeps H1–H5).
