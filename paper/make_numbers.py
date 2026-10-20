@@ -117,6 +117,9 @@ def phase4() -> None:
     for sys_, name in (("G", "DetG"), ("S1-C", "DetSC"), ("S1-L", "DetSL")):
         d = r["detection_R"][sys_]
         kn(name, d["k"], d["n"], *d["ci95"], src)
+    for sys_, name in (("G", "DetGBlock"), ("S1-C", "DetSCBlock")):
+        d = r["detection_R_block_only"][sys_]
+        kn(name, d["k"], d["n"], *d["ci95"], src)
     h1 = r["H1"]
     macro("AddedDet", num(h1["table"]["G_only"]), src)
     macro("SCOnly", num(h1["table"]["S1C_only"]), src)
@@ -248,6 +251,27 @@ def phase5() -> None:
     macro("SgRMNFlag", str(g["R-M_N"]["flagged"]), src)
     macro("SgRMNCand", str(g["R-M_N"]["with_candidate"]["k"]), src)
     prop("SgBCov", g["B"]["with_verified_suggestion"], src)
+
+    src = "results/candidate/phase5/rm_windows.json"
+    w = load(src)["by_window"]
+    macro("WaveOneOnly", str(w["wave1"]["G_only"]), src)
+    macro("WaveTwoOnly", str(w["wave2"]["G_only"]), src)
+    macro("OutN", num(w["outside"]["n"]), src)
+    macro("OutOnly", str(w["outside"]["G_only"]), src)
+    macro("OutSCOnly", str(w["outside"]["S1C_only"]), src)
+    for sys_, name in (("G", "OutG"), ("S1-C", "OutSC")):
+        d = w["outside"][sys_]
+        kn(name, d["k"], d["n"], *d["ci95"], src)
+    p_out = w["outside"]["mcnemar_p"]
+    mant, exp = f"{p_out:.1e}".split("e")
+    macro("OutMcNemar", f"{mant}\\times10^{{{int(exp)}}}", src)
+
+    src = "results/candidate/phase5/plain_baselines.json"
+    pb = load(src)
+    for name, d in (("PinRM", pb["R-M"]["PIN_prevents"]), ("IgnRM", pb["R-M"]["IGN_prevents_upper_bound_npm"]),
+                    ("IgnB", pb["B"]["IGN_skips_honest_script_npm"]), ("SCIgn", pb["R-M"]["S1-C_or_IGN_npm"]),
+                    ("GNpm", pb["R-M"]["G_detects_npm"]), ("GIgn", pb["R-M"]["G_or_IGN_npm"])):
+        kn(name, d["k"], d["n"], *d["ci95"], src)
 
     src = "results/candidate/phase5/h2_runtime_check.json"
     rt = load(src)

@@ -75,6 +75,7 @@ that is already in the lock (it guards first use), and `gate unlocked` does not 
 
 ## Exploratory hardening (Phase 5, off by default)
 These are not part of the pre-registered gate. With no switch on, the gate runs exactly as tagged `prereg-v1`.
+The paper calls them D1–D5, so that they are not confused with the pre-registered hypotheses H1 and H2.
 Lock fields: [spec §6](../lockfile/SPEC.md). Evasion matrix and benign cost: `results/candidate/phase5/`.
 
 | Switch | What | How to turn it on |

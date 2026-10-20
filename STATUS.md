@@ -58,6 +58,18 @@ compromised release pipeline (T3) is outside what any lock can see.
   rule. Waiving it for servers already in the lock: false blocks 0.73% [0.57, 0.94] (from 33.4%), interruptions 28.4%
   (from 49.8%; warnings 27.7%), detection on R 187/490 (8 young hijacked packages lost; still 91 more than S1-C).
 
+### Post-review analyses (2026-10-20, exploratory; `paper/REVIEW.md`)
+- Plain alternatives (`plain_baselines.json`): exact version pins prevent all class C (368/468 R-M) but hold back
+  every upgrade; `--ignore-scripts` covers at most 26.6% of npm R-M (2.6% of honest npm upgrades lose a script);
+  S1-C + `--ignore-scripts` covers 42.2% of npm R-M vs G 41.9%. On real attacks most of G's gain is available
+  more cheaply; G's addition is tool and provenance continuity, unattended clean upgrades and a reviewable diff.
+- Publication windows (`rm_windows.json`): 32 + 30 of G's 99 added detections fall in the two 2025 Shai-Hulud
+  waves; outside both, G 32.0% vs S1-C 21.2% of 344 R-M cases (37 vs 0 discordant, p = 1.5e-11).
+- Block-only detection (pre-registered secondary): G 39.2% vs S1-C 19.6%.
+- Prior art: tool-definition pinning exists (MCP-Scan, ETDI, mcp-pin, mcpseal); the paper now says so. Note that
+  mcpseal's lockfile is also named `.mcp-lock.json`.
+- Paper: hardening switches renamed D1–D5 (code keeps H1–H5).
+
 ### Safer-alternative suggestions (2026-10-14, exploratory; `docs/SUGGESTIONS.md`)
 On a flagged command the gate proposes a replacement and shows it only if the gate passes it; decisions are
 unchanged (re-replay of every Phase 4 corpus identical: `results/census/logs/p5_suggest_recheck.log`).

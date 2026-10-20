@@ -34,13 +34,13 @@ def hardening_cost():
     pb = h["H3_pypi_all_files"]["block_on_B"]
     # (label, closes, lower estimate or None, upper estimate {pct, ci95}, note)
     rows = [
-        ("H5 command normalisation", "E11", None, h["H5_command_normalise"]["decisions_changed"], ""),
-        ("H3 lock every PyPI file", "E10", None, pb, "acts only on relaunch"),
-        ("H1 dependency-tree lock", "E9", h1["late"]["added_block_over_G"], h1["early"]["added_block_over_G"],
+        ("D5 command normalisation", "E11", None, h["H5_command_normalise"]["decisions_changed"], ""),
+        ("D3 lock every PyPI file", "E10", None, pb, "acts only on relaunch"),
+        ("D1 dependency-tree lock", "E9", h1["late"]["added_block_over_G"], h1["early"]["added_block_over_G"],
          "npm cases only"),
-        ("H2 runtime tools/list pin", "E5–E9", h2["added_block_over_G_lower"],
+        ("D2 runtime tools/list pin", "E5–E9", h2["added_block_over_G_lower"],
          h2["added_block_over_G_upper"], ""),
-        ("H4 require provenance", "E2", None, h["H4_require_provenance"]["added_block_over_G"], ""),
+        ("D4 require provenance", "E2", None, h["H4_require_provenance"]["added_block_over_G"], ""),
     ]
     plt.rcParams.update({"font.family": "serif", "font.size": 7.5, "axes.edgecolor": INK2,
                          "axes.labelcolor": INK, "xtick.color": INK2, "ytick.color": INK, "pdf.fonttype": 42})
