@@ -1,6 +1,6 @@
 # STATUS
 
-## Phase 5: adaptive attacker (RQ3) and hardening (2026-10-11). **Attack and defence done; paper not started**
+## Phase 5: adaptive attacker (RQ3) and hardening (2026-10-11). **Attack and defence done; paper drafted (`paper/`)**
 
 Plan: `docs/PHASE5_PLAN.md`. Everything here is **exploratory**: Phase 4 stays the confirmatory result, and with no
 hardening switch on, the gate is the frozen `prereg-v1` code. After the hardening edits, a re-replay of every Phase 4
