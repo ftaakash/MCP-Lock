@@ -1,15 +1,22 @@
+% Based on the IEEE Conference Template (Overleaf, grfzhhncsfqn).
 \documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
 \usepackage[T1]{fontenc}
 \usepackage{cite}
-\usepackage{amsmath}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
 \usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
 \usepackage{booktabs}
 \usepackage{multirow}
-\usepackage{xcolor}
 \usepackage[hidelinks]{hyperref}
 \usepackage{xurl}
 \usepackage{tikz}
 \usetikzlibrary{positioning,arrows.meta,fit}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \input{numbers}
 
 \newcommand{\G}{\textsf{G}}
@@ -21,9 +28,23 @@
 \title{MCP-Lock: Lockfiles and Pre-Launch Gating for Coding-Agent MCP Servers}
 
 \author{\IEEEauthorblockN{Aakash G S}
-\IEEEauthorblockA{Department of Computer Science and Engineering (Data Science)\\
-SRM Institute of Science and Technology\\
-gsaakash05@gmail.com}}
+\IEEEauthorblockA{\textit{Dept. of Computer Science and Engineering (Data Science)} \\
+\textit{SRM Institute of Science and Technology}\\
+Chennai, India \\
+gsaakash05@gmail.com}
+\and
+\IEEEauthorblockN{Hariharan J}
+\IEEEauthorblockA{\textit{Dept. of Computer Science and Engineering (Data Science)} \\
+\textit{SRM Institute of Science and Technology}\\
+Chennai, India \\
+harinithe1831@gmail.com}
+\and
+\IEEEauthorblockN{J Jaswanth Raj}
+\IEEEauthorblockA{\textit{Dept. of Computer Science and Engineering (Data Science)} \\
+\textit{SRM Institute of Science and Technology}\\
+Chennai, India \\
+jjjashjjj@gmail.com}
+}
 
 \maketitle
 
@@ -57,8 +78,8 @@ literature~\cite{invariant2025poisoning,hou2025mcp}.
 
 Existing pre-install checks do not look at this layer. The hook of Bagmar and Saraf~\cite{bagmar2026setup} checks names,
 sources and age before \code{pip install}; registry provenance (SLSA~\cite{slsa2023provenance}, Sigstore~\cite{newman2022sigstore},
-PEP~740~\cite{pep740}) says who built an archive, not what tools it advertises; and the public MCP registry does not
-version tool definitions at all~\cite{kraishan2026drift}. Scanners and proxies that pin the live tool list after a
+PEP~740~\cite{pep740}) says who built an archive, not what tools it advertises; and the public MCP registry keeps no
+versioned record of tool definitions~\cite{kraishan2026drift}. Scanners and proxies that pin the live tool list after a
 server starts exist~\cite{invariant2025mcpscan,mcppin,mcpseal}; none of them reports how often honest servers change
 tools, or what pinning catches and costs on real packages.
 
@@ -244,7 +265,7 @@ because removed malicious versions leave no registry record, so S2 and S3 were e
 On the synthetic rug pulls, \G{} detects \RSG{} and \SC{} \RSSC; S5 alone carries the two tool-definition classes, S4 the
 install-script class, and S2 and S3 each catch the stolen-token class. No control was flagged (\RSCtrl).
 
-The cost is paid in reviews. \G's false blocks barely move (\FbExtra{} more than \SC), but S5 adds warnings on
+\G's cost is extra reviews. Its false blocks barely move (\FbExtra{} more than \SC), but S5 adds warnings on
 \WarnGP{} of benign upgrades, essentially all in the MCP stratum, where honest servers change tools often (RQ1). Per
 added detection, \G{} costs \FbPerDet{} extra false blocks and \WarnPerDet{} extra warnings. The baseline's own
 \FbSCP{} false-block rate comes from its 30-day age rule replayed at upgrade time (\FbSCMcpP{} of MCP upgrades).
@@ -352,7 +373,7 @@ yet it warns on \WarnGMcpP{} of honest MCP upgrades. Of these \SfiveWarnN{} warn
 description, \SfAddsP{} add a tool, \SfSchemaP{} change only an input schema and \SfRemoveP{} only remove tools
 (exploratory). The first three are what a rug pull changes, so S5 cannot be narrowed without losing the attacks it
 exists for. The \SfRealAlone{} real attacks that S5 alone detects both report removed tools; no case in R is a
-known tool-definition rug pull, so S5's value against that attack rests on R-S and the adaptive cases. Provenance continuity is sound but rarely applicable: most
+known tool-definition rug pull, so the evidence that S5 stops rug pulls comes from R-S and the adaptive cases. Provenance continuity is sound but rarely applicable: most
 packages have none, and attackers who remove their versions take the evidence with them.
 
 \textbf{Simpler alternatives (exploratory).} Two steps need no gate. Pinning the exact version in the MCP
