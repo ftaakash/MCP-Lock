@@ -81,16 +81,16 @@ lock(s, 10.4, 0.9, 1.6, "Title lock");
 txt(s, "Domain: Cybersecurity · Software supply-chain security · AI agents (Model Context Protocol)", { x: 0.7, y: 3.45, w: 11.5, h: 0.4, fontSize: 15, color: C.accent2 });
 s.addTable([
   [th("Team member", { fill: { color: HEX.accent5 } }), th("Register number", { fill: { color: HEX.accent5 } })],
-  ...["Aakash G S", "Hariharan J", "J Jaswanth Raj"].map((n) => [
+  ...[["Aakash G S", "RA2311042010060"], ["Hariharan J", "RA2311042010059"], ["J Jaswanth Raj", "RA2311042010013"]].map(([n, reg]) => [
     td(n, { fontSize: 15, bold: true, color: "FFFFFF", fill: { color: HEX.dk1 } }),
-    td("RA22XXXXXXXXXXX", { fontSize: 15, color: HEX.accent6, fill: { color: HEX.dk1 }, fontFace: "Courier New" }),
+    td(reg, { fontSize: 15, color: HEX.accent6, fill: { color: HEX.dk1 }, fontFace: "Courier New" }),
   ]),
 ], { x: 0.7, y: 4.1, w: 6.4, colW: [3.4, 3.0], rowH: 0.42, border: { type: "solid", pt: 0.75, color: HEX.accent5 } });
 card(s, 7.6, 4.1, 5.05, 1.68, C.accent5, "Guide card");
 txt(s, "Project guide", { x: 7.85, y: 4.25, w: 4.6, h: 0.35, fontSize: 13, bold: true, color: C.accent6 });
-txt(s, "[Guide name]", { x: 7.85, y: 4.6, w: 4.6, h: 0.45, fontSize: 18, bold: true, color: C.background1 });
-txt(s, "[Designation], Dept. of Computer Science and Engineering (Data Science)", { x: 7.85, y: 5.05, w: 4.6, h: 0.65, fontSize: 13, color: C.background2 });
-txt(s, "Dept. of Computer Science and Engineering (Data Science), School of Computing, SRM Institute of Science and Technology, Kattankulathur", { x: 0.7, y: 6.1, w: 11.9, h: 0.35, fontSize: 13, color: C.accent2 });
+txt(s, "Sai Prasanth D", { x: 7.85, y: 4.6, w: 4.6, h: 0.45, fontSize: 18, bold: true, color: C.background1 });
+txt(s, "Assistant Professor, Department of Data Science and Business Systems", { x: 7.85, y: 5.05, w: 4.6, h: 0.65, fontSize: 13, color: C.background2 });
+txt(s, "Department of Data Science and Business Systems, School of Computing, SRM Institute of Science and Technology, Kattankulathur", { x: 0.7, y: 6.1, w: 11.9, h: 0.35, fontSize: 13, color: C.accent2 });
 txt(s, "21CSP401L Major Project  ·  Review 0", { x: 0.7, y: 6.5, w: 11.9, h: 0.35, fontSize: 13, bold: true, color: C.background1 });
 s.addNotes("Introduce the team and guide. One line: MCP-Lock records what you reviewed and checks every launch of an agent's tool server against it.");
 

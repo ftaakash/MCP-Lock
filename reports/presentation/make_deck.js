@@ -91,7 +91,7 @@ s.addText("MCP-Lock", { placeholder: "title" });
 s.addText("A lockfile and launch gate that stops AI coding agents from silently running new, unreviewed tool servers", { placeholder: "body" });
 lock(s, 9.9, 1.7, 2.0, "Title lock");
 txt(s, "Aakash G S  ·  Hariharan J  ·  J Jaswanth Raj", { x: 0.7, y: 5.55, w: 9, h: 0.4, fontSize: 18, bold: true, color: C.background1 });
-txt(s, "Dept. of Computer Science and Engineering (Data Science), SRM Institute of Science and Technology", { x: 0.7, y: 5.95, w: 10, h: 0.4, fontSize: 14, color: C.accent2 });
+txt(s, "Department of Data Science and Business Systems, SRM Institute of Science and Technology", { x: 0.7, y: 5.95, w: 10, h: 0.4, fontSize: 14, color: C.accent2 });
 s.addNotes("MCP-Lock protects developers who let AI coding agents start Model Context Protocol servers. One sentence: lock what you reviewed, check every launch against it.");
 
 // ---------- 2. problem ----------
