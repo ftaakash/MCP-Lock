@@ -75,13 +75,13 @@ txt(s, "Domain: Cybersecurity · Software Supply-Chain Security · AI Agents (Mo
 txt(s, [
   { text: "Guide: ", options: { bold: true, fontSize: 18 } },
   { text: "Mr. Sai Prasanth D", options: { fontSize: 18, breakLine: true } },
-  { text: "Assistant Professor", options: { fontSize: 14, breakLine: true } },
+  { text: "Assistant Professor Jr G", options: { fontSize: 14, breakLine: true } },
   { text: "Department of Data Science and Business Systems", options: { fontSize: 14 } },
 ], { x: 1.3, y: 4.3, w: 4.8, h: 1.3, paraSpaceAfter: 6 });
 const team = [["Aakash G S", "RA2311042010060"], ["Hariharan J", "RA2311042010059"], ["J Jaswanth Raj", "RA2311042010013"]];
 txt(s, team.flatMap(([n, r], i) => [
   { text: `${n} (${r})`, options: { fontSize: 18, breakLine: true } },
-  { text: "4th Year, B.Tech, DSBS Department", options: { fontSize: 13, breakLine: i < team.length - 1 } },
+  { text: "4th Year, B.Tech, CSBS, DSBS Department", options: { fontSize: 13, breakLine: i < team.length - 1 } },
 ]), { x: 7.3, y: 4.3, w: 5.2, h: 2.6, paraSpaceAfter: 6 });
 txt(s, "SRM Institute of Science and Technology, Kattankulathur  ·  21CSP401L Major Project  ·  Review 0", { x: 1.2, y: 6.85, w: 10.9, h: 0.35, fontSize: 13, align: "center", color: C.text2 });
 s.addNotes("Introduce the team and guide. One line: MCP-Lock records what you reviewed and checks every launch of an agent's tool server against it.");
@@ -153,6 +153,24 @@ txt(s, [{ text: "Common thread: ", options: { bold: true } }, { text: "no work c
 note(s, "All six sources verified against their primary pages (docs/CITATIONS_VERIFIED.md). Ladisa et al., IEEE S&P 2023, DOI 10.1109/SP46215.2023.10179304.");
 s.addNotes("Six works across three layers: generic supply chain (Ladisa), MCP threats and defences (Hou, ETDI), and agent supply chains (Bagmar & Saraf, Kapner, Kraishan). The last column is what each leaves open.");
 
+// ---------- 4b. literature survey, continued ----------
+s = pres.addSlide({ masterName: "CONTENT", sectionTitle: "Background" });
+s.addText("Literature Survey (contd.)", { placeholder: "title" });
+const lit2 = [
+  ["Sejfia & Schäfer [9]", "2022", "ICSE: Amalfi, machine-learning detection of malicious npm packages using three complementary techniques; 95 unknown samples found in one week", "Flags malicious new packages; keeps no record of the version a user reviewed and ignores tool definitions"],
+  ["Ladisa et al. [10]", "2023", "ACSAC: language-independent features to detect malicious npm and PyPI packages; 58 unknown ones found in 31,292", "Classification of package code; no continuity check and nothing specific to agents"],
+  ["Schorlemmer et al. [11]", "2024", "IEEE S&P: measures signing in Maven, PyPI, DockerHub and Hugging Face; registry policy drives how much is signed", "Measurement only; many packages carry no signature, so a defence cannot rely on signatures alone"],
+  ["Gamage et al. [12]", "2025", "Compares lockfile design across seven package managers, with 15 developer interviews", "Covers dependency lockfiles; nothing on MCP tool definitions or build-identity continuity"],
+  ["Gaire et al. [13]", "2025", "SoK: taxonomy of security and safety risks in the MCP ecosystem and a review of defences", "Systematization; no new defence evaluated on real attacks"],
+  ["Huang et al. [14]", "2026", "STRIDE/DREAD threat model of MCP; tests tool poisoning on seven MCP clients and proposes layered defences", "Client-side view; does not cover package versions, install scripts or registry provenance"],
+];
+s.addTable([[th("Paper / Authors"), th("Year"), th("Method / Contribution"), th("Limitation")], ...lit2.map((r) => r.map((c) => td(c, { fontSize: 12.5 })))], {
+  x: 0.92, y: 1.85, w: 11.5, colW: [2.2, 0.75, 4.4, 4.15], rowH: [0.4, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6], border, fontFace: "Times New Roman",
+});
+txt(s, [{ text: "Common thread: ", options: { bold: true } }, { text: "detection and signing work looks for known-bad code or a signature; none checks an agent's tool server against the state that was reviewed." }], { x: 0.92, y: 6.25, w: 11.5, h: 0.45, fontSize: 14 });
+note(s, "Checked on the publisher or arXiv page of each paper, 4 Nov. 2026.");
+s.addNotes("Six more recent works: malicious-package detection (Amalfi, cross-language detection), signing adoption, lockfile design, and two MCP threat studies. All scan or sign; none pins a reviewed state.");
+
 // ---------- 5. gap, market, patents ----------
 s = pres.addSlide({ masterName: "CONTENT", sectionTitle: "Background" });
 s.addText("Research Gap & Market / Patent Study", { placeholder: "title" });
@@ -160,9 +178,9 @@ const Y = "✓", N = "✗", P = "partly";
 const head = ["Existing solution", "Before launch, runs no code", "Pins tool definitions", "Build, publisher, script continuity", "No server / registry change"];
 const rows = [
   ["Bagmar & Saraf hook [7]", Y, N, N, Y],
-  ["MCP-Scan, mcp-pin, mcpseal [9]–[11]", N, Y, P, Y],
+  ["MCP-Scan, mcp-pin, mcpseal [15]–[17]", N, Y, P, Y],
   ["Signed definitions: ETDI [6]", "–", Y, "–", N],
-  ["npm provenance, Sigstore [12], [13]", Y, N, P, Y],
+  ["npm provenance, Sigstore [18], [19]", Y, N, P, Y],
   ["MCP-Lock (proposed)", Y, Y, Y, Y],
 ];
 s.addTable([
@@ -173,9 +191,9 @@ s.addTable([
 ], { x: 0.92, y: 1.85, w: 7.0, colW: [2.8, 1.05, 1.05, 1.05, 1.05], rowH: [0.62, 0.38, 0.38, 0.38, 0.38, 0.38], border, fontFace: "Times New Roman" });
 txt(s, "Patent landscape", { x: 8.2, y: 1.85, w: 4.3, h: 0.35, fontSize: 16, bold: true });
 txt(s, [
-  { text: "US 12,314,394 B2 (Socket, 2025) [14]: ", options: { bold: true, bullet: true } },
+  { text: "US 12,314,394 B2 (Socket, 2025) [20]: ", options: { bold: true, bullet: true } },
   { text: "scans a project's dependency files for malware via a cache of scanned packages; no comparison with a reviewed version.", options: { breakLine: true } },
-  { text: "US 10,055,576 B2 (Red Hat, 2018) [15]: ", options: { bold: true, bullet: true } },
+  { text: "US 10,055,576 B2 (Red Hat, 2018) [21]: ", options: { bold: true, bullet: true } },
   { text: "blocks repository packages whose components are on an insecure list; known-bad lists only.", options: { breakLine: true } },
   { text: "No patent found that pins agent tool definitions before launch.", options: { bullet: true, italic: true } },
 ], { x: 8.2, y: 2.25, w: 4.3, h: 2.35, fontSize: 13, paraSpaceAfter: 4 });
@@ -189,8 +207,9 @@ txt(s, items([
 txt(s, "Market and our edge", { x: 8.2, y: 4.35, w: 4.3, h: 0.35, fontSize: 16, bold: true });
 txt(s, [
   { text: "Socket and npm provenance protect packages; MCP-Scan and the pinning proxies protect tools only after start-up.", options: { bullet: true, breakLine: true } },
+  { text: "Simple alternatives: exact version pinning (freezes every honest upgrade) and npm --ignore-scripts (stops install scripts only).", options: { bullet: true, breakLine: true } },
   { text: "MCP-Lock: one lockfile pins archive, provenance, publisher, install scripts and tool definitions; the gate checks all five before every launch, needs no ecosystem change, and closes G1–G4.", options: { bullet: true } },
-], { x: 8.2, y: 4.75, w: 4.3, h: 1.9, fontSize: 13, paraSpaceAfter: 4 });
+], { x: 8.2, y: 4.75, w: 4.3, h: 1.95, fontSize: 12, paraSpaceAfter: 3 });
 note(s, "Patent search: Google Patents, 3 Nov. 2026, not exhaustive.");
 s.addNotes("Table: no existing solution ticks all four boxes. Patents cover malware scanning and known-bad lists, not pinning a reviewed state. G1 to G4 are the explicit gaps the objectives answer.");
 
@@ -223,7 +242,7 @@ const sdg = [
 s.addTable([[th("Goal"), th("Target"), th("How MCP-Lock contributes")], ...sdg.map((r) => [td(r[0], { bold: true }), td(r[1], { align: "center", bold: true }), td(r[2])])], {
   x: 0.92, y: 1.85, w: 11.5, colW: [3.1, 0.9, 7.5], rowH: [0.4, 0.75, 0.55, 0.75, 0.55, 0.75], border, fontFace: "Times New Roman",
 });
-note(s, "Targets as defined in UN resolution A/RES/70/1, “Transforming our world: the 2030 Agenda for Sustainable Development” [17].");
+note(s, "Targets as defined in UN resolution A/RES/70/1, “Transforming our world: the 2030 Agenda for Sustainable Development” [23].");
 s.addNotes("Primary SDG is 9: the software supply chain is infrastructure. SDG 16: preventing cyber crime and making decisions auditable. SDG 17: open science, everything public and reusable.");
 
 // ---------- 8. methodology and architecture ----------
@@ -261,7 +280,7 @@ txt(s, items([
 ]), { x: 0.92, y: 5.3, w: 6.6, h: 1.4, fontSize: 12.5 });
 txt(s, "Technology Stack", { x: 7.9, y: 4.95, w: 4.5, h: 0.35, fontSize: 15, bold: true });
 txt(s, "Python 3.11, tree-sitter (JS/TS), npm & PyPI APIs, Sigstore / SLSA provenance, Docker sandbox, pytest + GitHub Actions, Claude Code hook, OSF pre-registration, LaTeX IEEEtran.", { x: 7.9, y: 5.3, w: 4.5, h: 1.4, fontSize: 13 });
-note(s, "Method: lock once after review (mcplock lock), then the gate checks every launch. Evaluation is pre-registered on OSF [16] against the baseline hook [7].");
+note(s, "Method: lock once after review (mcplock lock), then the gate checks every launch. Evaluation is pre-registered on OSF [22] against the baseline hook [7].");
 s.addNotes("Walk the pipeline left to right: the hook intercepts the launch, the resolver fetches metadata and the archive, the extractor reads tool definitions without running code, and the checks compare against the lockfile. Then modules and stack.");
 
 // ---------- 9. work plan ----------
@@ -326,6 +345,12 @@ const refs = [
   "M. Bhatt, V. S. Narajala, and I. Habler, “ETDI: Mitigating tool squatting and rug pull attacks in Model Context Protocol (MCP) by using OAuth-enhanced tool definitions and policy-based access control,” arXiv:2506.01333, 2025.",
   "A. Bagmar and P. Saraf, “Setup complete, now you are compromised: Weaponizing setup instructions against AI coding agents,” arXiv:2607.15143, 2026.",
   "O. Kraishan, “Same name, different server: A security census of silent drift in the Model Context Protocol ecosystem,” arXiv:2609.14119, 2026.",
+  "A. Sejfia and M. Schäfer, “Practical automated detection of malicious npm packages,” in Proc. 44th Int. Conf. Software Engineering (ICSE), 2022, doi: 10.1145/3510003.3510104.",
+  "P. Ladisa, S. E. Ponta, N. Ronzoni, M. Martinez, and O. Barais, “On the feasibility of cross-language detection of malicious packages in npm and PyPI,” in Proc. ACSAC, 2023, pp. 71–82, doi: 10.1145/3627106.3627138.",
+  "T. R. Schorlemmer et al., “Signing in four public software package registries: Quantity, quality, and influencing factors,” in Proc. IEEE Symp. Security and Privacy (SP), 2024, doi: 10.1109/SP54263.2024.00182.",
+  "Y. Gamage, D. Tiwari, M. Monperrus, and B. Baudry, “The design space of lockfiles across package managers,” arXiv:2505.04834, 2025.",
+  "S. Gaire, S. Gyawali, S. Mishra, S. Niroula, D. Thakur, and U. Yadav, “Systematization of knowledge: Security and safety in the Model Context Protocol ecosystem,” arXiv:2512.08290, 2025.",
+  "C. Huang, X. Huang, N. P. Tran, and A. Milani Fard, “Model Context Protocol threat modeling and analyzing vulnerabilities to prompt injection with tool poisoning,” arXiv:2603.22489, 2026.",
   "L. Beurer-Kellner and M. Fischer, “Introducing MCP-Scan: Protecting MCP with Invariant,” Invariant Labs blog, Apr. 2025.",
   "GautamTalksDev, “mcp-pin: Pin what your agent approved; block it when it changes,” GitHub, 2026. [Online]. Available: github.com/GautamTalksDev/mcp-pin",
   "confuseddude, “mcpseal: Pins the hash of every approved MCP tool definition,” GitHub, 2026. [Online]. Available: github.com/confuseddude/mcpseal",
@@ -338,7 +363,7 @@ const refs = [
 ];
 const half = Math.ceil(refs.length / 2);
 [refs.slice(0, half), refs.slice(half)].forEach((col, ci) => {
-  txt(s, col.map((r, i) => ({ text: `[${ci * half + i + 1}]  ${r}`, options: { breakLine: i < col.length - 1 } })), { x: 0.92 + ci * 5.85, y: 1.85, w: 5.6, h: 4.85, fontSize: 11.5, paraSpaceAfter: 4 });
+  txt(s, col.map((r, i) => ({ text: `[${ci * half + i + 1}]  ${r}`, options: { breakLine: i < col.length - 1 } })), { x: 0.92 + ci * 5.85, y: 1.85, w: 5.6, h: 4.85, fontSize: 9.5, paraSpaceAfter: 2 });
 });
 note(s, "Code and data: github.com/ftaakash/MCP-Lock. All entries checked against their primary source; patents checked on Google Patents.");
 s.addNotes("IEEE-style references in order of first citation in this deck: papers, tools, patents, our pre-registration and the UN SDG resolution.");
