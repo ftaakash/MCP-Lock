@@ -1,4 +1,5 @@
-// Builds MCP-Lock-Review0.pptx: the 10-slide Review 0 deck, one slide per rubric item (21CSP401L).
+// Builds MCP-Lock-Review0.pptx: the 10-slide Review 0 deck, one slide per rubric item (21CSP401L), in the
+// department's black-and-white template (Times New Roman, SRM logo top right on every slide).
 // Numbers come from paper/numbers.tex; references from paper/refs.bib (docs/CITATIONS_VERIFIED.md) plus two
 // patents checked on Google Patents on 2026-11-03.
 // Run: NODE_PATH=<dir with pptxgenjs> node make_review0.js <path to pptx skill apply_theme.js>
@@ -7,29 +8,31 @@ const pptxgen = require("pptxgenjs");
 const { applyTheme } = require(process.argv[2]);
 
 const THEME = {
-  name: "MCP-Lock",
-  headFontFace: "Calibri",
-  bodyFontFace: "Calibri",
+  name: "SRM Review",
+  headFontFace: "Times New Roman",
+  bodyFontFace: "Times New Roman",
   colors: {
-    dk1: "14213D", lt1: "FFFFFF", dk2: "4A5568", lt2: "EEF1F6",
-    accent1: "F4A100", accent2: "8D99AE", accent3: "2A9D8F", accent4: "D62839", accent5: "1F3A60", accent6: "F2C14E",
-    hlink: "1F6FB2", folHlink: "6B4FA0",
+    dk1: "000000", lt1: "FFFFFF", dk2: "404040", lt2: "F2F2F2",
+    accent1: "000000", accent2: "595959", accent3: "7F7F7F", accent4: "A6A6A6", accent5: "262626", accent6: "D9D9D9",
+    hlink: "000000", folHlink: "404040",
   },
 };
-const HEX = THEME.colors;
 const pres = new pptxgen();
 pres.layout = "LAYOUT_WIDE";
 pres.title = "MCP-Lock: Review 0";
 pres.author = "Aakash G S, Hariharan J, J Jaswanth Raj";
 pres.theme = { headFontFace: THEME.headFontFace, bodyFontFace: THEME.bodyFontFace };
 const C = pres.SchemeColor;
+const LOGO = path.join(__dirname, "srm_logo.png");
+const logo = { image: { path: LOGO, x: 10.81, y: 0.68, w: 1.71, h: 0.58 } };
+const BLACK = "000000", GREY = "F2F2F2";
 
 pres.defineSlideMaster({
-  title: "DARK",
-  background: { color: C.text1 },
+  title: "TITLE",
+  background: { color: C.background1 },
   objects: [
-    { placeholder: { options: { name: "title", type: "title", x: 0.7, y: 1.0, w: 8.4, h: 1.2, fontSize: 54, bold: true, color: C.background1, valign: "bottom", align: "left", margin: 0 }, text: "" } },
-    { placeholder: { options: { name: "body", type: "body", x: 0.7, y: 2.3, w: 8.4, h: 1.0, fontSize: 20, color: C.accent6, valign: "top", align: "left", margin: 0 }, text: "" } },
+    logo,
+    { placeholder: { options: { name: "title", type: "title", x: 1.2, y: 1.55, w: 10.9, h: 1.9, fontSize: 32, bold: true, color: C.text1, align: "center", valign: "middle", margin: 0 }, text: "" } },
   ],
 });
 pres.defineSlideMaster({
@@ -37,162 +40,122 @@ pres.defineSlideMaster({
   background: { color: C.background1 },
   margin: [0.5, 0.6, 0.6, 0.6],
   objects: [
-    { placeholder: { options: { name: "title", type: "title", x: 0.6, y: 0.3, w: 10.2, h: 0.8, fontSize: 30, bold: true, color: C.text1, valign: "middle", align: "left", margin: 0 }, text: "" } },
-    { text: { text: "21CSP401L Major Project  |  Review 0  |  MCP-Lock  |  SRM IST, Kattankulathur", options: { x: 0.6, y: 7.05, w: 9, h: 0.3, fontSize: 10, color: C.text2, margin: 0 } } },
+    logo,
+    { placeholder: { options: { name: "title", type: "title", x: 0.92, y: 1.0, w: 9.7, h: 0.7, fontSize: 28, bold: true, color: C.text1, align: "left", valign: "middle", margin: 0 }, text: "" } },
   ],
-  slideNumber: { x: 12.2, y: 7.05, w: 0.5, h: 0.3, fontSize: 10, color: C.text2, align: "right" },
+  slideNumber: { x: 12.2, y: 7.0, w: 0.5, h: 0.3, fontSize: 11, color: C.text2, align: "right" },
 });
 
-function card(s, x, y, w, h, fill, name, line) {
-  s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x, y, w, h, rectRadius: 0.1, fill: { color: fill }, line: line || { type: "none" }, objectName: name });
-}
-function badge(s, x, y, d, fill, label, color, size, name) {
-  s.addShape(pres.shapes.OVAL, { x, y, w: d, h: d, fill: { color: fill }, line: { type: "none" }, objectName: name });
-  s.addText(label, { x, y, w: d, h: d, align: "center", valign: "middle", fontSize: size, bold: true, color, margin: 0, isTextBox: true });
-}
 function txt(s, text, o) {
-  s.addText(text, Object.assign({ margin: 0, isTextBox: true, fontSize: 14, color: C.text1, valign: "top" }, o));
+  s.addText(text, Object.assign({ margin: 0, isTextBox: true, fontSize: 16, color: C.text1, valign: "top" }, o));
 }
-function arrow(s, x, y, w, color, name) {
-  s.addShape(pres.shapes.RIGHT_ARROW, { x, y, w, h: 0.34, fill: { color }, line: { type: "none" }, objectName: name });
+function box(s, x, y, w, h, name, fill) {
+  s.addShape(pres.shapes.RECTANGLE, { x, y, w, h, fill: { color: fill || "FFFFFF" }, line: { color: BLACK, width: 1 }, objectName: name });
 }
-function source(s, text) {
-  txt(s, text, { x: 0.6, y: 6.7, w: 12.1, h: 0.3, fontSize: 10, color: C.text2, italic: true });
+function arrow(s, x, y, w, name) {
+  s.addShape(pres.shapes.LINE, { x, y, w, h: 0, line: { color: BLACK, width: 1.5, endArrowType: "triangle" }, objectName: name });
 }
-// The rubric criterion each slide answers, top right.
-function rubric(s, label) {
-  s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 10.95, y: 0.45, w: 1.75, h: 0.5, rectRadius: 0.25, fill: { color: C.background2 }, line: { color: HEX.accent2, width: 0.75 }, objectName: "Rubric tag" });
-  txt(s, label, { x: 10.95, y: 0.45, w: 1.75, h: 0.5, fontSize: 11, bold: true, align: "center", valign: "middle", color: C.accent5 });
+function note(s, text) {
+  txt(s, text, { x: 0.92, y: 6.75, w: 11.0, h: 0.3, fontSize: 11, italic: true, color: C.text2 });
 }
-function lock(s, x, y, scale, name) {
-  s.addShape(pres.shapes.BLOCK_ARC, { x: x + 0.25 * scale, y, w: 1.0 * scale, h: 1.0 * scale, angleRange: [180, 0], arcThicknessRatio: 0.24, fill: { color: C.accent1 }, line: { type: "none" }, objectName: name + " shackle" });
-  s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x, y: y + 0.5 * scale, w: 1.5 * scale, h: 1.15 * scale, rectRadius: 0.12 * scale, fill: { color: C.accent1 }, line: { type: "none" }, objectName: name + " body" });
-  s.addShape(pres.shapes.OVAL, { x: x + 0.62 * scale, y: y + 0.85 * scale, w: 0.26 * scale, h: 0.26 * scale, fill: { color: C.text1 }, line: { type: "none" }, objectName: name + " keyhole" });
-}
-const th = (t, o = {}) => ({ text: t, options: Object.assign({ bold: true, fontSize: 13, color: "FFFFFF", fill: { color: HEX.dk1 }, valign: "middle" }, o) });
-const td = (t, o = {}) => ({ text: t, options: Object.assign({ fontSize: 12, color: HEX.dk1, valign: "middle", fill: { color: "FFFFFF" } }, o) });
+// Bold label + text, one bullet per item.
+const items = (rows, extra = {}) => rows.flatMap(([label, body], i) => [
+  { text: label + " ", options: Object.assign({ bold: true, bullet: true }, extra) },
+  { text: body, options: { breakLine: i < rows.length - 1 } },
+]);
+const th = (t, o = {}) => ({ text: t, options: Object.assign({ bold: true, fontSize: 14, color: BLACK, fill: { color: GREY }, valign: "middle" }, o) });
+const td = (t, o = {}) => ({ text: t, options: Object.assign({ fontSize: 13, color: BLACK, valign: "middle" }, o) });
+const border = { type: "solid", pt: 1, color: BLACK };
 
 // ---------- 1. title and team ----------
 pres.addSection({ title: "Introduction" });
-let s = pres.addSlide({ masterName: "DARK", sectionTitle: "Introduction" });
-s.addText("MCP-Lock", { placeholder: "title" });
-s.addText("Provenance and tool-definition pinning to stop AI coding agents from silently running unreviewed tool servers", { placeholder: "body" });
-lock(s, 10.4, 0.9, 1.6, "Title lock");
-txt(s, "Domain: Cybersecurity · Software supply-chain security · AI agents (Model Context Protocol)", { x: 0.7, y: 3.45, w: 11.5, h: 0.4, fontSize: 15, color: C.accent2 });
-s.addTable([
-  [th("Team member", { fill: { color: HEX.accent5 } }), th("Register number", { fill: { color: HEX.accent5 } })],
-  ...[["Aakash G S", "RA2311042010060"], ["Hariharan J", "RA2311042010059"], ["J Jaswanth Raj", "RA2311042010013"]].map(([n, reg]) => [
-    td(n, { fontSize: 15, bold: true, color: "FFFFFF", fill: { color: HEX.dk1 } }),
-    td(reg, { fontSize: 15, color: HEX.accent6, fill: { color: HEX.dk1 }, fontFace: "Courier New" }),
-  ]),
-], { x: 0.7, y: 4.1, w: 6.4, colW: [3.4, 3.0], rowH: 0.42, border: { type: "solid", pt: 0.75, color: HEX.accent5 } });
-card(s, 7.6, 4.1, 5.05, 1.68, C.accent5, "Guide card");
-txt(s, "Project guide", { x: 7.85, y: 4.25, w: 4.6, h: 0.35, fontSize: 13, bold: true, color: C.accent6 });
-txt(s, "Sai Prasanth D", { x: 7.85, y: 4.6, w: 4.6, h: 0.45, fontSize: 18, bold: true, color: C.background1 });
-txt(s, "Assistant Professor, Department of Data Science and Business Systems", { x: 7.85, y: 5.05, w: 4.6, h: 0.65, fontSize: 13, color: C.background2 });
-txt(s, "Department of Data Science and Business Systems, School of Computing, SRM Institute of Science and Technology, Kattankulathur", { x: 0.7, y: 6.1, w: 11.9, h: 0.35, fontSize: 13, color: C.accent2 });
-txt(s, "21CSP401L Major Project  ·  Review 0", { x: 0.7, y: 6.5, w: 11.9, h: 0.35, fontSize: 13, bold: true, color: C.background1 });
+let s = pres.addSlide({ masterName: "TITLE", sectionTitle: "Introduction" });
+s.addText("MCP-Lock: Provenance and Tool-Definition Pinning to Stop AI Coding Agents from Silently Running Unreviewed Tool Servers", { placeholder: "title" });
+txt(s, "Domain: Cybersecurity · Software Supply-Chain Security · AI Agents (Model Context Protocol)", { x: 1.2, y: 3.5, w: 10.9, h: 0.4, fontSize: 16, italic: true, align: "center" });
+txt(s, [
+  { text: "Guide: ", options: { bold: true, fontSize: 18 } },
+  { text: "Mr. Sai Prasanth D", options: { fontSize: 18, breakLine: true } },
+  { text: "Assistant Professor", options: { fontSize: 14, breakLine: true } },
+  { text: "Department of Data Science and Business Systems", options: { fontSize: 14 } },
+], { x: 1.3, y: 4.3, w: 4.8, h: 1.3, paraSpaceAfter: 6 });
+const team = [["Aakash G S", "RA2311042010060"], ["Hariharan J", "RA2311042010059"], ["J Jaswanth Raj", "RA2311042010013"]];
+txt(s, team.flatMap(([n, r], i) => [
+  { text: `${n} (${r})`, options: { fontSize: 18, breakLine: true } },
+  { text: "4th Year, B.Tech, DSBS Department", options: { fontSize: 13, breakLine: i < team.length - 1 } },
+]), { x: 7.3, y: 4.3, w: 5.2, h: 2.6, paraSpaceAfter: 6 });
+txt(s, "SRM Institute of Science and Technology, Kattankulathur  ·  21CSP401L Major Project  ·  Review 0", { x: 1.2, y: 6.85, w: 10.9, h: 0.35, fontSize: 13, align: "center", color: C.text2 });
 s.addNotes("Introduce the team and guide. One line: MCP-Lock records what you reviewed and checks every launch of an agent's tool server against it.");
 
 // ---------- 2. problem statement ----------
 s = pres.addSlide({ masterName: "CONTENT", sectionTitle: "Introduction" });
-s.addText("Problem statement and background", { placeholder: "title" });
-rubric(s, "Criterion 1");
-txt(s, "Background: AI coding agents (Claude Code, Cursor, …) get their tools from MCP servers, which they start straight from npm or PyPI.", { x: 0.6, y: 1.25, w: 12.1, h: 0.4, fontSize: 15, color: C.text2 });
+s.addText("Problem Statement & Background", { placeholder: "title" });
+txt(s, "Background", { x: 0.92, y: 1.85, w: 11.5, h: 0.35, fontSize: 18, bold: true });
+txt(s, [{ text: "AI coding agents (Claude Code, Cursor, …) get their tools from MCP servers, which they start straight from npm or PyPI with unpinned commands such as npx -y.", options: { bullet: true } }], { x: 0.92, y: 2.25, w: 11.5, h: 0.65, fontSize: 16, align: "justify" });
 const steps = [
-  ["1", "Config says", "npx -y weather-mcp", "No version pinned: “give me the latest”"],
-  ["2", "Agent", "starts the server", "Automatically, every session"],
-  ["3", "Registry", "serves newest version", "May be hijacked or changed since review"],
-  ["4", "Server runs", "+ tools reach the model", "Tool descriptions act as instructions"],
+  ["1. Config says", "npx -y weather-mcp", "No version pinned: “give me the latest”"],
+  ["2. Agent", "starts the server", "Automatically, every session"],
+  ["3. Registry", "serves newest version", "May be hijacked or changed since review"],
+  ["4. Server runs", "+ tools reach the model", "Tool descriptions act as instructions"],
 ];
 steps.forEach((st, i) => {
-  const x = 0.6 + i * 3.15;
-  card(s, x, 1.8, 2.7, 2.0, C.background2, "Step " + st[0]);
-  badge(s, x + 0.2, 1.95, 0.5, C.text1, st[0], C.background1, 16, "Step badge " + st[0]);
-  txt(s, st[1], { x: x + 0.85, y: 2.0, w: 1.75, h: 0.4, fontSize: 16, bold: true });
-  txt(s, st[2], { x: x + 0.2, y: 2.6, w: 2.35, h: 0.4, fontSize: 14, bold: true, color: i === 0 ? C.accent5 : C.text1, fontFace: i === 0 ? "Courier New" : undefined });
-  txt(s, st[3], { x: x + 0.2, y: 3.05, w: 2.35, h: 0.65, fontSize: 13, color: C.text2 });
-  if (i < 3) arrow(s, x + 2.74, 2.62, 0.38, C.accent2, "Flow arrow " + i);
+  const x = 0.92 + i * 2.95;
+  box(s, x, 3.0, 2.55, 1.35, "Step " + (i + 1));
+  txt(s, st[0], { x: x + 0.12, y: 3.07, w: 2.3, h: 0.35, fontSize: 15, bold: true });
+  txt(s, st[1], { x: x + 0.12, y: 3.42, w: 2.3, h: 0.35, fontSize: 13, fontFace: i === 0 ? "Courier New" : undefined, bold: i === 0 });
+  txt(s, st[2], { x: x + 0.12, y: 3.77, w: 2.3, h: 0.55, fontSize: 12, italic: true });
+  if (i < 3) arrow(s, x + 2.57, 3.67, 0.36, "Flow arrow " + i);
 });
-card(s, 0.6, 4.05, 12.1, 2.5, C.text1, "Problem statement");
-txt(s, "PROBLEM STATEMENT", { x: 0.9, y: 4.25, w: 6, h: 0.35, fontSize: 13, bold: true, color: C.accent1, charSpacing: 2 });
-txt(s, [
-  { text: "Unpinned MCP-server launches let the code and the tool descriptions an agent runs change after a human reviewed them, with no signal to the user. Existing pre-install checks look only at package names, sources and age. " },
-  { text: "We need a gate that, before every launch and without executing package code, detects when the version about to run departs from the reviewed one in build provenance, publisher, install scripts or tool definitions, ", options: { bold: true, color: C.accent6 } },
-  { text: "and that catches more real attacks than existing checks at a measured false-block cost." },
-], { x: 0.9, y: 4.65, w: 11.5, h: 1.8, fontSize: 16, color: C.background1 });
-source(s, "MCP = Model Context Protocol, the open standard through which agents call external tools. Rug pull: a server changes a tool after it was approved.");
+txt(s, "Problem Statement", { x: 0.92, y: 4.6, w: 11.5, h: 0.35, fontSize: 18, bold: true });
+txt(s, [{ text: "Unpinned MCP-server launches let the code and the tool descriptions an agent runs change after a human reviewed them, with no signal to the user; existing pre-install checks look only at package names, sources and age. Develop a gate that, before every launch and without executing package code, detects when the version about to run departs from the reviewed one in build provenance, publisher, install scripts or tool definitions, and that catches more real attacks than existing checks at a measured false-block cost.", options: { bullet: true } }], { x: 0.92, y: 5.0, w: 11.5, h: 1.65, fontSize: 16, align: "justify" });
+note(s, "MCP = Model Context Protocol, the open standard through which agents call external tools. Rug pull: a server changes a tool after it was approved.");
 s.addNotes("Context first: the four-step launch path. Then read the formal problem statement. It names the input (a launch), the constraint (no code execution), the signals, and the success criteria.");
 
 // ---------- 3. motivation ----------
 s = pres.addSlide({ masterName: "CONTENT", sectionTitle: "Introduction" });
-s.addText("Motivation and justification: why now", { placeholder: "title" });
-rubric(s, "Criterion 1");
+s.addText("Motivation & Justification", { placeholder: "title" });
 const why = [
-  ["9.8%", "of 2,660 real agent setups launch MCP servers unpinned [1]", C.accent1],
-  ["500+", "npm packages hit by the Shai-Hulud worm through stolen maintainer tokens, Sept. 2025 [2]", C.accent4],
-  ["36.5%", "of 2,000 sampled MCP packages changed their tools within 90 days (our pilot census)", C.accent5],
-  ["Rarely", "do coding assistants check trust signals before installing anything [3]", C.accent3],
+  ["9.8%", "of 2,660 real agent setups launch MCP servers unpinned [1]"],
+  ["500+", "npm packages hit by the Shai-Hulud worm through stolen maintainer tokens, Sept. 2025 [2]"],
+  ["36.5%", "of 2,000 sampled MCP packages changed their tools within 90 days (our pilot census)"],
+  ["Rarely", "do coding assistants check trust signals before installing anything [3]"],
 ];
 why.forEach((w, i) => {
-  const x = 0.6 + i * 3.075;
-  card(s, x, 1.3, 2.85, 2.25, C.background2, "Why stat " + (i + 1));
-  txt(s, w[0], { x: x + 0.2, y: 1.45, w: 2.45, h: 0.85, fontSize: 40, bold: true, color: w[2] });
-  txt(s, w[1], { x: x + 0.2, y: 2.35, w: 2.5, h: 1.1, fontSize: 13, color: C.text2 });
+  const x = 0.92 + i * 2.9;
+  box(s, x, 1.9, 2.7, 1.75, "Why stat " + (i + 1));
+  txt(s, w[0], { x: x + 0.15, y: 1.98, w: 2.4, h: 0.6, fontSize: 30, bold: true, align: "center" });
+  txt(s, w[1], { x: x + 0.15, y: 2.6, w: 2.4, h: 1.0, fontSize: 13, align: "center" });
 });
-card(s, 0.6, 3.8, 5.9, 2.8, C.background2, "Beneficiaries");
-txt(s, "Who benefits", { x: 0.85, y: 3.95, w: 5.4, h: 0.4, fontSize: 18, bold: true });
-txt(s, [
-  { text: "Developers using AI coding agents: ", options: { bold: true, bullet: true } },
-  { text: "their keys, files and tokens stay safe", options: { breakLine: true } },
-  { text: "Companies and security teams: ", options: { bold: true, bullet: true } },
-  { text: "one auditable lockfile for every approved tool server", options: { breakLine: true } },
-  { text: "Open-source maintainers and registries: ", options: { bold: true, bullet: true } },
-  { text: "a hijacked release no longer spreads silently" },
-], { x: 0.85, y: 4.45, w: 5.45, h: 2.05, fontSize: 14, paraSpaceAfter: 8 });
-card(s, 6.8, 3.8, 5.9, 2.8, C.text1, "Scope");
-txt(s, "Scope", { x: 7.05, y: 3.95, w: 5.4, h: 0.4, fontSize: 18, bold: true, color: C.accent1 });
-txt(s, [
-  { text: "In: ", options: { bold: true, color: C.accent3 } },
-  { text: "MCP servers launched from npm and PyPI; attackers who squat a name, steal a token, enter the release pipeline, own the package, or own a dependency.", options: { breakLine: true } },
-  { text: " ", options: { breakLine: true } },
-  { text: "Out: ", options: { bold: true, color: C.accent4 } },
-  { text: "compromise of the registry itself, forged Sigstore signatures, attacks on the language model." },
-], { x: 7.05, y: 4.4, w: 5.45, h: 2.1, fontSize: 14, color: C.background1 });
-source(s, "The 36.5% figure is from our RQ1 census (stratified random sample, tool definitions extracted statically). Numbers in [ ] refer to the References slide.");
+txt(s, items([
+  ["Why now:", "agents start tool servers unattended, worms already used stolen npm tokens, and tool definitions change often without any metadata signal."],
+  ["Target beneficiaries:", "developers using AI coding agents (their keys, files and tokens stay safe); companies and security teams (one auditable lockfile for every approved tool server); open-source maintainers and registries (a hijacked release no longer spreads silently)."],
+  ["Scope (in):", "MCP servers launched from npm and PyPI; attackers who squat a name, steal a token, enter the release pipeline, own the package, or own a dependency."],
+  ["Scope (out):", "compromise of the registry itself, forged Sigstore signatures, attacks on the language model."],
+]), { x: 0.92, y: 3.9, w: 11.5, h: 2.8, fontSize: 15, align: "justify", paraSpaceAfter: 6 });
+note(s, "The 36.5% figure is from our RQ1 census (stratified random sample, tool definitions extracted statically). Numbers in [ ] refer to the References slide.");
 s.addNotes("Why now: agents are adopted fast, launches are unpinned, worms already used stolen npm tokens, and tool definitions change often. Then who benefits and what is in and out of scope.");
 
 // ---------- 4. literature survey ----------
 pres.addSection({ title: "Background" });
 s = pres.addSlide({ masterName: "CONTENT", sectionTitle: "Background" });
-s.addText("Literature survey", { placeholder: "title" });
-rubric(s, "Criterion 2");
+s.addText("Literature Survey", { placeholder: "title" });
 const lit = [
-  ["[4]", "Ladisa et al., 2023\nIEEE S&P", "SoK: taxonomy of attacks on open-source supply chains, incl. account takeover and install scripts", "General package ecosystems; nothing on agents, MCP or tool descriptions"],
-  ["[5]", "Hou et al., 2025\narXiv", "Survey of the MCP landscape; defines tool poisoning and rug-pull threats", "Survey only: no defence measured on real packages"],
-  ["[6]", "Bhatt et al., 2025\narXiv", "ETDI: OAuth-signed, versioned tool definitions with policy-based access control", "Needs servers and registries to change and sign; not usable with existing unsigned packages"],
-  ["[7]", "Bagmar & Saraf, 2026\narXiv", "Pre-install hook for coding agents: 7 checks on name, source and age (pip)", "Never compares with the version you reviewed; misses hijacks of existing packages"],
-  ["[1]", "Kapner et al., 2026\narXiv", "Scans 2,660 coding-agent setups; finds 9.8% with unpinned MCP servers", "Measures exposure only; no provenance analysis and no defence"],
-  ["[8]", "Kraishan, 2026\narXiv", "Census of drift in MCP-registry fields over 8,900 multi-version servers", "Registry does not version tool definitions, so tool changes go unmeasured; recommends client-side pinning"],
+  ["Ladisa et al. [4]", "2023", "IEEE S&P: SoK taxonomy of attacks on open-source supply chains, incl. account takeover and install scripts", "General package ecosystems; nothing on agents, MCP or tool descriptions"],
+  ["Hou et al. [5]", "2025", "Survey of the MCP landscape; defines tool poisoning and rug-pull threats", "Survey only: no defence measured on real packages"],
+  ["Bhatt et al. [6]", "2025", "ETDI: OAuth-signed, versioned tool definitions with policy-based access control", "Needs servers and registries to change and sign; not usable with existing unsigned packages"],
+  ["Bagmar & Saraf [7]", "2026", "Pre-install hook for coding agents: 7 checks on name, source and age (pip)", "Never compares with the version you reviewed; misses hijacks of existing packages"],
+  ["Kapner et al. [1]", "2026", "Scans 2,660 coding-agent setups; finds 9.8% with unpinned MCP servers", "Measures exposure only; no provenance analysis and no defence"],
+  ["Kraishan [8]", "2026", "Census of drift in MCP-registry fields over 8,900 multi-version servers", "Registry does not version tool definitions, so tool changes go unmeasured; recommends client-side pinning"],
 ];
-const litRows = [[th("Ref", { align: "center" }), th("Author, year, venue"), th("Method / contribution"), th("Limitation (what is left open)")]];
-lit.forEach((r, i) => {
-  const f = { color: i % 2 ? "F5F7FA" : "FFFFFF" };
-  litRows.push([td(r[0], { align: "center", bold: true, fill: f, color: HEX.accent5 }), td(r[1], { bold: true, fill: f }), td(r[2], { fill: f, fontSize: 11.5 }), td(r[3], { fill: f, fontSize: 11.5, color: "A01F2D" })]);
+s.addTable([[th("Paper / Authors"), th("Year"), th("Method / Contribution"), th("Limitation")], ...lit.map((r) => r.map((c) => td(c, { fontSize: 12.5 })))], {
+  x: 0.92, y: 1.85, w: 11.5, colW: [2.2, 0.75, 4.4, 4.15], rowH: [0.4, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6], border, fontFace: "Times New Roman",
 });
-s.addTable(litRows, { x: 0.6, y: 1.25, w: 12.1, colW: [0.6, 2.3, 4.7, 4.5], rowH: [0.42, 0.68, 0.68, 0.68, 0.68, 0.68, 0.68], border: { type: "solid", pt: 0.75, color: "D5DAE2" } });
-card(s, 0.6, 6.12, 12.1, 0.5, "FDF1D6", "Survey takeaway");
-txt(s, [
-  { text: "Common thread: ", options: { bold: true, color: C.accent4 } },
-  { text: "no work checks, before launch, whether a server's build, publisher, install scripts and tools still match what was reviewed." },
-], { x: 0.8, y: 6.15, w: 11.7, h: 0.5, fontSize: 14, valign: "middle" });
-source(s, "All six sources verified against their primary pages (docs/CITATIONS_VERIFIED.md). Ladisa et al. appeared at IEEE S&P 2023, DOI 10.1109/SP46215.2023.10179304.");
-s.addNotes("Six works across three layers: generic supply chain (Ladisa), MCP threats and defences (Hou, ETDI), and agent supply chains (Bagmar & Saraf, Kapner, Kraishan). The red column is what each leaves open.");
+txt(s, [{ text: "Common thread: ", options: { bold: true } }, { text: "no work checks, before launch, whether a server's build, publisher, install scripts and tools still match what was reviewed." }], { x: 0.92, y: 6.25, w: 11.5, h: 0.45, fontSize: 14 });
+note(s, "All six sources verified against their primary pages (docs/CITATIONS_VERIFIED.md). Ladisa et al., IEEE S&P 2023, DOI 10.1109/SP46215.2023.10179304.");
+s.addNotes("Six works across three layers: generic supply chain (Ladisa), MCP threats and defences (Hou, ETDI), and agent supply chains (Bagmar & Saraf, Kapner, Kraishan). The last column is what each leaves open.");
 
 // ---------- 5. gap, market, patents ----------
 s = pres.addSlide({ masterName: "CONTENT", sectionTitle: "Background" });
-s.addText("Research gap, market and patent study", { placeholder: "title" });
-rubric(s, "Criterion 2");
+s.addText("Research Gap & Market / Patent Study", { placeholder: "title" });
 const Y = "✓", N = "✗", P = "partly";
 const head = ["Existing solution", "Before launch, runs no code", "Pins tool definitions", "Build, publisher, script continuity", "No server / registry change"];
 const rows = [
@@ -202,158 +165,113 @@ const rows = [
   ["npm provenance, Sigstore [12], [13]", Y, N, P, Y],
   ["MCP-Lock (proposed)", Y, Y, Y, Y],
 ];
-const cell = (v, last) => ({ text: v, options: { align: "center", valign: "middle", bold: true, fontSize: v.length > 1 ? 12 : 18, color: v === Y ? HEX.accent3 : v === N ? HEX.accent4 : HEX.dk2, fill: { color: last ? "FDF1D6" : "FFFFFF" } } });
-const gt = [head.map((h, i) => th(h, { fontSize: 12, align: i ? "center" : "left" }))];
-rows.forEach((r, ri) => {
-  const last = ri === rows.length - 1;
-  gt.push(r.map((v, ci) => (ci === 0 ? td(v, { bold: last, fontSize: 12.5, fill: { color: last ? "FDF1D6" : "FFFFFF" } }) : cell(v, last))));
-});
-s.addTable(gt, { x: 0.6, y: 1.2, w: 7.3, colW: [3.1, 1.05, 1.05, 1.05, 1.05], rowH: [0.62, 0.42, 0.42, 0.42, 0.42, 0.42], border: { type: "solid", pt: 0.75, color: "D5DAE2" } });
-card(s, 8.15, 1.2, 4.55, 2.85, C.background2, "Patent study");
-txt(s, "Patent landscape", { x: 8.35, y: 1.3, w: 4.2, h: 0.35, fontSize: 15, bold: true });
+s.addTable([
+  head.map((h, i) => th(h, { fontSize: 12, align: i ? "center" : "left" })),
+  ...rows.map((r, ri) => r.map((v, ci) => td(v, ci === 0
+    ? { fontSize: 12.5, bold: ri === rows.length - 1 }
+    : { align: "center", fontSize: v.length > 1 ? 12 : 16, bold: ri === rows.length - 1 }))),
+], { x: 0.92, y: 1.85, w: 7.0, colW: [2.8, 1.05, 1.05, 1.05, 1.05], rowH: [0.62, 0.38, 0.38, 0.38, 0.38, 0.38], border, fontFace: "Times New Roman" });
+txt(s, "Patent landscape", { x: 8.2, y: 1.85, w: 4.3, h: 0.35, fontSize: 16, bold: true });
 txt(s, [
-  { text: "US 12,314,394 B2 (Socket, 2025) [14]: ", options: { bold: true, breakLine: true } },
-  { text: "scans a project's dependency files for malware via a cache of scanned packages. No comparison with a reviewed version.", options: { breakLine: true } },
-  { text: "US 10,055,576 B2 (Red Hat, 2018) [15]: ", options: { bold: true, breakLine: true } },
-  { text: "blocks repository packages whose components are on an insecure list. Known-bad lists only.", options: { breakLine: true } },
-  { text: "No patent found that pins agent tool definitions before launch.", options: { italic: true, color: C.accent5 } },
-], { x: 8.35, y: 1.7, w: 4.2, h: 2.3, fontSize: 12, paraSpaceAfter: 3 });
-const gaps = [
-  ["G1", "No measurement of how often MCP tool definitions really change"],
-  ["G2", "No check reads tool definitions before launch, without starting the server"],
-  ["G3", "No continuity checks on build, publisher and install scripts per server"],
-  ["G4", "No evaluation on real attacks with the false-block cost on honest upgrades"],
-];
-gaps.forEach((g, i) => {
-  const x = 0.6 + (i % 2) * 3.7, y = 4.55 + Math.floor(i / 2) * 1.02;
-  card(s, x, y, 3.55, 0.95, "FBE9EB", "Gap " + g[0]);
-  badge(s, x + 0.15, y + 0.2, 0.55, C.accent4, g[0], C.background1, 13, "Gap badge " + g[0]);
-  txt(s, g[1], { x: x + 0.85, y: y + 0.08, w: 2.6, h: 0.8, fontSize: 12.5, valign: "middle" });
-});
-card(s, 8.15, 4.3, 4.55, 2.22, C.text1, "Proposed edge");
-txt(s, "Our edge", { x: 8.35, y: 4.42, w: 4.2, h: 0.35, fontSize: 15, bold: true, color: C.accent1 });
-txt(s, "One lockfile pins archive, provenance, publisher, install scripts and tool definitions; the gate checks all five before every launch, needs no ecosystem change, and closes G1–G4.", { x: 8.35, y: 4.82, w: 4.2, h: 1.6, fontSize: 14, color: C.background1 });
-source(s, "Market: Socket and npm provenance protect packages, MCP-Scan and the pinning proxies protect tools after start-up. Patent search: Google Patents, 3 Nov. 2026, not exhaustive.");
+  { text: "US 12,314,394 B2 (Socket, 2025) [14]: ", options: { bold: true, bullet: true } },
+  { text: "scans a project's dependency files for malware via a cache of scanned packages; no comparison with a reviewed version.", options: { breakLine: true } },
+  { text: "US 10,055,576 B2 (Red Hat, 2018) [15]: ", options: { bold: true, bullet: true } },
+  { text: "blocks repository packages whose components are on an insecure list; known-bad lists only.", options: { breakLine: true } },
+  { text: "No patent found that pins agent tool definitions before launch.", options: { bullet: true, italic: true } },
+], { x: 8.2, y: 2.25, w: 4.3, h: 2.35, fontSize: 13, paraSpaceAfter: 4 });
+txt(s, "Research gaps", { x: 0.92, y: 4.98, w: 7, h: 0.35, fontSize: 16, bold: true });
+txt(s, items([
+  ["G1:", "no measurement of how often MCP tool definitions really change."],
+  ["G2:", "no check reads tool definitions before launch, without starting the server."],
+  ["G3:", "no continuity checks on build, publisher and install scripts per server."],
+  ["G4:", "no evaluation on real attacks with the false-block cost on honest upgrades."],
+]), { x: 0.92, y: 5.35, w: 7.0, h: 1.35, fontSize: 13.5, paraSpaceAfter: 2 });
+txt(s, "Market and our edge", { x: 8.2, y: 4.35, w: 4.3, h: 0.35, fontSize: 16, bold: true });
+txt(s, [
+  { text: "Socket and npm provenance protect packages; MCP-Scan and the pinning proxies protect tools only after start-up.", options: { bullet: true, breakLine: true } },
+  { text: "MCP-Lock: one lockfile pins archive, provenance, publisher, install scripts and tool definitions; the gate checks all five before every launch, needs no ecosystem change, and closes G1–G4.", options: { bullet: true } },
+], { x: 8.2, y: 4.75, w: 4.3, h: 1.9, fontSize: 13, paraSpaceAfter: 4 });
+note(s, "Patent search: Google Patents, 3 Nov. 2026, not exhaustive.");
 s.addNotes("Table: no existing solution ticks all four boxes. Patents cover malware scanning and known-bad lists, not pinning a reviewed state. G1 to G4 are the explicit gaps the objectives answer.");
 
 // ---------- 6. objectives ----------
 pres.addSection({ title: "Plan" });
 s = pres.addSlide({ masterName: "CONTENT", sectionTitle: "Plan" });
-s.addText("Objectives (SMART)", { placeholder: "title" });
-rubric(s, "Criterion 3");
+s.addText("Objectives / Product Goals", { placeholder: "title" });
 const obj = [
-  ["O1", "Measure the problem", "Census MCP packages on npm and PyPI; extract tool definitions from a stratified sample of 2,000 and report the 90-day change rate with 95% intervals.", "G1", "Done: 15,272 packages; 36.5% changed tools"],
-  ["O2", "Build MCP-Lock", "A lockfile and a launch gate with 5 checks (S1–S5) that never runs package code, installable as a coding-agent hook and covered by automated tests.", "G2, G3", "Done: gate + hook, 103 tests"],
-  ["O3", "Prove it works", "Pre-registered test on ≥ 490 real attacks: detect more than the baseline (McNemar, α = 0.05); report false blocks on 8,180 honest upgrades; withdraw the claim if S2–S5 add < 2.", "G4", "Done: 39.8% vs 19.6%, +0.42 pp"],
-  ["O4", "Stress-test and publish", "Build 12 adaptive attacks, add hardening with measured costs, release code and data, and submit an IEEE paper before the final review.", "G2–G4", "Planned: paper drafted, to submit"],
+  ["O1. Measure the problem", "Census MCP packages on npm and PyPI; extract tool definitions from a stratified sample of 2,000 and report the 90-day change rate with 95% intervals.", "G1", "Done: 15,272 packages; 36.5% changed tools"],
+  ["O2. Build MCP-Lock", "A lockfile and a launch gate with 5 checks (S1–S5) that never runs package code, installable as a coding-agent hook and covered by automated tests.", "G2, G3", "Done: gate + hook, 103 tests"],
+  ["O3. Prove it works", "Pre-registered test on ≥ 490 real attacks: detect more than the baseline (McNemar, α = 0.05); report false blocks on 8,180 honest upgrades; withdraw the claim if S2–S5 add < 2.", "G4", "Done: 39.8% vs 19.6%, +0.42 pp"],
+  ["O4. Stress-test and publish", "Build 12 adaptive attacks, add hardening with measured costs, release code and data, and submit an IEEE paper before the final review.", "G2–G4", "Planned: paper drafted, to submit"],
 ];
-obj.forEach((o, i) => {
-  const x = 0.6 + i * 3.075;
-  card(s, x, 1.25, 2.85, 5.3, C.background2, "Objective " + o[0]);
-  badge(s, x + 0.2, 1.42, 0.7, C.accent1, o[0], C.text1, 17, "Objective badge " + o[0]);
-  txt(s, o[1], { x: x + 1.05, y: 1.42, w: 1.7, h: 0.7, fontSize: 16, bold: true, valign: "middle" });
-  txt(s, o[2], { x: x + 0.2, y: 2.3, w: 2.48, h: 2.45, fontSize: 15, color: C.text2 });
-  txt(s, "Closes " + o[3], { x: x + 0.2, y: 4.8, w: 2.45, h: 0.3, fontSize: 12, bold: true, color: C.accent4 });
-  const done = o[4].startsWith("Done");
-  card(s, x + 0.15, 5.2, 2.55, 1.15, done ? "D7F0EC" : "FDF1D6", "Status " + o[0]);
-  txt(s, o[4], { x: x + 0.28, y: 5.25, w: 2.3, h: 1.05, fontSize: 13, bold: true, valign: "middle", color: done ? "1D6F65" : "8A5A00" });
+s.addTable([[th("Objective"), th("Specific, measurable target"), th("Gap"), th("Status at Review 0")], ...obj.map((o) => [td(o[0], { bold: true }), td(o[1]), td(o[2], { align: "center" }), td(o[3])])], {
+  x: 0.92, y: 1.85, w: 11.5, colW: [2.4, 5.9, 0.8, 2.4], rowH: [0.4, 0.95, 0.95, 0.95, 0.95], border, fontFace: "Times New Roman",
 });
-source(s, "S specific task · M a number or test · A sized to a 3-person team · R tied to gap G1–G4 · T each closes at a review milestone (see work plan).");
+note(s, "SMART: S specific task · M a number or test · A sized to a 3-person team · R tied to gap G1–G4 · T each closes at a review milestone (see work plan).");
 s.addNotes("Four objectives, each specific, measurable, tied to a gap and to a review milestone. O3 includes a kill rule fixed in advance, so the claim can fail.");
 
 // ---------- 7. SDGs ----------
 s = pres.addSlide({ masterName: "CONTENT", sectionTitle: "Plan" });
 s.addText("Alignment with UN Sustainable Development Goals", { placeholder: "title" });
-rubric(s, "Criterion 4");
 const sdg = [
-  ["9", "Industry, Innovation and Infrastructure", "FD6925", [
-    ["9.1", "Reliable, resilient infrastructure: the open-source supply chain is digital infrastructure; MCP-Lock keeps one hijacked release from reaching every agent that launches it."],
-    ["9.5", "Upgrade technological capability: a new, pre-registered security method with public code."],
-  ]],
-  ["16", "Peace, Justice and Strong Institutions", "00689D", [
-    ["16.a", "Capacity to prevent crime: blocks the cyber-crime pattern behind worms like Shai-Hulud (stolen tokens, install-script payloads)."],
-    ["16.6", "Accountable, transparent systems: every verdict is traceable to an auditable lockfile."],
-  ]],
-  ["17", "Partnerships for the Goals", "19486A", [
-    ["17.6", "Knowledge sharing in science and technology: code, data, replay bundles and the OSF pre-registration are open, so others, including developing-country teams, can reuse and verify them."],
-  ]],
+  ["SDG 9: Industry, Innovation and Infrastructure", "9.1", "Reliable, resilient infrastructure: the open-source supply chain is digital infrastructure; MCP-Lock keeps one hijacked release from reaching every agent that launches it."],
+  ["", "9.5", "Upgrade technological capability: a new, pre-registered security method with public code."],
+  ["SDG 16: Peace, Justice and Strong Institutions", "16.a", "Capacity to prevent crime: blocks the cyber-crime pattern behind worms like Shai-Hulud (stolen tokens, install-script payloads)."],
+  ["", "16.6", "Accountable, transparent systems: every verdict is traceable to an auditable lockfile."],
+  ["SDG 17: Partnerships for the Goals", "17.6", "Knowledge sharing in science and technology: code, data, replay bundles and the OSF pre-registration are open, so others, including developing-country teams, can reuse and verify them."],
 ];
-sdg.forEach((g, i) => {
-  const x = 0.6 + i * 4.1;
-  card(s, x, 1.25, 3.9, 5.25, C.background2, "SDG " + g[0]);
-  s.addShape(pres.shapes.RECTANGLE, { x: x + 0.25, y: 1.45, w: 1.1, h: 1.1, fill: { color: g[2] }, line: { type: "none" }, objectName: "SDG tile " + g[0] });
-  txt(s, g[0], { x: x + 0.25, y: 1.45, w: 1.1, h: 1.1, fontSize: 40, bold: true, align: "center", valign: "middle", color: C.background1 });
-  txt(s, "SDG " + g[0], { x: x + 1.5, y: 1.5, w: 2.25, h: 0.35, fontSize: 13, bold: true, color: C.text2 });
-  txt(s, g[1], { x: x + 1.5, y: 1.85, w: 2.25, h: 0.7, fontSize: 15, bold: true });
-  g[3].forEach((t, j) => {
-    const y = 2.85 + j * 1.85;
-    s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: x + 0.25, y, w: 0.8, h: 0.4, rectRadius: 0.08, fill: { color: g[2] }, line: { type: "none" }, objectName: "SDG target " + t[0] });
-    txt(s, t[0], { x: x + 0.25, y, w: 0.8, h: 0.4, fontSize: 13, bold: true, align: "center", valign: "middle", color: C.background1 });
-    txt(s, t[1], { x: x + 1.2, y: y - 0.03, w: 2.5, h: 1.7, fontSize: 13.5, color: C.text1 });
-  });
+s.addTable([[th("Goal"), th("Target"), th("How MCP-Lock contributes")], ...sdg.map((r) => [td(r[0], { bold: true }), td(r[1], { align: "center", bold: true }), td(r[2])])], {
+  x: 0.92, y: 1.85, w: 11.5, colW: [3.1, 0.9, 7.5], rowH: [0.4, 0.75, 0.55, 0.75, 0.55, 0.75], border, fontFace: "Times New Roman",
 });
-source(s, "Targets as defined in UN resolution A/RES/70/1, “Transforming our world: the 2030 Agenda for Sustainable Development” [17].");
+note(s, "Targets as defined in UN resolution A/RES/70/1, “Transforming our world: the 2030 Agenda for Sustainable Development” [17].");
 s.addNotes("Primary SDG is 9: the software supply chain is infrastructure. SDG 16: preventing cyber crime and making decisions auditable. SDG 17: open science, everything public and reusable.");
 
 // ---------- 8. methodology and architecture ----------
 s = pres.addSlide({ masterName: "CONTENT", sectionTitle: "Plan" });
-s.addText("Proposed methodology and high-level architecture", { placeholder: "title" });
-rubric(s, "Criteria 3 & 5");
+s.addText("Proposed Methodology / High-Level Architecture", { placeholder: "title" });
 const blocks = [
-  [0.6, "AI coding agent", "launch request\nnpx -y / uvx", C.background2, C.text1],
-  [2.95, "MCP-Lock hook", "intercepts the launch before it runs", C.accent1, C.text1],
-  [5.3, "Resolver", "npm / PyPI: version, archive digest, attestation", C.background2, C.text1],
-  [7.65, "Static extractor", "tree-sitter reads tools from the archive; no code runs", C.background2, C.text1],
-  [10.0, "Checks S1–S5", "S1 name/source/age · S2 provenance · S3 publisher · S4 install scripts · S5 tools", C.text1, C.background1],
+  ["AI coding agent", "launch request: npx -y / uvx"],
+  ["MCP-Lock hook", "intercepts the launch before it runs"],
+  ["Resolver", "npm / PyPI: version, archive digest, attestation"],
+  ["Static extractor", "tree-sitter reads tools from the archive; no code runs"],
+  ["Checks S1–S5", "S1 name/source/age · S2 provenance · S3 publisher · S4 install scripts · S5 tools"],
 ];
 blocks.forEach((b, i) => {
-  card(s, b[0], 1.35, 2.15, 1.55, b[3], "Arch " + b[1], b[3] === C.background2 ? { color: HEX.accent2, width: 0.75 } : undefined);
-  txt(s, b[1], { x: b[0] + 0.12, y: 1.45, w: 1.95, h: 0.45, fontSize: 15, bold: true, align: "center", color: b[4] });
-  txt(s, b[2], { x: b[0] + 0.12, y: 1.92, w: 1.95, h: 0.9, fontSize: 12, align: "center", color: b[4] });
-  if (i < 4) arrow(s, b[0] + 2.17, 1.95, 0.32, C.accent2, "Arch arrow " + i);
+  const x = 0.92 + i * 2.34;
+  box(s, x, 1.9, 2.0, 1.45, "Arch " + b[0], i === 1 ? GREY : undefined);
+  txt(s, b[0], { x: x + 0.08, y: 1.97, w: 1.84, h: 0.35, fontSize: 14, bold: true, align: "center" });
+  txt(s, b[1], { x: x + 0.08, y: 2.35, w: 1.84, h: 0.95, fontSize: 11.5, align: "center" });
+  if (i < 4) arrow(s, x + 2.02, 2.62, 0.3, "Arch arrow " + i);
 });
-card(s, 10.0, 3.15, 2.7, 0.95, "FDF1D6", "Lockfile store", { color: HEX.accent1, width: 1 });
-txt(s, [{ text: "mcp-lock.json", options: { bold: true, fontFace: "Courier New", breakLine: true } }, { text: "digest · provenance · publisher · scripts · tool hash" }], { x: 10.1, y: 3.2, w: 2.5, h: 0.85, fontSize: 11.5, align: "center", valign: "middle" });
-s.addShape(pres.shapes.LINE, { x: 11.35, y: 2.9, w: 0, h: 0.25, line: { color: HEX.accent1, width: 2 }, objectName: "Lock link" });
-const verdicts = [["ALLOW", "matches the lock", C.accent3, C.background1], ["WARN", "tools changed: show diff, ask user", C.accent1, C.text1], ["BLOCK", "+ suggest last safe version", C.accent4, C.background1]];
-verdicts.forEach((v, i) => {
-  const x = 0.6 + i * 3.1;
-  s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x, y: 3.25, w: 1.1, h: 0.5, rectRadius: 0.08, fill: { color: v[2] }, line: { type: "none" }, objectName: "Verdict " + v[0] });
-  txt(s, v[0], { x, y: 3.25, w: 1.1, h: 0.5, fontSize: 13, bold: true, align: "center", valign: "middle", color: v[3] });
-  txt(s, v[1], { x: x + 1.2, y: 3.25, w: 1.85, h: 0.5, fontSize: 12, valign: "middle", color: C.text2 });
-});
-txt(s, "Modules", { x: 0.6, y: 4.2, w: 6, h: 0.35, fontSize: 16, bold: true });
-const mods = [
+box(s, 10.28, 3.6, 2.0, 0.85, "Lockfile store");
+txt(s, [{ text: "mcp-lock.json", options: { bold: true, fontFace: "Courier New", breakLine: true } }, { text: "digest · provenance · publisher · scripts · tool hash" }], { x: 10.33, y: 3.63, w: 1.9, h: 0.8, fontSize: 10.5, align: "center", valign: "middle" });
+s.addShape(pres.shapes.LINE, { x: 11.28, y: 3.35, w: 0, h: 0.25, line: { color: BLACK, width: 1.5 }, objectName: "Lock link" });
+txt(s, "Verdict returned to the agent:", { x: 0.92, y: 3.6, w: 3.2, h: 0.35, fontSize: 14, bold: true });
+txt(s, items([
+  ["ALLOW:", "matches the lock."],
+  ["WARN:", "tools changed; show the diff and ask the user."],
+  ["BLOCK:", "build, scripts or name look wrong; suggest the last safe version."],
+]), { x: 0.92, y: 3.95, w: 9.0, h: 0.95, fontSize: 13 });
+txt(s, "Modules", { x: 0.92, y: 4.95, w: 5, h: 0.35, fontSize: 15, bold: true });
+txt(s, items([
   ["census/", "RQ1: frame of MCP packages, version history, static tool extraction"],
   ["lockfile/", "lock format spec and canonical tool-definition hashing"],
   ["gate/", "checks S1–S5, verdicts, safe-version suggestions, agent hook, CLI"],
   ["eval/", "replay of 490 attacks and 8,180 upgrades; adaptive attacks in Docker"],
-];
-mods.forEach((m, i) => {
-  const y = 4.6 + i * 0.5;
-  txt(s, m[0], { x: 0.6, y, w: 1.3, h: 0.42, fontSize: 13, bold: true, fontFace: "Courier New", color: C.accent5, valign: "middle" });
-  txt(s, m[1], { x: 1.95, y, w: 5.2, h: 0.42, fontSize: 13, valign: "middle" });
-});
-card(s, 7.5, 4.2, 5.2, 2.35, C.text1, "Tech stack");
-txt(s, "Tech stack", { x: 7.75, y: 4.3, w: 4.7, h: 0.35, fontSize: 16, bold: true, color: C.accent1 });
-const stack = ["Python 3.11", "tree-sitter (JS/TS)", "npm & PyPI APIs", "Sigstore / SLSA provenance", "Docker sandbox", "pytest + GitHub Actions", "Claude Code hook", "OSF · LaTeX IEEEtran"];
-stack.forEach((t, i) => {
-  const x = 7.75 + (i % 2) * 2.45, y = 4.75 + Math.floor(i / 2) * 0.43;
-  s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x, y, w: 2.3, h: 0.35, rectRadius: 0.08, fill: { color: C.accent5 }, line: { type: "none" }, objectName: "Stack " + t });
-  txt(s, t, { x, y, w: 2.3, h: 0.35, fontSize: 12, align: "center", valign: "middle", color: C.background1 });
-});
-source(s, "Method: lock once after review (mcplock lock), then the gate checks every launch. Evaluation is pre-registered on OSF [16] against the baseline hook [7].");
+]), { x: 0.92, y: 5.3, w: 6.6, h: 1.4, fontSize: 12.5 });
+txt(s, "Technology Stack", { x: 7.9, y: 4.95, w: 4.5, h: 0.35, fontSize: 15, bold: true });
+txt(s, "Python 3.11, tree-sitter (JS/TS), npm & PyPI APIs, Sigstore / SLSA provenance, Docker sandbox, pytest + GitHub Actions, Claude Code hook, OSF pre-registration, LaTeX IEEEtran.", { x: 7.9, y: 5.3, w: 4.5, h: 1.4, fontSize: 13 });
+note(s, "Method: lock once after review (mcplock lock), then the gate checks every launch. Evaluation is pre-registered on OSF [16] against the baseline hook [7].");
 s.addNotes("Walk the pipeline left to right: the hook intercepts the launch, the resolver fetches metadata and the archive, the extractor reads tool definitions without running code, and the checks compare against the lockfile. Then modules and stack.");
 
 // ---------- 9. work plan ----------
 s = pres.addSlide({ masterName: "CONTENT", sectionTitle: "Plan" });
-s.addText("Work plan and review timeline", { placeholder: "title" });
-rubric(s, "Criterion 5");
+s.addText("Work Plan & Review Timeline", { placeholder: "title" });
 const phases = ["Up to Review 0", "Review 0 → Review 1", "Review 1 → Review 2", "Review 2 → Final"];
-const gx = 4.6, gw = 8.1, colw = gw / 4, gy = 1.25;
+const gx = 5.0, gw = 7.5, colw = gw / 4, gy = 1.85;
 phases.forEach((p, i) => {
-  s.addShape(pres.shapes.RECTANGLE, { x: gx + i * colw, y: gy, w: colw, h: 0.45, fill: { color: i === 0 ? HEX.accent5 : HEX.dk1 }, line: { color: "FFFFFF", width: 1 }, objectName: "Phase " + i });
-  txt(s, p, { x: gx + i * colw, y: gy, w: colw, h: 0.45, fontSize: 12, bold: true, align: "center", valign: "middle", color: C.background1 });
+  box(s, gx + i * colw, gy, colw, 0.42, "Phase " + i, GREY);
+  txt(s, p, { x: gx + i * colw, y: gy, w: colw, h: 0.42, fontSize: 12.5, bold: true, align: "center", valign: "middle" });
 });
 const tasks = [
   ["Problem study and literature survey", 0, 1, true],
@@ -368,39 +286,37 @@ const tasks = [
   ["Submit IEEE paper + arXiv preprint", 2, 3, false],
   ["Project report, final demo and viva", 3, 4, false],
 ];
-const rh = 0.4;
+const rh = 0.37;
+const bar = (x, y, w, done, name) => s.addShape(pres.shapes.RECTANGLE, { x, y, w, h: rh - 0.14, fill: { color: done ? BLACK : "FFFFFF" }, line: { color: BLACK, width: 1 }, objectName: name });
 tasks.forEach((t, i) => {
-  const y = gy + 0.55 + i * rh;
-  if (i % 2 === 0) s.addShape(pres.shapes.RECTANGLE, { x: 0.6, y, w: 12.1, h: rh, fill: { color: "F5F7FA" }, line: { type: "none" }, objectName: "Row band " + i });
-  txt(s, t[0], { x: 0.7, y, w: 3.85, h: rh, fontSize: 12.5, valign: "middle" });
-  const bx = gx + t[1] * colw + 0.08, bw = (t[2] - t[1]) * colw - 0.16;
-  const split = t[2] > 1 && t[1] < 1; // finished part before Review 0, rest after
-  if (split) {
-    s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: bx, y: y + 0.08, w: bw, h: rh - 0.16, rectRadius: 0.06, fill: { color: HEX.accent1 }, line: { type: "none" }, objectName: "Bar rest " + i });
-    s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: bx, y: y + 0.08, w: colw - 0.16, h: rh - 0.16, rectRadius: 0.06, fill: { color: HEX.accent3 }, line: { type: "none" }, objectName: "Bar done " + i });
+  const y = gy + 0.5 + i * rh;
+  txt(s, t[0], { x: 0.92, y, w: 4.0, h: rh, fontSize: 13, valign: "middle" });
+  const bx = gx + t[1] * colw + 0.06, bw = (t[2] - t[1]) * colw - 0.12;
+  if (t[2] > 1 && t[1] < 1) { // finished up to Review 0, rest after
+    bar(bx, y + 0.07, bw, false, "Bar rest " + i);
+    bar(bx, y + 0.07, colw - 0.12, true, "Bar done " + i);
   } else {
-    s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: bx, y: y + 0.08, w: bw, h: rh - 0.16, rectRadius: 0.06, fill: { color: t[3] ? HEX.accent3 : HEX.accent1 }, line: { type: "none" }, objectName: "Bar " + i });
+    bar(bx, y + 0.07, bw, t[3], "Bar " + i);
   }
 });
-const my = gy + 0.55 + tasks.length * rh + 0.08;
+const my = gy + 0.5 + tasks.length * rh + 0.05;
 ["Review 0", "Review 1", "Review 2", "Final"].forEach((m, i) => {
   const x = gx + (i + 1) * colw;
-  s.addShape(pres.shapes.LINE, { x, y: gy + 0.45, w: 0, h: my - gy - 0.45, line: { color: HEX.accent4, width: 1, dashType: "dash" }, objectName: "Milestone line " + m });
-  s.addShape(pres.shapes.DIAMOND, { x: x - 0.14, y: my, w: 0.28, h: 0.28, fill: { color: HEX.accent4 }, line: { type: "none" }, objectName: "Milestone " + m });
-  txt(s, m, { x: x - 0.8, y: my + 0.3, w: 1.6, h: 0.3, fontSize: 12, bold: true, align: "center", color: C.accent4 });
+  s.addShape(pres.shapes.LINE, { x, y: gy + 0.42, w: 0, h: my - gy - 0.42, line: { color: BLACK, width: 0.75, dashType: "dash" }, objectName: "Milestone line " + m });
+  s.addShape(pres.shapes.DIAMOND, { x: x - 0.12, y: my, w: 0.24, h: 0.24, fill: { color: BLACK }, line: { type: "none" }, objectName: "Milestone " + m });
+  txt(s, m, { x: x - 0.8, y: my + 0.26, w: 1.6, h: 0.3, fontSize: 12, bold: true, align: "center" });
 });
-s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 0.7, y: gy + 0.11, w: 0.45, h: 0.22, rectRadius: 0.05, fill: { color: HEX.accent3 }, line: { type: "none" }, objectName: "Legend done" });
-txt(s, "done (8 Oct – 3 Nov 2026)", { x: 1.25, y: gy + 0.06, w: 1.85, h: 0.32, fontSize: 11.5, valign: "middle" });
-s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 3.15, y: gy + 0.11, w: 0.45, h: 0.22, rectRadius: 0.05, fill: { color: HEX.accent1 }, line: { type: "none" }, objectName: "Legend planned" });
-txt(s, "planned", { x: 3.7, y: gy + 0.06, w: 0.85, h: 0.32, fontSize: 11.5, valign: "middle" });
-source(s, "Done dates from the project's git history. Review dates follow the department calendar.");
+bar(0.92, gy + 0.1, 0.4, true, "Legend done");
+txt(s, "done (8 Oct – 3 Nov 2026)", { x: 1.42, y: gy + 0.05, w: 2.2, h: 0.32, fontSize: 12, valign: "middle" });
+bar(3.7, gy + 0.1, 0.4, false, "Legend planned");
+txt(s, "planned", { x: 4.2, y: gy + 0.05, w: 0.75, h: 0.32, fontSize: 12, valign: "middle" });
+note(s, "Done dates from the project's git history. Review dates follow the department calendar.");
 s.addNotes("Most of the research is already done: census, gate, pre-registered evaluation, hardening and a paper draft. The remaining phases are guide review, the demo, submission and the final report.");
 
 // ---------- 10. references ----------
 pres.addSection({ title: "References" });
 s = pres.addSlide({ masterName: "CONTENT", sectionTitle: "References" });
 s.addText("References", { placeholder: "title" });
-rubric(s, "Criteria 2 & 5");
 const refs = [
   "B. Kapner, C. Soceanu, A. Petrunin, and H. Gartner, “Scanning the harness: Configuration exposures in AI coding-agent supply chains,” arXiv:2609.07360v3, 2026.",
   "CISA, “Widespread supply chain compromise impacting npm ecosystem,” Alert, Sept. 23, 2025.",
@@ -422,9 +338,9 @@ const refs = [
 ];
 const half = Math.ceil(refs.length / 2);
 [refs.slice(0, half), refs.slice(half)].forEach((col, ci) => {
-  txt(s, col.map((r, i) => ({ text: `[${ci * half + i + 1}]  ${r}`, options: { breakLine: i < col.length - 1 } })), { x: 0.6 + ci * 6.15, y: 1.25, w: 5.95, h: 5.35, fontSize: 11.5, paraSpaceAfter: 5, color: C.text1 });
+  txt(s, col.map((r, i) => ({ text: `[${ci * half + i + 1}]  ${r}`, options: { breakLine: i < col.length - 1 } })), { x: 0.92 + ci * 5.85, y: 1.85, w: 5.6, h: 4.85, fontSize: 11.5, paraSpaceAfter: 4 });
 });
-source(s, "Code and data: github.com/ftaakash/MCP-Lock · All entries checked against their primary source (docs/CITATIONS_VERIFIED.md); patents checked on Google Patents.");
+note(s, "Code and data: github.com/ftaakash/MCP-Lock. All entries checked against their primary source; patents checked on Google Patents.");
 s.addNotes("IEEE-style references in order of first citation in this deck: papers, tools, patents, our pre-registration and the UN SDG resolution.");
 
 (async () => {
