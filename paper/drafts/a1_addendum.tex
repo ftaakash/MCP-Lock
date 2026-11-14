@@ -1,0 +1,34 @@
+% Draft text for addendum A1 (docs/A1_RESULTS.md). Not yet in main.tex.
+% Every number comes from results/candidate/a1/a1_results.json and results/candidate/a1/lost8_review.json.
+% Before inserting, add matching macros to paper/make_numbers.py so numbers.tex stays the only source of numbers.
+
+% ---------------------------------------------------------------------------------------------------------------------
+% (1) Results, RQ2: insert directly after the "Age-rule sensitivity (exploratory)" paragraph.
+% ---------------------------------------------------------------------------------------------------------------------
+\textbf{Pre-registered follow-up on new data.} Because the exemption was chosen after seeing these results, we tested it
+again under an OSF addendum~\cite{osf2026prereg} filed before any scored run, with the gate code frozen at a tag. The
+new corpora contain only versions published after the original freeze (9 Oct.--7 Nov.\ 2026): 2,653 benign upgrades
+(2,209 MCP, 230 npm, 214 PyPI) and 199 real malicious versions (42 hijacked, 157 new or typosquatted names). Against
+\SC, the exempted gate \G-X blocks far fewer honest upgrades: 0.53\% [0.31, 0.88] against 10.48\% [9.37, 11.70] (14 vs.\
+278 discordant transitions, Holm-adjusted $p < 10^{-60}$). It also detects fewer attacks: 52.3\% against 56.3\% (0 vs.\
+8 discordant cases, $p = 0.008$). All eight are hijacked packages under 30 days old that only the age rule caught; on
+hijacked packages the other checks added nothing, because only one of the 42 still had the registry data they compare.
+The registered claim rule required both lower false blocks and no loss of detection, so the exemption is
+\emph{not} confirmed as a default. Narrower variants that waive the rule only above a package or lock age of $d$ days do
+not help: false blocks and hijack detections fall together as $d$ decreases on both corpora (exploratory).
+
+% ---------------------------------------------------------------------------------------------------------------------
+% (2) Discussion: REPLACE the sentence that begins "A deployable gate should not re-apply first-use checks ..."
+%     (main.tex, "What the evidence supports"). The old sentence is no longer supported by the A1 result.
+% ---------------------------------------------------------------------------------------------------------------------
+Re-applying the first-use age rule to locked servers is what made both gates block a third of honest upgrades, but it is
+also what catches young packages hijacked soon after they were locked: on new data, waiving it removed 95\% of false
+blocks and missed 8 of 42 hijacked packages. The age rule is therefore a trade-off for the deployer to set, not a check
+to drop.
+
+% ---------------------------------------------------------------------------------------------------------------------
+% (3) Threats to validity: append to the sentence on class C ("Class C follows a mechanical rule ...").
+% ---------------------------------------------------------------------------------------------------------------------
+In the addendum, at least two of the eight hijacked cases that \G-X missed look attacker-owned (a typosquat, and a
+package whose only clean release preceded its malicious ones); counting them as new names leaves six misses, and the
+conclusion is unchanged ($p = 0.031$).
