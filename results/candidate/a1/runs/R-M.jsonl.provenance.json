@@ -1,0 +1,16 @@
+{
+  "result": "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/a1/runs/R-M.jsonl",
+  "result_sha256": "8b8ce69993953987398ef5f96fe5592102977ac7f3b4c8a2256719896d85a7b2",
+  "command": "python.exe eval/replay.py results/candidate/a1/malicious/bundles.jsonl.gz R-M",
+  "commit": "271a14e28f27f207608350ac46432dedb1231ed2-dirty",
+  "timestamp_utc": "2026-11-14T18:45:22Z",
+  "python": "3.11.9",
+  "inputs": {
+    "results/candidate/a1/malicious/bundles.jsonl.gz": "c9c782c252c1623f736118ec1f276b90e158c6e3a8a1c4dcfdba41f2568b2753"
+  },
+  "params": {
+    "cases": 356,
+    "group": "candidate"
+  },
+  "note": ""
+}

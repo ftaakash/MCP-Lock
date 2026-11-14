@@ -1,0 +1,16 @@
+{
+  "result": "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/a1/a1_results.json",
+  "result_sha256": "f035d037d1109ad7e5b9a1089dea9f84b3c4c9e812d726d33e7337347bd416f5",
+  "command": "python.exe eval/scoring/a1.py",
+  "commit": "271a14e28f27f207608350ac46432dedb1231ed2-dirty",
+  "timestamp_utc": "2026-11-14T18:51:13Z",
+  "python": "3.11.9",
+  "inputs": {
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/baseline/a1/runs/B.jsonl": "48c36108ef5a59dda4d0cd84eec6c4e33a8b0474d65b0479194b8c6a2807a9ee",
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/baseline/a1/runs/R-M.jsonl": "d170f01338b5aebbdc21bd59af93f2fc8da59d4b0143aa2adc5061241716de20",
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/a1/runs/B.jsonl": "2c5326144493880c036181a234ec43ca6ec556ee56833ed3eb601f7260956a5c",
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/a1/runs/R-M.jsonl": "8b8ce69993953987398ef5f96fe5592102977ac7f3b4c8a2256719896d85a7b2"
+  },
+  "params": {},
+  "note": ""
+}
