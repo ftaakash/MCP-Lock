@@ -1,0 +1,44 @@
+% Table V: performance comparison with existing methods. Every cell is a macro from numbers.tex.
+% Section VIII at the restructure.
+\section{Performance Comparison with Existing Methods}
+\label{sec:compare}
+Table~\ref{tab:compare} puts MCP-Lock next to the baseline hook in both readings and next to two steps that need no gate,
+all on the corpora of Section~V. On npm real attacks, the baseline hook plus \code{-{}-ignore-scripts} detects about as
+many cases as \G{} (\SCIgnP{} vs.\ \GNpmP), so most of \G's gain on real attacks is available more cheaply. The hook
+detects none of the synthetic rug pulls (\RSSC) and \G{} detects all of them (\RSG). Exact version pinning
+prevents every attack on an existing package (\PinRMP{} of R-M) and, by construction, every rug pull, but only by
+holding back all \NB{} benign upgrades until the user edits the configuration; \G{} lets an upgrade run unattended when
+nothing it checks has changed. We did not replay \code{-{}-ignore-scripts} on the synthetic rug pulls.
+
+\begin{table}[t]
+\caption{Comparison with existing methods.\\
+\textmd{R: real attacks ($n=\NR$); R-S: synthetic rug pulls; B: benign upgrades ($n=\NB$). npm columns use the npm
+cases of R-M. Wilson 95\% CIs in Section~V. -- not applicable.}}
+\label{tab:compare}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{2.5pt}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Method & R detected & npm R-M & R-S & B false blocks \\
+\midrule
+Hook, literal (S1-L)~\cite{bagmar2026setup} & \DetSLP{} & -- & \RSSL{} & \FbSLP{} \\
+Hook, charitable (S1-C) & \DetSCP{} & \SCNpmP{} & \RSSC{} & \FbSCP{} \\
+Exact version pin & -- & -- & all$^{d}$ & all held back \\
+\code{-{}-ignore-scripts} (npm) & -- & \IgnRMP{}$^{a}$ & -- & \IgnBP{}$^{b}$ \\
+S1-C + \code{-{}-ignore-scripts} & -- & \SCIgnP{} & -- & -- \\
+\textbf{MCP-Lock (\G)} & \textbf{\DetGP} & \GNpmP{} & \textbf{\RSG} & \FbGP{} \\
+\G{}, locked servers exempt from age rule$^{c}$ & \AgeDetP{} & -- & -- & \AgeFbP{} \\
+\bottomrule
+\end{tabular}}
+
+\vspace{2pt}
+\begin{minipage}{\columnwidth}\scriptsize
+Exact pinning prevents \PinRMP{} of R-M (every hijacked-package case) and holds back all benign upgrades.
+The npm R-M column counts the \code{-{}-ignore-scripts} rows as attacks prevented. $^{a}$Upper bound: a payload may also run at launch.
+$^{b}$Share of npm upgrades whose honest install script is skipped.
+$^{c}$Exploratory; a pre-registered re-test on new data did not confirm it (\AoneLost{} of \AoneRC{} hijacked cases
+missed). $^{d}$By construction: a pinned launch never runs a new version. Median gate latency: \LatColdMed{}\,s cold cache, \LatWarmMed{}\,s warm.
+\end{minipage}
+\end{table}

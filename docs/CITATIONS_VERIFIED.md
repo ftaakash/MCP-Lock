@@ -33,3 +33,14 @@ own page). Bibliographic data in `paper/refs.bib` is copied from these checks.
 | wilson1927 | Crossref 10.1080/01621459.1927.10502953 | VERIFIED | |
 | mcnemar1947 | Crossref 10.1007/BF02295996 | VERIFIED | |
 | holm1979 | Scand. J. Statist. 6(2):65–70 (JSTOR 4615733; bibliographic records) | VERIFIED (metadata) | JSTOR page did not render; details consistent across indexes. |
+
+## References added for the literature review (verified 2026-11-15)
+
+| Key | Source checked | Status | Notes |
+|---|---|---|---|
+| sejfia2022amalfi | arXiv:2202.13953 (abstract and paper page); ICSE 2022, doi 10.1145/3510003.3510104 | VERIFIED | Amalfi: ML classifiers plus a reproducibility check from the source repository plus clone detection; 95 previously unknown malware samples among 96,287 versions published in one week. Judges each version on its own; no continuity between versions. |
+| ladisa2023crosslang | arXiv:2310.09571; ACSAC 2023 programme, pp. 71--82, doi 10.1145/3627106.3627138 | VERIFIED | One classifier on language-independent features for npm and PyPI; 58 previously unknown malicious packages (38 npm, 20 PyPI) among 31,292 analysed. |
+| schorlemmer2024signing | arXiv:2401.14635v2 (full text, PyPI sections); IEEE S&P 2024, doi 10.1109/SP54263.2024.00182 | VERIFIED | Covers Maven, PyPI, Docker Hub and Hugging Face, **not npm**. PyPI: 0.2% of artifacts signed in 2023, 1.2% over 2015--2023; PGP deprecated 23 May 2023. Cite only for PyPI and for "registry policy drives signing". Predates PEP 740 attestations. Author list shortened with "others" in the .bib. |
+| gamage2025lockfiles | arXiv:2505.04834v3 (full text to 100k chars) | VERIFIED | Seven package managers; 81.4% of 4,859 projects commit lockfiles; lockfiles record versions, checksums and (npm, Cargo) a source link. Says nothing about publisher, install scripts or tool definitions. Preprint, no venue stated. |
+| gaire2025sok | arXiv:2512.08290v2 (to 100k chars) | VERIFIED | SoK of MCP security and safety. Rug pulls attributed to mutable server logic, no continuous integrity checks, no re-approval triggers. Discusses signed, immutable tool manifests (ETDI). **Does not use the word "pinning".** Preprint. |
+| huang2026toolpoison | arXiv:2603.22489v1 (to 100k chars) | VERIFIED | STRIDE/DREAD, 57 threats; tool poisoning tested on 7 MCP clients (Nov 2025); 5 of 7 lack static validation of tool metadata. Recommends signed, immutable tool definitions and static checks at registration. Per-client tables not read (beyond 100k chars). Preprint. |

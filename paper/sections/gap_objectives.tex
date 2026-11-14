@@ -1,0 +1,49 @@
+% Sections III (research gap) and IV (research objectives). Inserted after the literature review at the restructure.
+\section{Research Gap}
+\label{sec:gap}
+Table~\ref{tab:prior} leaves four gaps.
+
+\textbf{G1: tool-definition drift is unmeasured.} Surveys name rug pulls as a threat~\cite{hou2025mcp,gaire2025sok},
+and Kraishan measures drift in the registry's own fields~\cite{kraishan2026drift}, but no study diffs the tool
+definitions inside package archives. Nobody knows how often honest servers change their tools, so nobody knows what a
+tool pin costs.
+
+\textbf{G2: no pre-launch tool check without running the server.} MCP-Scan and the pinning proxies read tools from a
+running server~\cite{invariant2025mcpscan,mcppin,mcpseal}, so the new version's code has already executed. Signed tool
+definitions avoid that but need servers or registries to adopt them~\cite{bhatt2025etdi,metere2026attested}.
+
+\textbf{G3: no continuity check across upgrades.} Scanners judge each version alone~\cite{sejfia2022amalfi,
+ladisa2023crosslang}, provenance says who built a release but not whether the builder changed~\cite{slsa2023provenance,
+pep740}, and package lockfiles pin versions and checksums only~\cite{gamage2025lockfiles}. A hijacked account that
+publishes with a different builder, a different publisher or a new install script passes all three.
+
+\textbf{G4: no evaluation on real attacks with a false-block cost.} The pinning tools report no evaluation on real
+attacks, and the pre-install hook was evaluated on 11 constructed scenarios~\cite{bagmar2026setup}. Detection alone
+does not show whether a gate is usable, because every honest upgrade it blocks needs a person to step in.
+
+\section{Research Objectives}
+\label{sec:obj}
+Each objective answers one gap and one research question (Table~\ref{tab:obj}). O3 was pre-registered with a kill
+rule before any scored run~\cite{osf2026prereg}.
+
+\begin{table}[t]
+\caption{Objectives, the gaps and questions they answer, and the result.}
+\label{tab:obj}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}p{0.31\columnwidth}ccp{0.42\columnwidth}@{}}
+\toprule
+Objective & Gap & RQ & Result \\
+\midrule
+O1 Measure how often MCP servers change tool definitions, and whether metadata signals change with them
+  & G1 & RQ1 & \DriftPkgsP{} of \CensusSample{} packages changed tools within 90 days; \NoSignalP{} of changes carry no signal \\
+O2 Build a lockfile and a gate that checks every launch without running package code
+  & G2, G3 & -- & S1--S5 from archives and registry metadata; median latency \LatColdMed{}\,s cold, \LatWarmMed{}\,s warm \\
+O3 Test the gate against the closest prior gate on real attacks and benign upgrades (H1, H2, kill rule)
+  & G3, G4 & RQ2 & \DetGP{} vs.\ \DetSCP{} detection; \FbGP{} vs.\ \FbSCP{} false blocks; not killed \\
+O4 Attack the gate with an adaptive attacker and price each hardening step
+  & G2, G3 & RQ3 & \EGAllow{} of \ENCases{} attacks pass the frozen gate; hardening closes all but two \\
+\bottomrule
+\end{tabular}
+\end{table}
