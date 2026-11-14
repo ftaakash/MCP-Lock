@@ -36,6 +36,10 @@ PHASE2 = ROOT / "results/census/phase2"
 CUTOFF = datetime(2026, 10, 8, 23, 59, 59, tzinfo=UTC)
 N_NPM, N_PYPI = 1000, 500
 MAX_BYTES = 5 * 1024 ** 3  # PREREG §7: stop and ask above 5 GB of downloads
+from eval import a1  # noqa: E402
+if a1.ACTIVE:  # addendum A1: post-freeze window; transitions of the re-fetched sample
+    PHASE2 = ROOT / a1.CENSUS_DIR
+    CUTOFF = a1.WINDOW_END
 
 
 
@@ -76,6 +80,9 @@ def select_top(eco: str, n: int) -> tuple[list[dict], list[dict]]:
             continue
         stable = [v for v in vs if not v["prerelease"] and v.get("published")
                   and _ts(v["published"]) <= CUTOFF]
+        if a1.ACTIVE and stable and _ts(stable[-1]["published"]) < a1.WINDOW_START:
+            excluded.append({"package": name, "reason": "no stable release in the A1 window"})
+            continue
         if len(stable) < 2:
             excluded.append({"package": name, "reason": "fewer than 2 stable versions"})
             continue

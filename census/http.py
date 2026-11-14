@@ -16,6 +16,12 @@ from urllib.parse import urlparse
 import requests
 
 CACHE_DIR = Path("results/census/cache/http")
+try:  # addendum A1 uses a fresh cache (eval/a1.py)
+    from eval import a1 as _a1
+    if _a1.ACTIVE:
+        CACHE_DIR = Path(_a1.HTTP_CACHE)
+except ImportError:  # census used without the eval package
+    pass
 USER_AGENT = "mcp-lock-research/0.0.1 (academic census; contact: github.com/ftaakash)"
 
 # Minimum seconds between requests to one host.

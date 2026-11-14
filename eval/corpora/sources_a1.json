@@ -1,0 +1,11 @@
+{
+  "pinned": "2026-11-14",
+  "addendum": "docs/PREREG_ADDENDUM_AGE.md",
+  "sources": [
+    {"name": "ossf/malicious-packages", "url": "https://github.com/ossf/malicious-packages",
+     "commit": "016024d631828d2b6827bee160888f7205e42635", "license": "Apache-2.0", "use": "MAL- OSV records (npm, PyPI)"},
+    {"name": "DataDog/malicious-software-packages-dataset", "url": "https://github.com/DataDog/malicious-software-packages-dataset",
+     "commit": "72c723be547033c558244520524b117c8d71663b", "license": "Apache-2.0",
+     "use": "compromised_lib cases and per-case archives (encrypted zip); index listed via the GitHub tree API (1,477 zips), never cloned"}
+  ]
+}

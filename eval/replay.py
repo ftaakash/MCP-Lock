@@ -25,6 +25,7 @@ A signal marked not evaluable is disabled for that case (PREREG §3.2: no findin
 from __future__ import annotations
 
 import contextlib
+import os
 import json
 import tempfile
 from datetime import datetime
@@ -59,6 +60,11 @@ def systems(evaluable: dict, hardening: frozenset = frozenset()) -> dict[str, tu
            "G": ("charitable", frozenset({"S1"}) | ok)}
     for k in SIGNALS_23:
         out[f"G-{k}"] = ("charitable", frozenset({"S1"}) | (ok - {k}))
+    if os.environ.get("MCPLOCK_A1") == "1":  # addendum A1: G-X and its ablations
+        x = frozenset({"S1", core.AGE_EXEMPT})
+        out["G-X"] = ("charitable", x | ok)
+        for k in SIGNALS_23:
+            out[f"G-X-{k}"] = ("charitable", x | (ok - {k}))
     return out
 
 
@@ -207,7 +213,8 @@ def write_split(rows: list[dict], name: str, inputs: list) -> tuple[Path, Path]:
     paths = []
     for group, keep in (("baseline", lambda s: s in BASELINE_SYSTEMS),
                         ("candidate", lambda s: s not in BASELINE_SYSTEMS)):
-        out = ROOT / "results" / group / "phase4" / "runs" / f"{name}.jsonl"
+        phase = "a1" if os.environ.get("MCPLOCK_A1") == "1" else "phase4"  # addendum A1 kept apart
+        out = ROOT / "results" / group / phase / "runs" / f"{name}.jsonl"
         out.parent.mkdir(parents=True, exist_ok=True)
         with open(out, "w", encoding="utf-8") as g:
             for r in rows:

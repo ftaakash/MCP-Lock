@@ -5,8 +5,6 @@ Patterns:
   * X.registerTool(name, {title, description, inputSchema}, h)   MCP TS SDK
   * X.addTool({name, description, parameters | inputSchema})     FastMCP (TS)
   * any object literal {name: <string>, inputSchema: ...}        ListTools handlers / tool consts
-  * tool(name, {description, input | inputSchema, ...})         imported bare helper (v3)
-  * object literal {name, description, parameters | shape}       tool tables (v3)
 Identifiers are resolved through `const/let/var` declarations (file-local first, then unique
 across the package). Unresolvable values become OPAQUE; call callees keep only their last
 property name with trailing digits stripped, so bundler renames do not alter hashes.
@@ -28,7 +26,6 @@ TS = Language(tsts.language_typescript())
 _PARSERS = {"js": Parser(JS), "ts": Parser(TS)}
 
 CALL_PATTERNS = {"tool", "registerTool", "addTool"}
-ALT_SCHEMA_KEYS = ("parameters", "shape")
 WRAPPERS = {"parenthesized_expression", "as_expression", "satisfies_expression",
             "non_null_expression", "type_assertion"}
 ESCAPES = {"n": "\n", "t": "\t", "r": "\r", "b": "\b", "f": "\f", "v": "\v", "0": "\0",
@@ -279,8 +276,6 @@ def _str(v):
 
 def _from_call(r: Resolver, n: Node, ctx: FileCtx) -> list[ToolDef]:
     fn = n.child_by_field_name("function")
-    if fn is not None and fn.type == "identifier" and _text(fn) == "tool":
-        return _from_bare_tool(r, n, ctx)
     if fn is None or fn.type != "member_expression":
         return []
     prop = fn.child_by_field_name("property")
@@ -318,24 +313,6 @@ def _from_call(r: Resolver, n: Node, ctx: FileCtx) -> list[ToolDef]:
     return [ToolDef(name, _str(desc), shapes[0] if shapes else None, "tool", ctx.rel)]
 
 
-def _from_bare_tool(r: Resolver, n: Node, ctx: FileCtx) -> list[ToolDef]:
-    """v3 fix C: an imported bare `tool("name", {description, input | inputSchema, ...})`.
-
-    The config must be an object with a description, so unrelated functions named `tool` do not match.
-    """
-    args_node = n.child_by_field_name("arguments")
-    args = [a for a in (args_node.named_children if args_node else []) if a.type != "comment"]
-    if len(args) < 2:
-        return []
-    name = _str(r.ev(args[0], ctx))
-    cfg = r.ev(args[1], ctx)
-    if not name or not isinstance(cfg, dict) or "description" not in cfg:
-        return []
-    schema = cfg.get("inputSchema", cfg.get("input"))
-    return [ToolDef(name, _str(cfg.get("description")), schema, "bare_tool", ctx.rel,
-                    {"title": _str(cfg.get("title"))})]
-
-
 def _from_object(r: Resolver, n: Node, ctx: FileCtx) -> ToolDef | None:
     keys = {}
     for c in n.named_children:
@@ -345,12 +322,8 @@ def _from_object(r: Resolver, n: Node, ctx: FileCtx) -> ToolDef | None:
                 keys[_text(k).strip("'\"")] = c.child_by_field_name("value")
         elif c.type == "shorthand_property_identifier":
             keys[_text(c)] = c
-    # v3 fix B1: {name, description, parameters | shape} also counts (e.g. @doist/todoist-mcp, fluf-mcp);
-    # without inputSchema the object must carry a description, to keep unrelated objects out
-    alt = next((k for k in ALT_SCHEMA_KEYS if k in keys), None)
-    if "name" not in keys or not ("inputSchema" in keys or ("description" in keys and alt)):
+    if "name" not in keys or "inputSchema" not in keys:
         return None
-    schema_key = "inputSchema" if "inputSchema" in keys else alt
     nm = keys["name"]
     name = _str(ev_ident(r, _text(nm), ctx, 0) if nm.type == "shorthand_property_identifier"
                 else r.ev(nm, ctx))
@@ -359,8 +332,8 @@ def _from_object(r: Resolver, n: Node, ctx: FileCtx) -> ToolDef | None:
     obj = r.ev(n, ctx)
     if not isinstance(obj, dict):
         return None
-    return ToolDef(name, _str(obj.get("description")), obj.get(schema_key),
-                   "object_literal" if schema_key == "inputSchema" else "object_literal_alt", ctx.rel)
+    return ToolDef(name, _str(obj.get("description")), obj.get("inputSchema"), "object_literal",
+                   ctx.rel)
 
 
 def source_files(root: Path) -> list[Path]:

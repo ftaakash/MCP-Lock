@@ -14,6 +14,9 @@ from gate.findings import SEVERITY_ORDER, Finding
 ALL_SIGNALS = frozenset({"S1", "S2", "S3", "S4", "S5"})
 # Exploratory Phase 5 hardening checks run by the pre-launch gate (H2 lives in gate/proxy.py).
 HARDENING = frozenset({"H1", "H3"})
+# Addendum A1 (docs/PREREG_ADDENDUM_AGE.md): with "XAGE" in `enabled`, S1 `new_package` findings are dropped
+# for a launched package that has a lock entry. The age rule guards first use; a locked server was already reviewed.
+AGE_EXEMPT = "XAGE"
 
 
 def use_user_cache() -> None:
@@ -67,7 +70,11 @@ def evaluate(cmd: str, cwd: Path, lock_path: Path | None = None,
     findings: list[Finding] = []
     for inv in command.parse(cmd):
         if "S1" in enabled:
-            findings += s1.check_invocation(inv, Path(cwd), s1cfg)
+            s1f = s1.check_invocation(inv, Path(cwd), s1cfg)
+            lt0 = inv.launch if inv.kind == "launch" else None
+            if AGE_EXEMPT in enabled and lt0 is not None and lock.get((lt0.ecosystem, lt0.package)):
+                s1f = [f for f in s1f if not (f.signal == "S1" and f.check == "new_package")]
+            findings += s1f
         if inv.kind == "launch" and inv.launch is not None and \
                 enabled & ({"S2", "S3", "S4", "S5"} | HARDENING):
             lt = inv.launch

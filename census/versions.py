@@ -26,6 +26,13 @@ K = 10
 WINDOW_START = datetime(2026, 7, 10, tzinfo=UTC)
 WINDOW_END = datetime(2026, 10, 8, 23, 59, 59, tzinfo=UTC)
 WINDOW_CAP = 40
+try:  # addendum A1: post-freeze window (eval/a1.py)
+    from eval import a1 as _a1
+    if _a1.ACTIVE:
+        WINDOW_START, WINDOW_END = _a1.WINDOW_START, _a1.WINDOW_END
+        K = 0  # A1 needs only window transitions (B-mcp'), not the K latest versions
+except ImportError:
+    pass
 # Lifecycle scripts npm runs when installing a registry tarball. `prepare` is NOT run for
 # registry installs (only git/local), so it is excluded. `gypfile: true` implies `node-gyp rebuild`.
 INSTALL_SCRIPTS = ("preinstall", "install", "postinstall")
@@ -116,7 +123,7 @@ def pypi_versions(pkg: str) -> list[dict]:
 
 
 def select(versions: list[dict]) -> tuple[list[dict], dict]:
-    g1 = {v["version"] for v in versions[-K:]}
+    g1 = {v["version"] for v in versions[-K:]} if K else set()
     in_window = [i for i, v in enumerate(versions)
                  if (t := _ts(v["published"])) and WINDOW_START <= t <= WINDOW_END]
     capped = len(in_window) > WINDOW_CAP

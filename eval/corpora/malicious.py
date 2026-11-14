@@ -86,11 +86,21 @@ C_MIN_DAYS = 7
 SEED = 20261011
 C_CAP = 400
 N_MIN, R_MIN = 100, 200
+WORK = "work"
+from eval import a1  # noqa: E402
+if a1.ACTIVE:  # addendum A1 (docs/PREREG_ADDENDUM_AGE.md)
+    WINDOW = (a1.WINDOW_START.isoformat(), a1.WINDOW_END.isoformat())
+    SEED = a1.SEED
+    OSV_COMMIT = a1.OSV_COMMIT
+    WORK = a1.MAL_WORK
+    _src = json.loads(Path(__file__).with_name("sources_a1.json").read_text(encoding="utf-8"))
+    DATADOG_COMMIT = next(s["commit"] for s in _src["sources"] if s["name"].startswith("DataDog"))
+    INDEX = Path(__file__).with_name("datadog_compromised_paths_a1.txt")
 
 
 def _use_volume_cache(data: Path) -> None:
     from census import http
-    http.CACHE_DIR = data / "work" / "http"
+    http.CACHE_DIR = data / WORK / "http"
 
 
 def _iso(s: str | None) -> str | None:
@@ -314,7 +324,7 @@ def fetch(data: Path, out: Path) -> None:
     from census import http, tarballs
 
     _use_volume_cache(data)
-    arch = data / "work" / "archives"
+    arch = data / WORK / "archives"
     arch.mkdir(parents=True, exist_ok=True)
     cases = [json.loads(x) for x in gzip.open(out / "mal_sample.jsonl.gz", "rt", encoding="utf-8")]
     # every version any MAL record (OSV or DataDog) lists for a package is affected, as in classify
@@ -365,7 +375,7 @@ def fetch(data: Path, out: Path) -> None:
         rows.append(row)
         if i % 25 == 0:
             print(f"{i}/{len(cases)} fetched", flush=True)
-    with gzip.open(data / "work" / "fetched.jsonl.gz", "wt", encoding="utf-8") as g:
+    with gzip.open(data / WORK / "fetched.jsonl.gz", "wt", encoding="utf-8") as g:
         for r in rows:
             g.write(json.dumps(r) + "\n")
     print(f"fetched {len(rows)} cases")
@@ -419,8 +429,8 @@ def analyse(data: Path, out: Path) -> None:
     from census import tarballs
     from census.versions import INSTALL_SCRIPTS
 
-    rows = [json.loads(x) for x in gzip.open(data / "work" / "fetched.jsonl.gz", "rt", encoding="utf-8")]
-    src_root = data / "work" / "src"
+    rows = [json.loads(x) for x in gzip.open(data / WORK / "fetched.jsonl.gz", "rt", encoding="utf-8")]
+    src_root = data / WORK / "src"
     for r in rows:
         eco = r["case"]["ecosystem"]
         r["tools"], r["dd_scripts"] = {}, None
@@ -443,7 +453,7 @@ def analyse(data: Path, out: Path) -> None:
                 r["tools"][role] = _tools_from_dir(eco, dest)
             except Exception as e:
                 r["tools"][role] = {"error": f"{type(e).__name__}: {e}"}
-    with gzip.open(data / "work" / "analysed.jsonl.gz", "wt", encoding="utf-8") as g:
+    with gzip.open(data / WORK / "analysed.jsonl.gz", "wt", encoding="utf-8") as g:
         for r in rows:
             g.write(json.dumps(r) + "\n")
     print(f"analysed {len(rows)} cases")
@@ -469,7 +479,7 @@ def assemble(data: Path, out: Path) -> None:
     from census import provenance
     from eval.corpora.benign import _lock_entry
 
-    rows = [json.loads(x) for x in gzip.open(data / "work" / "analysed.jsonl.gz", "rt", encoding="utf-8")]
+    rows = [json.loads(x) for x in gzip.open(data / WORK / "analysed.jsonl.gz", "rt", encoding="utf-8")]
     bundles, excluded = [], []
     for r in rows:
         c, eco, name = r["case"], r["case"]["ecosystem"], r["case"]["name"]

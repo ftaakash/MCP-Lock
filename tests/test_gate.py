@@ -94,3 +94,18 @@ def test_signals_same_version_integrity(monkeypatch):
     assert f.check == "integrity_mismatch" and f.severity == "block"
     _patch(monkeypatch, {"version": "1.0.0", "integrity": "sha512-old"})
     assert signals.check("npm", "pkg", None, _entry()) == []
+
+
+def test_a1_age_exemption_only_for_locked_launches(monkeypatch, tmp_path):
+    """Addendum A1: with XAGE, S1 new_package is dropped for a locked launch and kept otherwise."""
+    import json
+    young = Finding("S1", "new_package", "block", "young-srv", "first published 3 days ago")
+    monkeypatch.setattr(s1, "check_invocation", lambda inv, cwd, cfg: [young])
+    monkeypatch.setattr(signals, "check", lambda eco, pkg, pinned, entry, enabled: [])
+    lock = tmp_path / "mcp-lock.json"
+    lock.write_text(json.dumps({"servers": {"y": {"ecosystem": "npm", "name": "young-srv"}}}))
+    on = frozenset({"S1", "S2", "S3", "S4", "S5", core.AGE_EXEMPT})
+    off = on - {core.AGE_EXEMPT}
+    assert core.evaluate("npx -y young-srv", tmp_path, lock, enabled=on).decision == "allow"
+    assert core.evaluate("npx -y young-srv", tmp_path, lock, enabled=off).decision == "block"
+    assert core.evaluate("npx -y young-srv", tmp_path, None, enabled=on).decision == "block"  # first use
