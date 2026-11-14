@@ -1,0 +1,22 @@
+20607 packages need a registry history
+1000/20607 histories, 0 failures
+2000/20607 histories, 0 failures
+3000/20607 histories, 0 failures
+4000/20607 histories, 0 failures
+5000/20607 histories, 0 failures
+6000/20607 histories, 0 failures
+7000/20607 histories, 0 failures
+8000/20607 histories, 0 failures
+9000/20607 histories, 0 failures
+10000/20607 histories, 0 failures
+11000/20607 histories, 0 failures
+12000/20607 histories, 0 failures
+13000/20607 histories, 0 failures
+14000/20607 histories, 0 failures
+15000/20607 histories, 0 failures
+16000/20607 histories, 0 failures
+17000/20607 histories, 0 failures
+18000/20607 histories, 0 failures
+19000/20607 histories, 0 failures
+20000/20607 histories, 0 failures
+{"window": ["2026-10-09T00:00:00+00:00", "2026-11-07T23:59:59+00:00"], "c_min_days": 7, "histories": 20607, "lookup_failures": 0, "dropped": {"out_of_window": 219703, "no_version": 510, "lookup_failed": 0}, "cases": {"C:npm": 43, "C:pypi": 0, "N:npm": 766, "N:pypi": 193}}
