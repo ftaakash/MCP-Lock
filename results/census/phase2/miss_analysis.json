@@ -1,0 +1,164 @@
+{
+ "source": "results/census/phase2/validation_heldout_{npm,pypi}.jsonl; extractor at HEAD (unchanged since prereg-v1); categories assigned by reading each package's source",
+ "n_validated_servers": 82,
+ "n_runtime_tools": 1385,
+ "n_missed": 305,
+ "by_category": {
+  "A_py_call_form": {
+   "missed": 67,
+   "servers": 3
+  },
+  "B1_nonstandard_schema_key": {
+   "missed": 60,
+   "servers": 2
+  },
+  "B2_custom_wrapper": {
+   "missed": 80,
+   "servers": 3
+  },
+  "C_bare_tool_fn": {
+   "missed": 16,
+   "servers": 2
+  },
+  "D_loop_over_table": {
+   "missed": 3,
+   "servers": 1
+  },
+  "E_decorator_name_kwarg": {
+   "missed": 3,
+   "servers": 1
+  },
+  "F_not_in_source": {
+   "missed": 76,
+   "servers": 2
+  }
+ },
+ "servers": [
+  {
+   "ecosystem": "npm",
+   "package": "@heroui/react-mcp",
+   "version": "1.1.2",
+   "n_runtime": 6,
+   "n_missed": 6,
+   "category": "B2_custom_wrapper",
+   "pattern": "tool object {name, description, register(server)}; registerTool(name, ...) with a destructured name"
+  },
+  {
+   "ecosystem": "npm",
+   "package": "fluf-mcp",
+   "version": "0.2.8",
+   "n_runtime": 13,
+   "n_missed": 13,
+   "category": "B1_nonstandard_schema_key",
+   "pattern": "TOOLS = [{name, description, shape, run}] mapped in a ListTools handler"
+  },
+  {
+   "ecosystem": "npm",
+   "package": "pixinsight-connector",
+   "version": "2.5.0",
+   "n_runtime": 91,
+   "n_missed": 6,
+   "category": "B2_custom_wrapper",
+   "pattern": "defineProcessTool({name, params}) builds inputSchema inside the factory"
+  },
+  {
+   "ecosystem": "npm",
+   "package": "appcrane-mcp",
+   "version": "1.3.4",
+   "n_runtime": 62,
+   "n_missed": 62,
+   "category": "F_not_in_source",
+   "pattern": "tools/list served from bundled catalog.json (proxy to a live backend)"
+  },
+  {
+   "ecosystem": "npm",
+   "package": "@cyanheads/who-gho-mcp-server",
+   "version": "0.3.5",
+   "n_runtime": 6,
+   "n_missed": 6,
+   "category": "C_bare_tool_fn",
+   "pattern": "imported bare tool('name', {...}) from @cyanheads/mcp-ts-core"
+  },
+  {
+   "ecosystem": "npm",
+   "package": "@doist/todoist-mcp",
+   "version": "13.4.1",
+   "n_runtime": 47,
+   "n_missed": 47,
+   "category": "B1_nonstandard_schema_key",
+   "pattern": "{name: g.ADD_TASKS, parameters: ...} registered through a helper"
+  },
+  {
+   "ecosystem": "npm",
+   "package": "verdix-mcp",
+   "version": "0.3.0",
+   "n_runtime": 6,
+   "n_missed": 3,
+   "category": "D_loop_over_table",
+   "pattern": "for (const tier of TIERS) server.registerTool(TIER_TOOL[tier].name, ...)"
+  },
+  {
+   "ecosystem": "npm",
+   "package": "@cyanheads/inaturalist-mcp-server",
+   "version": "0.2.2",
+   "n_runtime": 10,
+   "n_missed": 10,
+   "category": "C_bare_tool_fn",
+   "pattern": "imported bare tool('name', {...}) from @cyanheads/mcp-ts-core"
+  },
+  {
+   "ecosystem": "npm",
+   "package": "@dreamworkhq/mcp",
+   "version": "1.5.1",
+   "n_runtime": 68,
+   "n_missed": 68,
+   "category": "B2_custom_wrapper",
+   "pattern": "defineAction({id: ...}) later mapped to name: action.id"
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "inn-check-ru-mcp",
+   "version": "1.12.3",
+   "n_runtime": 14,
+   "n_missed": 14,
+   "category": "F_not_in_source",
+   "pattern": "wheel contains only metadata; tools live in a dependency"
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "mcp-ksef-pl",
+   "version": "0.10.1",
+   "n_runtime": 56,
+   "n_missed": 56,
+   "category": "A_py_call_form",
+   "pattern": "mcp.tool()(fn) inside a register function"
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "forkflux-mcp",
+   "version": "0.6.0",
+   "n_runtime": 9,
+   "n_missed": 3,
+   "category": "E_decorator_name_kwarg",
+   "pattern": "@tool(name='forkflux_x') from fastmcp.tools; extractor keeps the function name"
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "freeplay-mcp",
+   "version": "0.0.6",
+   "n_runtime": 9,
+   "n_missed": 9,
+   "category": "A_py_call_form",
+   "pattern": "for tool in [...]: mcp.tool()(tool)"
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "mcp-monumenten",
+   "version": "3.0.1",
+   "n_runtime": 2,
+   "n_missed": 2,
+   "category": "A_py_call_form",
+   "pattern": "mcp.tool(annotations=...)(fn)"
+  }
+ ]
+}
