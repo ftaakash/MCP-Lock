@@ -5,6 +5,7 @@ Patterns:
   * X.registerTool(name, {title, description, inputSchema}, h)   MCP TS SDK
   * X.addTool({name, description, parameters | inputSchema})     FastMCP (TS)
   * any object literal {name: <string>, inputSchema: ...}        ListTools handlers / tool consts
+  * tool(name, {description, input | inputSchema, ...})         imported bare helper (v3)
 Identifiers are resolved through `const/let/var` declarations (file-local first, then unique
 across the package). Unresolvable values become OPAQUE; call callees keep only their last
 property name with trailing digits stripped, so bundler renames do not alter hashes.
@@ -276,6 +277,8 @@ def _str(v):
 
 def _from_call(r: Resolver, n: Node, ctx: FileCtx) -> list[ToolDef]:
     fn = n.child_by_field_name("function")
+    if fn is not None and fn.type == "identifier" and _text(fn) == "tool":
+        return _from_bare_tool(r, n, ctx)
     if fn is None or fn.type != "member_expression":
         return []
     prop = fn.child_by_field_name("property")
@@ -311,6 +314,24 @@ def _from_call(r: Resolver, n: Node, ctx: FileCtx) -> list[ToolDef]:
     desc = vals[0] if vals and isinstance(vals[0], str) else None
     shapes = [v for v in vals[1 if desc is not None else 0:] if isinstance(v, dict)]
     return [ToolDef(name, _str(desc), shapes[0] if shapes else None, "tool", ctx.rel)]
+
+
+def _from_bare_tool(r: Resolver, n: Node, ctx: FileCtx) -> list[ToolDef]:
+    """v3 fix C: an imported bare `tool("name", {description, input | inputSchema, ...})`.
+
+    The config must be an object with a description, so unrelated functions named `tool` do not match.
+    """
+    args_node = n.child_by_field_name("arguments")
+    args = [a for a in (args_node.named_children if args_node else []) if a.type != "comment"]
+    if len(args) < 2:
+        return []
+    name = _str(r.ev(args[0], ctx))
+    cfg = r.ev(args[1], ctx)
+    if not name or not isinstance(cfg, dict) or "description" not in cfg:
+        return []
+    schema = cfg.get("inputSchema", cfg.get("input"))
+    return [ToolDef(name, _str(cfg.get("description")), schema, "bare_tool", ctx.rel,
+                    {"title": _str(cfg.get("title"))})]
 
 
 def _from_object(r: Resolver, n: Node, ctx: FileCtx) -> ToolDef | None:

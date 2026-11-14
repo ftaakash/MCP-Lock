@@ -341,6 +341,10 @@ python -m census.rq1              results/census/phase2
 pytest
 ```
 
+The paper's numbers use extractor v2. `main` now carries extractor v3 (three more registration patterns; see
+[docs/EXTRACTOR_MISS_ANALYSIS.md](docs/EXTRACTOR_MISS_ANALYSIS.md)), so check out tag `extract-v2.1` (census) or
+`prereg-v1` (gate and evaluation) to reproduce the paper exactly.
+
 All HTTP responses are cached under `results/census/cache/` (not committed), so re-runs are
 offline and deterministic. Every result file has a sibling `*.provenance.json` with the command,
 commit, timestamp and input hashes.

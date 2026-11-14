@@ -170,9 +170,71 @@ def _kw(call: ast.Call, name: str):
     return None
 
 
+def _tool_decorator_name(fdef: ast.AST | None, idx: Index) -> str | None:
+    """Name set by a `@tool(name=...)` / `@x.tool("name")` decorator on fdef, if any (v3, fix E)."""
+    for dec in getattr(fdef, "decorator_list", []):
+        if isinstance(dec, ast.Call) and _callee_name(dec.func) in DECORATOR_ATTRS:
+            n = evaluate(_kw(dec, "name"), idx)
+            if (n is None or n == OPAQUE) and dec.args:
+                n = evaluate(dec.args[0], idx)
+            if isinstance(n, str) and n != OPAQUE:
+                return n
+    return None
+
+
+def _unique_func(idx: Index, name: str):
+    fdefs = idx.funcs.get(name, [])
+    return fdefs[0] if len(fdefs) == 1 else None
+
+
+def _is_tool_factory_call(node: ast.AST) -> bool:
+    """`x.tool(...)` used as a function: the inner call of `x.tool(...)(fn)` (v3, fix A)."""
+    return (isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute)
+            and node.func.attr in DECORATOR_ATTRS)
+
+
+def _call_form_tool(outer: ast.Call, fdef: ast.AST, idx: Index, rel: str) -> ToolDef:
+    inner = outer.func
+    n = evaluate(_kw(inner, "name"), idx)
+    if (n is None or n == OPAQUE) and inner.args:
+        n = evaluate(inner.args[0], idx)
+    name = n if isinstance(n, str) and n != OPAQUE else (
+        _tool_decorator_name(fdef, idx) or fdef.name)
+    d = evaluate(_kw(inner, "description"), idx)
+    desc = d if isinstance(d, str) and d != OPAQUE else ast.get_docstring(fdef)
+    return ToolDef(name, inspect.cleandoc(desc) if desc else None, signature_schema(fdef),
+                   "py_tool_call_form", rel)
+
+
+def _loop_elements(loop: ast.For, idx: Index) -> list[str]:
+    it = loop.iter
+    if isinstance(it, ast.Name):
+        it = idx.const(it.id)
+    if not isinstance(it, (ast.List, ast.Tuple)):
+        return []
+    return [e.id for e in it.elts if isinstance(e, ast.Name)]
+
+
 def extract_module(tree: ast.Module, idx: Index, rel: str) -> list[ToolDef]:
     tools: list[ToolDef] = []
     for node in ast.walk(tree):
+        # v3 fix A: x.tool(...)(fn), the call form of the decorator
+        if (isinstance(node, ast.Call) and _is_tool_factory_call(node.func) and len(node.args) == 1
+                and isinstance(node.args[0], ast.Name)):
+            fdef = _unique_func(idx, node.args[0].id)
+            if fdef is not None:
+                tools.append(_call_form_tool(node, fdef, idx, rel))
+        # v3 fix A: for t in [f, g, ...] (or a module constant list): x.tool(...)(t)
+        if isinstance(node, ast.For) and isinstance(node.target, ast.Name):
+            var = node.target.id
+            calls = [c for b in node.body for c in ast.walk(b)
+                     if isinstance(c, ast.Call) and _is_tool_factory_call(c.func)
+                     and len(c.args) == 1 and isinstance(c.args[0], ast.Name) and c.args[0].id == var]
+            if calls and _unique_func(idx, var) is None:
+                for el in _loop_elements(node, idx):
+                    fdef = _unique_func(idx, el)
+                    if fdef is not None:
+                        tools.append(_call_form_tool(calls[0], fdef, idx, rel))
         # Tool(name=..., description=..., inputSchema=...)
         if isinstance(node, ast.Call) and _callee_name(node.func) in TOOL_CTORS:
             name = evaluate(_kw(node, "name"), idx)
@@ -203,7 +265,8 @@ def extract_module(tree: ast.Module, idx: Index, rel: str) -> list[ToolDef]:
             n = evaluate(_kw(node, "name"), idx)
             d = evaluate(_kw(node, "description"), idx)
             desc = d if isinstance(d, str) and d != OPAQUE else ast.get_docstring(fdef)
-            tools.append(ToolDef(n if isinstance(n, str) and n != OPAQUE else fdef.name,
+            tools.append(ToolDef(n if isinstance(n, str) and n != OPAQUE else (
+                                     _tool_decorator_name(fdef, idx) or fdef.name),
                                  inspect.cleandoc(desc) if desc else None,
                                  signature_schema(fdef), "py_tool_call", rel))
         # @x.tool / @x.tool(...) (FastMCP style) and @wrapper / @wrapper(...) where the wrapper
@@ -236,9 +299,11 @@ def extract_module(tree: ast.Module, idx: Index, rel: str) -> list[ToolDef]:
             fn_ref = node.args[0]
             fname = fn_ref.id if isinstance(fn_ref, ast.Name) else None
             n = evaluate(_kw(node, "name"), idx)
-            name = n if isinstance(n, str) and n != OPAQUE else fname
             fdefs = idx.funcs.get(fname or "", [])
             fdef = fdefs[0] if len(fdefs) == 1 else None
+            # v3 fix E: add_tool(fn) where fn carries @tool(name="...")
+            name = n if isinstance(n, str) and n != OPAQUE else (
+                _tool_decorator_name(fdef, idx) or fname)
             d = evaluate(_kw(node, "description"), idx)
             desc = d if isinstance(d, str) and d != OPAQUE else (
                 ast.get_docstring(fdef) if fdef else None)

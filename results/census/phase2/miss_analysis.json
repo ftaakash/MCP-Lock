@@ -5,7 +5,7 @@
  "n_missed": 305,
  "by_category": {
   "A_py_call_form": {
-   "missed": 67,
+   "missed": 23,
    "servers": 3
   },
   "B1_nonstandard_schema_key": {
@@ -29,8 +29,8 @@
    "servers": 1
   },
   "F_not_in_source": {
-   "missed": 76,
-   "servers": 2
+   "missed": 120,
+   "servers": 3
   }
  },
  "servers": [
@@ -129,9 +129,9 @@
    "package": "mcp-ksef-pl",
    "version": "0.10.1",
    "n_runtime": 56,
-   "n_missed": 56,
+   "n_missed": 12,
    "category": "A_py_call_form",
-   "pattern": "mcp.tool()(fn) inside a register function"
+   "pattern": "mcp.tool()(fn) inside a register function (12 tools)"
   },
   {
    "ecosystem": "pypi",
@@ -159,6 +159,16 @@
    "n_missed": 2,
    "category": "A_py_call_form",
    "pattern": "mcp.tool(annotations=...)(fn)"
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "mcp-ksef-pl",
+   "version": "0.10.1",
+   "n_runtime": 56,
+   "n_missed": 44,
+   "category": "F_not_in_source",
+   "pattern": "register_peppol_*_tools imported from the dependency mcp_einvoicing_core (44 tools); found after the v3 fix"
   }
- ]
+ ],
+ "correction_2026_11_14": "mcp-ksef-pl was first put wholly in A; 44 of its 56 misses are defined in a dependency (F)."
 }
