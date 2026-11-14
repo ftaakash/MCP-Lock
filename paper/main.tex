@@ -10,11 +10,12 @@
 \usepackage{textcomp}
 \usepackage{xcolor}
 \usepackage{booktabs}
+\usepackage{pifont}
 \usepackage{multirow}
 \usepackage[hidelinks]{hyperref}
 \usepackage{xurl}
 \usepackage{tikz}
-\usetikzlibrary{positioning,arrows.meta,fit}
+\usetikzlibrary{positioning,arrows.meta,fit,shapes.geometric}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \input{numbers}
@@ -105,6 +106,14 @@ tool definitions for a stratified sample of \CensusSample{} (Section~\ref{sec:ce
 benign upgrades, with a kill rule fixed in advance (Section~\ref{sec:eval}).
 (iv)~An adaptive-attacker study with five hardening switches (D1--D5), each reported with its cost on benign upgrades
 (Section~\ref{sec:adaptive}). Code, data and the registration are public (Section~\ref{sec:artifact}).
+Fig.~\ref{fig:method} summarises the methodology.
+
+% ------------------------------------------------------------------------------------------------
+\input{sections/litreview}
+
+% ------------------------------------------------------------------------------------------------
+\input{sections/gap_objectives}
+\input{sections/fig_flowchart}
 
 % ------------------------------------------------------------------------------------------------
 \section{Background and Threat Model}
@@ -388,6 +397,9 @@ user re-locks. Suggesting a typosquat's target or a fixed version is existing pr
 every suggestion, including the rollback, is checked by the gate before the agent sees it.
 
 % ------------------------------------------------------------------------------------------------
+\input{sections/table_comparison}
+
+% ------------------------------------------------------------------------------------------------
 \section{Discussion and Limitations}
 \textbf{What the evidence supports.} Pinning catches real attacks that the name-and-source checks miss, but the
 confirmed gain is an install-script diff (S4), a classic supply-chain signal rather than an MCP-specific one. Re-applying
@@ -402,14 +414,10 @@ exists for. The \SfRealAlone{} real attacks that S5 alone detects both report re
 known tool-definition rug pull, so the evidence that S5 stops rug pulls comes from R-S and the adaptive cases. Provenance continuity is sound but rarely applicable: most
 packages have none, and attackers who remove their versions take the evidence with them.
 
-\textbf{Simpler alternatives (exploratory).} Two steps need no gate. Pinning the exact version in the MCP
-configuration prevents every class-C case (\PinRM{} of R-M) but holds back all \NB{} benign upgrades until the user
-edits the configuration. npm's \code{-{}-ignore-scripts} keeps the install-time code of up to \IgnRMP{} of npm R-M
-cases from running (an upper bound, since a payload may also run at launch) and skips an honest install script in
-\IgnBP{} of npm upgrades. Together with the baseline hook it covers \SCIgnP{} of npm R-M cases, about as many as
-\G{} (\GNpmP), so on real attacks most of \G's gain is available more cheaply. What \G{} adds is continuity of
-tool definitions and provenance, which the real attacks barely exercised, unattended upgrades when nothing changed,
-and a diff to review when something did.
+\textbf{Simpler alternatives (exploratory).} Section~\ref{sec:compare} shows that on npm real attacks the baseline
+hook with \code{-{}-ignore-scripts} catches about as many cases as \G. What \G{} adds is continuity of tool
+definitions and provenance, which the real attacks barely exercised, unattended upgrades when nothing changed, and a
+diff to review when something did.
 
 \textbf{Limits of a lock.} Every lock in this paper trusts the state at lock time and flags change. An attacker in the
 release pipeline (T3) produces change that is indistinguishable from an honest release, and a runtime pin can only
@@ -428,33 +436,6 @@ the same D2 verdict in \RtAgree{} cases and the same findings in \RtSame, with E
 range.
 
 % ------------------------------------------------------------------------------------------------
-\section{Related Work}
-\textbf{MCP security.} Surveys and taxonomies describe tool poisoning, rug pulls and malicious
-servers~\cite{hou2025mcp,zhao2025attack}, and practitioners described the rug-pull pattern early on~\cite{invariant2025poisoning}.
-Hasan et al.\ analyse the security and maintainability of open-source servers~\cite{hasan2025glance}. Closest to RQ1,
-Kraishan measures drift of the fields the MCP registry versions (descriptions, packages, endpoints) across 8,900
-multi-version servers and notes that tool definitions are not versioned there~\cite{kraishan2026drift}; we measure the
-tool definitions themselves from package archives, and build the client-side pinning that work recommends. Metere
-proposes signed admission and per-server tool allowlists for remote servers~\cite{metere2026attested}, and ETDI signed,
-versioned tool definitions~\cite{bhatt2025etdi}; MCP-Lock instead needs no change to servers or registries.
-
-\textbf{Tool pinning.} Pinning tool definitions is established practice. MCP-Scan hashes tool descriptions to detect
-rug pulls~\cite{invariant2025mcpscan}, and open-source proxies pin each tool's definition in a committed lockfile and
-block a changed listing; one also records the package version and registry digest~\cite{mcppin,mcpseal}. These tools
-start the server to read its tools. MCP-Lock's S5 reads them from the archive before launch, combines them with
-provenance, publisher and install-script continuity, and is evaluated on real attacks and benign upgrades; our runtime
-proxy (D2) follows the existing design.
-
-\textbf{Agent supply chains.} Bagmar and Saraf weaponise setup instructions against coding agents and propose the
-pre-install hook we use as baseline~\cite{bagmar2026setup}. Kapner et al.\ scan agent configurations and report unpinned
-MCP declarations~\cite{kapner2026harness}. Shan finds in a pre-registered audit that coding assistants almost never
-check trust signals before installing~\cite{shan2026check}, which motivates a gate that checks on their behalf.
-
-\textbf{Package supply chains.} Attack catalogues~\cite{ohm2020backstabber,ladisa2023sok} and ecosystem
-studies~\cite{zimmermann2019small,zahan2022weak} document account takeover and install-script abuse, the patterns behind
-S3 and S4. Sigstore~\cite{newman2022sigstore}, SLSA~\cite{slsa2023provenance} and PEP~740~\cite{pep740} make build
-identity verifiable; MCP-Lock uses that identity for continuity rather than for absolute trust.
-
 % ------------------------------------------------------------------------------------------------
 \section{Conclusion}
 MCP servers change the tools they present to models often, and nothing in their metadata says so. A lock that pins

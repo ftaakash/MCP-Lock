@@ -1,4 +1,4 @@
-% Section II: literature review (2022--2026). Replaces the "Related Work" section at the restructure.
+% Section II: literature review (2022--2026). Included in main.tex after the introduction.
 \section{Literature Review}
 \label{sec:lit}
 
@@ -16,7 +16,8 @@ provenance~\cite{npmprovenance} and PEP~740~\cite{pep740} let a consumer check w
 repository. Adoption depends on registry policy: Schorlemmer et al.\ find that 0.2\% of PyPI artifacts were signed in
 2023, before PEP~740 attestations, and that mandates raise the number of signatures while dedicated tooling raises their
 quality~\cite{schorlemmer2024signing}. Provenance tells who built a release; it does not say whether the builder changed
-since the last version a user accepted.
+since the last version a user accepted. MCP-Lock uses build identity for that continuity check, not as proof that a
+release is safe.
 
 \textbf{Lockfiles.} Gamage et al.\ compare the lockfiles of seven package managers. Most record versions and checksums,
 and npm and Cargo also record a source link~\cite{gamage2025lockfiles}; publisher identity, install scripts and the
@@ -31,14 +32,15 @@ manifests~\cite{gaire2025sok}. Huang et al.\ test tool poisoning on seven MCP cl
 validate tool metadata statically; they recommend signed, immutable tool definitions and checks at
 registration~\cite{huang2026toolpoison}. Hasan et al.\ study the security and maintainability of open-source
 servers~\cite{hasan2025glance}. Kraishan measures drift of the fields the MCP registry versions across 8,900
-multi-version servers and notes that tool definitions are not versioned there~\cite{kraishan2026drift}. Metere
+multi-version servers, notes that tool definitions are not versioned there, and recommends client-side
+pinning~\cite{kraishan2026drift}; we measure the tool definitions themselves and build that pinning. Metere
 proposes signed admission with per-server tool allowlists~\cite{metere2026attested}, and ETDI signed, versioned tool
 definitions~\cite{bhatt2025etdi}; both need servers or registries to change.
 
 \textbf{Tool pinning.} MCP-Scan hashes tool descriptions to detect rug pulls~\cite{invariant2025mcpscan}, and
 open-source proxies pin each tool's definition in a committed lockfile and block a changed listing; one also records the
 package version and registry digest~\cite{mcppin,mcpseal}. All of them start the server to read its tools, and none
-reports an evaluation on real attacks.
+reports an evaluation on real attacks. Our runtime proxy (D2, Section~\ref{sec:adaptive}) follows their design.
 
 \textbf{Agent supply chains.} Bagmar and Saraf weaponise setup instructions against coding agents and propose a
 pre-install hook that checks names, sources and package age~\cite{bagmar2026setup}; it is our baseline. Kapner et al.\

@@ -1,9 +1,9 @@
 % Table V: performance comparison with existing methods. Every cell is a macro from numbers.tex.
-% Section VIII at the restructure.
+% Included in main.tex as the comparison section.
 \section{Performance Comparison with Existing Methods}
 \label{sec:compare}
 Table~\ref{tab:compare} puts MCP-Lock next to the baseline hook in both readings and next to two steps that need no gate,
-all on the corpora of Section~V. On npm real attacks, the baseline hook plus \code{-{}-ignore-scripts} detects about as
+all on the corpora of Section~\ref{sec:eval}. On npm real attacks, the baseline hook plus \code{-{}-ignore-scripts} detects about as
 many cases as \G{} (\SCIgnP{} vs.\ \GNpmP), so most of \G's gain on real attacks is available more cheaply. The hook
 detects none of the synthetic rug pulls (\RSSC) and \G{} detects all of them (\RSG). Exact version pinning
 prevents every attack on an existing package (\PinRMP{} of R-M) and, by construction, every rug pull, but only by
@@ -13,7 +13,7 @@ nothing it checks has changed. We did not replay \code{-{}-ignore-scripts} on th
 \begin{table}[t]
 \caption{Comparison with existing methods.\\
 \textmd{R: real attacks ($n=\NR$); R-S: synthetic rug pulls; B: benign upgrades ($n=\NB$). npm columns use the npm
-cases of R-M. Wilson 95\% CIs in Section~V. -- not applicable.}}
+cases of R-M. Wilson 95\% CIs in Section~\ref{sec:eval}. -- not applicable.}}
 \label{tab:compare}
 \centering
 \footnotesize
