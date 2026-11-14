@@ -1,0 +1,18 @@
+{
+  "result": "results/census/a1/extractions.jsonl",
+  "result_sha256": "23c1d8e2132cdf1cb4f5c11050b1abb3a5bc0c1ee986e5811e3a1b72ceba66c1",
+  "command": "python.exe C:\\Users\\Administrator\\Desktop\\Major Project\\mcp-lock\\census\\run_extract.py results/census/a1/versions.jsonl --stream",
+  "commit": "84972ca8b21091d303bad8eab142018025dbccfc-dirty",
+  "timestamp_utc": "2026-11-14T14:27:42Z",
+  "python": "3.11.9",
+  "inputs": {
+    "results/census/a1/versions.jsonl": "f3cde44b3d2b66a641839c9deeca667e646832c5c18a81ec5878b3602da02f64"
+  },
+  "params": {
+    "status_counts": {
+      "ok": 3585
+    },
+    "suspicious_versions": 27
+  },
+  "note": ""
+}

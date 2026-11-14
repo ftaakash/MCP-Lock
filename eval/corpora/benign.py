@@ -226,6 +226,12 @@ def cmd_bundle(out: Path, workers: int) -> None:
             f"{tr['a']['version']}->{tr['b']['version']}" not in done]
     print(f"{len(done)} done, {len(todo)} to build")
     errors = []
+
+    def cache_size():
+        return sum(p.stat().st_size for p in tarballs.TARBALLS.rglob("*") if p.is_file())
+    # A1 (DEVIATIONS A1-1): the shared tarball cache already holds the Phase 2/4 downloads, so the 5 GB stop
+    # rule counts only what this run adds
+    start = cache_size() if a1.ACTIVE else 0
     with open(part, "a", encoding="utf-8") as f, ThreadPoolExecutor(workers) as pool:
         futs = {pool.submit(build_bundle, tr): tr for tr in todo}
         for i, fut in enumerate(as_completed(futs), 1):
@@ -237,9 +243,9 @@ def cmd_bundle(out: Path, workers: int) -> None:
                 errors.append({"package": tr["package"], "stratum": tr["stratum"],
                                "error": f"{type(e).__name__}: {e}"})
             if i % 200 == 0:
-                size = sum(p.stat().st_size for p in tarballs.TARBALLS.rglob("*") if p.is_file())
+                size = cache_size() - start
                 print(f"{i}/{len(todo)} built, {len(errors)} errors, tarball cache "
-                      f"{size / 1024 ** 3:.2f} GB", flush=True)
+                      f"{'growth ' if a1.ACTIVE else ''}{size / 1024 ** 3:.2f} GB", flush=True)
                 if size > MAX_BYTES:
                     pool.shutdown(cancel_futures=True)
                     raise SystemExit("tarball cache above 5 GB: stopping to ask (PREREG §7)")
