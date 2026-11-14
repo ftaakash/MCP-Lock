@@ -24,3 +24,4 @@ results/census/phase2/extractions.jsonl
 results/**/bundles.part.jsonl
 results/candidate/phase4/synthetic/work/
 results/candidate/phase4/runs/B.jsonl
+results/census/cache_a1/
