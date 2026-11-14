@@ -1,0 +1,13 @@
+extract: 300/3585 versions
+extract: 600/3585 versions
+extract: 900/3585 versions
+extract: 1200/3585 versions
+extract: 1500/3585 versions
+extract: 1800/3585 versions
+extract: 2100/3585 versions
+extract: 2400/3585 versions
+extract: 2700/3585 versions
+extract: 3000/3585 versions
+extract: 3300/3585 versions
+extract: 3585/3585 versions
+extract: {'ok': 3585}; suspicious versions: 27 -> results\census\a1\extractions.jsonl

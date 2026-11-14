@@ -1,0 +1,17 @@
+{
+  "result": "/out/bundles.jsonl.gz",
+  "result_sha256": "c9c782c252c1623f736118ec1f276b90e158c6e3a8a1c4dcfdba41f2568b2753",
+  "command": "python /repo/eval/corpora/malicious.py assemble --data /data --out /out",
+  "commit": "unknown",
+  "timestamp_utc": "2026-11-14T14:59:37Z",
+  "python": "3.11.9",
+  "inputs": {
+    "/out/mal_sample.jsonl.gz": "891ad86923014268efcd74c77ddc67367c1da96f3fe4d6a371f68878be637d35"
+  },
+  "params": {
+    "seed": 20261114,
+    "osv_commit": "016024d631828d2b6827bee160888f7205e42635",
+    "datadog_commit": "72c723be547033c558244520524b117c8d71663b"
+  },
+  "note": ""
+}

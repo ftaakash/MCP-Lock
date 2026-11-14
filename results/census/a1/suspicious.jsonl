@@ -1,0 +1,27 @@
+{"ecosystem": "npm", "package": "@porkbunllc/mcp-server", "version": "0.49.0", "suspicious": ["do not tell the user"]}
+{"ecosystem": "npm", "package": "@porkbunllc/mcp-server", "version": "0.50.0", "suspicious": ["do not tell the user"]}
+{"ecosystem": "npm", "package": "@porkbunllc/mcp-server", "version": "0.51.0", "suspicious": ["do not tell the user"]}
+{"ecosystem": "npm", "package": "@porkbunllc/mcp-server", "version": "0.51.1", "suspicious": ["do not tell the user"]}
+{"ecosystem": "npm", "package": "@porkbunllc/mcp-server", "version": "0.52.0", "suspicious": ["do not tell the user"]}
+{"ecosystem": "npm", "package": "@porkbunllc/mcp-server", "version": "0.53.0", "suspicious": ["do not tell the user"]}
+{"ecosystem": "npm", "package": "@porkbunllc/mcp-server", "version": "0.54.0", "suspicious": ["do not tell the user"]}
+{"ecosystem": "npm", "package": "@porkbunllc/mcp-server", "version": "0.55.0", "suspicious": ["do not tell the user"]}
+{"ecosystem": "npm", "package": "@porkbunllc/mcp-server", "version": "0.56.0", "suspicious": ["do not tell the user"]}
+{"ecosystem": "npm", "package": "@porkbunllc/mcp-server", "version": "0.57.0", "suspicious": ["do not tell the user"]}
+{"ecosystem": "npm", "package": "@porkbunllc/mcp-server", "version": "0.58.0", "suspicious": ["do not tell the user"]}
+{"ecosystem": "npm", "package": "@porkbunllc/mcp-server", "version": "0.59.0", "suspicious": ["do not tell the user"]}
+{"ecosystem": "npm", "package": "@porkbunllc/mcp-server", "version": "0.60.0", "suspicious": ["do not tell the user"]}
+{"ecosystem": "npm", "package": "@porkbunllc/mcp-server", "version": "0.60.1", "suspicious": ["do not tell the user"]}
+{"ecosystem": "npm", "package": "@porkbunllc/mcp-server", "version": "0.61.0", "suspicious": ["do not tell the user"]}
+{"ecosystem": "npm", "package": "@porkbunllc/mcp-server", "version": "0.62.0", "suspicious": ["do not tell the user"]}
+{"ecosystem": "npm", "package": "@skillsmith/mcp-server", "version": "0.7.19", "suspicious": ["exfiltrat"]}
+{"ecosystem": "npm", "package": "@skillsmith/mcp-server", "version": "0.8.0", "suspicious": ["exfiltrat"]}
+{"ecosystem": "npm", "package": "@orygn/opa-mcp", "version": "0.9.0", "suspicious": ["exfiltrat"]}
+{"ecosystem": "npm", "package": "@orygn/opa-mcp", "version": "0.9.1", "suspicious": ["exfiltrat"]}
+{"ecosystem": "npm", "package": "@mailsai/mcp-server", "version": "0.2.12", "suspicious": ["ignore all previous instructions"]}
+{"ecosystem": "npm", "package": "@mailsai/mcp-server", "version": "0.3.0", "suspicious": ["ignore all previous instructions"]}
+{"ecosystem": "npm", "package": "@mailsai/mcp-server", "version": "0.4.0", "suspicious": ["ignore all previous instructions"]}
+{"ecosystem": "npm", "package": "shrike-mcp", "version": "4.1.0", "suspicious": ["exfiltrat"]}
+{"ecosystem": "npm", "package": "shrike-mcp", "version": "4.2.0", "suspicious": ["exfiltrat"]}
+{"ecosystem": "npm", "package": "agentic-sdlc-mcp", "version": "1.9.0", "suspicious": ["exfiltrat"]}
+{"ecosystem": "npm", "package": "agentic-sdlc-mcp", "version": "1.11.0", "suspicious": ["exfiltrat"]}

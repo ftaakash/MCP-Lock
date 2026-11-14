@@ -71,3 +71,9 @@ by package with seed 20261114), for S1-L, S1-C, G and G-X.
 ## 5. Stop rules
 
 As `PREREG.md` §7. Downloads above 5 GB or runs longer than 12 h are asked about first.
+
+---
+
+**Filing record.** Filed on OSF as an update to osf.io/2amj3 on 2026-11-15, before any scored run. Every section's text
+was added to the original answers. The PDF could not be attached in the update form, so the context section links to
+this file at commits `bb70a6a` (text) and `3c836ec` (PDF). The update may show as pending until OSF approves it.

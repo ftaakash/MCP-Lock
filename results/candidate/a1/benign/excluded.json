@@ -1,0 +1,4230 @@
+{
+ "npm-top": [
+  {
+   "package": "debug",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "ansi-styles",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "brace-expansion",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "strip-ansi",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "ms",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "supports-color",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "chalk",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "lru-cache",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "string-width",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "wrap-ansi",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "picomatch",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "emoji-regex",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "type-fest",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "color-name",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "eslint-visitor-keys",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "color-convert",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "ajv",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "minipass",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "source-map",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "readable-stream",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "which",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "glob-parent",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "escape-string-regexp",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "has-flag",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "find-up",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "locate-path",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "json-schema-traverse",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "p-limit",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "yallist",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "safe-buffer",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "p-locate",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "iconv-lite",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "signal-exit",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "esbuild",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "is-fullwidth-code-point",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "isexe",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "isarray",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "path-key",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "string_decoder",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "mime-db",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "agent-base",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@esbuild/linux-x64",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "yargs-parser",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "mime-types",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "acorn",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "estraverse",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "cross-spawn",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "picocolors",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "fs-extra",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "hasown",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "nanoid",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "yargs",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "resolve-from",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "shebang-command",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "pretty-format",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "json5",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "https-proxy-agent",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "path-exists",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "punycode",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "js-tokens",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "cliui",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "shebang-regex",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "strip-json-comments",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "inherits",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "webidl-conversions",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "get-stream",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "eslint-scope",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "is-number",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "tr46",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "convert-source-map",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "is-glob",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "braces",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "fast-deep-equal",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "form-data",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "lodash",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@babel/helper-validator-identifier",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "fill-range",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "function-bind",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "readdirp",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "escalade",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "graceful-fs",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "negotiator",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "is-stream",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "yocto-queue",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "to-regex-range",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "node-fetch",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "micromatch",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "get-intrinsic",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "universalify",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "jsesc",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "es-errors",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "statuses",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "is-extglob",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@jridgewell/trace-mapping",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@jridgewell/resolve-uri",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "http-errors",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "onetime",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "has-symbols",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "es-define-property",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "gopd",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "util-deprecate",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "object-assign",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "jiti",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "yaml",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@babel/template",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "imurmurhash",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "fast-glob",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "update-browserslist-db",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@babel/compat-data",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "eventemitter3",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "callsites",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "http-proxy-agent",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "detect-libc",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "espree",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "concat-map",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "source-map-js",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "tinyglobby",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "call-bind-apply-helpers",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "flat-cache",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "fdir",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "pify",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@jest/types",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "normalize-path",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "minimist",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "estree-walker",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "file-entry-cache",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "object-inspect",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "buffer",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "uri-js",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "import-fresh",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "optionator",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "flatted",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "math-intrinsics",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "safer-buffer",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "y18n",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@babel/helper-module-imports",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "mkdirp",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "dunder-proto",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "path-parse",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "fastq",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "levn",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@babel/helper-compilation-targets",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "keyv",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "get-proto",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "csstype",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "npm-run-path",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "fast-json-stable-stringify",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "reusify",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@babel/helper-plugin-utils",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "kind-of",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "lines-and-columns",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "fast-levenshtein",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "supports-preserve-symlinks-flag",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "make-dir",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "slash",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "prelude-ls",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "typescript",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "strip-bom",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "parent-module",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "esutils",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "ci-info",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@smithy/util-utf8",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "type-check",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "mimic-fn",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@babel/helper-validator-option",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@types/json-schema",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@rolldown/pluginutils",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "side-channel-list",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "json-buffer",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "raw-body",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "has-tostringtag",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "wrappy",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "diff",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "jackspeak",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "deep-is",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "foreground-child",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@eslint/js",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "anymatch",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "natural-compare",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "esquery",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@eslint-community/regexpp",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "es-set-tostringtag",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "acorn-jsx",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "finalhandler",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "parse-json",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "depd",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "run-parallel",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "source-map-support",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "esrecurse",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "call-bound",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "content-disposition",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "human-signals",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "ts-api-utils",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "ansi-escapes",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "jest-util",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "send",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "type-is",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "once",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "cosmiconfig",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "lodash.merge",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "json-stable-stringify-without-jsonify",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "open",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@eslint/eslintrc",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "is-arrayish",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@jridgewell/sourcemap-codec",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "gensync",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "word-wrap",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "arg",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "jsonfile",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@smithy/is-array-buffer",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "chownr",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "delayed-stream",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@smithy/util-buffer-from",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "asynckit",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "tapable",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "aria-query",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "indent-string",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "bytes",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "binary-extensions",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "ini",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "doctrine",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "queue-microtask",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "accepts",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "merge2",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "get-caller-file",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@humanwhocodes/retry",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@jridgewell/gen-mapping",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "jest-worker",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "proxy-from-env",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "clsx",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "side-channel-map",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "fresh",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "restore-cursor",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "is-plain-obj",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "ipaddr.js",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "pathe",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@jest/schemas",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "base64-js",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "require-directory",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "is-binary-path",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "postcss-value-parser",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "media-typer",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "setprototypeof",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "side-channel-weakmap",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@isaacs/cliui",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "is-wsl",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "retry",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@types/react-dom",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "combined-stream",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "es-object-atoms",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@eslint/core",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "whatwg-mimetype",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "domutils",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "core-util-is",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "esprima",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "loose-envify",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "cookie-signature",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "cli-cursor",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "strip-final-newline",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "eastasianwidth",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "json-parse-even-better-errors",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "sprintf-js",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "path-type",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "content-type",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@nodelib/fs.scandir",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "write-file-atomic",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@eslint/plugin-kit",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "ieee754",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "prop-types",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "require-from-string",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "dom-serializer",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "call-bind",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@eslint/config-array",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "has-property-descriptors",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@nodelib/fs.stat",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "merge-descriptors",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "rxjs",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "toidentifier",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "globby",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "domhandler",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "async",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@babel/helper-globals",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "pirates",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "date-fns",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "is-docker",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "tar",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "which-typed-array",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "ajv-formats",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@opentelemetry/api-logs",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "side-channel",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "cjs-module-lexer",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "range-parser",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@humanfs/node",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "define-data-property",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "node-addon-api",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "fs.realpath",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@img/sharp-libvips-linuxmusl-x64",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "cssesc",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "domelementtype",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "hosted-git-info",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@eslint/object-schema",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "etag",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@eslint/config-helpers",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "package-json-from-dist",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@humanfs/core",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "htmlparser2",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "jest-message-util",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "for-each",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "pkg-dir",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "unpipe",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "buffer-from",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "es-abstract",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "is-unicode-supported",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@types/yargs",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "is-callable",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "istanbul-lib-instrument",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "escape-html",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "is-regex",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "dom-accessibility-api",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "css-tree",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "error-ex",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "ee-first",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@types/unist",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "log-symbols",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "path-is-absolute",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "end-of-stream",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "object.assign",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "object-keys",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "tinyexec",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "scheduler",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "p-try",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "process-nextick-args",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "vary",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@pkgjs/parseargs",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@types/babel__generator",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "kleur",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "merge-stream",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "available-typed-arrays",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "mute-stream",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "is-typed-array",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "safe-regex-test",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "tsconfig-paths",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "minizlib",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "tar-stream",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@floating-ui/core",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "deepmerge",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "get-tsconfig",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "set-function-length",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "css-select",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@types/babel__core",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "forwarded",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "ajv-keywords",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "define-properties",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "is-generator-function",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "regexp.prototype.flags",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "acorn-walk",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "pump",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "data-uri-to-buffer",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "object-hash",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "nopt",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@babel/plugin-syntax-jsx",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@floating-ui/dom",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "tiny-invariant",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "strip-indent",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "chai",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@babel/code-frame",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "proxy-addr",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "parseurl",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@floating-ui/utils",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "html-encoding-sniffer",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "whatwg-encoding",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "events",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "env-paths",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "internal-slot",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "string.prototype.trimend",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "extend",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "resolve-pkg-maps",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "istanbul-lib-coverage",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "is-number-object",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "is-plain-object",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "string.prototype.trimstart",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@babel/plugin-syntax-typescript",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "jest-diff",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "define-lazy-prop",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "globalthis",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "which-boxed-primitive",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "sax",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@floating-ui/react-dom",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "internmap",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@radix-ui/react-compose-refs",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "is-symbol",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@eslint-community/eslint-utils",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "serve-static",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "get-symbol-description",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "is-shared-array-buffer",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "functions-have-names",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "array-buffer-byte-length",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "socks-proxy-agent",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "extend-shallow",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@radix-ui/react-use-layout-effect",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "function.prototype.name",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "is-bigint",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "is-string",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "tmp",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "is-date-object",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "lightningcss-linux-x64-musl",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "proc-log",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "long",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@opentelemetry/sdk-trace-base",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "nth-check",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@types/babel__template",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "jest-regex-util",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "jest-mock",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "socks",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "lightningcss",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "assertion-error",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "es-to-primitive",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "tinyrainbow",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "possible-typed-array-names",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "figures",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "xml-name-validator",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "any-promise",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "terser",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "std-env",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "is-array-buffer",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "safe-array-concat",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "data-urls",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "set-function-name",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "css-what",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "typed-array-length",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "typed-array-byte-offset",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "thenify",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "mz",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "react-remove-scroll",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@radix-ui/react-id",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "is-weakset",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "is-boolean-object",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@alloc/quick-lru",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "html-escaper",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "has-bigints",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "lightningcss-linux-x64-gnu",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@radix-ui/react-presence",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "w3c-xmlserializer",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "istanbul-reports",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@babel/helper-annotate-as-pure",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "typed-array-buffer",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@nodelib/fs.walk",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "sharp",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "arraybuffer.prototype.slice",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "has-proto",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "lodash.isplainobject",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "is-weakref",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "istanbul-lib-report",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "postcss-load-config",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "define-property",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@sinonjs/fake-timers",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "clone",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "normalize-package-data",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "colorette",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "is-negative-zero",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "unbox-primitive",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "data-view-byte-length",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "data-view-buffer",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "regenerator-runtime",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "is-set",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "saxes",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "decimal.js",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "dequal",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "which-collection",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "cli-width",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "data-view-byte-offset",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "is-map",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "is-path-inside",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "xtend",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "is-finalizationregistry",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "xmlbuilder",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@sinclair/typebox",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "is-async-function",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "tsx",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "jwa",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@types/express-serve-static-core",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "thenify-all",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@jridgewell/remapping",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "abbrev",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "type-detect",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "loader-utils",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "mimic-response",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "string.prototype.trim",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "fraction.js",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "ast-types",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "which-builtin-type",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "array-includes",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@bcoe/v8-coverage",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "expect",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@types/d3-shape",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@smithy/protocol-http",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "cli-spinners",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@types/d3-time",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@types/d3-color",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "sucrase",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "typed-array-byte-length",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "aria-hidden",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "escodegen",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@types/d3-array",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "bn.js",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "split2",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "http-cache-semantics",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "utils-merge",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "buffer-crc32",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "boolbase",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@types/d3-path",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@ungap/structured-clone",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "react-remove-scroll-bar",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@types/send",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "mdn-data",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "cors",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@types/express",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "is-weakmap",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "reflect.getprototypeof",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "jest-haste-map",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "eslint-config-prettier",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "neo-async",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "array-union",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "ssri",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@types/d3-interpolate",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@babel/helper-replace-supers",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "stop-iteration-iterator",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "istanbul-lib-source-maps",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "dedent",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "is-data-view",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "redent",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "is-promise",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "object.values",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@istanbuljs/schema",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@sindresorhus/is",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "own-keys",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@jest/fake-timers",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "safe-push-apply",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "cssstyle",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "destroy",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@jest/transform",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "react-transition-group",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@babel/helper-member-expression-to-functions",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "ts-interface-checker",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "dom-helpers",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@img/sharp-linux-x64",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "isobject",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "array.prototype.flatmap",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@types/ws",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "es-shim-unscopables",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "array.prototype.flat",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@babel/plugin-syntax-import-attributes",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@emnapi/runtime",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@types/chai",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@types/prop-types",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@types/d3-ease",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@jest/environment",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "jest-matcher-utils",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "symbol-tree",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "detect-node-es",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "test-exclude",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "dlv",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@smithy/property-provider",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "xmlchars",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@smithy/util-middleware",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "shell-quote",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "smart-buffer",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "set-proto",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "graphemer",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "is-extendable",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "get-nonce",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "is-potential-custom-element-name",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@types/d3-timer",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@smithy/querystring-builder",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "inflight",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@radix-ui/react-use-size",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "leven",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "read-cache",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@types/ms",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "setimmediate",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "read-pkg",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@smithy/smithy-client",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "methods",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@sinonjs/commons",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "object.entries",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "babel-jest",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@types/serve-static",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "is-interactive",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "event-target-shim",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "jest-get-type",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "postcss-js",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "class-variance-authority",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@jest/console",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@radix-ui/react-use-previous",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "pure-rand",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "object.fromentries",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "babel-plugin-istanbul",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "dir-glob",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "siginfo",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "jest-validate",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@smithy/middleware-endpoint",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "babel-plugin-polyfill-corejs3",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@types/istanbul-lib-coverage",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "babel-plugin-jest-hoist",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "async-function",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "array-flatten",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "didyoumean",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "get-east-asian-width",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@smithy/shared-ini-file-loader",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "dayjs",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "recharts",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@jest/test-result",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@radix-ui/rect",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@octokit/types",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@babel/plugin-transform-react-jsx-source",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@tootallnate/once",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@protobufjs/utf8",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@protobufjs/codegen",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@radix-ui/number",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@types/qs",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "jest-environment-node",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@protobufjs/inquire",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@babel/plugin-transform-modules-commonjs",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "ansi-colors",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "jest-resolve",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@smithy/util-base64",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "cssom",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@smithy/credential-provider-imds",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "ecdsa-sig-formatter",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "eslint-import-resolver-node",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "camelcase-css",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@smithy/middleware-serde",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@types/yargs-parser",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@babel/helper-optimise-call-expression",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "process",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@smithy/url-parser",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@noble/hashes",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "jest-snapshot",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@smithy/middleware-stack",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "eslint-plugin-import",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@testing-library/dom",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@csstools/css-tokenizer",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@smithy/util-retry",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@smithy/service-error-classification",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@types/react",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "jest-docblock",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "sisteransi",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@smithy/querystring-parser",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "lie",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@smithy/util-stream",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@colors/colors",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "requires-port",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "string-length",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@smithy/node-config-provider",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@octokit/openapi-types",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "diff-sequences",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@smithy/util-uri-escape",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@types/istanbul-reports",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "tar-fs",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "expect-type",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "is-buffer",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@testing-library/jest-dom",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@types/deep-eql",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "terser-webpack-plugin",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "babel-preset-jest",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@smithy/middleware-retry",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@smithy/util-hex-encoding",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "eslint-plugin-react",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "prompts",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@types/body-parser",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "find-cache-dir",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "unist-util-is",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "make-fetch-happen",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "chardet",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "jest-watcher",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "jws",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "stack-utils",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "is-obj",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@types/range-parser",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "jest-runtime",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@smithy/util-endpoints",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "rfdc",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "unist-util-stringify-position",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "import-local",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@smithy/util-defaults-mode-node",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "node-gyp",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "string.prototype.matchall",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "micromark-util-symbol",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "color",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "decimal.js-light",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "nwsapi",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "abort-controller",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "spdx-expression-parse",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@protobufjs/eventemitter",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "jest",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "jsonwebtoken",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@jest/reporters",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@protobufjs/fetch",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "unique-filename",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "make-error",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "color-string",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "glob-to-regexp",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "bluebird",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "ts-node",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@smithy/hash-node",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "is-descriptor",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "psl",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "wordwrap",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "jest-cli",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@csstools/css-calc",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "resolve-cwd",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@types/json5",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@csstools/css-parser-algorithms",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@jest/globals",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@protobufjs/aspromise",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@img/sharp-linuxmusl-x64",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@jest/expect-utils",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "fflate",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "get-package-type",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@types/hast",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "jest-leak-detector",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@types/istanbul-lib-report",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@types/mdast",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "pathval",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "node-int64",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@babel/helper-define-polyfill-provider",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "loupe",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "char-regex",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "jest-runner",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "eslint-module-utils",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "decompress-response",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "uglify-js",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@smithy/util-defaults-mode-browser",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "jest-circus",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "micromark-util-character",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "lz-string",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "min-indent",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@babel/plugin-syntax-numeric-separator",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@babel/plugin-syntax-optional-catch-binding",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "deep-eql",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@babel/plugin-syntax-top-level-await",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@babel/plugin-syntax-nullish-coalescing-operator",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "zod-to-json-schema",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "progress",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@smithy/util-body-length-browser",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@babel/plugin-transform-parameters",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@jest/source-map",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "immediate",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@babel/plugin-syntax-object-rest-spread",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@smithy/config-resolver",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@babel/plugin-syntax-logical-assignment-operators",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@protobufjs/pool",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "jest-changed-files",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@babel/plugin-syntax-json-strings",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@csstools/color-helpers",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "webpack-virtual-modules",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "jest-resolve-dependencies",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "through",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "util",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "micromark-util-types",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "cacache",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@types/stack-utils",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@emnapi/wasi-threads",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "axobject-query",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@pkgr/core",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "arrify",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@babel/plugin-transform-computed-properties",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "array.prototype.findlastindex",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@babel/plugin-transform-for-of",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "@emnapi/core",
+   "reason": "no stable release in the A1 window"
+  }
+ ],
+ "pypi-top": [
+  {
+   "package": "packaging",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "typing-extensions",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "idna",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "urllib3",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "requests",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "charset-normalizer",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "cryptography",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "cffi",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "pygments",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "pyyaml",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "six",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "iniconfig",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "annotated-types",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "h11",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "attrs",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "protobuf",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "httpx",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "markupsafe",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "httpcore",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "python-dotenv",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "pyjwt",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "fsspec",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "jinja2",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "jmespath",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "pathspec",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "uvicorn",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "jsonschema",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "rpds-py",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "yarl",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "rich",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "markdown-it-py",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "propcache",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "referencing",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "jsonschema-specifications",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "mdurl",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "frozenlist",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "tqdm",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "aiosignal",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "aiohappyeyeballs",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "annotated-doc",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "sniffio",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "greenlet",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "wheel",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "tenacity",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "trove-classifiers",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "pyasn1-modules",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "pyparsing",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "lxml",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "watchfiles",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "s3fs",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "scipy",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "beautifulsoup4",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "opentelemetry-semantic-conventions",
+   "reason": "fewer than 2 stable versions"
+  },
+  {
+   "package": "psutil",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "openpyxl",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "et-xmlfile",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "tomli",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "distro",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "shellingham",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "colorama",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "proto-plus",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "requests-oauthlib",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "exceptiongroup",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "mcp",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "editables",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "sortedcontainers",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "uvloop",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "docstring-parser",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "psycopg2-binary",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "pytest-cov",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "redis",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "networkx",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "defusedxml",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "requests-toolbelt",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "rsa",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "werkzeug",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "scikit-learn",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "prompt-toolkit",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "mako",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "orjson",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "tiktoken",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "pyopenssl",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "isodate",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "cloudpickle",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "pynacl",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "websocket-client",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "joblib",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "matplotlib",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "email-validator",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "azure-core",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "itsdangerous",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "google-cloud-core",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "zstandard",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "httpx-sse",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "kiwisolver",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "dill",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "ruamel-yaml",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "bcrypt",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "identify",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "tabulate",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "opentelemetry-instrumentation",
+   "reason": "fewer than 2 stable versions"
+  },
+  {
+   "package": "smmap",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "msal",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "cfgv",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "keyring",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "h2",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "hpack",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "gitdb",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "decorator",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "hyperframe",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "jaraco-classes",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "jaraco-functools",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "jeepney",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "cycler",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "secretstorage",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "toml",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "jaraco-context",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "google-crc32c",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "contourpy",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "google-resumable-media",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "docutils",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "pytest-xdist",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "execnet",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "flask",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "prometheus-client",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "asn1crypto",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "backoff",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "docker",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "sympy",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "uritemplate",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "blinker",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "ptyprocess",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "mpmath",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "google-api-python-client",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "pexpect",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "librt",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "google-auth-httplib2",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "pytest-json-ctrf",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "async-timeout",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "multiprocess",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "aiofiles",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "rapidfuzz",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "traitlets",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "webencodings",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "google-auth-oauthlib",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "opentelemetry-util-http",
+   "reason": "fewer than 2 stable versions"
+  },
+  {
+   "package": "msal-extensions",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "asyncpg",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "babel",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "gunicorn",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "parso",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "structlog",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "typedload",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "asttokens",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "pyproject-hooks",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "xmltodict",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "python-docx",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "matplotlib-inline",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "pure-eval",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "build",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "isort",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "tinycss2",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "stack-data",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "poetry-core",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "python-json-logger",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "aioitertools",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "pytest-timeout",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "setuptools-scm",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "cachecontrol",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "nest-asyncio",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "debugpy",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "flatbuffers",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "mcp-types",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "jupyter-core",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "croniter",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "vcs-versioning",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "nbformat",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "lz4",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "pymysql",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "pyperclip",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "opentelemetry-instrumentation-requests",
+   "reason": "fewer than 2 stable versions"
+  },
+  {
+   "package": "pytokens",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "safetensors",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "jupyter-client",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "jsonref",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "datasets",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "termcolor",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "mccabe",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "opentelemetry-instrumentation-fastapi",
+   "reason": "fewer than 2 stable versions"
+  },
+  {
+   "package": "xlrd",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "mdit-py-plugins",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "tomli-w",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "py4j",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "fastuuid",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "pathable",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "opentelemetry-instrumentation-asgi",
+   "reason": "fewer than 2 stable versions"
+  },
+  {
+   "package": "loguru",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "jsonschema-path",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "importlib-resources",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "text-unidecode",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "types-protobuf",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "lark",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "semver",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "linkify-it-py",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "python-slugify",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "ruamel-yaml-clib",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "wsproto",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "typing-inspect",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "rich-rst",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "psycopg2",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "py-key-value-aio",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "argon2-cffi-bindings",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "requests-file",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "aiosqlite",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "deprecation",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "invoke",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "bleach",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "argon2-cffi",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "types-toml",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "rfc3339-validator",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "arrow",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "shapely",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "grpclib",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "pycodestyle",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "argcomplete",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "comm",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "mmh3",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "ipython-pygments-lexers",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "textual",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "markdownify",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "ipykernel",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "python-pptx",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "toolz",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "types-certifi",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "aiofile",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "durationpy",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "deepdiff",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "pdfminer-six",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "responses",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "llvmlite",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "openapi-pydantic",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "typeguard",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "pydantic-extra-types",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "nbclient",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "plotly",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "msrest",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "pygithub",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "tree-sitter",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "antlr4-python3-runtime",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "pandocfilters",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "humanize",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "jupyterlab-pygments",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "opentelemetry-instrumentation-httpx",
+   "reason": "fewer than 2 stable versions"
+  },
+  {
+   "package": "dataclasses-json",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "humanfriendly",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "cssselect2",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "freezegun",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "click-plugins",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "py",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "colorlog",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "thrift",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "vine",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "future",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "redshift-connector",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "click-repl",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "google-cloud-resource-manager",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "simplejson",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "click-didyoumean",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "orderly-set",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "rich-toolkit",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "poetry",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "flask-cors",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "pysocks",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "backports-tarfile",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "pyright",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "ecdsa",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "pdfplumber",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "semantic-version",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "prettytable",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "bytecode",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "fastapi-cli",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "crashtest",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "cleo",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "opensearch-py",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "peewee",
+   "reason": "no stable release in the A1 window"
+  },
+  {
+   "package": "astroid",
+   "reason": "no stable release in the A1 window"
+  }
+ ]
+}

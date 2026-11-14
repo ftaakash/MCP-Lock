@@ -1,0 +1,8 @@
+[
+ {
+  "case": "npm:spectral-core@3.0.2",
+  "reason": [
+   "no listed unaffected version before t"
+  ]
+ }
+]

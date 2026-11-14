@@ -1,0 +1,16 @@
+{
+  "result": "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/a1/runs/B.jsonl",
+  "result_sha256": "2c5326144493880c036181a234ec43ca6ec556ee56833ed3eb601f7260956a5c",
+  "command": "python.exe eval/replay.py results/candidate/a1/benign/bundles.jsonl.gz B",
+  "commit": "271a14e28f27f207608350ac46432dedb1231ed2-dirty",
+  "timestamp_utc": "2026-11-14T18:51:03Z",
+  "python": "3.11.9",
+  "inputs": {
+    "results/candidate/a1/benign/bundles.jsonl.gz": "12b5c6d65f5d2bcdce72586847d775b948bbc3d530861f9b9fb65ba4ee4ca4e5"
+  },
+  "params": {
+    "cases": 2653,
+    "group": "candidate"
+  },
+  "note": ""
+}
