@@ -65,9 +65,9 @@ that pins each server's archive, build identity, publisher, install scripts and 
 every launch against it. In a pre-registered evaluation, MCP-Lock detects twice as many real attacks as the closest prior
 gate (\DetGP{} vs.\ \DetSCP{} of \NR), almost entirely through install-script diffs (\AblFour{} of \AddedDet{}
 added detections). Almost all its false blocks come from the
-baseline's age rule; exempting locked servers from that rule cuts them from \FbGP{} to \AgeFbP, but a pre-registered
-test on new data shows that the exemption also misses \AoneLost{} of \AoneRC{} hijacked packages, so it is a trade-off,
-not a default. An adaptive attacker
+baseline's age rule. Exempting locked servers from that rule cuts them from \FbGP{} to \AgeFbP, but in a
+pre-registered test on new data the exemption also missed \AoneLost{} of \AoneRC{} hijacked packages, so whether to use
+it is a choice for the deployer. An adaptive attacker
 still gets past the gate in \EGAllow{} of \ENCases{} attacks; five exploratory hardening switches close all but two, and
 we measure what each costs on \NB{} benign upgrades.
 \end{abstract}
@@ -289,19 +289,19 @@ blocks also carried a tool-drift warning, which now surfaces on its own. Detecti
 enough for the age rule to catch, to \AgeDetP{} (\AgeDet), still \AgeAdded{} more than \SC. This was not
 pre-registered; the confirmatory results above are unchanged.
 
-\textbf{Pre-registered follow-up on new data.} Because the exemption was chosen after seeing these results, we tested it
-again under an addendum to the OSF registration~\cite{osf2026prereg}, filed before any scored run, with the gate code
-frozen at a tag. The new corpora contain only versions published after the original freeze (9 Oct.--7 Nov.\ 2026):
+\textbf{Pre-registered follow-up on new data.} We chose the exemption after seeing these results, so we tested it again
+under an addendum to the OSF registration~\cite{osf2026prereg}, filed before any scored run and with the gate code
+frozen at a tag. The new corpora hold only versions published after the original freeze (9 Oct.--7 Nov.\ 2026):
 \AoneB{} benign upgrades (\AoneBmcp{} MCP, \AoneBnpm{} npm, \AoneBpypi{} PyPI) and \AoneR{} real malicious versions
-(\AoneRC{} hijacked, \AoneRN{} new or typosquatted names). Against \SC, the exempted gate \GX{} blocks far fewer honest
-upgrades, \AoneFbGXP{} \AoneFbGXCI{} against \AoneFbSCP{} \AoneFbSCCI{} (\AoneHTwoGX{} vs.\ \AoneHTwoSC{} discordant
-transitions, Holm-adjusted $p = \AoneHTwoP$), but it also detects fewer attacks, \AoneDetGXP{} against \AoneDetSCP{}
-(\AoneHOneGX{} vs.\ \AoneLost{} discordant cases, $p = \AoneHOneP$). All \AoneLost{} are hijacked packages under 30 days
-old that only the age rule caught; on hijacked packages the other checks added nothing, because only \AoneCEval{} of the
-\AoneRC{} still had the registry data they compare. The registered claim rule required lower false blocks and no loss of
-detection, so the exemption is \emph{not} confirmed as a default. Narrower variants that waive the rule only above a
-package or lock age of $d$ days do not help: false blocks and hijack detections fall together as $d$ decreases on both
-corpora (exploratory).
+(\AoneRC{} hijacked, \AoneRN{} new or typosquatted names). The exempted gate \GX{} blocked \AoneFbGXP{} \AoneFbGXCI{}
+of honest upgrades against \AoneFbSCP{} \AoneFbSCCI{} for \SC{} (\AoneHTwoGX{} vs.\ \AoneHTwoSC{} discordant
+transitions, Holm-adjusted $p = \AoneHTwoP$). It also detected fewer attacks, \AoneDetGXP{} against \AoneDetSCP{}
+(\AoneHOneGX{} vs.\ \AoneLost{} discordant cases, $p = \AoneHOneP$). All \AoneLost{} missed cases are hijacked packages
+under 30 days old that only the age rule caught. The other checks added nothing on hijacked packages, because only
+\AoneCEval{} of the \AoneRC{} still had the registry data they compare. The registered claim rule required lower false
+blocks with no loss of detection, so the exemption is \emph{not} confirmed as a default. Waiving the rule only above a
+package or lock age of $d$ days does not help either: on both corpora, false blocks and hijack detections fall together
+as $d$ decreases (exploratory).
 
 % ------------------------------------------------------------------------------------------------
 \section{RQ3: Adaptive Attacker}
@@ -391,10 +391,10 @@ every suggestion, including the rollback, is checked by the gate before the agen
 \section{Discussion and Limitations}
 \textbf{What the evidence supports.} Pinning catches real attacks that the name-and-source checks miss, but the
 confirmed gain is an install-script diff (S4), a classic supply-chain signal rather than an MCP-specific one. Re-applying
-the first-use age rule to locked servers is what made both gates block a third of honest upgrades, but it is also what
-catches young packages hijacked soon after they were locked: on new data, waiving it removed \AoneFbRemoved{} of \G's
-false blocks and missed \AoneLost{} of \AoneRC{} hijacked packages. The age rule is therefore a trade-off for the
-deployer to set, not a check to drop. Tool pinning (S5) is what catches MCP rug pulls, and it is necessary because metadata signals do not accompany tool changes (RQ1),
+the first-use age rule to locked servers made both gates block a third of honest upgrades, and the same rule catches
+young packages hijacked soon after they were locked. On new data, waiving it for locked servers removed
+\AoneFbRemoved{} of \G's false blocks and missed \AoneLost{} of \AoneRC{} hijacked packages; a deployer has to weigh
+one against the other. Tool pinning (S5) is what catches MCP rug pulls, and it is necessary because metadata signals do not accompany tool changes (RQ1),
 yet it warns on \WarnGMcpP{} of honest MCP upgrades. Of these \SfiveWarnN{} warnings, \SfDescP{} change a
 description, \SfAddsP{} add a tool, \SfSchemaP{} change only an input schema and \SfRemoveP{} only remove tools
 (exploratory). The first three are what a rug pull changes, so S5 cannot be narrowed without losing the attacks it
@@ -419,9 +419,9 @@ compare against what was trusted first. Reviewing the diff remains the user's jo
 bounds. R-M contains only attacks that were caught and reported; attacks still undetected are absent by definition.
 Replay reconstructs metadata as of each case's time but cannot recover removed versions, which is why S2/S3 evaluability
 is low. Class C follows a mechanical rule (an earlier clean version exists) and may include attacker-owned packages with
-a benign first release; in the addendum, at least \AoneOwned{} of the \AoneLost{} hijacked cases that \GX{} missed
-look attacker-owned (a typosquat, and a package whose only clean release preceded its malicious ones), and counting
-them as new names leaves \AoneLostAdj{} misses ($p = \AoneLostAdjP$), which does not change the conclusion. The adaptive attacks were built by the authors of the defence; the hardening results are
+a benign first release. In the addendum, at least \AoneOwned{} of the \AoneLost{} hijacked cases that \GX{} missed
+look attacker-owned: one is a typosquat, and the other's only clean release came before its malicious ones. Counted as
+new names, they leave \AoneLostAdj{} misses ($p = \AoneLostAdjP$), and the conclusion holds. The adaptive attacks were built by the authors of the defence; the hardening results are
 exploratory and were not pre-registered, as are the safer-alternative suggestions and the publication-window split. D2's matrix verdicts use live tool
 lists written down from each attack's source; running the \RtCases{} locked servers in containers with no outside network gave
 the same D2 verdict in \RtAgree{} cases and the same findings in \RtSame, with E8a's clock set past its trigger date. Time of lock is unknown in practice, which is why D1 is reported as a
