@@ -346,6 +346,23 @@ def heldout_candidates(pilot: Path, sample_dir: Path, eco: str) -> list[dict]:
              "source": "heldout", "version": None, "static": None} for i in order]
 
 
+def heldout2_candidates(pilot: Path, sample_dir: Path, eco: str) -> list[dict]:
+    """Fresh validation pool for extractor v3 (docs/EXTRACTOR_V3_VALIDATION_PLAN.md): packages of the
+    phase-2 sample never attempted before, neither in development (v1/v2) nor in the first held-out
+    run, in a new independently seeded order."""
+    used = set()
+    for f in [pilot / n for n in ("validation_v1.jsonl", "validation_npm.jsonl", "validation_pypi.jsonl")] + [
+            sample_dir / f"validation_heldout_{e}.jsonl" for e in ("npm", "pypi")]:
+        if f.exists():
+            used |= {(r["ecosystem"], r["package"]) for r in map(json.loads, open(f, encoding="utf-8"))}
+    pool = sorted((r for r in map(json.loads, open(sample_dir / "sample.jsonl", encoding="utf-8"))
+                   if r["ecosystem"] == eco and (eco, r["package"]) not in used),
+                  key=lambda r: r["package"])
+    order = np.random.default_rng(SEED + 2).permutation(len(pool))
+    return [{"ecosystem": eco, "package": pool[i]["package"], "tercile": pool[i]["tercile"],
+             "source": "heldout2", "version": None, "static": None} for i in order]
+
+
 def _prepare_reserve(c: dict) -> dict | None:
     """Fetch the latest version and run the static extractor (host side; no code execution)."""
     from census import versions as V
@@ -380,7 +397,7 @@ def _f1_index() -> dict:
 
 
 def attempt(c: dict, idx: int, f1: dict) -> dict:
-    if c["source"] in ("reserve", "heldout"):
+    if c["source"] in ("reserve", "heldout", "heldout2"):
         c2 = _prepare_reserve(c)
         if c2 is None:
             return {"ecosystem": c["ecosystem"], "package": c["package"], "attempt": idx,
@@ -432,6 +449,9 @@ def run(pilot: Path, eco: str, target: int, max_attempts: int, workers: int,
     if pool_name == "heldout":
         cands = heldout_candidates(pilot, sample_dir, eco)[:max_attempts]
         out_dir, prefix = sample_dir, "validation_heldout_"
+    elif pool_name == "heldout2":
+        cands = heldout2_candidates(pilot, sample_dir, eco)[:max_attempts]
+        out_dir, prefix = sample_dir, "validation_heldout2_"
     else:
         cands = candidates(pilot, eco)[:max_attempts]
         out_dir, prefix = pilot, "validation_"
@@ -455,6 +475,7 @@ def run(pilot: Path, eco: str, target: int, max_attempts: int, workers: int,
     provenance.write(out, inputs=[pilot / "versions.jsonl", pilot / "extractions.jsonl",
                                   pilot / "stratum_order.jsonl"],
                      params={"harness": "v2", "pool": pool_name, "seed": SEED, "eco": eco,
+                             "pool_seed": {"heldout": SEED + 1, "heldout2": SEED + 2}.get(pool_name, SEED),
                              "target": target,
                              "max_attempts": max_attempts, "workers": workers,
                              "images": [NODE_IMG, *PY_IMGS.values()], "hardening": HARDEN,
@@ -539,7 +560,7 @@ def main():
     r.add_argument("--target", type=int, default=40)
     r.add_argument("--max-attempts", type=int, default=160)
     r.add_argument("--workers", type=int, default=3)
-    r.add_argument("--pool", choices=["dev", "heldout"], default="dev")
+    r.add_argument("--pool", choices=["dev", "heldout", "heldout2"], default="dev")
     r.add_argument("--sample-dir", type=Path, default=Path("results/census/phase2"))
     s = sub.add_parser("summarize")
     s.add_argument("pilot", type=Path)
