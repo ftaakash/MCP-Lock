@@ -1,7 +1,7 @@
 # Why the static extractor misses tools (held-out validation, 2026-11-14)
 
 No reported result changes. Every paper number uses extractor v2 (tags `extract-v2.1` and `prereg-v1`). Re-running v2
-reproduces every miss below exactly. Fixes A, C and E were then added to `main` as extractor v3 (see "Extractor v3" below).
+reproduces every miss below exactly. Fixes A, B1, C and E were then added to `main` as extractor v3 (see "Extractor v3" below).
 
 - Input: `results/census/phase2/validation_heldout_{npm,pypi}.jsonl` (82 servers that started; 1,385 runtime tools)
 - Re-run: `scripts/miss_rerun.py` (archives fetched with digest checks into a scratch folder, never executed)
@@ -39,7 +39,7 @@ they are **not** an estimate of new recall. A fixed extractor must be validated 
 |---|---|---|
 | none (paper) | — | 78.0% |
 | A + C + E (**done, measured: 81.0%**) | small; patterns are unambiguous | 81.0% |
-| + B1 (accept `parameters`/`shape` keys on objects that also have `name` and `description`) | small; some false-positive risk | 85.3% |
+| + B1 (accept `parameters`/`shape` keys on objects that also have `name` and `description`) (**done, measured: 85.3%**) | small; some false-positive risk | 85.3% |
 | + B2 + D (follow a value into a factory or a loop over a literal table) | moderate; interprocedural | 91.3% |
 | F | not possible from the package's own source | ceiling for static extraction: 91.3% |
 
@@ -64,26 +64,28 @@ reasonably pin.
   patterns.
 - Fourteen servers is a small base for ranking categories.
 
-## Extractor v3 (fixes A, C, E; 2026-11-14)
+## Extractor v3 (fixes A, B1, C, E; 2026-11-14)
 
 | Fix | Change | File |
 |---|---|---|
 | A | `x.tool(...)(fn)`, and `for t in [f, g] / CONST_LIST: x.tool(...)(t)`; name and description from the inner call, else the function | `census/extract_py.py` |
+| B1 | object literal `{name, description, parameters / shape}`; without `inputSchema` a description is required | `census/extract_js.py` |
 | C | bare `tool("name", {description, input / inputSchema})`; the config must have a description | `census/extract_js.py` |
 | E | `@tool(name="x")` / `@x.tool("x")` on a function later passed to `add_tool(fn)` or the call form uses `"x"` | `census/extract_py.py` |
 
-Four unit tests cover these (`tests/test_extract.py`, `test_v3_*`), including negative cases. All 107 tests pass.
+Five unit tests cover these (`tests/test_extract.py`, `test_v3_*`), including negative cases. All 108 tests pass.
 
 **Re-run on all 82 validated servers. This is in-sample, exploratory and not a recall estimate:**
 
 | | Recall (micro) | Precision (micro) | Static names | Matched |
 |---|---|---|---|---|
 | v2 (paper) | 78.0% | 92.2% | 1,171 | 1,080 |
-| v3 | 81.0% | 92.7% | 1,210 | 1,122 |
+| v3 with A, C, E | 81.0% | 92.7% | 1,210 | 1,122 |
+| v3 with A, B1, C, E | 85.3% | 93.1% | 1,270 | 1,182 |
 
-- **Changed servers:** six — who-gho 0→6, inaturalist 0→10, mcp-ksef-pl 0→12, mcp-monumenten 0→2, freeplay-mcp 0→9 matched,
-  and forkflux-mcp 6→9 matched with its 3 wrong names gone.
-- **Unchanged:** the other 76 servers are identical to v2. No server lost a tool or gained a wrong one.
+- **Changed servers:** eight — who-gho 0→6, inaturalist 0→10, mcp-ksef-pl 0→12, mcp-monumenten 0→2, freeplay-mcp 0→9
+  matched, forkflux-mcp 6→9 matched with its 3 wrong names gone, and (B1) @doist/todoist-mcp 0→47 and fluf-mcp 0→13.
+- **Unchanged:** the other 74 servers are identical to v2. No server lost a tool or gained a wrong one.
 
 **Reproducibility:** the gate (`gate/signals.py`), lockfile generation and the evaluation corpora import the extractor, so `main`
 now behaves differently from the frozen gate. Check out `prereg-v1` (gate) or `extract-v2.1` (census) to reproduce the paper.
@@ -91,6 +93,6 @@ now behaves differently from the frozen gate. Check out `prereg-v1` (gate) or `e
 ## Next steps
 
 1. ~~Implement A, C and E as extractor v3, with unit tests from these servers.~~ Done.
-2. Optionally add B1, then freeze v3 at a tag.
+2. ~~Add B1.~~ Done. Freeze v3 at a tag before the new validation run.
 3. Draw a fresh held-out validation sample that excludes these 171 servers. Report v3 recall on it next to v2.
 4. Keep every paper number on v2 as reported. Any v3 census re-run is reported as exploratory.

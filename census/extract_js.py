@@ -6,6 +6,7 @@ Patterns:
   * X.addTool({name, description, parameters | inputSchema})     FastMCP (TS)
   * any object literal {name: <string>, inputSchema: ...}        ListTools handlers / tool consts
   * tool(name, {description, input | inputSchema, ...})         imported bare helper (v3)
+  * object literal {name, description, parameters | shape}       tool tables (v3)
 Identifiers are resolved through `const/let/var` declarations (file-local first, then unique
 across the package). Unresolvable values become OPAQUE; call callees keep only their last
 property name with trailing digits stripped, so bundler renames do not alter hashes.
@@ -27,6 +28,7 @@ TS = Language(tsts.language_typescript())
 _PARSERS = {"js": Parser(JS), "ts": Parser(TS)}
 
 CALL_PATTERNS = {"tool", "registerTool", "addTool"}
+ALT_SCHEMA_KEYS = ("parameters", "shape")
 WRAPPERS = {"parenthesized_expression", "as_expression", "satisfies_expression",
             "non_null_expression", "type_assertion"}
 ESCAPES = {"n": "\n", "t": "\t", "r": "\r", "b": "\b", "f": "\f", "v": "\v", "0": "\0",
@@ -343,8 +345,12 @@ def _from_object(r: Resolver, n: Node, ctx: FileCtx) -> ToolDef | None:
                 keys[_text(k).strip("'\"")] = c.child_by_field_name("value")
         elif c.type == "shorthand_property_identifier":
             keys[_text(c)] = c
-    if "name" not in keys or "inputSchema" not in keys:
+    # v3 fix B1: {name, description, parameters | shape} also counts (e.g. @doist/todoist-mcp, fluf-mcp);
+    # without inputSchema the object must carry a description, to keep unrelated objects out
+    alt = next((k for k in ALT_SCHEMA_KEYS if k in keys), None)
+    if "name" not in keys or not ("inputSchema" in keys or ("description" in keys and alt)):
         return None
+    schema_key = "inputSchema" if "inputSchema" in keys else alt
     nm = keys["name"]
     name = _str(ev_ident(r, _text(nm), ctx, 0) if nm.type == "shorthand_property_identifier"
                 else r.ev(nm, ctx))
@@ -353,8 +359,8 @@ def _from_object(r: Resolver, n: Node, ctx: FileCtx) -> ToolDef | None:
     obj = r.ev(n, ctx)
     if not isinstance(obj, dict):
         return None
-    return ToolDef(name, _str(obj.get("description")), obj.get("inputSchema"), "object_literal",
-                   ctx.rel)
+    return ToolDef(name, _str(obj.get("description")), obj.get(schema_key),
+                   "object_literal" if schema_key == "inputSchema" else "object_literal_alt", ctx.rel)
 
 
 def source_files(root: Path) -> list[Path]:

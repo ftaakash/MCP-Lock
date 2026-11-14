@@ -193,3 +193,17 @@ def test_v3_js_bare_tool_helper(tmp_path):  # fix C (@cyanheads/*)
     """)
     assert set(t) == {"who_list_dimensions"}
     assert t["who_list_dimensions"].description == "List all dimensions."
+
+
+def test_v3_js_object_with_parameters_or_shape(tmp_path):  # fix B1 (@doist/todoist-mcp, fluf-mcp)
+    t = _js(tmp_path, """
+        const g = { ADD_TASKS: "add-tasks" };
+        const addTasks = { name: g.ADD_TASKS, description: "Add tasks.", parameters: { content: z.string() } };
+        const TOOLS = [
+            { name: "start_task", description: "Start a task.", shape: { id: z.string() }, run: go },
+        ];
+        const col = { name: "Name", parameters: {} };          // no description: ignored
+        const field = { name: "x", description: "a column" };  // no schema key: ignored
+    """)
+    assert set(t) == {"add-tasks", "start_task"}
+    assert t["add-tasks"].description == "Add tasks."

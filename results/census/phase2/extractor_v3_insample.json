@@ -1,4 +1,6 @@
 {
+ "status": "EXPLORATORY, IN-SAMPLE: same 82 servers used to find the patterns; not an estimate of recall on new servers",
+ "extractor": "v3 = v2 (prereg-v1) + fixes A, B1, C, E; see docs/EXTRACTOR_MISS_ANALYSIS.md",
  "n_servers": 82,
  "runtime_tools": 1385,
  "v2": {
@@ -6,73 +8,73 @@
   "both": 1080
  },
  "v3": {
-  "static": 1210,
-  "both": 1122
+  "static": 1270,
+  "both": 1182
  },
- "changed": [
-  [
-   "@cyanheads/who-gho-mcp-server",
-   "v2 static/both",
-   0,
-   0,
-   "v3",
-   6,
-   6
-  ],
-  [
-   "@cyanheads/inaturalist-mcp-server",
-   "v2 static/both",
-   0,
-   0,
-   "v3",
-   10,
-   10
-  ],
-  [
-   "mcp-ksef-pl",
-   "v2 static/both",
-   0,
-   0,
-   "v3",
-   12,
-   12
-  ],
-  [
-   "forkflux-mcp",
-   "v2 static/both",
-   9,
-   6,
-   "v3",
-   9,
-   9
-  ],
-  [
-   "freeplay-mcp",
-   "v2 static/both",
-   2,
-   0,
-   "v3",
-   11,
-   9
-  ],
-  [
-   "mcp-monumenten",
-   "v2 static/both",
-   0,
-   0,
-   "v3",
-   2,
-   2
-  ]
- ],
- "status": "EXPLORATORY, IN-SAMPLE: same 82 servers used to find the patterns; not an estimate of recall on new servers",
- "extractor": "v3 = v2 (prereg-v1) + fixes A, C, E; see docs/EXTRACTOR_MISS_ANALYSIS.md",
  "recall": {
   "v2": 0.7798,
-  "v3": 0.8101
+  "v3": 0.8534
  },
  "precision": {
   "v2": 0.9223,
-  "v3": 0.9273
- }
+  "v3": 0.9307
+ },
+ "changed_vs_v2": [
+  {
+   "package": "fluf-mcp",
+   "v2_static": 0,
+   "v2_matched": 0,
+   "v3_static": 13,
+   "v3_matched": 13
+  },
+  {
+   "package": "@cyanheads/who-gho-mcp-server",
+   "v2_static": 0,
+   "v2_matched": 0,
+   "v3_static": 6,
+   "v3_matched": 6
+  },
+  {
+   "package": "@doist/todoist-mcp",
+   "v2_static": 0,
+   "v2_matched": 0,
+   "v3_static": 47,
+   "v3_matched": 47
+  },
+  {
+   "package": "@cyanheads/inaturalist-mcp-server",
+   "v2_static": 0,
+   "v2_matched": 0,
+   "v3_static": 10,
+   "v3_matched": 10
+  },
+  {
+   "package": "mcp-ksef-pl",
+   "v2_static": 0,
+   "v2_matched": 0,
+   "v3_static": 12,
+   "v3_matched": 12
+  },
+  {
+   "package": "forkflux-mcp",
+   "v2_static": 9,
+   "v2_matched": 6,
+   "v3_static": 9,
+   "v3_matched": 9
+  },
+  {
+   "package": "freeplay-mcp",
+   "v2_static": 2,
+   "v2_matched": 0,
+   "v3_static": 11,
+   "v3_matched": 9
+  },
+  {
+   "package": "mcp-monumenten",
+   "v2_static": 0,
+   "v2_matched": 0,
+   "v3_static": 2,
+   "v3_matched": 2
+  }
+ ]
 }
