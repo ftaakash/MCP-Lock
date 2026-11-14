@@ -67,3 +67,52 @@
     exploratory work and would need new data.
 - **Descriptive, not tested:** S1-C's false-block rate on B′ (10.5%) is lower than on the Phase 4 corpus (32.9%).
   B′ covers 30 days instead of 90, and has fewer young MCP servers at upgrade time.
+
+## Follow-up 1 (exploratory): is there a better threshold? (`eval/adaptive/age_tradeoff.py`)
+
+Each variant waives the age rule for a locked package only when a condition holds. It re-decides the frozen gate G's
+stored findings. These data have already been seen, so none of this is confirmatory.
+
+**Package age at upgrade time ≥ d days:**
+
+| d (days) | Phase 4 false blocks | Phase 4 hijacked caught (of 368) | A1 false blocks | A1 hijacked caught (of 42) |
+|---|---|---|---|---|
+| 0 (= G-X) | 0.73% | 108 | 0.53% | 0 |
+| 1 | 9.74% | 108 | 0.53% | 0 |
+| 7 | 19.96% | 108 | 0.75% | 0 |
+| 14 | 26.09% | 110 | 2.04% | 2 |
+| 21 | 29.43% | 115 | 4.33% | 4 |
+| 30 (= G) | 33.36% | 116 | 11.01% | 8 |
+
+**Locked version's age ≥ d days:**
+- In Phase 4, false blocks jump from 0.86% (d = 0) to 21.81% at d = 1.
+- In A1 they jump from 0.53% to 5.01%.
+- Hijacked caught rise only from 108 to 112 and from 0 to 2.
+
+**Reading: no threshold gives a middle ground.**
+- The age rule's false blocks and its hijack detections come from the same population, packages younger than 30 days,
+  so any threshold trades one for the other almost linearly.
+- The two datasets disagree on where the false blocks are:
+  - Phase 4's benign MCP upgrades include many packages under a day old, so even d = 1 brings back about 10% false blocks.
+  - In A1 the false blocks only come back from d = 14.
+- A threshold tuned on one dataset would not carry over to the other. We do not recommend pre-registering any threshold
+  variant.
+
+## Follow-up 2 (exploratory): are the 8 missed cases real hijacks? (`results/candidate/a1/lost8_review.json`)
+
+Only registry metadata and OSV record headers were read, inside Docker. GHSA's boilerplate calls every affected machine
+"compromised", so that word is not evidence of an account takeover.
+
+| Package | Age at attack (days) | Assessment | Evidence |
+|---|---|---|---|
+| tailwindcss-hook-forms | 13 | likely attacker-owned (typosquat) | advisory: impersonates `@tailwindcss/forms`; only a placeholder version before the malicious one |
+| overarch-windows-x64-yr | 22 | likely attacker-owned | one version, then three malicious versions three weeks later |
+| @adminide-stack/forms-core | 14 | likely real compromise | the same campaign hit 5 packages of the scope on 3–4 Nov, one of them published since 2017 |
+| @ai-ecoverse/slicc-windows-amd64, kampodra, local-commander-agent, modelsdesk, paidwithtab | 9–26 | undetermined | active young projects (8 to 180 versions); metadata cannot tell a takeover from a long con |
+
+- **Class rule:** at least 2 of the 8 look misclassified by the mechanical rule (a threat to validity already listed in
+  the paper).
+- **Sensitivity with those 2 moved to class N:**
+  - They would have no lock, so G-X would keep the age rule and catch them.
+  - G-X would then miss 6, not 8 (exact two-sided p = 0.031; still significant after Holm).
+  - **The confirmatory conclusion does not change.**

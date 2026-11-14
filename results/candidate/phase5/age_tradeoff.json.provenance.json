@@ -1,0 +1,16 @@
+{
+  "result": "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase5/age_tradeoff.json",
+  "result_sha256": "e9b12c6b57fde0c59c06994c953c0256428062a0ae898a1262f1ed4adb7109a9",
+  "command": "python.exe eval/adaptive/age_tradeoff.py",
+  "commit": "0dc82e3784f2498d775d9f3e1dad3c12dc07a540-dirty",
+  "timestamp_utc": "2026-11-14T19:15:27Z",
+  "python": "3.11.9",
+  "inputs": {
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase4/benign/bundles.jsonl.gz": "bffade4c221b0afb1812fc5105540919b10838eda2836c100414bb507fd6d743",
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/phase4/malicious/bundles.jsonl.gz": "123b09a69b7b63dbe9e03a41b5defb95035fdc9be7b24b2310b1905b02f5b1ae",
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/a1/benign/bundles.jsonl.gz": "12b5c6d65f5d2bcdce72586847d775b948bbc3d530861f9b9fb65ba4ee4ca4e5",
+    "C:/Users/Administrator/Desktop/Major Project/mcp-lock/results/candidate/a1/malicious/bundles.jsonl.gz": "c9c782c252c1623f736118ec1f276b90e158c6e3a8a1c4dcfdba41f2568b2753"
+  },
+  "params": {},
+  "note": ""
+}
