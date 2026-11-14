@@ -1,0 +1,203 @@
+{
+  "harness": "v2",
+  "attempted": 161,
+  "stage_a_failed": 3,
+  "stage_b_failed": 78,
+  "validated": 80,
+  "start_rate": [
+    0.4968944099378882,
+    0.4206400468926114,
+    0.5732935180785177
+  ],
+  "validated_needing_arg_fallback": 0,
+  "validated_without_dep_snapshot": 0,
+  "all": {
+    "attempted": 161,
+    "validated": 80,
+    "start_rate": [
+      0.4968944099378882,
+      0.4206400468926114,
+      0.5732935180785177
+    ],
+    "name_precision_micro": 0.9942062572421785,
+    "name_recall_micro": 0.793709528214616,
+    "name_precision_macro": 0.9859098228663445,
+    "name_recall_macro": 0.8198615600086189,
+    "name_set_equal": [
+      60,
+      80,
+      [
+        0.75,
+        0.6451532538076602,
+        0.8319376814245761
+      ]
+    ],
+    "g1_detection_when_server_has_tools": [
+      69,
+      80,
+      [
+        0.8625,
+        0.7703289993301339,
+        0.9214528567566089
+      ]
+    ],
+    "servers_with_zero_tools": 0,
+    "description_exact_match_mean": 0.9687571888658845,
+    "bias_static_extractable_started": [
+      69,
+      80,
+      [
+        0.8625,
+        0.7703289993301339,
+        0.9214528567566089
+      ]
+    ],
+    "bias_static_extractable_not_started": [
+      67,
+      81,
+      [
+        0.8271604938271605,
+        0.7305386248522877,
+        0.8941559612227986
+      ]
+    ],
+    "validated_by_tercile": {
+      "0": 23,
+      "1": 32,
+      "2": 25
+    },
+    "attempted_by_tercile": {
+      "0": 51,
+      "1": 59,
+      "2": 51
+    }
+  },
+  "npm": {
+    "attempted": 57,
+    "validated": 40,
+    "start_rate": [
+      0.7017543859649122,
+      0.5733571989653998,
+      0.8046744992518191
+    ],
+    "name_precision_micro": 0.9873737373737373,
+    "name_recall_micro": 0.722735674676525,
+    "name_precision_macro": 0.9714052287581699,
+    "name_recall_macro": 0.7660051712992889,
+    "name_set_equal": [
+      26,
+      40,
+      [
+        0.65,
+        0.49505880837257693,
+        0.7786547112682372
+      ]
+    ],
+    "g1_detection_when_server_has_tools": [
+      34,
+      40,
+      [
+        0.85,
+        0.709276756335103,
+        0.9293881228267964
+      ]
+    ],
+    "servers_with_zero_tools": 0,
+    "description_exact_match_mean": 0.9696837068160598,
+    "bias_static_extractable_started": [
+      34,
+      40,
+      [
+        0.85,
+        0.709276756335103,
+        0.9293881228267964
+      ]
+    ],
+    "bias_static_extractable_not_started": [
+      14,
+      17,
+      [
+        0.8235294117647058,
+        0.5897054143116588,
+        0.9380887336237901
+      ]
+    ],
+    "validated_by_tercile": {
+      "0": 14,
+      "1": 16,
+      "2": 10
+    },
+    "attempted_by_tercile": {
+      "0": 20,
+      "1": 22,
+      "2": 15
+    }
+  },
+  "pypi": {
+    "attempted": 104,
+    "validated": 40,
+    "start_rate": [
+      0.38461538461538464,
+      0.2968126300610473,
+      0.48063845171721087
+    ],
+    "name_precision_micro": 1.0,
+    "name_recall_micro": 0.8648148148148148,
+    "name_precision_macro": 1.0,
+    "name_recall_macro": 0.8737179487179487,
+    "name_set_equal": [
+      34,
+      40,
+      [
+        0.85,
+        0.709276756335103,
+        0.9293881228267964
+      ]
+    ],
+    "g1_detection_when_server_has_tools": [
+      35,
+      40,
+      [
+        0.875,
+        0.738878801611489,
+        0.945404997490546
+      ]
+    ],
+    "servers_with_zero_tools": 0,
+    "description_exact_match_mean": 0.9678571428571429,
+    "bias_static_extractable_started": [
+      35,
+      40,
+      [
+        0.875,
+        0.738878801611489,
+        0.945404997490546
+      ]
+    ],
+    "bias_static_extractable_not_started": [
+      53,
+      64,
+      [
+        0.828125,
+        0.7178678837734179,
+        0.9012225769875536
+      ]
+    ],
+    "validated_by_tercile": {
+      "0": 9,
+      "1": 16,
+      "2": 15
+    },
+    "attempted_by_tercile": {
+      "0": 31,
+      "1": 37,
+      "2": 36
+    }
+  },
+  "failure_reasons": {
+    "initialize timeout/exit": 76,
+    "initialize failed": 1,
+    "stage_a": 3,
+    "tools/list failed": 1
+  }
+}

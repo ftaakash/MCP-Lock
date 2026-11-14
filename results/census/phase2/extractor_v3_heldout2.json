@@ -1,0 +1,2895 @@
+{
+ "summary": {
+  "plan": "docs/EXTRACTOR_V3_VALIDATION_PLAN.md",
+  "status": "EXPLORATORY; fresh servers not used to build v3",
+  "attempted": 161,
+  "validated": 80,
+  "validated_by_eco": {
+   "npm": 40,
+   "pypi": 40
+  },
+  "runtime_tools": 1081,
+  "v3": {
+   "recall_micro": 0.793709528214616,
+   "recall_ci": [
+    0.667712976809043,
+    0.898833192000422
+   ],
+   "precision_micro": 0.9942062572421785,
+   "precision_ci": [
+    0.985632183908046,
+    1.0
+   ]
+  },
+  "v2": {
+   "recall_micro": 0.793709528214616,
+   "recall_ci": [
+    0.6666666666666666,
+    0.8983198000607868
+   ],
+   "precision_micro": 0.9942062572421785,
+   "precision_ci": [
+    0.9855711863361697,
+    1.0
+   ]
+  },
+  "v3_minus_v2_recall": {
+   "diff": 0.0,
+   "paired_ci": [
+    0.0,
+    0.0
+   ]
+  },
+  "v3_name_set_equal": [
+   60,
+   80,
+   [
+    0.75,
+    0.6451532538076602,
+    0.8319376814245761
+   ]
+  ],
+  "servers_changed_v2_to_v3": [],
+  "servers_with_v3_misses": [
+   {
+    "package": "mcp-pexels",
+    "missed": 9,
+    "of": 9
+   },
+   {
+    "package": "node9-ai",
+    "missed": 18,
+    "of": 18
+   },
+   {
+    "package": "@true402.dev/mcp-server",
+    "missed": 11,
+    "of": 13
+   },
+   {
+    "package": "@chrischall/jobber-mcp",
+    "missed": 3,
+    "of": 7
+   },
+   {
+    "package": "@devlensio/cli",
+    "missed": 5,
+    "of": 5
+   },
+   {
+    "package": "@toportal/second-brain-mcp",
+    "missed": 13,
+    "of": 13
+   },
+   {
+    "package": "fettle-mcp",
+    "missed": 56,
+    "of": 56
+   },
+   {
+    "package": "@runapi.ai/grok-imagine-mcp",
+    "missed": 8,
+    "of": 10
+   },
+   {
+    "package": "@validatefin/mcp",
+    "missed": 11,
+    "of": 34
+   },
+   {
+    "package": "publedge",
+    "missed": 6,
+    "of": 13
+   },
+   {
+    "package": "@sylphx/repomap",
+    "missed": 6,
+    "of": 6
+   },
+   {
+    "package": "octagon-mcp",
+    "missed": 4,
+    "of": 8
+   },
+   {
+    "package": "f1verse",
+    "missed": 26,
+    "of": 26
+   },
+   {
+    "package": "apple-system-mcp",
+    "missed": 2,
+    "of": 39
+   },
+   {
+    "package": "kitchensink4word",
+    "missed": 10,
+    "of": 10
+   },
+   {
+    "package": "codepathfinder",
+    "missed": 13,
+    "of": 13
+   },
+   {
+    "package": "roadstyle-mcp",
+    "missed": 3,
+    "of": 3
+   },
+   {
+    "package": "mcp-dados-br",
+    "missed": 19,
+    "of": 19
+   }
+  ],
+  "record_vs_local_v3_mismatch": [],
+  "miss_categories": {
+   "W": {
+    "label": "project-specific registration helper (B2/D type)",
+    "servers": 5,
+    "missed": 47
+   },
+   "N": {
+    "label": "tool names built at runtime (no literal occurrence)",
+    "servers": 6,
+    "missed": 48
+   },
+   "F": {
+    "label": "tools outside the package source (data file, native binary, no code)",
+    "servers": 4,
+    "missed": 73
+   },
+   "P": {
+    "label": "programmatic catalogue (hand-written protocol handler or generated registration)",
+    "servers": 2,
+    "missed": 36
+   },
+   "A2": {
+    "label": "call form over a local list of attributes (variant of A not covered)",
+    "servers": 1,
+    "missed": 19
+   }
+  },
+  "miss_categories_note": "Assigned by brief source inspection after the run (plan: secondary). N means a grep for the missed names found no literal occurrence; the exact mechanism was not examined."
+ },
+ "servers": [
+  {
+   "ecosystem": "npm",
+   "package": "mcp-pexels",
+   "version": "1.0.2",
+   "dyn": [
+    "pexels_collection_media",
+    "pexels_curated_photos",
+    "pexels_featured_collections",
+    "pexels_get_photo",
+    "pexels_get_video",
+    "pexels_my_collections",
+    "pexels_popular_videos",
+    "pexels_search_photos",
+    "pexels_search_videos"
+   ],
+   "n_dynamic": 9,
+   "v3": {
+    "static": 0,
+    "both": 0
+   },
+   "v3_missed": [
+    "pexels_collection_media",
+    "pexels_curated_photos",
+    "pexels_featured_collections",
+    "pexels_get_photo",
+    "pexels_get_video",
+    "pexels_my_collections",
+    "pexels_popular_videos",
+    "pexels_search_photos",
+    "pexels_search_videos"
+   ],
+   "v2": {
+    "static": 0,
+    "both": 0
+   },
+   "miss_category": "W",
+   "miss_note": "defineTool({name, ...}) helper"
+  },
+  {
+   "ecosystem": "npm",
+   "package": "@triptyk/delegate-mcp",
+   "version": "0.1.2",
+   "dyn": [
+    "delegate_setup_required"
+   ],
+   "n_dynamic": 1,
+   "v3": {
+    "static": 3,
+    "both": 1
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 3,
+    "both": 1
+   }
+  },
+  {
+   "ecosystem": "npm",
+   "package": "@invapi/mcp-server",
+   "version": "1.0.5",
+   "dyn": [
+    "invapi_batch_convert",
+    "invapi_convert_cii_to_json",
+    "invapi_convert_json_to_cii",
+    "invapi_convert_json_to_ubl",
+    "invapi_convert_json_to_xlsx",
+    "invapi_convert_ubl_to_json",
+    "invapi_convert_zugferd_to_json",
+    "invapi_create_zugferd_pdf",
+    "invapi_extract_invoice",
+    "invapi_extract_qr",
+    "invapi_get_user",
+    "invapi_validate_cii",
+    "invapi_validate_ubl",
+    "invapi_validate_xml"
+   ],
+   "n_dynamic": 14,
+   "v3": {
+    "static": 14,
+    "both": 14
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 14,
+    "both": 14
+   }
+  },
+  {
+   "ecosystem": "npm",
+   "package": "@hanoak/pixabay-mcp-server",
+   "version": "1.0.1",
+   "dyn": [
+    "pixabay_get_image",
+    "pixabay_get_video",
+    "pixabay_search_images",
+    "pixabay_search_videos"
+   ],
+   "n_dynamic": 4,
+   "v3": {
+    "static": 4,
+    "both": 4
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 4,
+    "both": 4
+   }
+  },
+  {
+   "ecosystem": "npm",
+   "package": "node9-ai",
+   "version": "2.61.1",
+   "dyn": [
+    "node9_approver_list",
+    "node9_approver_set",
+    "node9_audit_get",
+    "node9_config_get",
+    "node9_egress_deny",
+    "node9_egress_protect",
+    "node9_egress_status",
+    "node9_explain",
+    "node9_policy_get",
+    "node9_posture",
+    "node9_report",
+    "node9_rule_add",
+    "node9_scan",
+    "node9_session",
+    "node9_shield_disable",
+    "node9_shield_enable",
+    "node9_shield_list",
+    "node9_status"
+   ],
+   "n_dynamic": 18,
+   "v3": {
+    "static": 0,
+    "both": 0
+   },
+   "v3_missed": [
+    "node9_approver_list",
+    "node9_approver_set",
+    "node9_audit_get",
+    "node9_config_get",
+    "node9_egress_deny",
+    "node9_egress_protect",
+    "node9_egress_status",
+    "node9_explain",
+    "node9_policy_get",
+    "node9_posture",
+    "node9_report",
+    "node9_rule_add",
+    "node9_scan",
+    "node9_session",
+    "node9_shield_disable",
+    "node9_shield_enable",
+    "node9_shield_list",
+    "node9_status"
+   ],
+   "v2": {
+    "static": 0,
+    "both": 0
+   },
+   "miss_category": "N",
+   "miss_note": "no missed name occurs literally in the package source"
+  },
+  {
+   "ecosystem": "npm",
+   "package": "interpro-mcp",
+   "version": "1.0.2",
+   "dyn": [
+    "echo",
+    "entry",
+    "entry_protein_matches",
+    "health_check",
+    "list_tools",
+    "ping",
+    "protein_entry_matches",
+    "search",
+    "timestamp",
+    "version_info"
+   ],
+   "n_dynamic": 10,
+   "v3": {
+    "static": 10,
+    "both": 10
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 10,
+    "both": 10
+   }
+  },
+  {
+   "ecosystem": "npm",
+   "package": "mcacp",
+   "version": "0.1.3",
+   "dyn": [
+    "agent_check_upgrades",
+    "agent_install",
+    "agent_uninstall",
+    "cancel",
+    "close_session",
+    "discover_agents",
+    "events",
+    "get_agent_status",
+    "grant_permission",
+    "initialize",
+    "list_installed_agents",
+    "list_running_agents",
+    "list_sessions",
+    "load_session",
+    "new_session",
+    "prompt",
+    "prompt_events",
+    "prompt_start",
+    "registry_search",
+    "reload_config",
+    "request_permission",
+    "set_agent_status",
+    "set_mode",
+    "shutdown"
+   ],
+   "n_dynamic": 24,
+   "v3": {
+    "static": 24,
+    "both": 24
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 24,
+    "both": 24
+   }
+  },
+  {
+   "ecosystem": "npm",
+   "package": "@cyanheads/git-mcp-server",
+   "version": "2.15.3",
+   "dyn": [
+    "git_add",
+    "git_blame",
+    "git_branch",
+    "git_changelog_analyze",
+    "git_checkout",
+    "git_cherry_pick",
+    "git_clean",
+    "git_clear_working_dir",
+    "git_clone",
+    "git_commit",
+    "git_diff",
+    "git_fetch",
+    "git_init",
+    "git_log",
+    "git_merge",
+    "git_pull",
+    "git_push",
+    "git_rebase",
+    "git_reflog",
+    "git_remote",
+    "git_reset",
+    "git_set_working_dir",
+    "git_show",
+    "git_stash",
+    "git_status",
+    "git_tag",
+    "git_worktree",
+    "git_wrapup_instructions"
+   ],
+   "n_dynamic": 28,
+   "v3": {
+    "static": 28,
+    "both": 28
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 28,
+    "both": 28
+   }
+  },
+  {
+   "ecosystem": "npm",
+   "package": "geckoterminal-mcp",
+   "version": "1.0.8",
+   "dyn": [
+    "dexes",
+    "networks",
+    "newPools",
+    "pool",
+    "pool_ohlc",
+    "pool_trades",
+    "search",
+    "token",
+    "token_pools",
+    "token_prices",
+    "trending"
+   ],
+   "n_dynamic": 11,
+   "v3": {
+    "static": 11,
+    "both": 11
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 11,
+    "both": 11
+   }
+  },
+  {
+   "ecosystem": "npm",
+   "package": "@swarmsync/conduit-mcp",
+   "version": "0.2.0",
+   "dyn": [
+    "conduit_compare_browser_tools",
+    "conduit_feature_matrix",
+    "conduit_installation",
+    "conduit_overview",
+    "conduit_proof_bundle_spec",
+    "swarm_discover",
+    "swarm_route",
+    "swarm_score"
+   ],
+   "n_dynamic": 8,
+   "v3": {
+    "static": 8,
+    "both": 8
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 8,
+    "both": 8
+   }
+  },
+  {
+   "ecosystem": "npm",
+   "package": "@juicedresume/mcp",
+   "version": "0.4.2",
+   "dyn": [
+    "add_entry",
+    "add_section",
+    "company_search",
+    "create_resume",
+    "delete_resume",
+    "duplicate_resume",
+    "export_ats_pdf",
+    "export_latex",
+    "get_resume",
+    "list_resumes",
+    "remove_entry",
+    "remove_section",
+    "rename_section",
+    "reorder_sections",
+    "score_resume",
+    "set_locale",
+    "set_personal_info",
+    "set_styling",
+    "set_summary",
+    "set_template",
+    "skill_search",
+    "tailor_to_jd",
+    "templates_list",
+    "title_search",
+    "toggle_section_visibility",
+    "update_entry",
+    "verb_lookup"
+   ],
+   "n_dynamic": 27,
+   "v3": {
+    "static": 27,
+    "both": 27
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 27,
+    "both": 27
+   }
+  },
+  {
+   "ecosystem": "npm",
+   "package": "flyonui-mcp",
+   "version": "1.0.4",
+   "dyn": [
+    "get-block-content",
+    "get-block-meta-content",
+    "get-blocks-metadata",
+    "get-create-instructions",
+    "get-inspire-instructions",
+    "get-refine-instructions"
+   ],
+   "n_dynamic": 6,
+   "v3": {
+    "static": 6,
+    "both": 6
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 6,
+    "both": 6
+   }
+  },
+  {
+   "ecosystem": "npm",
+   "package": "agent-signal",
+   "version": "0.7.1",
+   "dyn": [
+    "add_to_wishlist",
+    "agent_signal_status",
+    "check_merchant_reliability",
+    "check_price_alerts",
+    "create_price_alert",
+    "detect_deal",
+    "evaluate_and_compare",
+    "get_budget_products",
+    "get_category_demand",
+    "get_category_recommendations",
+    "get_competitive_landscape",
+    "get_constraint_match",
+    "get_merchant_scorecard",
+    "get_price_history",
+    "get_product_intelligence",
+    "get_rejection_analysis",
+    "get_session_summary",
+    "get_similar_session_outcomes",
+    "get_todays_deals",
+    "get_trending_products",
+    "get_warnings",
+    "get_wishlist",
+    "import_completed_session",
+    "log_comparison",
+    "log_outcome",
+    "log_product_evaluation",
+    "log_shopping_session",
+    "remove_from_wishlist",
+    "search_products",
+    "smart_shopping_session"
+   ],
+   "n_dynamic": 30,
+   "v3": {
+    "static": 30,
+    "both": 30
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 30,
+    "both": 30
+   }
+  },
+  {
+   "ecosystem": "npm",
+   "package": "korea-business-verify",
+   "version": "0.1.2",
+   "dyn": [
+    "batch_check_status",
+    "check_business_status",
+    "check_invoice_eligibility",
+    "explain_kr_tax_type",
+    "verify_business"
+   ],
+   "n_dynamic": 5,
+   "v3": {
+    "static": 5,
+    "both": 5
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 5,
+    "both": 5
+   }
+  },
+  {
+   "ecosystem": "npm",
+   "package": "fec-mcp",
+   "version": "1.1.0",
+   "dyn": [
+    "candidate_totals",
+    "candidates",
+    "committees",
+    "elections",
+    "filings",
+    "schedule_a",
+    "schedule_b"
+   ],
+   "n_dynamic": 7,
+   "v3": {
+    "static": 7,
+    "both": 7
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 7,
+    "both": 7
+   }
+  },
+  {
+   "ecosystem": "npm",
+   "package": "@true402.dev/mcp-server",
+   "version": "1.3.2",
+   "dyn": [
+    "chat",
+    "headers_check",
+    "link_preview",
+    "liquidity_history",
+    "liquidity_pulls",
+    "list_models",
+    "new_pairs",
+    "robots_check",
+    "seo_audit",
+    "token_safety",
+    "tx_preflight",
+    "web_extract",
+    "whale_swaps"
+   ],
+   "n_dynamic": 13,
+   "v3": {
+    "static": 2,
+    "both": 2
+   },
+   "v3_missed": [
+    "headers_check",
+    "link_preview",
+    "liquidity_history",
+    "liquidity_pulls",
+    "new_pairs",
+    "robots_check",
+    "seo_audit",
+    "token_safety",
+    "tx_preflight",
+    "web_extract",
+    "whale_swaps"
+   ],
+   "v2": {
+    "static": 2,
+    "both": 2
+   },
+   "miss_category": "W",
+   "miss_note": "registerStall(server, ..., spec) -> server.tool(spec.toolName, ...)"
+  },
+  {
+   "ecosystem": "npm",
+   "package": "apexapi-mcp",
+   "version": "0.5.1",
+   "dyn": [
+    "chat",
+    "check_job",
+    "crawl_site",
+    "create_upload_url",
+    "extract_structured",
+    "generate_image",
+    "generate_speech",
+    "generate_video",
+    "get_balance",
+    "list_generations",
+    "list_models",
+    "list_uploads",
+    "scrape_page",
+    "studio_catalog",
+    "studio_expand_prompt",
+    "studio_generate",
+    "studio_list_assets",
+    "studio_preview",
+    "studio_register_avatar",
+    "studio_register_product",
+    "upload_reference"
+   ],
+   "n_dynamic": 21,
+   "v3": {
+    "static": 21,
+    "both": 21
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 21,
+    "both": 21
+   }
+  },
+  {
+   "ecosystem": "npm",
+   "package": "@chrischall/jobber-mcp",
+   "version": "1.1.1",
+   "dyn": [
+    "jobber_healthcheck",
+    "jobber_list_appointments",
+    "jobber_list_hubs",
+    "jobber_list_invoices",
+    "jobber_list_quotes",
+    "jobber_list_work_requests",
+    "jobber_read_page"
+   ],
+   "n_dynamic": 7,
+   "v3": {
+    "static": 4,
+    "both": 4
+   },
+   "v3_missed": [
+    "jobber_list_invoices",
+    "jobber_list_quotes",
+    "jobber_list_work_requests"
+   ],
+   "v2": {
+    "static": 4,
+    "both": 4
+   },
+   "miss_category": "W",
+   "miss_note": "registerCardTool(server, ..., {name})"
+  },
+  {
+   "ecosystem": "npm",
+   "package": "@weiseer/status-aggregator-mcp",
+   "version": "0.1.2",
+   "dyn": [
+    "check_all",
+    "get_incidents_today",
+    "get_status",
+    "list_services"
+   ],
+   "n_dynamic": 4,
+   "v3": {
+    "static": 4,
+    "both": 4
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 4,
+    "both": 4
+   }
+  },
+  {
+   "ecosystem": "npm",
+   "package": "@verusidx/send-mcp",
+   "version": "0.1.7",
+   "dyn": [
+    "estimateconversion",
+    "getcurrencybalance",
+    "getcurrencyconverters",
+    "gettransaction",
+    "listcurrencies",
+    "listtransactions",
+    "sendcurrency",
+    "z_getoperationstatus"
+   ],
+   "n_dynamic": 8,
+   "v3": {
+    "static": 8,
+    "both": 8
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 8,
+    "both": 8
+   }
+  },
+  {
+   "ecosystem": "npm",
+   "package": "@devlensio/cli",
+   "version": "0.7.2",
+   "dyn": [
+    "find_symbols",
+    "get_node",
+    "impact",
+    "repo",
+    "resolve_context"
+   ],
+   "n_dynamic": 5,
+   "v3": {
+    "static": 0,
+    "both": 0
+   },
+   "v3_missed": [
+    "find_symbols",
+    "get_node",
+    "impact",
+    "repo",
+    "resolve_context"
+   ],
+   "v2": {
+    "static": 0,
+    "both": 0
+   },
+   "miss_category": "N",
+   "miss_note": "no missed name occurs literally in the package source"
+  },
+  {
+   "ecosystem": "npm",
+   "package": "@coppica/persuasion-mcp",
+   "version": "1.0.7",
+   "dyn": [
+    "check_headlines",
+    "check_marketing_claims",
+    "diagnose_marketing_copy",
+    "explain_why_not_converting",
+    "find_persuasion_techniques",
+    "get_persuasion_technique",
+    "plan_ab_test",
+    "plan_marketing_copy",
+    "read_ab_test_result"
+   ],
+   "n_dynamic": 9,
+   "v3": {
+    "static": 9,
+    "both": 9
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 9,
+    "both": 9
+   }
+  },
+  {
+   "ecosystem": "npm",
+   "package": "myrmigo-mcp",
+   "version": "0.1.0",
+   "dyn": [
+    "find_website_task_guide"
+   ],
+   "n_dynamic": 1,
+   "v3": {
+    "static": 1,
+    "both": 1
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 1,
+    "both": 1
+   }
+  },
+  {
+   "ecosystem": "npm",
+   "package": "@toportal/second-brain-mcp",
+   "version": "0.1.3",
+   "dyn": [
+    "concepto_crear",
+    "concepto_fusionar",
+    "jardin",
+    "lectura_actualizar",
+    "lectura_crear",
+    "lectura_nota",
+    "mini_listar",
+    "mini_nota",
+    "mini_promover",
+    "nota_enlazar",
+    "nota_permanente",
+    "resurgir",
+    "vault_buscar"
+   ],
+   "n_dynamic": 13,
+   "v3": {
+    "static": 0,
+    "both": 0
+   },
+   "v3_missed": [
+    "concepto_crear",
+    "concepto_fusionar",
+    "jardin",
+    "lectura_actualizar",
+    "lectura_crear",
+    "lectura_nota",
+    "mini_listar",
+    "mini_nota",
+    "mini_promover",
+    "nota_enlazar",
+    "nota_permanente",
+    "resurgir",
+    "vault_buscar"
+   ],
+   "v2": {
+    "static": 0,
+    "both": 0
+   },
+   "miss_category": "W",
+   "miss_note": "registerTool over names built from a table (name: t)"
+  },
+  {
+   "ecosystem": "npm",
+   "package": "deribit-mcp",
+   "version": "1.1.1",
+   "dyn": [
+    "book",
+    "currencies",
+    "funding_rate_history",
+    "futures_open_interest",
+    "historical_volatility",
+    "implied_vol_history",
+    "indexPrice",
+    "instruments",
+    "options_positioning",
+    "options_summary",
+    "summary",
+    "supported",
+    "ticker",
+    "trades"
+   ],
+   "n_dynamic": 14,
+   "v3": {
+    "static": 14,
+    "both": 14
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 14,
+    "both": 14
+   }
+  },
+  {
+   "ecosystem": "npm",
+   "package": "ctc-monitor-mcp",
+   "version": "1.0.4",
+   "dyn": [
+    "get_cluster",
+    "get_digest",
+    "get_map",
+    "get_preferences",
+    "get_regions",
+    "get_stats",
+    "get_stories",
+    "search_stories"
+   ],
+   "n_dynamic": 8,
+   "v3": {
+    "static": 8,
+    "both": 8
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 8,
+    "both": 8
+   }
+  },
+  {
+   "ecosystem": "npm",
+   "package": "mindswap",
+   "version": "3.3.0",
+   "dyn": [
+    "mindswap_get_context",
+    "mindswap_memory",
+    "mindswap_save_context",
+    "mindswap_search"
+   ],
+   "n_dynamic": 4,
+   "v3": {
+    "static": 4,
+    "both": 4
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 4,
+    "both": 4
+   }
+  },
+  {
+   "ecosystem": "npm",
+   "package": "socialfanout-mcp",
+   "version": "0.1.7",
+   "dyn": [
+    "fanout_cancel_job",
+    "fanout_first_comment_capability",
+    "fanout_first_comment_status",
+    "fanout_get_job",
+    "fanout_health",
+    "fanout_list_connections",
+    "fanout_list_posts",
+    "fanout_list_providers",
+    "fanout_publish_post",
+    "fanout_publishing_capabilities",
+    "fanout_start_oauth"
+   ],
+   "n_dynamic": 11,
+   "v3": {
+    "static": 12,
+    "both": 11
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 12,
+    "both": 11
+   }
+  },
+  {
+   "ecosystem": "npm",
+   "package": "tech-debt-mcp",
+   "version": "2.1.0",
+   "dyn": [
+    "add_custom_rule",
+    "analyze_file",
+    "analyze_project",
+    "check_dependencies",
+    "execute_custom_rules",
+    "get_debt_summary",
+    "get_issues_by_category",
+    "get_issues_by_severity",
+    "get_recommendations",
+    "get_sqale_metrics",
+    "get_vulnerability_report",
+    "list_session_custom_rules",
+    "list_supported_languages",
+    "remove_custom_rule",
+    "validate_config",
+    "validate_custom_pattern"
+   ],
+   "n_dynamic": 16,
+   "v3": {
+    "static": 16,
+    "both": 16
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 16,
+    "both": 16
+   }
+  },
+  {
+   "ecosystem": "npm",
+   "package": "saymaker-mcp",
+   "version": "0.1.1",
+   "dyn": [
+    "edit_image",
+    "generate_image",
+    "generate_video",
+    "get_task",
+    "list_models",
+    "open_in_saymaker"
+   ],
+   "n_dynamic": 6,
+   "v3": {
+    "static": 6,
+    "both": 6
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 6,
+    "both": 6
+   }
+  },
+  {
+   "ecosystem": "npm",
+   "package": "fettle-mcp",
+   "version": "1.8.0",
+   "dyn": [
+    "acknowledge_incident",
+    "bulk_create_monitors",
+    "bulk_pause_monitors",
+    "bulk_resume_monitors",
+    "bulk_update_heartbeat_tags",
+    "bulk_update_monitor_tags",
+    "bulk_update_monitors",
+    "check_now",
+    "check_target",
+    "create_heartbeat",
+    "create_maintenance_window",
+    "create_monitor",
+    "create_status_page_incident",
+    "delete_heartbeat",
+    "delete_maintenance_window",
+    "delete_monitor",
+    "delete_status_page_incident",
+    "delete_tag",
+    "draft_status_page_post",
+    "get_exposed_ports_preset",
+    "get_heartbeat",
+    "get_incident",
+    "get_incident_context",
+    "get_incident_diagnosis",
+    "get_maintenance_window",
+    "get_monitor",
+    "get_plan_usage",
+    "get_response_time_by_region",
+    "get_status_page",
+    "get_uptime_daily",
+    "get_uptime_summary",
+    "list_active_maintenance",
+    "list_changes",
+    "list_channels",
+    "list_check_results",
+    "list_heartbeats",
+    "list_incidents",
+    "list_maintenance_windows",
+    "list_monitors",
+    "list_regions",
+    "list_status_page_incidents",
+    "list_status_pages",
+    "list_tags",
+    "pause_heartbeat",
+    "pause_monitor",
+    "post_status_page_update",
+    "preview_maintenance_window",
+    "record_deploy",
+    "rename_tag",
+    "resume_heartbeat",
+    "resume_monitor",
+    "update_heartbeat",
+    "update_maintenance_window",
+    "update_monitor",
+    "update_status_page_incident",
+    "verify_deploy"
+   ],
+   "n_dynamic": 56,
+   "v3": {
+    "static": 0,
+    "both": 0
+   },
+   "v3_missed": [
+    "acknowledge_incident",
+    "bulk_create_monitors",
+    "bulk_pause_monitors",
+    "bulk_resume_monitors",
+    "bulk_update_heartbeat_tags",
+    "bulk_update_monitor_tags",
+    "bulk_update_monitors",
+    "check_now",
+    "check_target",
+    "create_heartbeat",
+    "create_maintenance_window",
+    "create_monitor",
+    "create_status_page_incident",
+    "delete_heartbeat",
+    "delete_maintenance_window",
+    "delete_monitor",
+    "delete_status_page_incident",
+    "delete_tag",
+    "draft_status_page_post",
+    "get_exposed_ports_preset",
+    "get_heartbeat",
+    "get_incident",
+    "get_incident_context",
+    "get_incident_diagnosis",
+    "get_maintenance_window",
+    "get_monitor",
+    "get_plan_usage",
+    "get_response_time_by_region",
+    "get_status_page",
+    "get_uptime_daily",
+    "get_uptime_summary",
+    "list_active_maintenance",
+    "list_changes",
+    "list_channels",
+    "list_check_results",
+    "list_heartbeats",
+    "list_incidents",
+    "list_maintenance_windows",
+    "list_monitors",
+    "list_regions",
+    "list_status_page_incidents",
+    "list_status_pages",
+    "list_tags",
+    "pause_heartbeat",
+    "pause_monitor",
+    "post_status_page_update",
+    "preview_maintenance_window",
+    "record_deploy",
+    "rename_tag",
+    "resume_heartbeat",
+    "resume_monitor",
+    "update_heartbeat",
+    "update_maintenance_window",
+    "update_monitor",
+    "update_status_page_incident",
+    "verify_deploy"
+   ],
+   "v2": {
+    "static": 0,
+    "both": 0
+   },
+   "miss_category": "F",
+   "miss_note": "tool list in contracts/mcp_tools.json"
+  },
+  {
+   "ecosystem": "npm",
+   "package": "@runapi.ai/grok-imagine-mcp",
+   "version": "0.2.2",
+   "dyn": [
+    "check_pricing",
+    "edit_image",
+    "extend_video",
+    "get_task",
+    "image_to_video",
+    "login",
+    "segment_map",
+    "text_to_image",
+    "text_to_video",
+    "upscale_image"
+   ],
+   "n_dynamic": 10,
+   "v3": {
+    "static": 2,
+    "both": 2
+   },
+   "v3_missed": [
+    "edit_image",
+    "extend_video",
+    "image_to_video",
+    "login",
+    "segment_map",
+    "text_to_image",
+    "text_to_video",
+    "upscale_image"
+   ],
+   "v2": {
+    "static": 2,
+    "both": 2
+   },
+   "miss_category": "F",
+   "miss_note": "tool list in data/contract.json"
+  },
+  {
+   "ecosystem": "npm",
+   "package": "@validatefin/mcp",
+   "version": "1.3.1",
+   "dyn": [
+    "convert_bai2",
+    "convert_camt_to_csv",
+    "convert_camt_to_mt940",
+    "convert_cfonb",
+    "convert_coda",
+    "convert_mt940",
+    "generate_camt_test",
+    "generate_epc_qr",
+    "read_mt103",
+    "sepa_dates",
+    "validate_aba",
+    "validate_ach",
+    "validate_camt",
+    "validate_cfonb",
+    "validate_coda",
+    "validate_cpa005",
+    "validate_creditor_id",
+    "validate_efactura",
+    "validate_epc_qr",
+    "validate_facturae",
+    "validate_fatturapa",
+    "validate_fedwire",
+    "validate_iban",
+    "validate_jpk",
+    "validate_ksef",
+    "validate_lei",
+    "validate_nav",
+    "validate_pix",
+    "validate_portugal_qr",
+    "validate_sepa",
+    "validate_swiss_qr",
+    "validate_ubl",
+    "validate_verifactu",
+    "validate_xrechnung"
+   ],
+   "n_dynamic": 34,
+   "v3": {
+    "static": 23,
+    "both": 23
+   },
+   "v3_missed": [
+    "validate_camt",
+    "validate_efactura",
+    "validate_facturae",
+    "validate_fedwire",
+    "validate_jpk",
+    "validate_ksef",
+    "validate_nav",
+    "validate_sepa",
+    "validate_ubl",
+    "validate_verifactu",
+    "validate_xrechnung"
+   ],
+   "v2": {
+    "static": 23,
+    "both": 23
+   },
+   "miss_category": "W",
+   "miss_note": "registerValidator('name', ...)"
+  },
+  {
+   "ecosystem": "npm",
+   "package": "@nextoolsolutions/mcp-n8n",
+   "version": "2.0.2",
+   "dyn": [
+    "n8n_activate_workflow",
+    "n8n_create_credential",
+    "n8n_create_datatable",
+    "n8n_create_project",
+    "n8n_create_tag",
+    "n8n_create_variable",
+    "n8n_create_workflow",
+    "n8n_deactivate_workflow",
+    "n8n_delete_credential",
+    "n8n_delete_datatable_rows",
+    "n8n_delete_execution",
+    "n8n_delete_project",
+    "n8n_delete_tag",
+    "n8n_delete_user",
+    "n8n_delete_variable",
+    "n8n_delete_workflow",
+    "n8n_execute_workflow",
+    "n8n_generate_audit",
+    "n8n_get_credential_schema",
+    "n8n_get_datatable",
+    "n8n_get_datatable_rows",
+    "n8n_get_execution",
+    "n8n_get_tag",
+    "n8n_get_user",
+    "n8n_get_workflow",
+    "n8n_get_workflow_tags",
+    "n8n_health_check",
+    "n8n_insert_datatable_rows",
+    "n8n_list_credentials",
+    "n8n_list_datatables",
+    "n8n_list_executions",
+    "n8n_list_projects",
+    "n8n_list_tags",
+    "n8n_list_users",
+    "n8n_list_variables",
+    "n8n_list_workflows",
+    "n8n_trigger_webhook",
+    "n8n_update_datatable_rows",
+    "n8n_update_project",
+    "n8n_update_tag",
+    "n8n_update_workflow",
+    "n8n_update_workflow_tags",
+    "n8n_upsert_datatable_row"
+   ],
+   "n_dynamic": 43,
+   "v3": {
+    "static": 43,
+    "both": 43
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 43,
+    "both": 43
+   }
+  },
+  {
+   "ecosystem": "npm",
+   "package": "publedge",
+   "version": "0.2.5",
+   "dyn": [
+    "fetch_by_url",
+    "get_authority",
+    "get_legal-instrument",
+    "get_mappings",
+    "get_matrix",
+    "get_obligation",
+    "get_recently_changed",
+    "get_upcoming",
+    "list_authorities",
+    "list_legal-instruments",
+    "list_obligations",
+    "search",
+    "search_obligations"
+   ],
+   "n_dynamic": 13,
+   "v3": {
+    "static": 9,
+    "both": 7
+   },
+   "v3_missed": [
+    "get_authority",
+    "get_legal-instrument",
+    "get_obligation",
+    "list_authorities",
+    "list_legal-instruments",
+    "list_obligations"
+   ],
+   "v2": {
+    "static": 9,
+    "both": 7
+   },
+   "miss_category": "N",
+   "miss_note": "no missed name occurs literally in the package source"
+  },
+  {
+   "ecosystem": "npm",
+   "package": "@sylphx/repomap",
+   "version": "1.9.0",
+   "dyn": [
+    "context",
+    "db",
+    "impact",
+    "map",
+    "search",
+    "trace"
+   ],
+   "n_dynamic": 6,
+   "v3": {
+    "static": 0,
+    "both": 0
+   },
+   "v3_missed": [
+    "context",
+    "db",
+    "impact",
+    "map",
+    "search",
+    "trace"
+   ],
+   "v2": {
+    "static": 0,
+    "both": 0
+   },
+   "miss_category": "F",
+   "miss_note": "native binary per platform (optional dependency)"
+  },
+  {
+   "ecosystem": "npm",
+   "package": "the-trivia-api-mcp",
+   "version": "1.0.2",
+   "dyn": [
+    "categories",
+    "echo",
+    "health_check",
+    "help",
+    "list_tools",
+    "ping",
+    "questions",
+    "status",
+    "timestamp",
+    "version_info"
+   ],
+   "n_dynamic": 10,
+   "v3": {
+    "static": 10,
+    "both": 10
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 10,
+    "both": 10
+   }
+  },
+  {
+   "ecosystem": "npm",
+   "package": "octagon-mcp",
+   "version": "1.2.0",
+   "dyn": [
+    "octagon-agent",
+    "octagon-deep-research-agent",
+    "octagon-docs-list",
+    "octagon-docs-read",
+    "octagon-docs-refresh",
+    "octagon-docs-search",
+    "octagon-prediction-markets-agent",
+    "prediction_markets_history"
+   ],
+   "n_dynamic": 8,
+   "v3": {
+    "static": 4,
+    "both": 4
+   },
+   "v3_missed": [
+    "octagon-docs-list",
+    "octagon-docs-read",
+    "octagon-docs-refresh",
+    "octagon-docs-search"
+   ],
+   "v2": {
+    "static": 4,
+    "both": 4
+   },
+   "miss_category": "N",
+   "miss_note": "no missed name occurs literally in the package source"
+  },
+  {
+   "ecosystem": "npm",
+   "package": "@wartzar-bee/tokenscope-mcp",
+   "version": "0.2.3",
+   "dyn": [
+    "analyze_claude_cost",
+    "get_cost_benchmark",
+    "tokenscope_share_summary"
+   ],
+   "n_dynamic": 3,
+   "v3": {
+    "static": 3,
+    "both": 3
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 3,
+    "both": 3
+   }
+  },
+  {
+   "ecosystem": "npm",
+   "package": "excalidraw-mcp-server",
+   "version": "2.0.0",
+   "dyn": [
+    "align_elements",
+    "batch_create_elements",
+    "create_element",
+    "create_from_mermaid",
+    "create_view",
+    "delete_element",
+    "distribute_elements",
+    "export_scene",
+    "get_resource",
+    "group_elements",
+    "lock_elements",
+    "query_elements",
+    "read_me",
+    "ungroup_elements",
+    "unlock_elements",
+    "update_element"
+   ],
+   "n_dynamic": 16,
+   "v3": {
+    "static": 16,
+    "both": 16
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 16,
+    "both": 16
+   }
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "chipsai-mcp",
+   "version": "1.1.0",
+   "dyn": [
+    "create_chatbot",
+    "create_conversation",
+    "delete_chatbot",
+    "delete_conversation",
+    "get_chatbot",
+    "get_chatbot_analytics",
+    "get_chatbot_config",
+    "get_conversation",
+    "get_conversation_messages",
+    "get_session_messages",
+    "get_user_plan",
+    "list_ai_models",
+    "list_chatbots",
+    "list_conversation_history",
+    "list_conversations",
+    "send_message",
+    "update_chatbot",
+    "update_conversation",
+    "upload_document"
+   ],
+   "n_dynamic": 19,
+   "v3": {
+    "static": 19,
+    "both": 19
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 19,
+    "both": 19
+   }
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "f1verse",
+   "version": "0.15.0",
+   "dyn": [
+    "f1_archive_race",
+    "f1_battles",
+    "f1_circuit_directory",
+    "f1_circuit_history",
+    "f1_circuit_profile",
+    "f1_circuit_survey",
+    "f1_closest_titles",
+    "f1_data_quality",
+    "f1_deleted_laps",
+    "f1_driver_career",
+    "f1_highlights",
+    "f1_pace_changes",
+    "f1_race_brief",
+    "f1_race_events",
+    "f1_race_story",
+    "f1_retirement_risk",
+    "f1_running_order",
+    "f1_season_shape",
+    "f1_season_status",
+    "f1_session_results",
+    "f1_source_status",
+    "f1_standings",
+    "f1_title_race",
+    "f1_turning_points",
+    "f1_tyre_wear",
+    "f1_weekend_sessions"
+   ],
+   "n_dynamic": 26,
+   "v3": {
+    "static": 0,
+    "both": 0
+   },
+   "v3_missed": [
+    "f1_archive_race",
+    "f1_battles",
+    "f1_circuit_directory",
+    "f1_circuit_history",
+    "f1_circuit_profile",
+    "f1_circuit_survey",
+    "f1_closest_titles",
+    "f1_data_quality",
+    "f1_deleted_laps",
+    "f1_driver_career",
+    "f1_highlights",
+    "f1_pace_changes",
+    "f1_race_brief",
+    "f1_race_events",
+    "f1_race_story",
+    "f1_retirement_risk",
+    "f1_running_order",
+    "f1_season_shape",
+    "f1_season_status",
+    "f1_session_results",
+    "f1_source_status",
+    "f1_standings",
+    "f1_title_race",
+    "f1_turning_points",
+    "f1_tyre_wear",
+    "f1_weekend_sessions"
+   ],
+   "v2": {
+    "static": 0,
+    "both": 0
+   },
+   "miss_category": "P",
+   "miss_note": "hand-written JSON-RPC handler returns catalog('mcp') from _tools.py"
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "fda-samd-mcp",
+   "version": "1.0.11",
+   "dyn": [
+    "ai_ml_action_plan",
+    "classify_sw_device",
+    "good_ml_practice",
+    "list_regulations_in_db",
+    "pccp_template",
+    "regulatory_pathway",
+    "search_regulation"
+   ],
+   "n_dynamic": 7,
+   "v3": {
+    "static": 7,
+    "both": 7
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 7,
+    "both": 7
+   }
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "libraryapi-mcp",
+   "version": "0.1.3",
+   "dyn": [
+    "find_libraries_near_address",
+    "find_libraries_near_coordinates",
+    "get_library",
+    "get_outlet",
+    "get_state_summary",
+    "search_libraries"
+   ],
+   "n_dynamic": 6,
+   "v3": {
+    "static": 6,
+    "both": 6
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 6,
+    "both": 6
+   }
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "tokencast",
+   "version": "0.1.4",
+   "dyn": [
+    "estimate_cost",
+    "get_calibration_status",
+    "get_cost_history",
+    "report_session",
+    "report_step_cost"
+   ],
+   "n_dynamic": 5,
+   "v3": {
+    "static": 5,
+    "both": 5
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 5,
+    "both": 5
+   }
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "docalyze-mcp-server",
+   "version": "0.2.1",
+   "dyn": [
+    "document_info",
+    "list_documents",
+    "read_document",
+    "visual_evaluate_document"
+   ],
+   "n_dynamic": 4,
+   "v3": {
+    "static": 4,
+    "both": 4
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 4,
+    "both": 4
+   }
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "apple-system-mcp",
+   "version": "1.1.7",
+   "dyn": [
+    "get_tool_info",
+    "search_tools",
+    "system_get_accessibility_settings",
+    "system_get_appearance_settings",
+    "system_get_battery",
+    "system_get_clipboard",
+    "system_get_context_snapshot",
+    "system_get_dock_settings",
+    "system_get_finder_settings",
+    "system_get_focus_status",
+    "system_get_frontmost_app",
+    "system_get_prompt",
+    "system_get_settings_snapshot",
+    "system_gui_choose_popup_value",
+    "system_gui_click_button",
+    "system_gui_click_menu_path",
+    "system_gui_list_menu_bar_items",
+    "system_gui_press_keys",
+    "system_gui_type_text",
+    "system_health",
+    "system_list_prompts",
+    "system_list_running_apps",
+    "system_list_settings_domains",
+    "system_open_application",
+    "system_permission_guide",
+    "system_read_preference_domain",
+    "system_set_appearance_mode",
+    "system_set_clipboard",
+    "system_set_dock_autohide",
+    "system_set_dock_show_recents",
+    "system_set_finder_path_bar",
+    "system_set_finder_status_bar",
+    "system_set_increase_contrast",
+    "system_set_reduce_motion",
+    "system_set_reduce_transparency",
+    "system_set_show_all_extensions",
+    "system_set_show_hidden_files",
+    "system_show_notification",
+    "system_status"
+   ],
+   "n_dynamic": 39,
+   "v3": {
+    "static": 37,
+    "both": 37
+   },
+   "v3_missed": [
+    "get_tool_info",
+    "search_tools"
+   ],
+   "v2": {
+    "static": 37,
+    "both": 37
+   },
+   "miss_category": "N",
+   "miss_note": "no missed name occurs literally in the package source"
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "designesy-mcp",
+   "version": "1.13.10",
+   "dyn": [
+    "designesy_a11y_score",
+    "designesy_agent_json",
+    "designesy_catalog",
+    "designesy_compare",
+    "designesy_contract",
+    "designesy_design_review",
+    "designesy_drift_score",
+    "designesy_guardrails",
+    "designesy_llms_full_txt",
+    "designesy_llms_txt",
+    "designesy_monitor_score",
+    "designesy_motion_score",
+    "designesy_readiness_score",
+    "designesy_report",
+    "designesy_score",
+    "designesy_skill_md",
+    "designesy_tokens_score"
+   ],
+   "n_dynamic": 17,
+   "v3": {
+    "static": 17,
+    "both": 17
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 17,
+    "both": 17
+   }
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "fintable-mcp",
+   "version": "0.1.1",
+   "dyn": [
+    "fintable_create_bulk_categories",
+    "fintable_create_bulk_rules",
+    "fintable_create_category",
+    "fintable_create_rule",
+    "fintable_delete_rule",
+    "fintable_list_accounts",
+    "fintable_list_categories",
+    "fintable_list_rules",
+    "fintable_list_transactions",
+    "fintable_resync_spreadsheets",
+    "fintable_run_all_rules",
+    "fintable_sync_accounts"
+   ],
+   "n_dynamic": 12,
+   "v3": {
+    "static": 12,
+    "both": 12
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 12,
+    "both": 12
+   }
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "cal-scheduler-mcp",
+   "version": "1.1.3",
+   "dyn": [
+    "create_calendar",
+    "create_event",
+    "delete_calendar",
+    "delete_event",
+    "exclude_occurrence",
+    "list_calendars",
+    "list_events",
+    "mark_done",
+    "move_occurrence",
+    "resolve_datetime",
+    "update_event"
+   ],
+   "n_dynamic": 11,
+   "v3": {
+    "static": 11,
+    "both": 11
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 11,
+    "both": 11
+   }
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "excel-vision-mcp",
+   "version": "1.2.1",
+   "dyn": [
+    "add_excel_sheet",
+    "create_excel_file",
+    "extract_images",
+    "format_excel_cells",
+    "get_workbook_overview",
+    "insert_excel_image",
+    "list_sheets",
+    "read_excel_data",
+    "read_full_content",
+    "search_excel",
+    "set_excel_column_widths",
+    "update_excel_cells",
+    "write_excel_rows"
+   ],
+   "n_dynamic": 13,
+   "v3": {
+    "static": 13,
+    "both": 13
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 13,
+    "both": 13
+   }
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "stremio-mcp-server",
+   "version": "0.2.0",
+   "dyn": [
+    "library",
+    "play",
+    "playback_status",
+    "search",
+    "tv_control"
+   ],
+   "n_dynamic": 5,
+   "v3": {
+    "static": 5,
+    "both": 5
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 5,
+    "both": 5
+   }
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "swiss-ip-mcp",
+   "version": "1.2.0",
+   "dyn": [
+    "swiss_ip_get_patent",
+    "swiss_ip_get_quota",
+    "swiss_ip_get_trademark",
+    "swiss_ip_search_patent_publications",
+    "swiss_ip_search_patents",
+    "swiss_ip_search_patents_by_applicant",
+    "swiss_ip_search_recent_filings",
+    "swiss_ip_search_spc",
+    "swiss_ip_search_trademarks",
+    "swiss_ip_search_trademarks_by_class",
+    "swiss_ip_search_trademarks_by_owner"
+   ],
+   "n_dynamic": 11,
+   "v3": {
+    "static": 11,
+    "both": 11
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 11,
+    "both": 11
+   }
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "qidi-printer-mcp",
+   "version": "1.0.8",
+   "dyn": [
+    "cancel_print",
+    "get_temperatures",
+    "list_files",
+    "pause_print",
+    "preheat",
+    "print_progress",
+    "printer_status",
+    "resume_print",
+    "send_gcode",
+    "start_print"
+   ],
+   "n_dynamic": 10,
+   "v3": {
+    "static": 10,
+    "both": 10
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 10,
+    "both": 10
+   }
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "secobserve-mcp",
+   "version": "1.0.0",
+   "dyn": [
+    "secobserve_api_import",
+    "secobserve_approve_observation_log",
+    "secobserve_assess_observation",
+    "secobserve_bulk_assess_observations",
+    "secobserve_call_action",
+    "secobserve_create",
+    "secobserve_delete",
+    "secobserve_describe_resource",
+    "secobserve_get",
+    "secobserve_list",
+    "secobserve_list_resources",
+    "secobserve_product_metrics",
+    "secobserve_run_periodic_task",
+    "secobserve_status",
+    "secobserve_trigger_scan",
+    "secobserve_update",
+    "secobserve_upload_file",
+    "secobserve_vex_document"
+   ],
+   "n_dynamic": 18,
+   "v3": {
+    "static": 18,
+    "both": 18
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 18,
+    "both": 18
+   }
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "mcpgawk",
+   "version": "0.1.87",
+   "dyn": [
+    "scan_mcp_fleet",
+    "scan_mcp_server"
+   ],
+   "n_dynamic": 2,
+   "v3": {
+    "static": 2,
+    "both": 2
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 2,
+    "both": 2
+   }
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "atomno-mcp-cbr-rates",
+   "version": "0.1.11",
+   "dyn": [
+    "get_rate",
+    "history_rates",
+    "inflation",
+    "key_rate",
+    "statistics"
+   ],
+   "n_dynamic": 5,
+   "v3": {
+    "static": 5,
+    "both": 5
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 5,
+    "both": 5
+   }
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "auto-skill-loader",
+   "version": "1.0.1",
+   "dyn": [
+    "activate_skill",
+    "check_prerequisites",
+    "deactivate_skill",
+    "get_active_skills",
+    "get_skill_info",
+    "list_skills",
+    "minimax_understand_image",
+    "minimax_web_search",
+    "suggest_skills"
+   ],
+   "n_dynamic": 9,
+   "v3": {
+    "static": 9,
+    "both": 9
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 9,
+    "both": 9
+   }
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "blender-optics-mcp",
+   "version": "0.24.4",
+   "dyn": [
+    "aberrated_psf",
+    "add_component",
+    "align_all",
+    "align_element",
+    "ao_close_loop",
+    "ao_close_loop_recon",
+    "ao_command",
+    "ao_kolmogorov",
+    "ao_measure",
+    "auto_align",
+    "bake_beams",
+    "beam_profile",
+    "build_bench",
+    "build_example",
+    "capabilities",
+    "caustic_pattern",
+    "check_mechanics",
+    "clear_beams",
+    "coupling_efficiency",
+    "design_4f",
+    "design_telescope",
+    "detect_phenomena",
+    "diagnose",
+    "dress_bench",
+    "export_report",
+    "export_svg",
+    "fdtd_derive_property",
+    "fienup_phase_retrieval",
+    "gerchberg_saxton",
+    "get_state",
+    "get_wavefront",
+    "gpu_status",
+    "import_glass",
+    "inspect_all",
+    "inspect_beam",
+    "inspect_element",
+    "make_cage",
+    "make_rail",
+    "make_tube",
+    "material_tables",
+    "mode_match",
+    "monte_carlo_tissue",
+    "newton_rings",
+    "optics_calc",
+    "place_on_grid",
+    "place_on_rail",
+    "place_relative",
+    "produce_phenomenon",
+    "propagate_chain",
+    "propagate_field",
+    "propagate_pulse",
+    "propagate_turbulent",
+    "propose_corrections",
+    "pyramid_wfs",
+    "quantum_stats",
+    "render",
+    "render_sequence",
+    "reset_mount",
+    "scan",
+    "sensor_capture",
+    "set_grid",
+    "set_mount",
+    "set_param",
+    "slit_diffraction",
+    "spatial_filter",
+    "speckle_pattern",
+    "swap_part",
+    "tag_element",
+    "talbot_effect",
+    "tem_mode",
+    "tilt_null",
+    "tolerance_scan",
+    "trace_beam",
+    "turbulence_screen",
+    "wave_psf",
+    "zonal_render"
+   ],
+   "n_dynamic": 76,
+   "v3": {
+    "static": 76,
+    "both": 76
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 76,
+    "both": 76
+   }
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "mdr-medical-device-mcp",
+   "version": "1.0.8",
+   "dyn": [
+    "ce_marking_requirements",
+    "classify_ivd",
+    "classify_medical_device",
+    "list_regulations_in_db",
+    "samd_ai_ml_check",
+    "search_regulation"
+   ],
+   "n_dynamic": 6,
+   "v3": {
+    "static": 6,
+    "both": 6
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 6,
+    "both": 6
+   }
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "agentic-hil",
+   "version": "0.26.0",
+   "dyn": [
+    "artifact_upload",
+    "bench_run_start",
+    "bench_run_status",
+    "bench_run_stop",
+    "can_buses_list",
+    "can_read",
+    "can_send",
+    "can_session_start",
+    "can_session_stop",
+    "classify_last_error",
+    "com_ports_list",
+    "com_read",
+    "com_session_start",
+    "com_session_stop",
+    "com_write",
+    "debug_clear_breakpoints",
+    "debug_continue",
+    "debug_dump_symbol_ihex",
+    "debug_get_session_status",
+    "debug_get_stop_reason",
+    "debug_halt",
+    "debug_list_breakpoints",
+    "debug_set_breakpoint",
+    "debug_start_session",
+    "debug_stop_session",
+    "debug_symbol_info",
+    "debug_symbol_value",
+    "debugger_info",
+    "debugger_probes_list",
+    "flash_firmware",
+    "get_last_report",
+    "hardware_lease_status",
+    "hardware_recover",
+    "power_supply_cycle",
+    "power_supply_output",
+    "power_supply_set",
+    "power_supply_status",
+    "probe_target",
+    "project_config_adopt_hardware",
+    "project_config_create",
+    "project_config_describe",
+    "project_config_reload_description",
+    "project_config_set",
+    "reset_target",
+    "server_upgrade",
+    "test_reactor_run",
+    "test_reactor_status",
+    "test_reactor_stop"
+   ],
+   "n_dynamic": 48,
+   "v3": {
+    "static": 48,
+    "both": 48
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 48,
+    "both": 48
+   }
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "kitchensink4word",
+   "version": "3.0.1",
+   "dyn": [
+    "word_app",
+    "word_document",
+    "word_edit",
+    "word_format",
+    "word_help",
+    "word_media",
+    "word_read",
+    "word_references",
+    "word_review",
+    "word_structure"
+   ],
+   "n_dynamic": 10,
+   "v3": {
+    "static": 0,
+    "both": 0
+   },
+   "v3_missed": [
+    "word_app",
+    "word_document",
+    "word_edit",
+    "word_format",
+    "word_help",
+    "word_media",
+    "word_read",
+    "word_references",
+    "word_review",
+    "word_structure"
+   ],
+   "v2": {
+    "static": 0,
+    "both": 0
+   },
+   "miss_category": "P",
+   "miss_note": "FastMCP surface assembled programmatically from an op table"
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "macrofactor-mcp",
+   "version": "0.1.1",
+   "dyn": [
+    "analyze_meal_patterns",
+    "body_comp_trend",
+    "clear_data",
+    "daily_briefing",
+    "data_status",
+    "detect_phases",
+    "garmin_status",
+    "get_combined_data",
+    "get_compliance_report",
+    "get_digest",
+    "get_exercise_progress",
+    "get_food_log",
+    "get_insights",
+    "get_muscle_group_summary",
+    "get_nutrition_range",
+    "get_nutrition_summary",
+    "get_weight_trend",
+    "get_workout_history",
+    "get_workout_log",
+    "import_export",
+    "list_exercises",
+    "nutrition_performance_correlation",
+    "query",
+    "recovery_check",
+    "search_food",
+    "setup_check",
+    "sleep_analysis",
+    "sync_garmin",
+    "weekly_report"
+   ],
+   "n_dynamic": 29,
+   "v3": {
+    "static": 29,
+    "both": 29
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 29,
+    "both": 29
+   }
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "japan-data-mcp",
+   "version": "0.2.2",
+   "dyn": [
+    "check_invoice_registration",
+    "compare_regions",
+    "get_corporation",
+    "get_meta_info",
+    "get_population",
+    "get_real_estate_transactions",
+    "get_regional_data",
+    "get_regional_profile",
+    "list_available_stats",
+    "resolve_area",
+    "search_corporations",
+    "search_invoice_by_name",
+    "search_statistics",
+    "validate_invoice_on_date"
+   ],
+   "n_dynamic": 14,
+   "v3": {
+    "static": 14,
+    "both": 14
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 14,
+    "both": 14
+   }
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "aws-cli-mcp-server",
+   "version": "1.1.0",
+   "dyn": [
+    "aws_cli_read_only",
+    "aws_cli_write_only"
+   ],
+   "n_dynamic": 2,
+   "v3": {
+    "static": 2,
+    "both": 2
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 2,
+    "both": 2
+   }
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "planthire-ai-mcp",
+   "version": "1.0.8",
+   "dyn": [
+    "calculate_transport",
+    "check_availability",
+    "create_booking",
+    "get_rental_quote",
+    "get_safety_checklist",
+    "search_equipment"
+   ],
+   "n_dynamic": 6,
+   "v3": {
+    "static": 6,
+    "both": 6
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 6,
+    "both": 6
+   }
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "codepathfinder",
+   "version": "2.1.1",
+   "dyn": [
+    "find_compose_services",
+    "find_dockerfile_instructions",
+    "find_module",
+    "find_symbol",
+    "get_call_details",
+    "get_callees",
+    "get_callers",
+    "get_docker_dependencies",
+    "get_dockerfile_details",
+    "get_index_info",
+    "list_modules",
+    "resolve_import",
+    "status"
+   ],
+   "n_dynamic": 13,
+   "v3": {
+    "static": 0,
+    "both": 0
+   },
+   "v3_missed": [
+    "find_compose_services",
+    "find_dockerfile_instructions",
+    "find_module",
+    "find_symbol",
+    "get_call_details",
+    "get_callees",
+    "get_callers",
+    "get_docker_dependencies",
+    "get_dockerfile_details",
+    "get_index_info",
+    "list_modules",
+    "resolve_import",
+    "status"
+   ],
+   "v2": {
+    "static": 0,
+    "both": 0
+   },
+   "miss_category": "N",
+   "miss_note": "no missed name occurs literally in the package source"
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "hermes-prime-mcp",
+   "version": "0.2.1a2",
+   "dyn": [
+    "get_conventions",
+    "list_scopes"
+   ],
+   "n_dynamic": 2,
+   "v3": {
+    "static": 2,
+    "both": 2
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 2,
+    "both": 2
+   }
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "verantis-mcp",
+   "version": "0.2.1",
+   "dyn": [
+    "check_wallet",
+    "directory_stats",
+    "find_paid_service",
+    "get_service"
+   ],
+   "n_dynamic": 4,
+   "v3": {
+    "static": 4,
+    "both": 4
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 4,
+    "both": 4
+   }
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "roadstyle-mcp",
+   "version": "0.29.0",
+   "dyn": [
+    "render_file",
+    "render_place",
+    "snapshot"
+   ],
+   "n_dynamic": 3,
+   "v3": {
+    "static": 0,
+    "both": 0
+   },
+   "v3_missed": [
+    "render_file",
+    "render_place",
+    "snapshot"
+   ],
+   "v2": {
+    "static": 0,
+    "both": 0
+   },
+   "miss_category": "F",
+   "miss_note": "wheel contains no code"
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "kilonova-mcp",
+   "version": "0.1.1",
+   "dyn": [
+    "corpus_status",
+    "dot_load",
+    "kb_backup",
+    "kb_load",
+    "kb_schema",
+    "kb_search",
+    "kb_topics",
+    "kb_write"
+   ],
+   "n_dynamic": 8,
+   "v3": {
+    "static": 8,
+    "both": 8
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 8,
+    "both": 8
+   }
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "perplexity-agent-mcp",
+   "version": "0.4.0",
+   "dyn": [
+    "perplexity_agent",
+    "perplexity_agent_cancel",
+    "perplexity_agent_result"
+   ],
+   "n_dynamic": 3,
+   "v3": {
+    "static": 3,
+    "both": 3
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 3,
+    "both": 3
+   }
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "usgs-mcp",
+   "version": "0.1.1",
+   "dyn": [
+    "usgs_find_nearest_sites",
+    "usgs_find_sites",
+    "usgs_get_daily_stats",
+    "usgs_get_daily_values",
+    "usgs_get_flood_status",
+    "usgs_get_hydrograph",
+    "usgs_get_instantaneous_values",
+    "usgs_get_monthly_stats",
+    "usgs_get_peak_streamflow",
+    "usgs_get_site_info"
+   ],
+   "n_dynamic": 10,
+   "v3": {
+    "static": 10,
+    "both": 10
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 10,
+    "both": 10
+   }
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "key-drivers-mcp",
+   "version": "0.1.2",
+   "dyn": [
+    "explain_segment",
+    "find_drivers",
+    "list_datasets",
+    "load_dataset"
+   ],
+   "n_dynamic": 4,
+   "v3": {
+    "static": 4,
+    "both": 4
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 4,
+    "both": 4
+   }
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "elephia",
+   "version": "0.2.0",
+   "dyn": [
+    "commit_turn",
+    "context_log",
+    "context_stats",
+    "explain_selection",
+    "full_context",
+    "mark_stale",
+    "merge_log",
+    "prepare_context",
+    "remember",
+    "resolve_pending",
+    "search_context",
+    "show_context"
+   ],
+   "n_dynamic": 12,
+   "v3": {
+    "static": 12,
+    "both": 12
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 12,
+    "both": 12
+   }
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "mcp-zen-of-languages",
+   "version": "0.9.1",
+   "dyn": [
+    "analyze_batch",
+    "analyze_batch_auto",
+    "analyze_batch_summary",
+    "analyze_repository",
+    "analyze_zen_violations",
+    "check_architectural_patterns",
+    "clear_config_overrides",
+    "detect_languages",
+    "export_rule_detector_mapping",
+    "generate_agent_tasks",
+    "generate_prompts",
+    "generate_report",
+    "get_config",
+    "get_supported_languages",
+    "onboard_project",
+    "set_config_override"
+   ],
+   "n_dynamic": 16,
+   "v3": {
+    "static": 16,
+    "both": 16
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 16,
+    "both": 16
+   }
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "oxford-ledge-mcp",
+   "version": "3.8.4",
+   "dyn": [
+    "get_13f_holdings",
+    "get_activist_stakes",
+    "get_bdc_borrower_mark_history",
+    "get_bdc_holdings",
+    "get_bdc_list",
+    "get_capital_allocation",
+    "get_corporate_events",
+    "get_debt_maturities",
+    "get_fails_to_deliver",
+    "get_fred_data",
+    "get_fundamentals",
+    "get_holders",
+    "get_insider_trades",
+    "get_sec_filings",
+    "get_value_investing_fact",
+    "get_yield_curve",
+    "ol_bdc_borrower_dispersion",
+    "ol_bdc_common_borrowers",
+    "ol_bdc_credit_quality",
+    "ol_bdc_mark_changes",
+    "ol_bdc_top_borrowers",
+    "ol_cftc_cot",
+    "ol_fdic_bank",
+    "ol_federal_contracts",
+    "ol_form_d_raises",
+    "ol_insider_recent_buys",
+    "ol_patents",
+    "ol_treasury_debt",
+    "search_bdc_borrower"
+   ],
+   "n_dynamic": 29,
+   "v3": {
+    "static": 29,
+    "both": 29
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 29,
+    "both": 29
+   }
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "meok-enterprise-compliance-checker",
+   "version": "1.0.7",
+   "dyn": [
+    "check_compliance"
+   ],
+   "n_dynamic": 1,
+   "v3": {
+    "static": 1,
+    "both": 1
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 1,
+    "both": 1
+   }
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "mcp-dados-br",
+   "version": "0.6.0",
+   "dyn": [
+    "bcb_cambio",
+    "bcb_focus",
+    "bcb_moedas",
+    "bcb_serie",
+    "camara_agenda",
+    "camara_deputados",
+    "camara_detalhes_deputado",
+    "camara_proposicoes",
+    "camara_tramitacao",
+    "camara_votacoes_proposicao",
+    "ibge_municipios",
+    "ibge_pib",
+    "ibge_populacao",
+    "ibge_sidra",
+    "inmet_dados",
+    "inmet_estacoes",
+    "senado_materias",
+    "senado_senadores",
+    "senado_votacoes"
+   ],
+   "n_dynamic": 19,
+   "v3": {
+    "static": 0,
+    "both": 0
+   },
+   "v3_missed": [
+    "bcb_cambio",
+    "bcb_focus",
+    "bcb_moedas",
+    "bcb_serie",
+    "camara_agenda",
+    "camara_deputados",
+    "camara_detalhes_deputado",
+    "camara_proposicoes",
+    "camara_tramitacao",
+    "camara_votacoes_proposicao",
+    "ibge_municipios",
+    "ibge_pib",
+    "ibge_populacao",
+    "ibge_sidra",
+    "inmet_dados",
+    "inmet_estacoes",
+    "senado_materias",
+    "senado_senadores",
+    "senado_votacoes"
+   ],
+   "v2": {
+    "static": 0,
+    "both": 0
+   },
+   "miss_category": "A2",
+   "miss_note": "for tool in tools: mcp.tool()(tool) over a function-local list of module attributes (ibge.ibge_pib); v3 fix A covers only module-level lists of plain names"
+  },
+  {
+   "ecosystem": "pypi",
+   "package": "voc-amazon-reviews-mcp",
+   "version": "0.1.1",
+   "dyn": [
+    "analyze_csv",
+    "analyze_reviews",
+    "extract_listing_improvements",
+    "fetch_reviews",
+    "render_dashboard",
+    "voc_full"
+   ],
+   "n_dynamic": 6,
+   "v3": {
+    "static": 6,
+    "both": 6
+   },
+   "v3_missed": [],
+   "v2": {
+    "static": 6,
+    "both": 6
+   }
+  }
+ ]
+}
