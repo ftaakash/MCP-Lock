@@ -2,58 +2,44 @@
 \section{Literature Review}
 \label{sec:lit}
 
-\textbf{Malicious-package detection.} Most supply-chain defences judge each published version on its own. Attack
-catalogues and taxonomies document account takeover, typosquatting and install-script abuse~\cite{ohm2020backstabber,
-ladisa2023sok}, and ecosystem studies show how a few maintainer accounts can reach much of npm~\cite{zimmermann2019small,
-zahan2022weak}. Amalfi combines classifiers, a check that a package rebuilds from its source repository, and clone
-detection, and found 95 previously unknown malicious npm versions in one week of publications~\cite{sejfia2022amalfi}.
-Ladisa et al.\ train one classifier on language-independent features for npm and PyPI and report 58 new malicious
-packages~\cite{ladisa2023crosslang}. These scanners run on the registry side and ask whether a version looks malicious;
-they do not compare a version with the one a user already trusts.
+\textbf{Malicious-package detection.} Catalogues of supply-chain attacks list account takeover, typosquatting and
+install-script abuse as the usual routes in~\cite{ohm2020backstabber,ladisa2023sok}, and a handful of maintainer
+accounts can reach a large part of npm~\cite{zimmermann2019small,zahan2022weak}. Amalfi pairs classifiers with a rebuild
+check and clone detection, and in one week of npm uploads it found 95 malicious versions nobody had reported
+before~\cite{sejfia2022amalfi}. Ladisa et al.\ use language-independent features to cover npm and PyPI with a single
+model~\cite{ladisa2023crosslang}. Both run at the registry and judge a version in isolation; neither asks how it differs
+from the version a user already accepted.
 
 \textbf{Signing and provenance.} Sigstore~\cite{newman2022sigstore}, SLSA~\cite{slsa2023provenance}, npm
-provenance~\cite{npmprovenance} and PEP~740~\cite{pep740} let a consumer check who built a release and from which
-repository. Adoption depends on registry policy: Schorlemmer et al.\ find that 0.2\% of PyPI artifacts were signed in
-2023, before PEP~740 attestations, and that mandates raise the number of signatures while dedicated tooling raises their
-quality~\cite{schorlemmer2024signing}. Provenance tells who built a release; it does not say whether the builder changed
-since the last version a user accepted. MCP-Lock uses build identity for that continuity check, not as proof that a
-release is safe.
+provenance~\cite{npmprovenance} and PEP~740~\cite{pep740} record which repository and workflow produced a release.
+Uptake follows registry policy; in 2023 only 0.2\% of PyPI artifacts carried a signature~\cite{schorlemmer2024signing}.
+A provenance record names today's builder. It does not tell a user that the builder is different from last time, and
+that comparison is the one MCP-Lock makes. Lockfiles store versions and checksums, and for npm and Cargo a source
+link~\cite{gamage2025lockfiles}, but no publisher, scripts or tools; an \code{npx -y pkg} launch has no lockfile at all.
 
-\textbf{Lockfiles.} Gamage et al.\ compare the lockfiles of seven package managers. Most record versions and checksums,
-and npm and Cargo also record a source link~\cite{gamage2025lockfiles}; publisher identity, install scripts and the
-tools a package advertises are not among the contents they describe. An MCP configuration that launches \code{npx -y pkg} has no lockfile at
-all.
+\textbf{MCP security.} Rug pulls, tool poisoning and malicious servers appear in every MCP threat
+survey~\cite{hou2025mcp,zhao2025attack,gaire2025sok}, and practitioners warned about rug pulls
+early~\cite{invariant2025poisoning}. Gaire et al.\ blame mutable server code, missing ongoing integrity verification
+and the lack of any prompt to approve a server again~\cite{gaire2025sok}. Huang et al.\ found that five of seven MCP
+clients accept tool metadata without static checks~\cite{huang2026toolpoison}, and Hasan et al.\ examine
+vulnerabilities and code quality in open MCP servers~\cite{hasan2025glance}. Kraishan tracked the fields the MCP registry
+versions across 8,900 servers, observed that tool definitions are not among them, and called for client-side
+pinning~\cite{kraishan2026drift}; we measure the tools directly and build that pin. Signed admission~\cite{metere2026attested}
+and signed tool definitions (ETDI)~\cite{bhatt2025etdi} would solve part of the problem, once servers or registries adopt
+them.
 
-\textbf{MCP security.} Surveys and taxonomies describe tool poisoning, rug pulls and malicious
-servers~\cite{hou2025mcp,zhao2025attack,gaire2025sok}, and practitioners described the rug-pull pattern
-early~\cite{invariant2025poisoning}. Gaire et al.\ trace rug pulls to mutable server logic, the absence of continuous
-integrity checks and the absence of re-approval triggers, and discuss signed, immutable tool
-manifests~\cite{gaire2025sok}. Huang et al.\ test tool poisoning on seven MCP clients and find that five do not
-validate tool metadata statically; they recommend signed, immutable tool definitions and checks at
-registration~\cite{huang2026toolpoison}. Hasan et al.\ study the security and maintainability of open-source
-servers~\cite{hasan2025glance}. Kraishan measures drift of the fields the MCP registry versions across 8,900
-multi-version servers, notes that tool definitions are not versioned there, and recommends client-side
-pinning~\cite{kraishan2026drift}; we measure the tool definitions themselves and build that pinning. Metere
-proposes signed admission with per-server tool allowlists~\cite{metere2026attested}, and ETDI signed, versioned tool
-definitions~\cite{bhatt2025etdi}; both need servers or registries to change.
-
-\textbf{Tool pinning.} MCP-Scan hashes tool descriptions to detect rug pulls~\cite{invariant2025mcpscan}, and
-open-source proxies pin each tool's definition in a committed lockfile and block a changed listing; one also records the
-package version and registry digest~\cite{mcppin,mcpseal}. All of them start the server to read its tools, and none
-reports an evaluation on real attacks. Our runtime proxy (D2, Section~\ref{sec:adaptive}) follows their design.
-
-\textbf{Agent supply chains.} Bagmar and Saraf weaponise setup instructions against coding agents and propose a
-pre-install hook that checks names, sources and package age~\cite{bagmar2026setup}; it is our baseline. Kapner et al.\
-report unpinned MCP declarations in 9.8\% of 2,660 agent setups~\cite{kapner2026harness}, and Shan finds that coding
-assistants rarely check trust signals before they install~\cite{shan2026check}.
-
-Table~\ref{tab:prior} compares the closest defences on the five properties MCP-Lock targets.
+\textbf{Tool pinning and agent supply chains.} MCP-Scan hashes tool descriptions~\cite{invariant2025mcpscan}, and two
+open-source proxies store a pin for every tool and refuse a changed listing~\cite{mcppin,mcpseal}. All three have to
+start the server first, and none reports results on real attacks. Bagmar and Saraf attack coding agents through setup
+instructions and defend with a pre-install hook on names, sources and package age~\cite{bagmar2026setup}; we use that
+hook as our baseline. Shan reports that coding assistants seldom look at trust signals before they
+install~\cite{shan2026check}. Table~\ref{tab:prior} sums up where these defences stand.
 
 \begin{table}[t]
 \caption{Closest defences and the properties MCP-Lock targets.\\
-\textmd{P1 pins tool definitions; P2 checks before the server runs; P3 needs no change to servers or registries;
-P4 checks continuity of build identity, publisher and install scripts; P5 evaluated on real attacks with a
-benign-upgrade cost. \ding{51} yes, $\circ$ partly, -- no; judged from each work's own description.}}
+\textmd{P1 pins tools; P2 acts before the server runs; P3 no server or registry change; P4 checks that build
+identity, publisher and scripts stay the same; P5 evaluated on real attacks with a benign cost. \ding{51} yes,
+$\circ$ partly, -- no.}}
 \label{tab:prior}
 \centering
 \footnotesize

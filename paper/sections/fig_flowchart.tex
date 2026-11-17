@@ -1,51 +1,32 @@
-% Fig. 2: methodology flowchart. Needs the TikZ libraries positioning, arrows.meta and shapes.geometric
-% (main.tex loads the first two; add shapes.geometric at the restructure).
+% Fig. 1: methodology flowchart. Needs the TikZ libraries positioning, arrows.meta and shapes.geometric.
 \begin{figure}[t]
 \centering
 \begin{tikzpicture}[
-  node distance=3.2mm,
-  box/.style={draw, rounded corners=1.5pt, align=center, font=\scriptsize, minimum height=6.5mm,
-              text width=0.80\columnwidth, inner sep=2pt},
-  dec/.style={draw, diamond, aspect=2.6, align=center, font=\scriptsize, inner sep=0.5pt},
-  side/.style={draw, rounded corners=1.5pt, align=center, font=\scriptsize, text width=0.27\columnwidth,
-               inner sep=2pt},
-  arr/.style={-{Stealth[length=1.6mm]}, semithick},
+  node distance=2.2mm,
+  box/.style={draw, rounded corners=1.5pt, align=center, font=\scriptsize, minimum height=5mm,
+              text width=0.62\columnwidth, inner sep=1.5pt},
+  dec/.style={draw, diamond, aspect=2.4, align=center, font=\scriptsize, inner sep=0pt},
+  side/.style={draw, rounded corners=1.5pt, align=center, font=\scriptsize, text width=0.25\columnwidth,
+               inner sep=1.5pt},
+  arr/.style={-{Stealth[length=1.4mm]}, semithick},
   lab/.style={font=\tiny, fill=white, inner sep=1pt}]
-\node[box] (frame) {\textbf{Frame and sample.} Official MCP registry + GitHub configs; stratified sample by
-  ecosystem and download tercile (fixed seed)};
-\node[box, below=of frame] (extract) {\textbf{Static tool extraction} from every version's archive (no execution);
-  held-out runtime check of recall and precision};
-\node[box, below=of extract] (rq1) {\textbf{RQ1: drift census.} Do tool definitions change within 90 days, and do
-  provenance, publisher or install-script signals change with them?};
-\node[box, below=of rq1] (design) {\textbf{Design.} Lockfile (digest, build identity, publisher, install scripts,
-  tool hash) and pre-launch gate with checks S1--S5};
-\node[box, below=of design] (prereg) {\textbf{Pre-register on OSF:} H1, H2, kill rule, corpora; freeze the code at a
-  tag};
-\node[box, below=of prereg] (replay) {\textbf{Offline replay as of publication time:} real attacks R, synthetic rug
-  pulls R-S, benign upgrades B; S1-L, S1-C and G decide every case};
-\node[box, below=of replay] (stats) {\textbf{Statistics:} exact McNemar with Holm correction; Wilson intervals;
-  cluster bootstrap by package};
-\node[dec, below=of stats] (kill) {Kill rule\\met?};
-\node[side, left=4mm of kill] (neg) {Report the method claim as withdrawn (negative result)};
-\node[box, below=5mm of kill] (rq2) {\textbf{RQ2 results:} detection and false blocks; ablation per check;
-  simpler alternatives};
-\node[box, below=of rq2] (rq3) {\textbf{RQ3: adaptive attacker.} 12 attacks that know every check; hardening
-  switches D1--D5, each priced on benign upgrades};
-\node[box, below=of rq3] (a1) {\textbf{Addendum A1:} re-test a post-hoc change on data published after the freeze,
-  filed on OSF before scoring};
-\draw[arr] (frame) -- (extract);
-\draw[arr] (extract) -- (rq1);
+\node[box] (frame) {\textbf{Sample} MCP packages (registry + GitHub configs); extract tools statically};
+\node[box, below=of frame] (rq1) {\textbf{RQ1} tool drift and metadata signals over 90 days};
+\node[box, below=of rq1] (design) {\textbf{Design} lockfile + pre-launch gate (S1--S5)};
+\node[box, below=of design] (prereg) {\textbf{Pre-register} H1, H2, kill rule; freeze code; offline replay};
+\node[dec, below=of prereg] (kill) {kill rule\\met?};
+\node[side, right=3mm of kill] (neg) {withdraw the method claim};
+\node[box, below=of kill] (rq2) {\textbf{RQ2} detection, false blocks, ablation};
+\node[box, below=of rq2] (rq3) {\textbf{RQ3} adaptive attacks, hardening D1--D5; addendum A1};
+\draw[arr] (frame) -- (rq1);
 \draw[arr] (rq1) -- (design);
 \draw[arr] (design) -- (prereg);
-\draw[arr] (prereg) -- (replay);
-\draw[arr] (replay) -- (stats);
-\draw[arr] (stats) -- (kill);
+\draw[arr] (prereg) -- (kill);
 \draw[arr] (kill) -- node[lab, above] {yes} (neg);
 \draw[arr] (kill) -- node[lab, right] {no} (rq2);
 \draw[arr] (rq2) -- (rq3);
-\draw[arr] (rq3) -- (a1);
 \end{tikzpicture}
-\caption{Methodology. The census (RQ1) motivates the design; the evaluation (RQ2) is pre-registered with a kill
-rule; the adaptive attacker (RQ3) and addendum A1 follow.}
+\caption{Methodology. The drift census shapes the design, and the evaluation was registered with a kill rule before
+any scored run.}
 \label{fig:method}
 \end{figure}

@@ -1,19 +1,17 @@
-% Table V: performance comparison with existing methods. Every cell is a macro from numbers.tex.
-% Included in main.tex as the comparison section.
-\section{Performance Comparison with Existing Methods}
+% Performance comparison with existing methods. Every cell is a macro from numbers.tex.
+\section{Comparison with Existing Methods}
 \label{sec:compare}
-Table~\ref{tab:compare} puts MCP-Lock next to the baseline hook in both readings and next to two steps that need no gate,
-all on the corpora of Section~\ref{sec:eval}. On npm real attacks, the baseline hook plus \code{-{}-ignore-scripts} detects about as
-many cases as \G{} (\SCIgnP{} vs.\ \GNpmP), so most of \G's gain on real attacks is available more cheaply. The hook
-detects none of the synthetic rug pulls (\RSSC) and \G{} detects all of them (\RSG). Exact version pinning
-prevents every attack on an existing package (\PinRMP{} of R-M) and, by construction, every rug pull, but only by
-holding back all \NB{} benign upgrades until the user edits the configuration; \G{} lets an upgrade run unattended when
-nothing it checks has changed. We did not replay \code{-{}-ignore-scripts} on the synthetic rug pulls.
+Table~\ref{tab:compare} sets MCP-Lock beside both readings of the baseline hook and two measures that need no gate,
+all on the corpora of Section~\ref{sec:eval}. On npm attacks, the hook combined with \code{-{}-ignore-scripts} reaches
+roughly the detection of \G{} (\SCIgnP{} vs.\ \GNpmP), so a cheaper route to most of \G's real-attack gain exists. The
+rug pulls separate them: the hook catches \RSSC{} and \G{} catches \RSG. Pinning an exact version stops \PinRMP{} of
+R-M and, trivially, every rug pull, but every one of the \NB{} honest upgrades then waits until someone edits the
+configuration. \G{} lets an upgrade through on its own when none of its checks sees a change.
 
 \begin{table}[t]
 \caption{Comparison with existing methods.\\
-\textmd{R: real attacks ($n=\NR$); R-S: synthetic rug pulls; B: benign upgrades ($n=\NB$). npm columns use the npm
-cases of R-M. Wilson 95\% CIs in Section~\ref{sec:eval}. -- not applicable.}}
+\textmd{R: real attacks ($n=\NR$); R-S: synthetic rug pulls; B: benign upgrades ($n=\NB$). The npm column uses the
+npm cases of R-M. -- not applicable.}}
 \label{tab:compare}
 \centering
 \footnotesize
@@ -35,10 +33,8 @@ S1-C + \code{-{}-ignore-scripts} & -- & \SCIgnP{} & -- & -- \\
 
 \vspace{2pt}
 \begin{minipage}{\columnwidth}\scriptsize
-Exact pinning prevents \PinRMP{} of R-M (every hijacked-package case) and holds back all benign upgrades.
-The npm R-M column counts the \code{-{}-ignore-scripts} rows as attacks prevented. $^{a}$Upper bound: a payload may also run at launch.
-$^{b}$Share of npm upgrades whose honest install script is skipped.
-$^{c}$Exploratory; a pre-registered re-test on new data did not confirm it (\AoneLost{} of \AoneRC{} hijacked cases
-missed). $^{d}$By construction: a pinned launch never runs a new version. Median gate latency: \LatColdMed{}\,s cold cache, \LatWarmMed{}\,s warm.
+$^{a}$Upper bound; a payload may also run at launch. $^{b}$npm upgrades whose honest install script would be skipped.
+$^{c}$Exploratory; not confirmed on new data (\AoneLost{} of \AoneRC{} hijacked cases missed). $^{d}$A pinned launch
+never runs a new version. Median gate latency: \LatColdMed{}\,s cold, \LatWarmMed{}\,s warm.
 \end{minipage}
 \end{table}
