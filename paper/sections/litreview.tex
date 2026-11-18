@@ -20,9 +20,9 @@ link~\cite{gamage2025lockfiles}, but no publisher, scripts or tools; an \code{np
 \textbf{MCP security.} Rug pulls, tool poisoning and malicious servers appear in every MCP threat
 survey~\cite{hou2025mcp,zhao2025attack,gaire2025sok}, and practitioners warned about rug pulls
 early~\cite{invariant2025poisoning}. Gaire et al.\ blame mutable server code, missing ongoing integrity verification
-and the lack of any prompt to approve a server again~\cite{gaire2025sok}. Huang et al.\ found that five of seven MCP
-clients accept tool metadata without static checks~\cite{huang2026toolpoison}, and Hasan et al.\ examine
-vulnerabilities and code quality in open MCP servers~\cite{hasan2025glance}. Kraishan tracked the fields the MCP registry
+and the lack of any prompt to approve a server again~\cite{gaire2025sok}. Huang et al.\ tested seven MCP clients, and
+five of them used tool metadata without any static check~\cite{huang2026toolpoison}. Vulnerabilities and code quality
+in open MCP servers were studied by Hasan et al.~\cite{hasan2025glance}. Kraishan tracked the fields the MCP registry
 versions across 8,900 servers, observed that tool definitions are not among them, and called for client-side
 pinning~\cite{kraishan2026drift}; we measure the tools directly and build that pin. Signed admission~\cite{metere2026attested}
 and signed tool definitions (ETDI)~\cite{bhatt2025etdi} would solve part of the problem, once servers or registries adopt
@@ -30,10 +30,11 @@ them.
 
 \textbf{Tool pinning and agent supply chains.} MCP-Scan hashes tool descriptions~\cite{invariant2025mcpscan}, and two
 open-source proxies store a pin for every tool and refuse a changed listing~\cite{mcppin,mcpseal}. All three have to
-start the server first, and none reports results on real attacks. Bagmar and Saraf attack coding agents through setup
-instructions and defend with a pre-install hook on names, sources and package age~\cite{bagmar2026setup}; we use that
-hook as our baseline. Shan reports that coding assistants seldom look at trust signals before they
-install~\cite{shan2026check}. Table~\ref{tab:prior} sums up where these defences stand.
+start the server first, and none reports results on real attacks. Bagmar and Saraf showed that setup
+instructions can be used to attack coding agents~\cite{bagmar2026setup}. Their defence is a pre-install hook that checks
+the package name, its source and its age, and this hook is our baseline. According to Shan~\cite{shan2026check},
+coding assistants rarely look at trust signals before installing a package. Table~\ref{tab:prior} compares these
+defences.
 
 \begin{table}[t]
 \caption{Closest defences and the properties MCP-Lock targets.\\
