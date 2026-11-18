@@ -2,7 +2,8 @@
 \section{Research Gap and Objectives}
 \label{sec:gap}
 Four things are missing from the work above.
-\emph{G1:} we found no study that compares tool definitions across versions of a package archive. Kraishan looked only at registry
+\emph{G1:} as far as we can tell, nobody has compared the tool definitions inside package archives across
+versions. Kraishan looked only at registry
 fields~\cite{kraishan2026drift}, so the rate at which honest servers change tools, and therefore the price of a tool pin,
 is unknown.
 \emph{G2:} every existing tool check reads the tools from a running server~\cite{invariant2025mcpscan,mcppin,mcpseal}.
@@ -15,9 +16,9 @@ install script gets past all of them.
 scenarios~\cite{bagmar2026setup}. A detection rate means little without the number of honest upgrades that a person must
 then unblock by hand.
 
-From these gaps we set four objectives. The first, O1 (for G1 and RQ1), is to measure how much tool drift
-there is in MCP packages and whether metadata changes along with it. O2 answers G2 and G3 with a lockfile and a
-pre-launch gate that does not execute package code. In O3 (G3, G4, RQ2) we compare this gate with the closest earlier
-gate on real attacks and benign upgrades, using a kill rule registered beforehand~\cite{osf2026prereg}. O4 (G2, G3,
-RQ3) gives an attacker full knowledge of the gate and measures the benign cost of every fix. Fig.~\ref{fig:method}
-gives the overall method.
+The four objectives map onto these gaps. O1 measures tool drift in MCP packages and checks whether metadata
+changes with it (G1, RQ1); without that number nobody can say what a tool pin costs. O2 is the artifact itself, a
+lockfile plus a pre-launch gate that never runs package code (G2, G3). O3 tests the gate against the closest earlier
+one on real attacks and benign upgrades, under a kill rule registered in advance~\cite{osf2026prereg} (G3, G4, RQ2).
+In O4 an attacker gets full knowledge of the gate, and each fix is priced on benign upgrades (G2, G3, RQ3).
+Fig.~\ref{fig:method} shows the method.
